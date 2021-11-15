@@ -45,7 +45,7 @@ namespace RMU.Hand
             SortHand();
         }
 
-        public void SortHand() //TODO: Make this work
+        public void SortHand()
         {
             _closedTiles = _handSorter.SortHand(_closedTiles);
         }
