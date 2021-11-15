@@ -16,12 +16,14 @@ namespace RMU.Hand
         private TileObject _drawTile;
         private const int MAX_NUMBER_OF_CLOSED_TILES = 13;
         private StandardDiscardPile _discardPile;
+        private Algorithms.HandSorter _handSorter;
 
         public StandardHand(IWall wall, IDeadWall deadWall)
         {
             this._wall = wall;
             this._deadWall = deadWall;
             this._discardPile = new StandardDiscardPile();
+            this._handSorter = new Algorithms.HandSorter();
         }
 
         public void DrawTileFromWall()
@@ -45,7 +47,7 @@ namespace RMU.Hand
 
         public void SortHand() //TODO: Make this work
         {
-            _closedTiles = Algorithms.SortHand.Sort(_closedTiles);
+            _closedTiles = _handSorter.SortHand(_closedTiles);
         }
 
         public TileObject GetDrawTile()
