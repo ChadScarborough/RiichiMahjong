@@ -42,17 +42,32 @@ namespace RMU.Player
 
         public void SetPlayerOnLeft(IPlayer player)
         {
-            _playerOnLeft = player;
+            if(player != this)
+            {
+                _playerOnLeft = player;
+                return;
+            }
+            throw new ArgumentException("Attempted to set this player to sit on their own left");
         }
 
         public void SetPlayerAcross(IPlayer player)
         {
-            _playerAcross = player;
+            if(player != this)
+            {
+                _playerAcross = player;
+                return;
+            }
+            throw new ArgumentException("Attempted to set this player to sit across from themself");
         }
 
         public void SetPlayerOnRight(IPlayer player)
         {
-            _playerAcross = player;
+            if(player != this)
+            {
+                _playerOnRight = player;
+                return;
+            }
+            throw new ArgumentException("Attempted to set this player to sit on their own right");
         }
 
         public IPlayer GetPlayerOnLeft()
