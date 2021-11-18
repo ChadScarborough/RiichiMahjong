@@ -12,7 +12,8 @@ namespace RMU.Algorithms
         private TileEnums.Suit _thirdSuit;
         private TileEnums.Suit _fourthSuit;
         private TileEnums.Suit _fifthSuit;
-        private List<TileEnums.Suit> _suitOrder;
+        private List<TileEnums.Suit> _suitPriority;
+        private ISortingAlgorithm _sortingAlgorithm;
 
         public HandSorter()
         {
@@ -21,35 +22,14 @@ namespace RMU.Algorithms
             this._thirdSuit = TileEnums.Suit.Sou;
             this._fourthSuit = TileEnums.Suit.Wind;
             this._fifthSuit = TileEnums.Suit.Dragon;
-            this._suitOrder = new List<TileEnums.Suit>() { _firstSuit, _secondSuit, _thirdSuit, _fourthSuit, _fifthSuit };
+            this._suitPriority = new List<TileEnums.Suit>() { _firstSuit, _secondSuit, _thirdSuit, _fourthSuit, _fifthSuit };
+            this._sortingAlgorithm = new RadixSort();
         }
         public List<TileObject> SortHand(List<TileObject> list)
         {
             if(list.Count > 1)
             {
-                int size = list.Count;
-                int counter = 0;
-                do
-                {
-                    for(int i = 0; i < size - 1; i++)
-                    {
-                        if (_suitOrder.IndexOf(list[i].GetSuit()) > _suitOrder.IndexOf(list[i + 1].GetSuit()))
-                        {
-                            TileObject temp = list[i + 1];
-                            list[i + 1] = list[i];
-                            list[i] = temp;
-                            continue;
-                        }
-                        else if ((list[i].GetValue() > list[i + 1].GetValue()) && list[i].GetSuit() == list[i + 1].GetSuit())
-                        {
-                            TileObject temp = list[i + 1];
-                            list[i + 1] = list[i];
-                            list[i] = temp;
-                        }
-                    }
-                    counter++;
-
-                } while (counter < size);
+                _sortingAlgorithm.SortHand(list, _suitPriority);
             }
             return list;
         }
@@ -61,7 +41,7 @@ namespace RMU.Algorithms
             this._thirdSuit = _thirdSuit;
             this._fourthSuit = _fourthSuit;
             this._fifthSuit = _fifthSuit;
-            this._suitOrder = new List<TileEnums.Suit>() { _firstSuit, _secondSuit, _thirdSuit, _fourthSuit, _fifthSuit };
+            this._suitPriority = new List<TileEnums.Suit>() { _firstSuit, _secondSuit, _thirdSuit, _fourthSuit, _fifthSuit };
         }
     }
 }
