@@ -34,29 +34,34 @@ namespace RMU.Algorithms
 
         private void SortTilesBySuit(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority)
         {
+            FillSuitBuckets(Tiles, SuitPriority);
+            Tiles.Clear();
+            EmptyBuckets(Tiles, SuitBuckets);
+        }
+
+        private void FillSuitBuckets(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority)
+        {
             foreach (TileObject tile in Tiles)
             {
                 TileEnums.Suit suit = tile.GetSuit();
                 int index = SuitPriority.IndexOf(suit);
                 SuitBuckets[index].Enqueue(tile);
             }
-            Tiles.Clear();
-            foreach (DataStructures.Queue<TileObject> queue in SuitBuckets)
-            {
-                EmptyQueues(Tiles, queue);
-            }
         }
 
         private void SortTilesByNumber(List<TileObject> Tiles)
         {
+            FillNumberBuckets(Tiles);
+            Tiles.Clear();
+            EmptyBuckets(Tiles, NumberBuckets);
+        }
+
+        private void FillNumberBuckets(List<TileObject> Tiles)
+        {
             foreach (TileObject tile in Tiles)
             {
-                NumberBuckets[tile.GetValue() - 1].Enqueue(tile);
-            }
-            Tiles.Clear();
-            foreach (DataStructures.Queue<TileObject> queue in NumberBuckets)
-            {
-                EmptyQueues(Tiles, queue);
+                int index = tile.GetValue() - 1;
+                NumberBuckets[index].Enqueue(tile);
             }
         }
 
@@ -64,7 +69,16 @@ namespace RMU.Algorithms
         {
             while (!queue.IsEmpty())
             {
-                Tiles.Add(queue.Dequeue());
+                TileObject tile = queue.Dequeue();
+                Tiles.Add(tile);
+            }
+        }
+
+        private void EmptyBuckets(List<TileObject> Tiles, List<DataStructures.Queue<TileObject>> buckets)
+        {
+            foreach (DataStructures.Queue<TileObject> queue in buckets)
+            {
+                EmptyQueues(Tiles, queue);
             }
         }
     }
