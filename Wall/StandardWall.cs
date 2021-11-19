@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Text;
 using RMU.DataStructures;
 using RMU.Tiles;
-using RMU.Wall.DeadWall;
 
 namespace RMU.Wall
 {

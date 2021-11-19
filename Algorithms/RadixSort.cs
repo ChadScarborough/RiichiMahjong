@@ -15,15 +15,18 @@ namespace RMU.Algorithms
         {
             NumberBuckets = new List<DataStructures.Queue<TileObject>>();
             SuitBuckets = new List<DataStructures.Queue<TileObject>>();
-            for(int i = 0; i < UNIQUE_NUMBERS; i++)
+            CreateBuckets(NumberBuckets, UNIQUE_NUMBERS);
+            CreateBuckets(SuitBuckets, UNIQUE_SUITS);
+        }
+
+        private void CreateBuckets(List<DataStructures.Queue<TileObject>> Buckets, int Quantity)
+        {
+            for (int i = 0; i < Quantity; i++)
             {
-                NumberBuckets.Add(new DataStructures.Queue<TileObject>());
+                DataStructures.Queue<TileObject> queue = new DataStructures.Queue<TileObject>();
+                Buckets.Add(queue);
             }
-            for(int i = 0; i < UNIQUE_SUITS; i++)
-            {
-                SuitBuckets.Add(new DataStructures.Queue<TileObject>());
-            }
-         }
+        }
 
         public List<TileObject> SortHand(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority)
         {
