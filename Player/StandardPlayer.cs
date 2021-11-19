@@ -42,32 +42,23 @@ namespace RMU.Player
 
         public void SetPlayerOnLeft(IPlayer player)
         {
-            if(player != this)
-            {
-                _playerOnLeft = player;
-                return;
-            }
-            throw new ArgumentException("Attempted to set this player to sit on their own left");
+            CheckForDuplicatePlayers(player, GetPlayerAcross(), GetPlayerOnRight());
+            CheckThatThisPlayerIsNotDuplicated(player);
+            _playerOnLeft = player;
         }
-
+        
         public void SetPlayerAcross(IPlayer player)
         {
-            if(player != this)
-            {
-                _playerAcross = player;
-                return;
-            }
-            throw new ArgumentException("Attempted to set this player to sit across from themself");
+            CheckForDuplicatePlayers(player, GetPlayerOnLeft(), GetPlayerOnRight());
+            CheckThatThisPlayerIsNotDuplicated(player);
+            _playerAcross = player;
         }
 
         public void SetPlayerOnRight(IPlayer player)
         {
-            if(player != this)
-            {
-                _playerOnRight = player;
-                return;
-            }
-            throw new ArgumentException("Attempted to set this player to sit on their own right");
+            CheckForDuplicatePlayers(player, GetPlayerOnLeft(), GetPlayerAcross());
+            CheckThatThisPlayerIsNotDuplicated(player);
+            _playerOnRight = player;
         }
 
         public IPlayer GetPlayerOnLeft()
@@ -83,6 +74,22 @@ namespace RMU.Player
         public IPlayer GetPlayerOnRight()
         {
             return _playerOnRight;
+        }
+
+        private void CheckForDuplicatePlayers(IPlayer player, IPlayer existingPlayer1, IPlayer existingPlayer2)
+        {
+            if (player == existingPlayer1 || player == existingPlayer2)
+            {
+                throw new ArgumentException("Attempted to set the same player in two locations");
+            }
+        }
+
+        private void CheckThatThisPlayerIsNotDuplicated(IPlayer player)
+        {
+            if(player == this)
+            {
+                throw new ArgumentException("Attempted to set this player to multiple locations");
+            }
         }
     }
 }
