@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RMU.Globals;
 
 namespace RMU.Player
 {
     public class NorthWindState : ISeatWindState
     {
-        public PlayerEnums.SeatWinds GetSeatWind()
+        public Enums.Wind GetSeatWind()
         {
-            return PlayerEnums.SeatWinds.North;
+            return Enums.Wind.North;
         }
     }
 }

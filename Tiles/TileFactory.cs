@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RMU.Globals;
 
 namespace RMU.Tiles
 {
@@ -10,17 +11,17 @@ namespace RMU.Tiles
         private WindTileFactory windTileFactory = new WindTileFactory();
         private DragonTileFactory dragonTileFactory = new DragonTileFactory();
 
-        public TileObject CreateTile(int value, TileEnums.Suit suit)
+        public TileObject CreateTile(int value, Enums.Suit suit)
         {
             switch (suit)
             {
-                case TileEnums.Suit.Man:
-                case TileEnums.Suit.Pin:
-                case TileEnums.Suit.Sou:
+                case Enums.Suit.Man:
+                case Enums.Suit.Pin:
+                case Enums.Suit.Sou:
                     return numberTileFactory.CreateTile(value, suit);
-                case TileEnums.Suit.Wind:
+                case Enums.Suit.Wind:
                     return windTileFactory.CreateTile(value, suit);
-                case TileEnums.Suit.Dragon:
+                case Enums.Suit.Dragon:
                     return dragonTileFactory.CreateTile(value, suit);
                 default:
                     throw new ArgumentException();

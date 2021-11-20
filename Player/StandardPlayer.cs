@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using RMU.Hand;
+using RMU.Globals;
 
 namespace RMU.Player
 {
@@ -20,7 +21,7 @@ namespace RMU.Player
             this._hand = _hand;
         }
 
-        public PlayerEnums.SeatWinds GetSeatWind()
+        public Enums.Wind GetSeatWind()
         {
             return _seatWind.GetSeatWind();
         }

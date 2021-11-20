@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RMU.Globals;
 
 namespace RMU.Tiles
 {
@@ -15,7 +16,7 @@ namespace RMU.Tiles
             _tileFactory = new TileFactory();
         }
 
-        public TileObject CreateTile(int value, TileEnums.Suit suit)
+        public TileObject CreateTile(int value, Enums.Suit suit)
         {
             return _tileFactory.CreateTile(value, suit);
         }

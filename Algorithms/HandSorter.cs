@@ -2,17 +2,18 @@
 using System.Collections.Generic;
 using System.Text;
 using RMU.Tiles;
+using RMU.Globals;
 
 namespace RMU.Algorithms
 {
     public class HandSorter
     {
-        private List<TileEnums.Suit> _suitPriority;
+        private List<Enums.Suit> _suitPriority;
         private ISortingAlgorithm _sortingAlgorithm;
 
         public HandSorter()
         {
-            this._suitPriority = new List<TileEnums.Suit>() { TileEnums.Suit.Man, TileEnums.Suit.Pin, TileEnums.Suit.Sou, TileEnums.Suit.Wind, TileEnums.Suit.Dragon };
+            this._suitPriority = new List<Enums.Suit>() { Enums.Suit.Man, Enums.Suit.Pin, Enums.Suit.Sou, Enums.Suit.Wind, Enums.Suit.Dragon };
             this._sortingAlgorithm = new RadixSort();
         }
         public List<TileObject> SortHand(List<TileObject> list)
@@ -24,9 +25,9 @@ namespace RMU.Algorithms
             return list;
         }
 
-        public void SetSuitPriority(TileEnums.Suit _firstSuit, TileEnums.Suit _secondSuit, TileEnums.Suit _thirdSuit, TileEnums.Suit _fourthSuit, TileEnums.Suit _fifthSuit)
+        public void SetSuitPriority(Enums.Suit _firstSuit, Enums.Suit _secondSuit, Enums.Suit _thirdSuit, Enums.Suit _fourthSuit, Enums.Suit _fifthSuit)
         {
-            this._suitPriority = new List<TileEnums.Suit>() { _firstSuit, _secondSuit, _thirdSuit, _fourthSuit, _fifthSuit };
+            this._suitPriority = new List<Enums.Suit>() { _firstSuit, _secondSuit, _thirdSuit, _fourthSuit, _fifthSuit };
         }
     }
 }

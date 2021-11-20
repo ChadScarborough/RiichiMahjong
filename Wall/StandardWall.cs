@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using RMU.DataStructures;
 using RMU.Tiles;
+using RMU.Globals;
 
 namespace RMU.Wall
 {
@@ -74,7 +75,7 @@ namespace RMU.Wall
             {
                 for (int j = 0; j < NUMBER_OF_COPIES; j++)
                 {
-                    destination.Add(tileFacade.CreateTile(i + 1, TileEnums.Suit.Man));
+                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Man));
                 }
             }
         }
@@ -85,7 +86,7 @@ namespace RMU.Wall
             {
                 for (int j = 0; j < NUMBER_OF_COPIES; j++)
                 {
-                    destination.Add(tileFacade.CreateTile(i + 1, TileEnums.Suit.Pin));
+                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Pin));
                 }
             }
         }
@@ -96,7 +97,7 @@ namespace RMU.Wall
             {
                 for (int j = 0; j < NUMBER_OF_COPIES; j++)
                 {
-                    destination.Add(tileFacade.CreateTile(i + 1, TileEnums.Suit.Sou));
+                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Sou));
                 }
             }
         }
@@ -107,7 +108,7 @@ namespace RMU.Wall
             {
                 for (int j = 0; j < NUMBER_OF_COPIES; j++)
                 {
-                    destination.Add(tileFacade.CreateTile(i + 1, TileEnums.Suit.Wind));
+                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Wind));
                 }
             }
         }
@@ -118,7 +119,7 @@ namespace RMU.Wall
             {
                 for (int j = 0; j < NUMBER_OF_COPIES; j++)
                 {
-                    destination.Add(tileFacade.CreateTile(i + 1, TileEnums.Suit.Dragon));
+                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Dragon));
                 }
             }
         }

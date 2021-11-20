@@ -1,9 +1,11 @@
-﻿namespace RMU.Player
+﻿using RMU.Globals;
+
+namespace RMU.Player
 {
     public interface IPlayer
     {
         int GetScore();
-        PlayerEnums.SeatWinds GetSeatWind();
+        Enums.Wind GetSeatWind();
         void SetScore(int _score);
         void SetSeatWind(ISeatWindState seatWindState);
         void SetPlayerOnLeft(IPlayer player);

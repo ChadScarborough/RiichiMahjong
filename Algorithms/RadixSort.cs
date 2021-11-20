@@ -1,4 +1,5 @@
 ﻿using RMU.Tiles;
+using RMU.Globals;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -28,25 +29,25 @@ namespace RMU.Algorithms
             }
         }
 
-        public List<TileObject> SortHand(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority)
+        public List<TileObject> SortHand(List<TileObject> Tiles, List<Enums.Suit> SuitPriority)
         {
             SortTilesByNumber(Tiles);
             SortTilesBySuit(Tiles, SuitPriority);
             return Tiles;
         }
 
-        private void SortTilesBySuit(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority)
+        private void SortTilesBySuit(List<TileObject> Tiles, List<Enums.Suit> SuitPriority)
         {
             FillSuitBuckets(Tiles, SuitPriority);
             Tiles.Clear();
             EmptyBuckets(Tiles, SuitBuckets);
         }
 
-        private void FillSuitBuckets(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority)
+        private void FillSuitBuckets(List<TileObject> Tiles, List<Enums.Suit> SuitPriority)
         {
             foreach (TileObject tile in Tiles)
             {
-                TileEnums.Suit suit = tile.GetSuit();
+                Enums.Suit suit = tile.GetSuit();
                 int index = SuitPriority.IndexOf(suit);
                 SuitBuckets[index].Enqueue(tile);
             }

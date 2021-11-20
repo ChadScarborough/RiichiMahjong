@@ -1,4 +1,5 @@
 ﻿using RMU.Tiles;
+using RMU.Globals;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +8,7 @@ namespace RMU.Algorithms
 {
     public class BubbleSort : ISortingAlgorithm
     {
-        public List<TileObject> SortHand(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority)
+        public List<TileObject> SortHand(List<TileObject> Tiles, List<Enums.Suit> SuitPriority)
         {
             int size = Tiles.Count;
             int counter = 0;
@@ -21,7 +22,7 @@ namespace RMU.Algorithms
             return Tiles;
         }
 
-        private void IterateThroughList(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority, int size)
+        private void IterateThroughList(List<TileObject> Tiles, List<Enums.Suit> SuitPriority, int size)
         {
             for (int i = 0; i < size - 1; i++)
             {
@@ -29,7 +30,7 @@ namespace RMU.Algorithms
             }
         }
 
-        private void CompareTiles(List<TileObject> Tiles, List<TileEnums.Suit> SuitPriority, int index)
+        private void CompareTiles(List<TileObject> Tiles, List<Enums.Suit> SuitPriority, int index)
         {
             if (SuitPriority.IndexOf(Tiles[index].GetSuit()) > SuitPriority.IndexOf(Tiles[index + 1].GetSuit()))
             {
