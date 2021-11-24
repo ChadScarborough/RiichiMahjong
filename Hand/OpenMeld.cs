@@ -21,6 +21,11 @@ namespace RMU.Hand
             _tiles = _createMeldBehaviour.CreateMeld(_calledTile);
         }
 
+        public void AddTile(TileObject tile)
+        {
+            _tiles.Add(tile);
+        }
+
         public void SetMeldType(Enums.MeldType _meldType)
         {
             switch (_meldType)
@@ -40,6 +45,9 @@ namespace RMU.Hand
                 case Enums.MeldType.OpenKan1:
                 case Enums.MeldType.ClosedKan:
                     _createMeldBehaviour = new CreateKanBehaviour();
+                    break;
+                case Enums.MeldType.OpenKan2:
+                    this._meldType = Enums.MeldType.OpenKan2;
                     break;
             }
         }
