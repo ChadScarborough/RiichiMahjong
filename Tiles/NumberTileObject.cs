@@ -12,5 +12,15 @@ namespace RMU.Tiles
             this._value = value;
             this._suit = suit;
         }
+
+        public override bool IsTerminal()
+        {
+            return _value == 1 || _value == 9;
+        }
+
+        public override bool IsHonor()
+        {
+            return false;
+        }
     }
 }
