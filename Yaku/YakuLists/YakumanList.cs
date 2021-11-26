@@ -14,5 +14,10 @@ namespace RMU.Yaku.YakuLists
             new BigThreeDragons(),
             new FourBigWinds()
         };
+
+        public static List<AbstractYakuman> GetYakumanList()
+        {
+            return _yakumanList;
+        }
     }
 }
