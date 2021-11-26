@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RMU.Tiles;
 
 namespace RMU.Hand
 {
@@ -8,16 +9,17 @@ namespace RMU.Hand
         void DrawTileFromWall();
         void DrawTileFromDeadWall();
         void SortHand();
-        void CallPon(Tiles.TileObject _calledTile);
-        void CallLowChii(Tiles.TileObject _calledTile);
-        void CallMidChii(Tiles.TileObject _calledTile);
-        void CallHighChii(Tiles.TileObject _calledTile);
-        void CallClosedKan(Tiles.TileObject _calledTile);
-        void CallOpenKan1(Tiles.TileObject _calledTile);
-        void CallOpenKan2(Tiles.TileObject _calledTile);
+        void CallPon(TileObject _calledTile);
+        void CallLowChii(TileObject _calledTile);
+        void CallMidChii(TileObject _calledTile);
+        void CallHighChii(TileObject _calledTile);
+        void CallClosedKan(TileObject _calledTile);
+        void CallOpenKan1(TileObject _calledTile);
+        void CallOpenKan2(TileObject _calledTile);
         void AddDrawTileToHand();
-        List<Tiles.TileObject> GetClosedTiles();
+        List<TileObject> GetClosedTiles();
         List<OpenMeld> GetOpenMelds();
-        Tiles.TileObject GetDrawTile();
+        TileObject GetDrawTile();
+        List<TileObject> Listify(TileObject _extraTile);
     }
 }

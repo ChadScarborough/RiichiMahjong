@@ -226,5 +226,23 @@ namespace RMU.Hand
             bool sameSuit = (tile1.GetSuit() == tile2.GetSuit());
             return sameValue && sameSuit;
         }
+
+        public List<TileObject> Listify(TileObject _extraTile)
+        {
+            List<TileObject> outputList = new List<TileObject>();
+            foreach(TileObject tile in _closedTiles)
+            {
+                outputList.Add(tile);
+            }
+            foreach(OpenMeld openMeld in _openMelds)
+            {
+                foreach(TileObject tile in openMeld.GetTiles())
+                {
+                    outputList.Add(tile);
+                }
+            }
+            outputList.Add(_extraTile);
+            return _handSorter.SortHand(outputList);
+        }
     }
 }
