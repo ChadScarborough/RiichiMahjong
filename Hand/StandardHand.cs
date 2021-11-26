@@ -19,6 +19,7 @@ namespace RMU.Hand
         private StandardDiscardPile _discardPile;
         private Algorithms.HandSorter _handSorter;
         private List<OpenMeld> _openMelds;
+        private bool _isOpen = false;
 
         public StandardHand(IWall wall, IDeadWall deadWall)
         {
@@ -89,6 +90,7 @@ namespace RMU.Hand
 
         public void CallLowChii(TileObject _calledTile)
         {
+            _isOpen = true;
             CreateOpenMeld(_calledTile, Enums.MeldType.LowChii);
             TileFactory tileFactory = new TileFactory();
             for (int i = 0; i < 2; i++)
@@ -100,6 +102,7 @@ namespace RMU.Hand
 
         public void CallMidChii(TileObject _calledTile)
         {
+            _isOpen = true;
             CreateOpenMeld(_calledTile, Enums.MeldType.MidChii);
             TileFactory tileFactory = new TileFactory();
             for (int i = 0; i < 2; i++)
@@ -111,6 +114,7 @@ namespace RMU.Hand
 
         public void CallHighChii(TileObject _calledTile)
         {
+            _isOpen = true;
             CreateOpenMeld(_calledTile, Enums.MeldType.HighChii);
             TileFactory tileFactory = new TileFactory();
             for (int i = 0; i < 2; i++)
@@ -135,6 +139,7 @@ namespace RMU.Hand
 
         public void CallOpenKan1(TileObject _calledTile)
         {
+            _isOpen = true;
             CreateOpenMeld(_calledTile, Enums.MeldType.OpenKan1);
             for (int i = 0; i < 3; i++)
             {
@@ -243,6 +248,11 @@ namespace RMU.Hand
             }
             outputList.Add(_extraTile);
             return _handSorter.SortHand(outputList);
+        }
+
+        public bool IsOpen()
+        {
+            return _isOpen;
         }
     }
 }

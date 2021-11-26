@@ -20,6 +20,7 @@ namespace RMU.Hand
         List<TileObject> GetClosedTiles();
         List<OpenMeld> GetOpenMelds();
         TileObject GetDrawTile();
+        bool IsOpen();
         List<TileObject> Listify(TileObject _extraTile);
     }
 }
