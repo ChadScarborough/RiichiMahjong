@@ -7,7 +7,7 @@ using System.Text;
 
 namespace RMU.Yaku.Yakuman
 {
-    public class BigThreeDragons : Yakuman
+    public class BigThreeDragons : AbstractYakuman
     {
         private int _greenDragonCounter = 0;
         private int _redDragonCounter = 0;

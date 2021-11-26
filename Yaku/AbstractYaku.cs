@@ -6,7 +6,7 @@ using RMU.Tiles;
 
 namespace RMU.Yaku
 {
-    public abstract class Yaku
+    public abstract class AbstractYaku
     {
         protected const int NUMBER_OF_TILES_IN_FULL_HAND = 14;
         protected string _name;

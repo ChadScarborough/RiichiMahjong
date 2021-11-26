@@ -7,7 +7,7 @@ using RMU.Globals;
 
 namespace RMU.Yaku
 {
-    public class WhiteDragon : Yaku
+    public class WhiteDragon : AbstractYaku
     {
         private int counter;
 

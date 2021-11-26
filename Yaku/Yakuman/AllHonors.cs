@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RMU.Yaku.Yakuman
 {
-    public class AllHonors : Yakuman
+    public class AllHonors : AbstractYakuman
     {
         public AllHonors()
         {

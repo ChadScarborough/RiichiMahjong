@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RMU.Yaku
 {
-    public class AllTerminalsAndHonors : Yaku
+    public class AllTerminalsAndHonors : AbstractYaku
     {
         private int _terminalCounter;
         private int _honorCounter;

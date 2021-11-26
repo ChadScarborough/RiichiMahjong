@@ -6,7 +6,7 @@ using System.Text;
 
 namespace RMU.Yaku
 {
-    public class AllSimples : Yaku
+    public class AllSimples : AbstractYaku
     {
 
         public AllSimples()

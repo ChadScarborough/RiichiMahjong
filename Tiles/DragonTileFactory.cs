@@ -9,7 +9,7 @@ namespace RMU.Tiles
     {
         public DragonTileObject CreateTile(int value, Enums.Suit suit)
         {
-            if (value >= TileObject.GREEN && value <= TileObject.WHITE)
+            if (value >= ConstValues.GREEN_DRAGON && value <= ConstValues.WHITE_DRAGON)
             {
                 return new DragonTileObject(value, suit);
             }

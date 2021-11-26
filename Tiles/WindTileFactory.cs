@@ -9,7 +9,7 @@ namespace RMU.Tiles
     {
         public WindTileObject CreateTile(int value, Enums.Suit suit)
         {
-            if(value >= TileObject.EAST && value <= TileObject.NORTH)
+            if(value >= ConstValues.EAST_WIND && value <= ConstValues.NORTH_WIND)
             {
                 return new WindTileObject(value, suit);
             }

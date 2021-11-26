@@ -4,7 +4,7 @@ using System.Text;
 
 namespace RMU.Yaku.Yakuman
 {
-    public abstract class Yakuman : Yaku
+    public abstract class AbstractYakuman : AbstractYaku
     {
 
     }
