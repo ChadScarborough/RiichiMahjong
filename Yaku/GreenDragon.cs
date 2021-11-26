@@ -9,18 +9,14 @@ namespace RMU.Yaku
 {
     public class GreenDragon : Yaku
     {
-        private readonly string _name;
-        private readonly int _value;
-        private IGetNameBehaviour getNameBehaviour;
-        private IGetValueBehaviour getValueBehaviour;
         private int counter;
 
         public GreenDragon()
         {
             _name = "Green Dragon";
             _value = 1;
-            getNameBehaviour = new StandardGetNameBehaviour();
-            getValueBehaviour = new StandardGetValueBehaviour();
+            _getNameBehaviour = new StandardGetNameBehaviour();
+            _getValueBehaviour = new StandardGetValueBehaviour();
         }
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
@@ -49,16 +45,6 @@ namespace RMU.Yaku
             bool sameSuit = tileSuit == Enums.Suit.Dragon;
             bool sameValue = tileValue == ConstValues.GREEN_DRAGON;
             return sameSuit && sameValue;
-        }
-
-        public override string GetName()
-        {
-            return getNameBehaviour.GetName(_name);
-        }
-
-        public override int GetValue()
-        {
-            return getValueBehaviour.GetValue(_value);
         }
     }
 }

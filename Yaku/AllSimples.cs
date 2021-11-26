@@ -8,17 +8,13 @@ namespace RMU.Yaku
 {
     public class AllSimples : Yaku
     {
-        private readonly string _name;
-        private readonly int _value;
-        private IGetNameBehaviour getNameBehaviour;
-        private IGetValueBehaviour getValueBehaviour;
 
         public AllSimples()
         {
             _name = "All Simples";
             _value = 1;
-            getNameBehaviour = new StandardGetNameBehaviour();
-            getValueBehaviour = new StandardGetValueBehaviour();
+            _getNameBehaviour = new StandardGetNameBehaviour();
+            _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
@@ -31,16 +27,6 @@ namespace RMU.Yaku
                 }
             }
             return true;
-        }
-
-        public override string GetName()
-        {
-            return getNameBehaviour.GetName(_name);
-        }
-
-        public override int GetValue()
-        {
-            return getValueBehaviour.GetValue(_value);
         }
     }
 }

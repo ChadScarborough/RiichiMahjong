@@ -8,10 +8,6 @@ namespace RMU.Yaku
 {
     public class AllTerminalsAndHonors : Yaku
     {
-        private string _name;
-        private int _value;
-        private IGetNameBehaviour _getNameBehaviour;
-        private IGetValueBehaviour _getValueBehaviour;
         private int _terminalCounter;
         private int _honorCounter;
 
@@ -64,16 +60,6 @@ namespace RMU.Yaku
         private bool AtLeastOneTerminalAndAtLeastOneHonor()
         {
             return _terminalCounter * _honorCounter != 0;
-        }
-
-        public override string GetName()
-        {
-            return _getNameBehaviour.GetName(_name);
-        }
-
-        public override int GetValue()
-        {
-            return _getValueBehaviour.GetValue(_value);
         }
     }
 }
