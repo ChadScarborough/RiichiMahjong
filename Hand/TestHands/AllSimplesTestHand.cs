@@ -1,19 +1,18 @@
-﻿using RMU.Tiles;
-using RMU.Algorithms;
-using RMU.Globals;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using RMU.Tiles;
+using RMU.Globals;
 
 namespace RMU.Hand.TestHands
 {
-    public class AllTerminalsTestHand : TestHand
+    public class AllSimplesTestHand : TestHand
     {
-        public AllTerminalsTestHand()
+        public AllSimplesTestHand()
         {
             _closedTiles = new List<TileObject>();
+            _handSorter = new Algorithms.HandSorter();
             _tileFactory = new TileFactory();
-            _handSorter = new HandSorter();
             SetTileValues();
             SetTileSuits();
             FillHand();
@@ -21,13 +20,13 @@ namespace RMU.Hand.TestHands
 
         private void SetTileSuits()
         {
-            _tileSuits = new List<Enums.Suit>()
+            _tileSuits = new List<Enums.Suit>
             {
                 Enums.Suit.Man, Enums.Suit.Man, Enums.Suit.Man,
-                Enums.Suit.Man, Enums.Suit.Man, Enums.Suit.Man,
                 Enums.Suit.Pin, Enums.Suit.Pin, Enums.Suit.Pin,
+                Enums.Suit.Sou, Enums.Suit.Sou, Enums.Suit.Sou,
                 Enums.Suit.Pin, Enums.Suit.Pin, Enums.Suit.Pin,
-                Enums.Suit.Sou
+                Enums.Suit.Man
             };
         }
 
@@ -35,11 +34,11 @@ namespace RMU.Hand.TestHands
         {
             _tileValues = new List<int>
             {
-                1, 1, 1,
-                9, 9, 9,
-                1, 1, 1,
-                9, 9, 9,
-                1
+                2, 3, 4,
+                5, 5, 5,
+                6, 7, 8,
+                2, 2, 2,
+                8
             };
         }
     }
