@@ -179,7 +179,10 @@ namespace RMU.Hand
             }
             foreach (TileObject tile in _closedTiles)
             {
-                if (RemovedTileFromHand(tile)) { return true; }
+                if (RemovedTileFromHand(tile)) 
+                { 
+                    return true; 
+                }
             }
             return false;
         }
@@ -235,19 +238,39 @@ namespace RMU.Hand
         public List<TileObject> Listify(TileObject _extraTile)
         {
             List<TileObject> outputList = new List<TileObject>();
-            foreach(TileObject tile in _closedTiles)
+            AddClosedTilesToOutputList(outputList);
+            AddEachOpenMeldToOutputList(outputList);
+            AddExtraTileToOutputList(_extraTile, outputList);
+            return _handSorter.SortHand(outputList);
+        }
+
+        private static void AddExtraTileToOutputList(TileObject _extraTile, List<TileObject> outputList)
+        {
+            outputList.Add(_extraTile);
+        }
+
+        private void AddEachOpenMeldToOutputList(List<TileObject> outputList)
+        {
+            foreach (OpenMeld openMeld in _openMelds)
+            {
+                AddEachTileInOpenMeldToOutputList(outputList, openMeld);
+            }
+        }
+
+        private static void AddEachTileInOpenMeldToOutputList(List<TileObject> outputList, OpenMeld openMeld)
+        {
+            foreach (TileObject tile in openMeld.GetTiles())
             {
                 outputList.Add(tile);
             }
-            foreach(OpenMeld openMeld in _openMelds)
+        }
+
+        private void AddClosedTilesToOutputList(List<TileObject> outputList)
+        {
+            foreach (TileObject tile in _closedTiles)
             {
-                foreach(TileObject tile in openMeld.GetTiles())
-                {
-                    outputList.Add(tile);
-                }
+                outputList.Add(tile);
             }
-            outputList.Add(_extraTile);
-            return _handSorter.SortHand(outputList);
         }
 
         public bool IsOpen()
