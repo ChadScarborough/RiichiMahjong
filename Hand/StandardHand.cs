@@ -153,7 +153,7 @@ namespace RMU.Hand
             {
                 if(SuccessfullyTurnedPonIntoOpenKan2(_calledTile, openMeld))
                 {
-                    break;
+                    return;
                 }
             }
         }
@@ -203,7 +203,7 @@ namespace RMU.Hand
             {
                 if (IsDuplicateTile(_closedTiles[i], _calledTile, i))
                 {
-                    break;
+                    return;
                 }
             }
         }
