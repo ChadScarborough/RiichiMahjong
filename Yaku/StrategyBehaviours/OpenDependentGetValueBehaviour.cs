@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace RMU.Yaku.StrategyBehaviours
+namespace RMU.Yaku
 {
     public class OpenDependentGetValueBehaviour : IGetValueBehaviour
     {

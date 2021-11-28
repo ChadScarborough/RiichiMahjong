@@ -109,5 +109,10 @@ namespace RMU.Hand.TestHands
             outputList.Add(_extraTile);
             return _handSorter.SortHand(outputList);
         }
+
+        public virtual bool IsOpen()
+        {
+            return false;
+        }
     }
 }
