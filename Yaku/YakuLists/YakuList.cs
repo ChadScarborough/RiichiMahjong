@@ -10,6 +10,7 @@ namespace RMU.Yaku.YakuLists
         {
             new AllSimples(),
             new AllTerminalsAndHonors(),
+            new FullFlush(),
             new GreenDragon(),
             new RedDragon(),
             new WhiteDragon()
