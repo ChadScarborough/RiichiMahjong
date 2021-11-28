@@ -14,7 +14,7 @@ namespace RMU.Wall
         private const int NUMBER_OF_WINDS = 4;
         private const int NUMBER_OF_DRAGONS = 3;
         private const int NUMBER_OF_COPIES = 4;
-        private TileFacade tileFacade = new TileFacade();
+        private TileFactory tileFactory = new TileFactory();
 
         public StandardWall()
         {
@@ -48,78 +48,70 @@ namespace RMU.Wall
         {
             List<TileObject> outputList = new List<TileObject>();
             Random _rand = new Random();
-            int _r;
+            int _r = 0;
             while (tiles.Count > 0)
             {
-                _r = _rand.Next(0, tiles.Count);
-                outputList.Add(tiles[_r]);
-                tiles.RemoveAt(_r);
+                AddRandomTileToOutputList(tiles, outputList, _r, _rand);
             }
             return outputList;
+        }
+
+        private void AddRandomTileToOutputList(List<TileObject> inputList, List<TileObject> outputList, int _r, Random _rand)
+        {
+            _r = _rand.Next(0, inputList.Count);
+            outputList.Add(inputList[_r]);
+            inputList.RemoveAt(_r);
         }
 
         private List<TileObject> GenerateTiles()
         {
             List<TileObject> tileList = new List<TileObject>();
-            GenerateManTiles(tileList);
-            GeneratePinTiles(tileList);
-            GenerateSouTiles(tileList);
+            GenerateNumberTiles(tileList);
             GenerateWindTiles(tileList);
             GenerateDragonTiles(tileList);
             return tileList;
         }
 
+        private void GenerateNumberTiles(List<TileObject> tileList)
+        {
+            GenerateManTiles(tileList);
+            GeneratePinTiles(tileList);
+            GenerateSouTiles(tileList);
+        }
+
         private void GenerateManTiles(List<TileObject> destination)
         {
-            for (int i = 0; i < NUMBER_OF_NUMERICAL_VALUES; i++)
-            {
-                for (int j = 0; j < NUMBER_OF_COPIES; j++)
-                {
-                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Man));
-                }
-            }
+            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Man, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
         private void GeneratePinTiles(List<TileObject> destination)
         {
-            for (int i = 0; i < NUMBER_OF_NUMERICAL_VALUES; i++)
-            {
-                for (int j = 0; j < NUMBER_OF_COPIES; j++)
-                {
-                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Pin));
-                }
-            }
+            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Pin, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
         private void GenerateSouTiles(List<TileObject> destination)
         {
-            for (int i = 0; i < NUMBER_OF_NUMERICAL_VALUES; i++)
-            {
-                for (int j = 0; j < NUMBER_OF_COPIES; j++)
-                {
-                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Sou));
-                }
-            }
+            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Sou, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
         private void GenerateWindTiles(List<TileObject> destination)
         {
-            for (int i = 0; i < NUMBER_OF_WINDS; i++)
-            {
-                for (int j = 0; j < NUMBER_OF_COPIES; j++)
-                {
-                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Wind));
-                }
-            }
+            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Wind, NUMBER_OF_WINDS, destination);
         }
 
         private void GenerateDragonTiles(List<TileObject> destination)
         {
-            for (int i = 0; i < NUMBER_OF_DRAGONS; i++)
+            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Dragon, NUMBER_OF_DRAGONS, destination);
+        }
+
+        private void GenerateTilesOfAGivenSuitAndNumber(Enums.Suit suit, int numberOfValues, List<TileObject> destination)
+        {
+            for(int i = 0; i < numberOfValues; i++)
             {
-                for (int j = 0; j < NUMBER_OF_COPIES; j++)
+                for(int j = 0; j < NUMBER_OF_COPIES; j++)
                 {
-                    destination.Add(tileFacade.CreateTile(i + 1, Enums.Suit.Dragon));
+                    TileObject _tile = tileFactory.CreateTile(i + 1, suit);
+                    destination.Add(_tile);
                 }
             }
         }
