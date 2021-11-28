@@ -71,21 +71,22 @@ namespace RMU.Yaku.Yakuman
 
         private bool IsGreenDragon(TileObject tile)
         {
-            bool sameValue = tile.GetValue() == ConstValues.GREEN_DRAGON;
-            bool sameSuit = tile.GetSuit() == Enums.Suit.Dragon;
-            return sameValue && sameSuit;
+            return IsGivenDragon(tile, ConstValues.GREEN_DRAGON);
         }
 
         private bool IsRedDragon(TileObject tile)
         {
-            bool sameValue = tile.GetValue() == ConstValues.RED_DRAGON;
-            bool sameSuit = tile.GetSuit() == Enums.Suit.Dragon;
-            return sameValue && sameSuit;
+            return IsGivenDragon(tile, ConstValues.RED_DRAGON);
         }
 
         private bool IsWhiteDragon(TileObject tile)
         {
-            bool sameValue = tile.GetValue() == ConstValues.WHITE_DRAGON;
+            return IsGivenDragon(tile, ConstValues.WHITE_DRAGON);
+        }
+
+        private bool IsGivenDragon(TileObject tile, int dragonConstValue)
+        {
+            bool sameValue = tile.GetValue() == dragonConstValue;
             bool sameSuit = tile.GetSuit() == Enums.Suit.Dragon;
             return sameValue && sameSuit;
         }

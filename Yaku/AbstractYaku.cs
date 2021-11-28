@@ -8,11 +8,11 @@ namespace RMU.Yaku
 {
     public abstract class AbstractYaku
     {
-        protected const int NUMBER_OF_TILES_IN_FULL_HAND = 14;
         protected string _name;
         protected int _value;
         protected IGetNameBehaviour _getNameBehaviour;
         protected IGetValueBehaviour _getValueBehaviour;
+        protected IHand _hand;
 
         public abstract bool CheckYaku(IHand hand, TileObject extraTile);
         public string GetName()
@@ -20,9 +20,9 @@ namespace RMU.Yaku
             return _getNameBehaviour.GetName(_name);
         }
 
-        public int GetValue()
+        public int GetValue(IHand hand)
         {
-            return _getValueBehaviour.GetValue(_value);
+            return _getValueBehaviour.GetValue(_value, hand);
         }
     }
 }
