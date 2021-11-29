@@ -10,5 +10,12 @@ namespace RMU.Globals
         public enum Suit { Man, Pin, Sou, Wind, Dragon }
         public enum Wind { East, South, West, North }
         public enum Dragon { Green, Red, White }
+        public enum CompleteHandComponentType
+        {
+            ClosedChii, ClosedPon, ClosedKan,
+            OpenChii, OpenPon, OpenKan,
+            IncompleteSequenceClosedWait, IncompleteSequenceOpenWait, IncompleteSequenceEdgeWait,
+            Pair, IsolatedTerminal, DrawTile
+        }
     }
 }
