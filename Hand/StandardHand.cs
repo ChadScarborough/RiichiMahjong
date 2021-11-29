@@ -92,10 +92,9 @@ namespace RMU.Hand
         {
             _isOpen = true;
             CreateOpenMeld(_calledTile, Enums.MeldType.LowChii);
-            TileFactory tileFactory = new TileFactory();
             for (int i = 0; i < 2; i++)
             {
-                TileObject tempTile = tileFactory.CreateTile(_calledTile.GetValue() - (i + 1), _calledTile.GetSuit());
+                TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() - (i + 1), _calledTile.GetSuit());
                 RemoveCopyOfTile(tempTile);
             }
         }
@@ -104,10 +103,9 @@ namespace RMU.Hand
         {
             _isOpen = true;
             CreateOpenMeld(_calledTile, Enums.MeldType.MidChii);
-            TileFactory tileFactory = new TileFactory();
             for (int i = 0; i < 2; i++)
             {
-                TileObject tempTile = tileFactory.CreateTile(_calledTile.GetValue() - ((2 * i) - 1), _calledTile.GetSuit());
+                TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() - ((2 * i) - 1), _calledTile.GetSuit());
                 RemoveCopyOfTile(tempTile);
             }
         }
@@ -116,10 +114,9 @@ namespace RMU.Hand
         {
             _isOpen = true;
             CreateOpenMeld(_calledTile, Enums.MeldType.HighChii);
-            TileFactory tileFactory = new TileFactory();
             for (int i = 0; i < 2; i++)
             {
-                TileObject tempTile = tileFactory.CreateTile(_calledTile.GetValue() + (i + 1), _calledTile.GetSuit());
+                TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() + (i + 1), _calledTile.GetSuit());
                 RemoveCopyOfTile(tempTile);
             }
         }

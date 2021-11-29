@@ -13,7 +13,6 @@ namespace RMU.Hand.TestHands
         {
             _closedTiles = new List<TileObject>();
             _handSorter = new HandSorter();
-            _tileFactory = new TileFactory();
             SetTileValues();
             SetTileSuits();
             FillHand();

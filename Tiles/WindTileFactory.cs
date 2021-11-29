@@ -5,9 +5,9 @@ using RMU.Globals;
 
 namespace RMU.Tiles
 {
-    public class WindTileFactory
+    public static class WindTileFactory
     {
-        public WindTileObject CreateTile(int value, Enums.Suit suit)
+        public static WindTileObject CreateTile(int value, Enums.Suit suit)
         {
             if(value >= ConstValues.EAST_WIND && value <= ConstValues.NORTH_WIND)
             {

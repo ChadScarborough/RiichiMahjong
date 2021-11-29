@@ -5,9 +5,9 @@ using RMU.Globals;
 
 namespace RMU.Tiles
 {
-    public class DragonTileFactory
+    public static class DragonTileFactory
     {
-        public DragonTileObject CreateTile(int value, Enums.Suit suit)
+        public static DragonTileObject CreateTile(int value, Enums.Suit suit)
         {
             if (value >= ConstValues.GREEN_DRAGON && value <= ConstValues.WHITE_DRAGON)
             {

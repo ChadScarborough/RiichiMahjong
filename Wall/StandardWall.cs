@@ -14,7 +14,6 @@ namespace RMU.Wall
         private const int NUMBER_OF_WINDS = 4;
         private const int NUMBER_OF_DRAGONS = 3;
         private const int NUMBER_OF_COPIES = 4;
-        private TileFactory tileFactory = new TileFactory();
 
         public StandardWall()
         {
@@ -110,7 +109,7 @@ namespace RMU.Wall
             {
                 for(int j = 0; j < NUMBER_OF_COPIES; j++)
                 {
-                    TileObject _tile = tileFactory.CreateTile(i + 1, suit);
+                    TileObject _tile = TileFactory.CreateTile(i + 1, suit);
                     destination.Add(_tile);
                 }
             }

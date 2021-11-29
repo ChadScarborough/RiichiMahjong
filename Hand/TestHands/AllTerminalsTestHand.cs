@@ -12,7 +12,6 @@ namespace RMU.Hand.TestHands
         public AllTerminalsTestHand()
         {
             _closedTiles = new List<TileObject>();
-            _tileFactory = new TileFactory();
             _handSorter = new HandSorter();
             SetTileValues();
             SetTileSuits();

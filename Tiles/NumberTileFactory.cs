@@ -5,9 +5,9 @@ using RMU.Globals;
 
 namespace RMU.Tiles
 {
-    public class NumberTileFactory
+    public static class NumberTileFactory
     {
-        public NumberTileObject CreateTile(int value, Enums.Suit suit)
+        public static NumberTileObject CreateTile(int value, Enums.Suit suit)
         {
             if(value >= 1 && value <= 9)
             {

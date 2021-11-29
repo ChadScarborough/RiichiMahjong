@@ -13,12 +13,11 @@ namespace RMU.Hand.TestHands
         protected HandSorter _handSorter;
         protected List<int> _tileValues;
         protected List<Enums.Suit> _tileSuits;
-        protected TileFactory _tileFactory;
         public virtual void FillHand()
         {
             for (int i = 0; i < 13; i++)
             {
-                TileObject tile = _tileFactory.CreateTile(_tileValues[i], _tileSuits[i]);
+                TileObject tile = TileFactory.CreateTile(_tileValues[i], _tileSuits[i]);
                 _closedTiles.Add(tile);
             }
             _closedTiles = _handSorter.SortHand(_closedTiles);
