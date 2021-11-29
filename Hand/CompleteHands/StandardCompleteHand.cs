@@ -47,7 +47,7 @@ namespace RMU.Hand.CompleteHands
         public StandardCompleteHand //Edge wait
             (
             ICompleteHandGroup group1, ICompleteHandGroup group2, ICompleteHandGroup group3,
-            IncompleteSequenceEdgeWait incompleteSequence, Pair pair, DrawTile drawTile
+            IncompleteSequenceClosedWait incompleteSequence, Pair pair, DrawTile drawTile
             )
         {
             InitializeList();
