@@ -42,9 +42,9 @@ namespace RMU.Globals
         public static readonly TileObject WEST_WIND = TileFactory.CreateTile(ConstValues.WEST_WIND, Enums.Suit.Wind);
         public static readonly TileObject NORTH_WIND = TileFactory.CreateTile(ConstValues.NORTH_WIND, Enums.Suit.Wind);
 
-        public static readonly TileObject GREEN_DRAGON = TileFactory.CreateTile(ConstValues.GREEN_DRAGON, Enums.Suit.Wind);
-        public static readonly TileObject RED_DRAGON = TileFactory.CreateTile(ConstValues.RED_DRAGON, Enums.Suit.Wind);
-        public static readonly TileObject WHITE_DRAGON = TileFactory.CreateTile(ConstValues.WHITE_DRAGON, Enums.Suit.Wind);
+        public static readonly TileObject GREEN_DRAGON = TileFactory.CreateTile(ConstValues.GREEN_DRAGON, Enums.Suit.Dragon);
+        public static readonly TileObject RED_DRAGON = TileFactory.CreateTile(ConstValues.RED_DRAGON, Enums.Suit.Dragon);
+        public static readonly TileObject WHITE_DRAGON = TileFactory.CreateTile(ConstValues.WHITE_DRAGON, Enums.Suit.Dragon);
 
     }
 }

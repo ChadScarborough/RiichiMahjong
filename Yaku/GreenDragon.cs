@@ -40,11 +40,7 @@ namespace RMU.Yaku
 
         private bool IsTileGreenDragon(TileObject tile)
         {
-            Enums.Suit tileSuit = tile.GetSuit();
-            int tileValue = tile.GetValue();
-            bool sameSuit = tileSuit == Enums.Suit.Dragon;
-            bool sameValue = tileValue == ConstValues.GREEN_DRAGON;
-            return sameSuit && sameValue;
+            return Functions.AreTilesEquivalent(tile, StandardTileList.GREEN_DRAGON);
         }
     }
 }

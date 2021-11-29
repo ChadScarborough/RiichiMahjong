@@ -89,31 +89,22 @@ namespace RMU.Yaku.Yakuman
 
         private bool IsEastWind(TileObject tile)
         {
-            return IsGivenWind(tile, ConstValues.EAST_WIND);
+            return Functions.AreTilesEquivalent(tile, StandardTileList.EAST_WIND);
         }
 
         private bool IsSouthWind(TileObject tile)
         {
-            return IsGivenWind(tile, ConstValues.SOUTH_WIND);
+            return Functions.AreTilesEquivalent(tile, StandardTileList.SOUTH_WIND);
         }
 
         private bool IsWestWind(TileObject tile)
         {
-            return IsGivenWind(tile, ConstValues.WEST_WIND);
+            return Functions.AreTilesEquivalent(tile, StandardTileList.WEST_WIND);
         }
 
         private bool IsNorthWind(TileObject tile)
         {
-            return IsGivenWind(tile, ConstValues.NORTH_WIND);
-        }
-
-        private bool IsGivenWind(TileObject tile, int wind)
-        {
-            int value = tile.GetValue();
-            Enums.Suit suit = tile.GetSuit();
-            bool sameValue = value == wind;
-            bool sameSuit = suit == Enums.Suit.Wind;
-            return sameValue && sameSuit;
+            return Functions.AreTilesEquivalent(tile, StandardTileList.NORTH_WIND);
         }
 
         private void ResetCounters()

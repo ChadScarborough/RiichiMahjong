@@ -12,7 +12,7 @@ namespace RMU.Globals
             return (int)MathF.Round(MathF.Min(a, MathF.Min(b, c)));
         }
 
-        public static bool TilesAreEquivalent(TileObject tile1, TileObject tile2)
+        public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2)
         {
             Enums.Suit suit1 = tile1.GetSuit();
             Enums.Suit suit2 = tile2.GetSuit();
