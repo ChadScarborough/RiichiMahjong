@@ -1,4 +1,5 @@
-﻿using RMU.Hand.CompleteHands.CompleteHandComponents;
+﻿using RMU.Globals;
+using RMU.Hand.CompleteHands.CompleteHandComponents;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -13,6 +14,16 @@ namespace RMU.Hand.CompleteHands
         }
 
         public List<ICompleteHandComponent> GetCompleteHand()
+        {
+            throw new NotImplementedException();
+        }
+
+        public Enums.CompleteHandType GetCompleteHandType()
+        {
+            return Enums.CompleteHandType.ThirteenOrphans;
+        }
+
+        public Enums.CompleteHandWaitType GetWaitType()
         {
             throw new NotImplementedException();
         }

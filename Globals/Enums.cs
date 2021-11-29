@@ -15,7 +15,9 @@ namespace RMU.Globals
             ClosedChii, ClosedPon, ClosedKan,
             OpenChii, OpenPon, OpenKan,
             IncompleteSequenceClosedWait, IncompleteSequenceOpenWait, IncompleteSequenceEdgeWait,
-            Pair, IsolatedTerminal, DrawTile
+            Pair, IsolatedTile, DrawTile
         }
+        public enum CompleteHandWaitType { PairWait, TwoSidedTripletWait, ClosedWait, EdgeWait, OpenWait, ThirteenWait }
+        public enum CompleteHandType { Standard, SevenPairs, ThirteenOrphans }
     }
 }
