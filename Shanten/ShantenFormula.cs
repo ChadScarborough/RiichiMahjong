@@ -12,7 +12,7 @@ namespace RMU.Shanten
             int _standardShanten = StandardShanten(_groups, _pairs, _taatsu);
             int _sevenPairsShanten = SevenPairsShanten(_pairs);
             int _thirteenOrphansShanten = ThirteenOrphansShanten(_uniqueTerminals);
-            return Globals.Math.MinOfThree(_standardShanten, _sevenPairsShanten, _thirteenOrphansShanten);   
+            return Globals.Functions.MinOfThree(_standardShanten, _sevenPairsShanten, _thirteenOrphansShanten);   
         }
 
         private static int StandardShanten(int _groups, int _pairs, int _taatsu)
