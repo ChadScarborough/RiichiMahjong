@@ -35,8 +35,9 @@ namespace RMU.Algorithms
             if (SuitPriority.IndexOf(Tiles[index].GetSuit()) > SuitPriority.IndexOf(Tiles[index + 1].GetSuit()))
             {
                 SwapTiles(Tiles, index);
+                return;
             }
-            else if ((Tiles[index].GetValue() > Tiles[index + 1].GetValue()) && Tiles[index].GetSuit() == Tiles[index + 1].GetSuit())
+            if ((Tiles[index].GetValue() > Tiles[index + 1].GetValue()) && Tiles[index].GetSuit() == Tiles[index + 1].GetSuit())
             {
                 SwapTiles(Tiles, index);
             }
