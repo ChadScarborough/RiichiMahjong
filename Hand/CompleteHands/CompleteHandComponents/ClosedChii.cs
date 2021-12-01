@@ -12,6 +12,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public ClosedChii(List<TileObject> closedChii)
         {
+            _tiles = new List<TileObject>();
             foreach(TileObject tile in closedChii)
             {
                 _tiles.Add(tile);
