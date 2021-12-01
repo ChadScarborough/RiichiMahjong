@@ -27,7 +27,8 @@ namespace RMU.Yaku
             if (SuccessfullyFoundNonHonorSuit() == false) return false;
             foreach(TileObject tile in _tiles)
             {
-                if (tile.GetSuit() != this._suit) return false;
+                if (tile.GetSuit() == this._suit) continue;
+                return false;
             }
             return true;
         }
