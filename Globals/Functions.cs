@@ -22,5 +22,22 @@ namespace RMU.Globals
             bool sameValue = value1 == value2;
             return sameSuit && sameValue;
         }
+
+        public static bool AreWindsEquivalent(TileObject windTile, Enums.Wind wind)
+        {
+            switch (windTile.GetValue())
+            {
+                case ConstValues.EAST_WIND:
+                    return wind == Enums.Wind.East;
+                case ConstValues.SOUTH_WIND:
+                    return wind == Enums.Wind.South;
+                case ConstValues.WEST_WIND:
+                    return wind == Enums.Wind.West;
+                case ConstValues.NORTH_WIND:
+                    return wind == Enums.Wind.North;
+                default:
+                    return false;
+            }
+        }
     }
 }
