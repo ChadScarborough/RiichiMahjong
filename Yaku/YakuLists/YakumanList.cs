@@ -9,15 +9,20 @@ namespace RMU.Yaku.YakuLists
     {
         private static List<AbstractYakuman> _yakumanList = new List<AbstractYakuman>
         {
-            new AllHonors(),
-            new AllTerminals(),
-            new BigThreeDragons(),
-            new FourBigWinds()
+            ALL_HONORS,
+            ALL_TERMINALS,
+            BIG_THREE_DRAGONS,
+            FOUR_BIG_WINDS
         };
 
         public static List<AbstractYakuman> GetYakumanList()
         {
             return _yakumanList;
         }
+
+        public static readonly AbstractYakuman ALL_HONORS = new AllHonors();
+        public static readonly AbstractYakuman ALL_TERMINALS = new AllTerminals();
+        public static readonly AbstractYakuman BIG_THREE_DRAGONS = new BigThreeDragons();
+        public static readonly AbstractYakuman FOUR_BIG_WINDS = new FourBigWinds();
     }
 }
