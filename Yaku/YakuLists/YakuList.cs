@@ -12,6 +12,7 @@ namespace RMU.Yaku.YakuLists
             ALL_TERMINALS_AND_HONORS,
             FULL_FLUSH,
             GREEN_DRAGON,
+            HALF_FLUSH,
             RED_DRAGON,
             WHITE_DRAGON
         };
@@ -25,6 +26,7 @@ namespace RMU.Yaku.YakuLists
         public static readonly AbstractYaku ALL_TERMINALS_AND_HONORS = new AllTerminalsAndHonors();
         public static readonly AbstractYaku FULL_FLUSH = new FullFlush();
         public static readonly AbstractYaku GREEN_DRAGON = new GreenDragon();
+        public static readonly AbstractYaku HALF_FLUSH = new HalfFlush();
         public static readonly AbstractYaku RED_DRAGON = new RedDragon();
         public static readonly AbstractYaku WHITE_DRAGON = new WhiteDragon();
     }
