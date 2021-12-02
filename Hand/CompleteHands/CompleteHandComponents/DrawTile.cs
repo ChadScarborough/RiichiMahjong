@@ -20,6 +20,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             return Enums.CompleteHandComponentType.DrawTile;
         }
 
+        public TileObject GetLeadTile()
+        {
+            return _tile;
+        }
+
         public List<TileObject> GetTiles()
         {
             return new List<TileObject> { _tile };

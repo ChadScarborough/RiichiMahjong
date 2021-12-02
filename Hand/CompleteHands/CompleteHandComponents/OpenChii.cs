@@ -46,5 +46,10 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             return _tiles;
         }
+
+        public TileObject GetLeadTile()
+        {
+            return _tiles[0];
+        }
     }
 }

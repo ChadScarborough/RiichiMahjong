@@ -24,6 +24,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             return Enums.CompleteHandComponentType.IncompleteSequenceOpenWait;
         }
 
+        public TileObject GetLeadTile()
+        {
+            return _tiles[0];
+        }
+
         public List<TileObject> GetTiles()
         {
             return _tiles;
