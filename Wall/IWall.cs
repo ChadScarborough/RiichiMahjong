@@ -1,7 +1,4 @@
-﻿using RMU.DataStructures;
-using RMU.Tiles;
-using System.Collections.Generic;
-using RMU.Wall.DeadWall;
+﻿using RMU.Tiles;
 
 namespace RMU.Wall
 {

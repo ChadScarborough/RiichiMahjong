@@ -1,9 +1,7 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RMU.Yaku
 {

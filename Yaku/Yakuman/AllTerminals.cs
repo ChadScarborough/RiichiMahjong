@@ -1,8 +1,5 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace RMU.Yaku.Yakuman
 {

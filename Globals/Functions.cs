@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using RMU.Tiles;
 
 namespace RMU.Globals
@@ -40,12 +38,12 @@ namespace RMU.Globals
             }
         }
 
-        public static TileObject GetTileTwoAbove(NumberTileObject tile)
+        public static TileObject GetTileTwoAbove(TileObject tile)
         {
             return tile.GetTileAbove().GetTileAbove();
         }
 
-        public static TileObject GetTileTwoBelow(NumberTileObject tile)
+        public static TileObject GetTileTwoBelow(TileObject tile)
         {
             return tile.GetTileBelow().GetTileBelow();
         }

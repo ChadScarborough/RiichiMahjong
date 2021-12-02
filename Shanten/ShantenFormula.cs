@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using RMU.Globals;
-
-namespace RMU.Shanten
+﻿namespace RMU.Shanten
 {
     public static class ShantenFormula
     {

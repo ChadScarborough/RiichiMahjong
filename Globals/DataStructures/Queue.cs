@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace RMU.DataStructures
+﻿namespace RMU.DataStructures
 {
     public class Queue<T>
     {

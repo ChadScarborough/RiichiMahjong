@@ -1,8 +1,6 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using RMU.Globals;
 
 namespace RMU.Yaku
 {
@@ -54,7 +52,7 @@ namespace RMU.Yaku
 
         private bool AllTilesAreTerminalsOrHonors()
         {
-            return _terminalCounter + _honorCounter == 14;
+            return _terminalCounter + _honorCounter >= ConstValues.NUMBER_OF_TILES_IN_FULL_HAND;
         }
 
         private bool AtLeastOneTerminalAndAtLeastOneHonor()
