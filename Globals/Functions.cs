@@ -21,6 +21,11 @@ namespace RMU.Globals
             return sameSuit && sameValue;
         }
 
+        public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2, TileObject tile3)
+        {
+            return AreTilesEquivalent(tile1, tile2) && AreTilesEquivalent(tile2, tile3);
+        }
+
         public static bool AreWindsEquivalent(TileObject windTile, Enums.Wind wind)
         {
             switch (windTile.GetValue())
