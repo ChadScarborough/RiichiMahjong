@@ -8,7 +8,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
     public class IncompleteSequenceClosedWait : ICompleteHandIncompleteGroup
     {
-        private List<TileObject> _tiles;
+        private readonly List<TileObject> _tiles;
 
         public IncompleteSequenceClosedWait(List<TileObject> incompleteSequenceClosedWait)
         {

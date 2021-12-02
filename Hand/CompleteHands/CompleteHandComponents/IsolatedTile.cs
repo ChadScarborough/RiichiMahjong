@@ -8,7 +8,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
     public class IsolatedTile : ICompleteHandComponent
     {
-        private TileObject _tile;
+        private readonly TileObject _tile;
 
         public IsolatedTile(TileObject isolatedTile)
         {
@@ -18,6 +18,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         public Enums.CompleteHandComponentType GetComponentType()
         {
             return Enums.CompleteHandComponentType.IsolatedTile;
+        }
+
+        public TileObject GetLeadTile()
+        {
+            return _tile;
         }
 
         public List<TileObject> GetTiles()

@@ -8,7 +8,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
     public class OpenPon : ICompleteHandGroup
     {
-        private List<TileObject> _tiles;
+        private readonly List<TileObject> _tiles;
 
         public OpenPon(OpenMeld openPon)
         {

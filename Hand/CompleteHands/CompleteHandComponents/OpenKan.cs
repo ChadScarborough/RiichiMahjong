@@ -8,7 +8,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
     public class OpenKan : ICompleteHandGroup
     {
-        private List<TileObject> _tiles;
+        private readonly List<TileObject> _tiles;
 
         public OpenKan(OpenMeld openKan)
         {

@@ -8,7 +8,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
     public class DrawTile : ICompleteHandComponent
     {
-        private TileObject _tile;
+        private readonly TileObject _tile;
 
         public DrawTile(TileObject drawTile)
         {
