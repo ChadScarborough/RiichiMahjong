@@ -39,5 +39,15 @@ namespace RMU.Globals
                     return false;
             }
         }
+
+        public static TileObject GetTileTwoAbove(NumberTileObject tile)
+        {
+            return tile.GetTileAbove().GetTileAbove();
+        }
+
+        public static TileObject GetTileTwoBelow(NumberTileObject tile)
+        {
+            return tile.GetTileBelow().GetTileBelow();
+        }
     }
 }
