@@ -22,5 +22,17 @@ namespace RMU.Tiles
         {
             return false;
         }
+
+        public override TileObject GetTileBelow()
+        {
+            if (_value == 1) return null;
+            return TileFactory.CreateTile(_value - 1, _suit);
+        }
+
+        public override TileObject GetTileAbove()
+        {
+            if (_value == 9) return null;
+            return TileFactory.CreateTile(_value + 1, _suit);
+        }
     }
 }
