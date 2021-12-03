@@ -44,12 +44,12 @@ namespace RMU.Hand.CompleteHands
 
         public Enums.CompleteHandWaitType GetWaitType()
         {
-            return Enums.CompleteHandWaitType.PairWait;
+            return Enums.PAIR_WAIT;
         }
 
         public Enums.CompleteHandType GetCompleteHandType()
         {
-            return Enums.CompleteHandType.SevenPairs;
+            return Enums.SEVEN_PAIRS;
         }
     }
 }

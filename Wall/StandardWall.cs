@@ -79,27 +79,27 @@ namespace RMU.Wall
 
         private void GenerateManTiles(List<TileObject> destination)
         {
-            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Man, NUMBER_OF_NUMERICAL_VALUES, destination);
+            GenerateTilesOfAGivenSuitAndNumber(Enums.MAN, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
         private void GeneratePinTiles(List<TileObject> destination)
         {
-            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Pin, NUMBER_OF_NUMERICAL_VALUES, destination);
+            GenerateTilesOfAGivenSuitAndNumber(Enums.PIN, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
         private void GenerateSouTiles(List<TileObject> destination)
         {
-            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Sou, NUMBER_OF_NUMERICAL_VALUES, destination);
+            GenerateTilesOfAGivenSuitAndNumber(Enums.SOU, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
         private void GenerateWindTiles(List<TileObject> destination)
         {
-            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Wind, NUMBER_OF_WINDS, destination);
+            GenerateTilesOfAGivenSuitAndNumber(Enums.WIND, NUMBER_OF_WINDS, destination);
         }
 
         private void GenerateDragonTiles(List<TileObject> destination)
         {
-            GenerateTilesOfAGivenSuitAndNumber(Enums.Suit.Dragon, NUMBER_OF_DRAGONS, destination);
+            GenerateTilesOfAGivenSuitAndNumber(Enums.DRAGON, NUMBER_OF_DRAGONS, destination);
         }
 
         private void GenerateTilesOfAGivenSuitAndNumber(Enums.Suit suit, int numberOfValues, List<TileObject> destination)

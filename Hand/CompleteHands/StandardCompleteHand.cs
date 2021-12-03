@@ -17,7 +17,7 @@ namespace RMU.Hand.CompleteHands
         {
             InitializeList();
             FillList(group1, group2, group3, group4, isolatedTile, drawTile);
-            _waitType = Enums.CompleteHandWaitType.PairWait;
+            _waitType = Enums.PAIR_WAIT;
         }
 
         public StandardCompleteHand //Two-sided triplet wait
@@ -28,7 +28,7 @@ namespace RMU.Hand.CompleteHands
         {
             InitializeList();
             FillList(group1, group2, group3, pair1, pair2, drawTile);
-            _waitType = Enums.CompleteHandWaitType.TwoSidedTripletWait;
+            _waitType = Enums.TWO_SIDED_TRIPLET_WAIT;
         }
 
         public StandardCompleteHand //Closed wait
@@ -39,7 +39,7 @@ namespace RMU.Hand.CompleteHands
         {
             InitializeList();
             FillList(group1, group2, group3, incompleteSequence, pair, drawTile);
-            _waitType = Enums.CompleteHandWaitType.ClosedWait;
+            _waitType = Enums.CLOSED_WAIT;
         }
 
         public StandardCompleteHand //Edge wait
@@ -50,7 +50,7 @@ namespace RMU.Hand.CompleteHands
         {
             InitializeList();
             FillList(group1, group2, group3, incompleteSequence, pair, drawTile);
-            _waitType = Enums.CompleteHandWaitType.EdgeWait;
+            _waitType = Enums.EDGE_WAIT;
         }
 
         public StandardCompleteHand //Open wait
@@ -61,7 +61,7 @@ namespace RMU.Hand.CompleteHands
         {
             InitializeList();
             FillList(group1, group2, group3, incompleteSequence, pair, drawTile);
-            _waitType = Enums.CompleteHandWaitType.OpenWait;
+            _waitType = Enums.OPEN_WAIT;
         }
 
         private void InitializeList()
@@ -94,7 +94,7 @@ namespace RMU.Hand.CompleteHands
 
         public Enums.CompleteHandType GetCompleteHandType()
         {
-            return Enums.CompleteHandType.Standard;
+            return Enums.STANDARD;
         }
     }
 }

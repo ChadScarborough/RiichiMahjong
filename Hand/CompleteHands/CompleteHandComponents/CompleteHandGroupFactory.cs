@@ -10,9 +10,9 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             switch (componentType)
             {
-                case Enums.CompleteHandComponentType.ClosedPon:
+                case Enums.CLOSED_PON:
                     return new ClosedPon(tiles);
-                case Enums.CompleteHandComponentType.ClosedChii:
+                case Enums.CLOSED_CHII:
                     return new ClosedChii(tiles);
                 default:
                     return null;
@@ -23,16 +23,16 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             switch (meld.GetMeldType())
             {
-                case Enums.MeldType.LowChii:
-                case Enums.MeldType.MidChii:
-                case Enums.MeldType.HighChii:
+                case Enums.LOW_CHII:
+                case Enums.MID_CHII:
+                case Enums.HIGH_CHII:
                     return new OpenChii(meld);
-                case Enums.MeldType.Pon:
+                case Enums.PON:
                     return new OpenPon(meld);
-                case Enums.MeldType.OpenKan1:
-                case Enums.MeldType.OpenKan2:
+                case Enums.OPEN_KAN_1:
+                case Enums.OPEN_KAN_2:
                     return new OpenKan(meld);
-                case Enums.MeldType.ClosedKan:
+                case Enums.CLOSED_KAN_MELD:
                     return new ClosedKan(meld);
                 default:
                     return null;

@@ -9,13 +9,13 @@ namespace RMU.Tiles
         {
             switch (suit)
             {
-                case Enums.Suit.Man:
-                case Enums.Suit.Pin:
-                case Enums.Suit.Sou:
+                case Enums.MAN:
+                case Enums.PIN:
+                case Enums.SOU:
                     return NumberTileFactory.CreateTile(value, suit);
-                case Enums.Suit.Wind:
+                case Enums.WIND:
                     return WindTileFactory.CreateTile(value, suit);
-                case Enums.Suit.Dragon:
+                case Enums.DRAGON:
                     return DragonTileFactory.CreateTile(value, suit);
                 default:
                     throw new ArgumentException();

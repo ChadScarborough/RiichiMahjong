@@ -26,7 +26,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         private static void CheckForCorrectMeldType(OpenMeld closedKan)
         {
-            if (closedKan.GetMeldType() != Enums.MeldType.ClosedKan)
+            if (closedKan.GetMeldType() != Enums.CLOSED_KAN_MELD)
             {
                 throw new ArgumentException("Attempted to pass a meld other than a closed kan as a closed kan");
             }
@@ -34,7 +34,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public Enums.CompleteHandComponentType GetComponentType()
         {
-            return Enums.CompleteHandComponentType.ClosedKan;
+            return Enums.CLOSED_KAN_COMPONENT;
         }
 
         public List<TileObject> GetTiles()

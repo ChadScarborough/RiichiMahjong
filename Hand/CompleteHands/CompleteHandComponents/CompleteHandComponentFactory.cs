@@ -10,14 +10,14 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             switch (componentType)
             {
-                case Enums.CompleteHandComponentType.Pair:
+                case Enums.PAIR:
                     return new Pair(tiles);
-                case Enums.CompleteHandComponentType.ClosedChii:
-                case Enums.CompleteHandComponentType.ClosedPon:
+                case Enums.CLOSED_CHII:
+                case Enums.CLOSED_PON:
                     return CompleteHandGroupFactory.CreateCompleteHandGroup(tiles, componentType);
-                case Enums.CompleteHandComponentType.IncompleteSequenceClosedWait:
-                case Enums.CompleteHandComponentType.IncompleteSequenceEdgeWait:
-                case Enums.CompleteHandComponentType.IncompleteSequenceOpenWait:
+                case Enums.INCOMPLETE_SEQUENCE_CLOSED_WAIT:
+                case Enums.INCOMPLETE_SEQUENCE_EDGE_WAIT:
+                case Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT:
                     return CompleteHandIncompleteGroupFactory.CreateCompleteHandIncompleteGroup(tiles, componentType);
                 default:
                     return null;
@@ -28,9 +28,9 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             switch (componentType)
             {
-                case Enums.CompleteHandComponentType.DrawTile:
+                case Enums.DRAW_TILE:
                     return new DrawTile(tile);
-                case Enums.CompleteHandComponentType.IsolatedTile:
+                case Enums.ISOLATED_TILE:
                     return new IsolatedTile(tile);
                 default:
                     return null;

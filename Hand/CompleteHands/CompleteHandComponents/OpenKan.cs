@@ -22,8 +22,8 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         private static void CheckForCorrectMeldType(OpenMeld openKan)
         {
             Enums.MeldType meldType = openKan.GetMeldType();
-            bool isOpenKan1 = meldType == Enums.MeldType.OpenKan1;
-            bool isOpenKan2 = meldType == Enums.MeldType.OpenKan2;
+            bool isOpenKan1 = meldType == Enums.OPEN_KAN_1;
+            bool isOpenKan2 = meldType == Enums.OPEN_KAN_2;
             ThrowExceptionOnIncorrectMeldType(isOpenKan1, isOpenKan2);
         }
 
@@ -37,7 +37,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public Enums.CompleteHandComponentType GetComponentType()
         {
-            return Enums.CompleteHandComponentType.OpenKan;
+            return Enums.OPEN_KAN;
         }
 
         public TileObject GetLeadTile()

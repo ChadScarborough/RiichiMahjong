@@ -36,25 +36,24 @@ namespace RMU.Wall.DeadWall
 
         private void PopulateDoraIndicators()
         {
-            for (int i = 0; i < NUMBER_OF_DORA_INDICATORS; i++)
-            {
-                _doraIndicators.Add(_wall.DrawTileFromEndOfWall());
-            }
+            PopulateList(_doraIndicators, NUMBER_OF_DORA_INDICATORS);
         }
 
         private void PopulateUraDoraIndicators()
         {
-            for (int i = 0; i < NUMBER_OF_DORA_INDICATORS; i++)
-            {
-                _uraDoraIndicators.Add(_wall.DrawTileFromEndOfWall());
-            }
+            PopulateList(_uraDoraIndicators, NUMBER_OF_DORA_INDICATORS);
         }
 
         private void PopulateDrawableTiles()
         {
-            for (int i = 0; i < NUMBER_OF_DRAWABLE_TILES; i++)
+            PopulateList(_drawableTiles, NUMBER_OF_DRAWABLE_TILES);
+        }
+
+        private void PopulateList(List<TileObject> list, int quantity)
+        {
+            for(int i = 0; i < quantity; i++)
             {
-                _drawableTiles.Add(_wall.DrawTileFromEndOfWall());
+                list.Add(_wall.DrawTileFromEndOfWall());
             }
         }
 

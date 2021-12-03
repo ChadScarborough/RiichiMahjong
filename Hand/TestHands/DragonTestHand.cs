@@ -20,11 +20,11 @@ namespace RMU.Hand.TestHands
         {
             _tileSuits = new List<Enums.Suit>
             {
-                Enums.Suit.Dragon, Enums.Suit.Dragon, Enums.Suit.Dragon,
-                Enums.Suit.Dragon, Enums.Suit.Dragon, Enums.Suit.Dragon,
-                Enums.Suit.Dragon, Enums.Suit.Dragon, Enums.Suit.Dragon,
-                Enums.Suit.Wind, Enums.Suit.Wind, Enums.Suit.Wind,
-                Enums.Suit.Wind
+                Enums.DRAGON, Enums.DRAGON, Enums.DRAGON,
+                Enums.DRAGON, Enums.DRAGON, Enums.DRAGON,
+                Enums.DRAGON, Enums.DRAGON, Enums.DRAGON,
+                Enums.WIND, Enums.WIND, Enums.WIND,
+                Enums.WIND
             };
         }
 

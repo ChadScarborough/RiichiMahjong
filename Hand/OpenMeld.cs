@@ -28,23 +28,23 @@ namespace RMU.Hand
         {
             switch (_meldType)
             {
-                case Enums.MeldType.LowChii:
+                case Enums.LOW_CHII:
                     _createMeldBehaviour = new CreateLowChiiBehaviour();
                     break;
-                case Enums.MeldType.MidChii:
+                case Enums.MID_CHII:
                     _createMeldBehaviour = new CreateMidChiiBehaviour();
                     break;
-                case Enums.MeldType.HighChii:
+                case Enums.HIGH_CHII:
                     _createMeldBehaviour = new CreateHighChiiBehaviour();
                     break;
-                case Enums.MeldType.Pon:
+                case Enums.PON:
                     _createMeldBehaviour = new CreatePonBehaviour();
                     break;
-                case Enums.MeldType.OpenKan1:
-                case Enums.MeldType.ClosedKan:
+                case Enums.OPEN_KAN_1:
+                case Enums.CLOSED_KAN_MELD:
                     _createMeldBehaviour = new CreateKanBehaviour();
                     break;
-                case Enums.MeldType.OpenKan2:
+                case Enums.OPEN_KAN_2:
                     this._meldType = Enums.MeldType.OpenKan2;
                     break;
             }

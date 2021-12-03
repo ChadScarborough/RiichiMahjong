@@ -13,7 +13,6 @@ namespace RMU.Hand
         private IDeadWall _deadWall;
         private List<TileObject> _closedTiles;
         private TileObject _drawTile;
-        private const int MAX_NUMBER_OF_CLOSED_TILES = 13;
         private StandardDiscardPile _discardPile;
         private Algorithms.HandSorter _handSorter;
         private List<OpenMeld> _openMelds;
@@ -73,7 +72,7 @@ namespace RMU.Hand
 
         public void CallPon(TileObject _calledTile)
         {
-            CreateOpenMeld(_calledTile, Enums.MeldType.Pon);
+            CreateOpenMeld(_calledTile, Enums.PON);
             for (int i = 0; i < 2; i++)
             {
                 RemoveCopyOfTile(_calledTile);
@@ -89,7 +88,7 @@ namespace RMU.Hand
         public void CallLowChii(TileObject _calledTile)
         {
             _isOpen = true;
-            CreateOpenMeld(_calledTile, Enums.MeldType.LowChii);
+            CreateOpenMeld(_calledTile, Enums.LOW_CHII);
             for (int i = 0; i < 2; i++)
             {
                 TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() - (i + 1), _calledTile.GetSuit());
@@ -100,7 +99,7 @@ namespace RMU.Hand
         public void CallMidChii(TileObject _calledTile)
         {
             _isOpen = true;
-            CreateOpenMeld(_calledTile, Enums.MeldType.MidChii);
+            CreateOpenMeld(_calledTile, Enums.MID_CHII);
             for (int i = 0; i < 2; i++)
             {
                 TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() - ((2 * i) - 1), _calledTile.GetSuit());
@@ -111,7 +110,7 @@ namespace RMU.Hand
         public void CallHighChii(TileObject _calledTile)
         {
             _isOpen = true;
-            CreateOpenMeld(_calledTile, Enums.MeldType.HighChii);
+            CreateOpenMeld(_calledTile, Enums.HIGH_CHII);
             for (int i = 0; i < 2; i++)
             {
                 TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() + (i + 1), _calledTile.GetSuit());
@@ -121,7 +120,7 @@ namespace RMU.Hand
 
         public void CallClosedKan(TileObject _calledTile)
         {
-            CreateOpenMeld(_calledTile, Enums.MeldType.ClosedKan);
+            CreateOpenMeld(_calledTile, Enums.CLOSED_KAN_MELD);
             for (int i = 0; i < 4; i++)
             {
                 RemoveCopyOfTile(_calledTile);
@@ -135,7 +134,7 @@ namespace RMU.Hand
         public void CallOpenKan1(TileObject _calledTile)
         {
             _isOpen = true;
-            CreateOpenMeld(_calledTile, Enums.MeldType.OpenKan1);
+            CreateOpenMeld(_calledTile, Enums.OPEN_KAN_1);
             for (int i = 0; i < 3; i++)
             {
                 RemoveCopyOfTile(_calledTile);
@@ -156,7 +155,7 @@ namespace RMU.Hand
         private bool SuccessfullyTurnedPonIntoOpenKan2(TileObject _calledTile, OpenMeld openMeld)
         {
             TileObject openMeldTile = openMeld.GetTiles()[0];
-            if (openMeld.GetMeldType() == Enums.MeldType.Pon && TilesAreEquivalent(openMeldTile, _calledTile))
+            if (openMeld.GetMeldType() == Enums.PON && TilesAreEquivalent(openMeldTile, _calledTile))
             {
                 return ChangePonToOpenKan2(_calledTile, openMeld);
             }
@@ -165,7 +164,7 @@ namespace RMU.Hand
 
         private bool ChangePonToOpenKan2(TileObject _calledTile, OpenMeld openMeld)
         {
-            openMeld.SetMeldType(Enums.MeldType.OpenKan2);
+            openMeld.SetMeldType(Enums.OPEN_KAN_2);
             openMeld.AddTile(_calledTile);
             if (TilesAreEquivalent(_drawTile, _calledTile))
             {

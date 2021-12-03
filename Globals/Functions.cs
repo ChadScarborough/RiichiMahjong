@@ -43,9 +43,19 @@ namespace RMU.Globals
             }
         }
 
+        public static TileObject GetTileAbove(TileObject tile)
+        {
+            return tile.GetTileAbove();
+        }
+
         public static TileObject GetTileTwoAbove(TileObject tile)
         {
             return tile.GetTileAbove().GetTileAbove();
+        }
+
+        public static TileObject GetTileBelow(TileObject tile)
+        {
+            return tile.GetTileBelow();
         }
 
         public static TileObject GetTileTwoBelow(TileObject tile)

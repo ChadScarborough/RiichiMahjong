@@ -15,24 +15,27 @@ namespace RMU.Shanten
             {
                 switch (tile.GetSuit())
                 {
-                    case Enums.Suit.Man:
+                    case Enums.MAN:
                         _manCollection.AddTile(tile);
                         break;
-                    case Enums.Suit.Pin:
+                    case Enums.PIN:
                         _pinCollection.AddTile(tile);
                         break;
-                    case Enums.Suit.Sou:
+                    case Enums.SOU:
                         _souCollection.AddTile(tile);
                         break;
-                    case Enums.Suit.Wind:
+                    case Enums.WIND:
                         _windCollection.AddTile(tile);
                         break;
-                    case Enums.Suit.Dragon:
+                    case Enums.DRAGON:
                         _dragonCollection.AddTile(tile);
                         break;
                 }
             }
-            return new List<AbstractTileCollection> { _manCollection, _pinCollection, _souCollection, _windCollection, _dragonCollection };
+            return new List<AbstractTileCollection> 
+            { 
+                _manCollection, _pinCollection, _souCollection, _windCollection, _dragonCollection 
+            };
         }
 
         private static void ClearTileCollections()

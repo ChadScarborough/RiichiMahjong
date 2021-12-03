@@ -22,9 +22,9 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         private void CheckForCorrectMeldType(OpenMeld openChii)
         {
             Enums.MeldType meldType = openChii.GetMeldType();
-            bool isHighChii = meldType == Enums.MeldType.HighChii;
-            bool isMidChii = meldType == Enums.MeldType.MidChii;
-            bool isLowChii = meldType == Enums.MeldType.LowChii;
+            bool isHighChii = meldType == Enums.HIGH_CHII;
+            bool isMidChii = meldType == Enums.MID_CHII;
+            bool isLowChii = meldType == Enums.LOW_CHII;
             ThrowExceptionOnIncorrectMeldType(isHighChii, isMidChii, isLowChii);
         }
 
@@ -38,7 +38,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public Enums.CompleteHandComponentType GetComponentType()
         {
-            return Enums.CompleteHandComponentType.OpenChii;
+            return Enums.OPEN_CHII;
         }
 
         public List<TileObject> GetTiles()

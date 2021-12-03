@@ -10,11 +10,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             switch (componentType)
             {
-                case Enums.CompleteHandComponentType.IncompleteSequenceClosedWait:
+                case Enums.INCOMPLETE_SEQUENCE_CLOSED_WAIT:
                     return new IncompleteSequenceClosedWait(tiles);
-                case Enums.CompleteHandComponentType.IncompleteSequenceEdgeWait:
+                case Enums.INCOMPLETE_SEQUENCE_EDGE_WAIT:
                     return new IncompleteSequenceEdgeWait(tiles);
-                case Enums.CompleteHandComponentType.IncompleteSequenceOpenWait:
+                case Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT:
                     return new IncompleteSequenceOpenWait(tiles);
                 default:
                     return null;

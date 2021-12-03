@@ -38,11 +38,11 @@ namespace RMU.Wall
         {
             for(int i = 0; i < 3; i++)
             {
-                _wall.AddTail(TileFactory.CreateTile(1, Enums.Suit.Man));
+                _wall.AddTail(TileFactory.CreateTile(1, Enums.MAN));
             }
             for(int i = 0; i < 5; i++)
             {
-                _wall.AddTail(TileFactory.CreateTile(i + 1, Enums.Suit.Sou));
+                _wall.AddTail(TileFactory.CreateTile(i + 1, Enums.SOU));
             }
         }
     }

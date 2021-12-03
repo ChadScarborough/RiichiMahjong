@@ -113,13 +113,13 @@ namespace RMU.Shanten
         {
             switch (tile.GetSuit())
             {
-                case Enums.Suit.Man:
+                case Enums.MAN:
                     FindExactTerminalTileValueAndIncrementOneOfTwoCounters(tile, ONE_MAN, NINE_MAN);
                     return;
-                case Enums.Suit.Pin:
+                case Enums.PIN:
                     FindExactTerminalTileValueAndIncrementOneOfTwoCounters(tile, ONE_PIN, NINE_PIN);
                     return;
-                case Enums.Suit.Sou:
+                case Enums.SOU:
                     FindExactTerminalTileValueAndIncrementOneOfTwoCounters(tile, ONE_SOU, NINE_SOU);
                     return;
             }

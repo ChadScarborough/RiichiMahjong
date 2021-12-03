@@ -22,7 +22,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         private static void CheckForCorrectMeldType(OpenMeld openPon)
         {
             Enums.MeldType meldType = openPon.GetMeldType();
-            if(meldType != Enums.MeldType.Pon)
+            if(meldType != Enums.PON)
             {
                 throw new ArgumentException("Attempted to pass a meld other than an open pon as an open pon");
             }
@@ -30,7 +30,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public Enums.CompleteHandComponentType GetComponentType()
         {
-            return Enums.CompleteHandComponentType.OpenPon;
+            return Enums.OPEN_PON;
         }
 
         public TileObject GetLeadTile()

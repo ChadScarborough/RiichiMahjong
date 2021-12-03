@@ -14,7 +14,7 @@ namespace RMU.Hand.TestHands
         protected List<Enums.Suit> _tileSuits;
         public virtual void FillHand()
         {
-            for (int i = 0; i < 13; i++)
+            for (int i = 0; i < ConstValues.NUMBER_OF_TILES_IN_FULL_HAND - 1; i++)
             {
                 TileObject tile = TileFactory.CreateTile(_tileValues[i], _tileSuits[i]);
                 _closedTiles.Add(tile);

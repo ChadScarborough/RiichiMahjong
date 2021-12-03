@@ -21,11 +21,11 @@ namespace RMU.Hand.TestHands
             };
             _tileSuits = new List<Enums.Suit>
             {
-                Enums.Suit.Man, Enums.Suit.Man, Enums.Suit.Man,
-                Enums.Suit.Man, Enums.Suit.Man, Enums.Suit.Man,
-                Enums.Suit.Man, Enums.Suit.Man, Enums.Suit.Man,
-                Enums.Suit.Man, Enums.Suit.Man, Enums.Suit.Man,
-                Enums.Suit.Man
+                Enums.MAN, Enums.MAN, Enums.MAN,
+                Enums.MAN, Enums.MAN, Enums.MAN,
+                Enums.MAN, Enums.MAN, Enums.MAN,
+                Enums.MAN, Enums.MAN, Enums.MAN,
+                Enums.MAN
             };
             FillHand();
         }

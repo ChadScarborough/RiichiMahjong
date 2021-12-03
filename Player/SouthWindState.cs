@@ -6,7 +6,7 @@ namespace RMU.Player
     {
         public Enums.Wind GetSeatWind()
         {
-            return Enums.Wind.South;
+            return Enums.SOUTH;
         }
     }
 }

@@ -19,7 +19,7 @@ namespace RMU.Hand.CompleteHands
 
         public Enums.CompleteHandType GetCompleteHandType()
         {
-            return Enums.CompleteHandType.ThirteenOrphans;
+            return Enums.THIRTEEN_ORPHANS;
         }
 
         public Enums.CompleteHandWaitType GetWaitType()

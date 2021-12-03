@@ -16,7 +16,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public Enums.CompleteHandComponentType GetComponentType()
         {
-            return Enums.CompleteHandComponentType.DrawTile;
+            return Enums.DRAW_TILE;
         }
 
         public TileObject GetLeadTile()

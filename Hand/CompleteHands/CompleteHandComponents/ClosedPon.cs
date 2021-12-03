@@ -19,7 +19,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public Enums.CompleteHandComponentType GetComponentType()
         {
-            return Enums.CompleteHandComponentType.ClosedPon;
+            return Enums.CLOSED_PON;
         }
 
         public TileObject GetLeadTile()

@@ -11,7 +11,7 @@ namespace RMU.Algorithms
 
         public HandSorter()
         {
-            this._suitPriority = new List<Enums.Suit>() { Enums.Suit.Man, Enums.Suit.Pin, Enums.Suit.Sou, Enums.Suit.Wind, Enums.Suit.Dragon };
+            this._suitPriority = new List<Enums.Suit>() { Enums.MAN, Enums.PIN, Enums.SOU, Enums.WIND, Enums.DRAGON };
             this._sortingAlgorithm = new RadixSort();
         }
         public List<TileObject> SortHand(List<TileObject> list)
