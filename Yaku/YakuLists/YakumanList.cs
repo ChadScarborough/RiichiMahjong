@@ -10,7 +10,9 @@ namespace RMU.Yaku.YakuLists
             ALL_HONORS,
             ALL_TERMINALS,
             BIG_THREE_DRAGONS,
-            FOUR_BIG_WINDS
+            FOUR_BIG_WINDS,
+            THIRTEEN_ORPHANS,
+            THIRTEEN_WAIT_THIRTEEN_ORPHANS
         };
 
         public static List<AbstractYakuman> GetYakumanList()
@@ -22,5 +24,7 @@ namespace RMU.Yaku.YakuLists
         public static readonly AbstractYakuman ALL_TERMINALS = new AllTerminals();
         public static readonly AbstractYakuman BIG_THREE_DRAGONS = new BigThreeDragons();
         public static readonly AbstractYakuman FOUR_BIG_WINDS = new FourBigWinds();
+        public static readonly AbstractYakuman THIRTEEN_ORPHANS = new ThirteenOrphans();
+        public static readonly AbstractYakuman THIRTEEN_WAIT_THIRTEEN_ORPHANS = new ThirteenWaitThirteenOrphans();
     }
 }
