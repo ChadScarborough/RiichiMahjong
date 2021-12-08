@@ -20,7 +20,7 @@ namespace RMU.Yaku
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            InitializeValues(hand, extraTile);
+            InitializeHandTiles(hand, extraTile);
             if (DidNotFindNonHonorTileForPrescribedSuit()) return false;
             return AllSuitsAreTheSame();
         }
@@ -44,7 +44,7 @@ namespace RMU.Yaku
             return SuitMatchesPrescribedSuit(tile) == false;
         }
 
-        private void InitializeValues(IHand hand, TileObject extraTile)
+        private void InitializeHandTiles(IHand hand, TileObject extraTile)
         {
             handTiles = hand.GetAllTiles(extraTile);
         }
