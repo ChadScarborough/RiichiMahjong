@@ -31,8 +31,8 @@ namespace RMU.Tiles
         
         public TileObject Clone()
         {
-            Enums.Suit suit = this.GetSuit();
-            int value = this.GetValue();
+            Enums.Suit suit = GetSuit();
+            int value = GetValue();
             return TileFactory.CreateTile(value, suit);
         }
     }
