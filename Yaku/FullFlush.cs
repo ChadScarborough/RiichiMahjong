@@ -8,7 +8,7 @@ namespace RMU.Yaku
     public class FullFlush : AbstractYaku
     {
         private Enums.Suit _suit;
-        private List<TileObject> _tiles;
+        private List<TileObject> handTiles;
 
         public FullFlush()
         {
@@ -32,7 +32,7 @@ namespace RMU.Yaku
 
         private bool AllSuitsAreTheSame()
         {
-            foreach (TileObject tile in _tiles)
+            foreach (TileObject tile in handTiles)
             {
                 if (SuitDoesNotMatchPrescribedSuit(tile)) return false;
             }
@@ -46,8 +46,7 @@ namespace RMU.Yaku
 
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
-            _hand = hand;
-            _tiles = hand.GetAllTiles(extraTile);
+            handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool SuitMatchesPrescribedSuit(TileObject tile)
@@ -57,15 +56,20 @@ namespace RMU.Yaku
 
         private bool SuccessfullyFoundNonHonorTileAndSetPrescribedSuit()
         {
-            foreach(TileObject tile in _tiles)
+            foreach(TileObject tile in handTiles)
             {
-                if(tile.IsHonor() == false)
+                if (TileIsNotHonor(tile))
                 {
                     SetSuit(tile);
                     return true;
                 }
             }
             return false;
+        }
+
+        private static bool TileIsNotHonor(TileObject tile)
+        {
+            return tile.IsHonor() == false;
         }
 
         private void SetSuit(TileObject tile)

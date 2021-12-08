@@ -8,7 +8,7 @@ namespace RMU.Yaku
     public class HalfFlush : AbstractYaku
     {
         private Enums.Suit _suit;
-        private List<TileObject> _tiles;
+        private List<TileObject> handTiles;
 
         public HalfFlush()
         {
@@ -20,20 +20,24 @@ namespace RMU.Yaku
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            InitializeValues(hand, extraTile);
-            if (HandContainsHonorsAndNonHonors() == false) return false;
+            InitializeHandTiles(hand, extraTile);
+            if (HandDoesNotContainBothHonorsAndNonHonors()) return false;
             return EveryTileIsSameSuitOrHonor();
         }
 
-        private void InitializeValues(IHand hand, TileObject extraTile)
+        private bool HandDoesNotContainBothHonorsAndNonHonors()
         {
-            _hand = hand;
-            _tiles = hand.GetAllTiles(extraTile);
+            return HandContainsHonorsAndNonHonors() == false;
+        }
+
+        private void InitializeHandTiles(IHand hand, TileObject extraTile)
+        {
+            handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool EveryTileIsSameSuitOrHonor()
         {
-            foreach (TileObject tile in _tiles)
+            foreach (TileObject tile in handTiles)
             {
                 if (TileMatchesPrescribedSuitOrIsHonorTile(tile)) continue;
                 return false;
@@ -63,15 +67,20 @@ namespace RMU.Yaku
 
         private bool SuccessfullyFoundNonHonorTileAndSetPrescribedSuit()
         {
-            foreach (TileObject tile in _tiles)
+            foreach (TileObject tile in handTiles)
             {
-                if (tile.IsHonor() == false)
+                if (TileIsNonHonorTile(tile))
                 {
                     SetPrescribedNonHonorSuit(tile);
                     return true;
                 }
             }
             return false;
+        }
+
+        private static bool TileIsNonHonorTile(TileObject tile)
+        {
+            return tile.IsHonor() == false;
         }
 
         private void SetPrescribedNonHonorSuit(TileObject tile)
@@ -81,14 +90,19 @@ namespace RMU.Yaku
 
         private bool SuccessfullyFoundHonorTile()
         {
-            foreach(TileObject tile in _tiles)
+            foreach(TileObject tile in handTiles)
             {
-                if (tile.IsHonor())
+                if (TileIsHonorTile(tile))
                 {
                     return true;
                 }
             }
             return false;
+        }
+
+        private static bool TileIsHonorTile(TileObject tile)
+        {
+            return tile.IsHonor();
         }
     }
 }

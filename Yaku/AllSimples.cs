@@ -41,7 +41,17 @@ namespace RMU.Yaku
 
         private static bool TileIsTerminalOrHonor(TileObject tile)
         {
-            return tile.IsHonor() || tile.IsTerminal();
+            return TileIsHonor(tile) || TileIsTerminal(tile);
+        }
+
+        private static bool TileIsTerminal(TileObject tile)
+        {
+            return tile.IsTerminal();
+        }
+
+        private static bool TileIsHonor(TileObject tile)
+        {
+            return tile.IsHonor();
         }
     }
 }

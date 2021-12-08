@@ -58,7 +58,7 @@ namespace RMU.Yaku.Yakuman
 
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
-            ClearCounters();
+            ResetCounters();
             tileList = hand.GetAllTiles(extraTile);
         }
 
@@ -106,7 +106,7 @@ namespace RMU.Yaku.Yakuman
             _counters[i]++;
         }
 
-        private void ClearCounters()
+        private void ResetCounters()
         {
             for(int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
             {
