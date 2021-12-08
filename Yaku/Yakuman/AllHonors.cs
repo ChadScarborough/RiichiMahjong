@@ -1,10 +1,13 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.Yakuman
 {
     public class AllHonors : AbstractYakuman
     {
+        private List<TileObject> tileList;
+
         public AllHonors()
         {
             _name = "All Honors";
@@ -15,7 +18,13 @@ namespace RMU.Yaku.Yakuman
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            foreach(TileObject tile in hand.Listify(extraTile))
+            InitializeTileList(hand, extraTile);
+            return HandContainsOnlyHonorTiles();
+        }
+
+        private bool HandContainsOnlyHonorTiles()
+        {
+            foreach (TileObject tile in tileList)
             {
                 if (tile.IsHonor() == false)
                 {
@@ -23,6 +32,11 @@ namespace RMU.Yaku.Yakuman
                 }
             }
             return true;
+        }
+
+        private void InitializeTileList(IHand hand, TileObject extraTile)
+        {
+            tileList = hand.Listify(extraTile);
         }
     }
 }

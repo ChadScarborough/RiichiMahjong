@@ -20,12 +20,22 @@ namespace RMU.Yaku
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
             ResetCounters();
+            CheckForTerminalsAndHonors(hand, extraTile);
+            return (AllTilesAreTerminalsOrHonorsAndThereIsAtLeastOneOfEach());
+        }
+
+        private bool AllTilesAreTerminalsOrHonorsAndThereIsAtLeastOneOfEach()
+        {
+            return AllTilesAreTerminalsOrHonors() && AtLeastOneTerminalAndAtLeastOneHonor();
+        }
+
+        private void CheckForTerminalsAndHonors(IHand hand, TileObject extraTile)
+        {
             foreach (TileObject tile in hand.Listify(extraTile))
             {
                 CheckHonor(tile);
                 CheckTerminal(tile);
             }
-            return (AllTilesAreTerminalsOrHonors() && AtLeastOneTerminalAndAtLeastOneHonor());
         }
 
         private void ResetCounters()
@@ -52,7 +62,7 @@ namespace RMU.Yaku
 
         private bool AllTilesAreTerminalsOrHonors()
         {
-            return _terminalCounter + _honorCounter >= ConstValues.NUMBER_OF_TILES_IN_FULL_HAND;
+            return _terminalCounter + _honorCounter == ConstValues.NUMBER_OF_TILES_IN_FULL_HAND;
         }
 
         private bool AtLeastOneTerminalAndAtLeastOneHonor()

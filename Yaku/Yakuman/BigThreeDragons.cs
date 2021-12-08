@@ -1,6 +1,7 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -9,6 +10,7 @@ namespace RMU.Yaku.Yakuman
         private int _greenDragonCounter = 0;
         private int _redDragonCounter = 0;
         private int _whiteDragonCounter = 0;
+        private List<TileObject> tileList;
 
         public BigThreeDragons()
         {
@@ -20,65 +22,113 @@ namespace RMU.Yaku.Yakuman
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
+            InitializeValues(hand, extraTile);
+            CheckTileListForDragons();
+            return AreAtLeastThreeOfEachDragon();
+        }
+
+        private void CheckTileListForDragons()
+        {
+            foreach (TileObject tile in tileList)
+            {
+                CheckIfTileIsDragonAndIncrementAppropriateCounter(tile);
+            }
+        }
+
+        private void InitializeValues(IHand hand, TileObject extraTile)
+        {
             ResetCounters();
-            foreach(TileObject tile in hand.Listify(extraTile))
-            {
-                if (CheckGreenDragon(tile)) continue;
-                if (CheckRedDragon(tile)) continue;
-                CheckWhiteDragon(tile);
-            }
-            return AtLeastThreeOfEachDragon();
+            tileList = hand.Listify(extraTile);
         }
 
-        private bool AtLeastThreeOfEachDragon()
+        private bool AreAtLeastThreeOfEachDragon()
         {
-            bool greenDragons = _greenDragonCounter >= 3;
-            bool redDragons = _redDragonCounter >= 3;
-            bool whiteDragons = _whiteDragonCounter >= 3;
-            return greenDragons && redDragons && whiteDragons;
+            return AreAtLeastThreeGreenDragons() && AreAtLeastThreeRedDragons() && AreAtLeastThreeWhiteDragons();
         }
 
-        private bool CheckGreenDragon(TileObject tile)
+        private bool AreAtLeastThreeGreenDragons()
         {
-            if (IsGreenDragon(tile))
+            return _greenDragonCounter >= 3;
+        }
+
+        private bool AreAtLeastThreeRedDragons()
+        {
+            return _redDragonCounter >= 3;
+        }
+
+        private bool AreAtLeastThreeWhiteDragons()
+        {
+            return _whiteDragonCounter >= 3;
+        }
+
+        private void CheckIfTileIsDragonAndIncrementAppropriateCounter(TileObject tile)
+        {
+            if (IncrementedGreenDragonCounterBecauseTileIsGreenDragon(tile)) return;
+            if (IncrementedRedDragonCounterBecauseTileIsRedDragon(tile)) return;
+            IncrementWhiteDragonCounterIfTileIsWhiteDragon(tile);
+        }
+
+        private bool IncrementedGreenDragonCounterBecauseTileIsGreenDragon(TileObject tile)
+        {
+            if (TileIsGreenDragon(tile))
             {
-                _greenDragonCounter++;
+                IncrementGreenDragonCounter();
                 return true;
             }
             return false;
         }
 
-        private bool CheckRedDragon(TileObject tile)
+        private void IncrementGreenDragonCounter()
         {
-            if (IsRedDragon(tile))
+            _greenDragonCounter++;
+        }
+
+        private bool IncrementedRedDragonCounterBecauseTileIsRedDragon(TileObject tile)
+        {
+            if (TileIsRedDragon(tile))
             {
-                _redDragonCounter++;
+                IncrementRedDragonCounter();
                 return true;
             }
             return false;
         }
 
-        private void CheckWhiteDragon(TileObject tile)
+        private void IncrementRedDragonCounter()
         {
-            if (IsWhiteDragon(tile))
+            _redDragonCounter++;
+        }
+
+        private void IncrementWhiteDragonCounterIfTileIsWhiteDragon(TileObject tile)
+        {
+            if (TileIsWhiteDragon(tile))
             {
-                _whiteDragonCounter++;
+                IncrementWhiteDragonCounter();
             }
         }
 
-        private bool IsGreenDragon(TileObject tile)
+        private void IncrementWhiteDragonCounter()
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.GREEN_DRAGON);
+            _whiteDragonCounter++;
         }
 
-        private bool IsRedDragon(TileObject tile)
+        private bool TileIsGreenDragon(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.RED_DRAGON);
+            return TileIsGivenDragon(tile, Enums.GREEN);
         }
 
-        private bool IsWhiteDragon(TileObject tile)
+        private bool TileIsRedDragon(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.WHITE_DRAGON);
+            return TileIsGivenDragon(tile, Enums.RED);
+        }
+
+        private bool TileIsWhiteDragon(TileObject tile)
+        {
+            return TileIsGivenDragon(tile, Enums.WHITE);
+        }
+
+        private bool TileIsGivenDragon(TileObject tile, Enums.Dragon dragon)
+        {
+            return Functions.AreDragonsEquivalent(tile, dragon);
         }
 
         private void ResetCounters()

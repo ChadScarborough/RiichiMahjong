@@ -20,17 +20,22 @@ namespace RMU.Yaku
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            _hand = hand;
-            _tiles = hand.Listify(extraTile);
+            InitializeValues(hand, extraTile);
             if (HandContainsHonorsAndNonHonors() == false) return false;
             return EveryTileIsSameSuitOrHonor();
+        }
+
+        private void InitializeValues(IHand hand, TileObject extraTile)
+        {
+            _hand = hand;
+            _tiles = hand.Listify(extraTile);
         }
 
         private bool EveryTileIsSameSuitOrHonor()
         {
             foreach (TileObject tile in _tiles)
             {
-                if (tile.GetSuit() == this._suit) continue;
+                if (tile.GetSuit() == _suit) continue;
                 if (tile.IsHonor()) continue;
                 return false;
             }
@@ -39,22 +44,27 @@ namespace RMU.Yaku
 
         private bool HandContainsHonorsAndNonHonors()
         {
-            if (SuccessfullyFoundNonHonorSuit() == false) return false;
+            if (SuccessfullyFoundNonHonorTile() == false) return false;
             if (SuccessfullyFoundHonorTile() == false) return false;
             return true;
         }
 
-        private bool SuccessfullyFoundNonHonorSuit()
+        private bool SuccessfullyFoundNonHonorTile()
         {
             foreach (TileObject tile in _tiles)
             {
                 if (tile.IsHonor() == false)
                 {
-                    this._suit = tile.GetSuit();
+                    SetNonHonorSuit(tile);
                     return true;
                 }
             }
             return false;
+        }
+
+        private void SetNonHonorSuit(TileObject tile)
+        {
+            _suit = tile.GetSuit();
         }
 
         private bool SuccessfullyFoundHonorTile()

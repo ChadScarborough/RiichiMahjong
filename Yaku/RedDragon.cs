@@ -8,6 +8,7 @@ namespace RMU.Yaku
     public class RedDragon : AbstractYaku
     {
         private int counter;
+        private List<TileObject> tiles;
 
         public RedDragon()
         {
@@ -18,14 +19,28 @@ namespace RMU.Yaku
         }
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            counter = 0;
-            List<TileObject> tiles = hand.Listify(extraTile);
+            InitializeValues(hand, extraTile);
+            CheckForRedDragons();
+            return AtLeastThreeRedDragons();
+        }
 
+        private void InitializeValues(IHand hand, TileObject extraTile)
+        {
+            counter = 0;
+            tiles = hand.Listify(extraTile);
+        }
+
+        private bool AtLeastThreeRedDragons()
+        {
+            return counter >= 3;
+        }
+
+        private void CheckForRedDragons()
+        {
             foreach (TileObject tile in tiles)
             {
                 CheckIfRedDragon(tile);
             }
-            return counter >= 3;
         }
 
         private void CheckIfRedDragon(TileObject tile)
@@ -38,7 +53,7 @@ namespace RMU.Yaku
 
         private bool IsTileRedDragon(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.RED_DRAGON);
+            return Functions.AreDragonsEquivalent(tile, Enums.RED);
         }
     }
 }

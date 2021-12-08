@@ -1,10 +1,13 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.Yakuman
 {
     public class AllTerminals : AbstractYakuman
     {
+        private List<TileObject> tileList;
+
         public AllTerminals()
         {
             _name = "All Terminals";
@@ -15,7 +18,13 @@ namespace RMU.Yaku.Yakuman
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            foreach (TileObject tile in hand.Listify(extraTile))
+            InitializeTileList(hand, extraTile);
+            return HandContainsOnlyTerminalTiles();
+        }
+
+        private bool HandContainsOnlyTerminalTiles()
+        {
+            foreach (TileObject tile in tileList)
             {
                 if (tile.IsTerminal() == false)
                 {
@@ -23,6 +32,11 @@ namespace RMU.Yaku.Yakuman
                 }
             }
             return true;
+        }
+
+        private void InitializeTileList(IHand hand, TileObject extraTile)
+        {
+            tileList = hand.Listify(extraTile);
         }
     }
 }

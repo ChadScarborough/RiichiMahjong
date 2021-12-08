@@ -8,6 +8,7 @@ namespace RMU.Yaku
     public class WhiteDragon : AbstractYaku
     {
         private int counter;
+        private List<TileObject> tiles;
 
         public WhiteDragon()
         {
@@ -18,14 +19,28 @@ namespace RMU.Yaku
         }
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            counter = 0;
-            List<TileObject> tiles = hand.Listify(extraTile);
+            InitializeValues(hand, extraTile);
+            CheckForWhiteDragons();
+            return AtLeastThreeWhiteDragons();
+        }
 
+        private void InitializeValues(IHand hand, TileObject extraTile)
+        {
+            counter = 0;
+            tiles = hand.Listify(extraTile);
+        }
+
+        private bool AtLeastThreeWhiteDragons()
+        {
+            return counter >= 3;
+        }
+
+        private void CheckForWhiteDragons()
+        {
             foreach (TileObject tile in tiles)
             {
                 CheckIfWhiteDragon(tile);
             }
-            return counter >= 3;
         }
 
         private void CheckIfWhiteDragon(TileObject tile)
@@ -38,7 +53,7 @@ namespace RMU.Yaku
 
         private bool IsTileWhiteDragon(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.WHITE_DRAGON);
+            return Functions.AreDragonsEquivalent(tile, Enums.WHITE);
         }
     }
 }

@@ -28,6 +28,7 @@ namespace RMU.Yaku.Yakuman
 
         private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS];
         private int _multiplier = 1;
+        private List<TileObject> tileList;
 
         public ThirteenOrphans()
         {
@@ -39,11 +40,26 @@ namespace RMU.Yaku.Yakuman
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            ClearCounters();
-            List<TileObject> tileList = hand.Listify(extraTile);
+            InitializeValues(hand, extraTile);
+            CheckHandForTerminals();
+            return HandContainsExactlyOneOfEveryTerminalPlusASecondCopyOfOne();
+        }
+
+        private bool HandContainsExactlyOneOfEveryTerminalPlusASecondCopyOfOne()
+        {
+            return _multiplier == 2; //A hand that does not meet the conditions for Thirteen Orphans will have a _multiplier value of 0
+        }
+
+        private void CheckHandForTerminals()
+        {
             CheckListForTerminals(tileList);
             MultiplyAllCountersTogether();
-            return _multiplier == 2;
+        }
+
+        private void InitializeValues(IHand hand, TileObject extraTile)
+        {
+            ClearCounters();
+            tileList = hand.Listify(extraTile);
         }
 
         private void MultiplyAllCountersTogether()
@@ -66,12 +82,28 @@ namespace RMU.Yaku.Yakuman
         {
             for (int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS; i++)
             {
-                if (Functions.AreTilesEquivalent(tile, _terminals[i]))
-                {
-                    _counters[i]++;
-                    break;
-                }
+                if(IncrementedAppropriateCounterBecauseTileIsTerminal(tile, i)) break;
             }
+        }
+
+        private bool IncrementedAppropriateCounterBecauseTileIsTerminal(TileObject tile, int i)
+        {
+            if (TileMatchesGivenTerminal(tile, i))
+            {
+                IncrementAppropriateCounter(i);
+                return true;
+            }
+            return false;
+        }
+
+        private bool TileMatchesGivenTerminal(TileObject tile, int i)
+        {
+            return Functions.AreTilesEquivalent(tile, _terminals[i]);
+        }
+
+        private void IncrementAppropriateCounter(int i)
+        {
+            _counters[i]++;
         }
 
         private void ClearCounters()

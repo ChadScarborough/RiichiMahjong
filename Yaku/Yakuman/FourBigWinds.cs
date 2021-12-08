@@ -22,31 +22,52 @@ namespace RMU.Yaku.Yakuman
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
             ResetCounters();
-            foreach(TileObject tile in hand.Listify(extraTile))
-            {
-                CheckTile(tile);
-            }
+            CheckTilesForWinds(hand, extraTile);
             return AreAtLeastThreeOfEachWind();
+        }
+
+        private void CheckTilesForWinds(IHand hand, TileObject extraTile)
+        {
+            foreach (TileObject tile in hand.Listify(extraTile))
+            {
+                CheckIfTileIsWindAndIncrementAppropriateCounter(tile);
+            }
         }
 
         private bool AreAtLeastThreeOfEachWind()
         {
-            bool atLeastThreeEast = _eastCounter >= 3;
-            bool atLeastThreeSouth = _southCounter >= 3;
-            bool atLeastThreeWest = _westCounter >= 3;
-            bool atLeastThreeNorth = _northCounter >= 3;
-            return atLeastThreeEast && atLeastThreeSouth && atLeastThreeWest && atLeastThreeNorth;
+            return AreAtLeastThreeEast() && AreAtLeastThreeSouth() && AreAtLeastThreeWest() && AreAtLeastThreeNorth();
         }
 
-        private void CheckTile(TileObject tile)
+        private bool AreAtLeastThreeEast()
         {
-            if (IncrementEastCounterIfTileIsEastWind(tile)) return;
-            if (IncrementSouthCounterIfTileIsSouthWind(tile)) return;
-            if (IncrementWestCounterIfTileIsWestWind(tile)) return;
+            return _eastCounter >= 3;
+        }
+
+        private bool AreAtLeastThreeSouth()
+        {
+            return _southCounter >= 3;
+        }
+        
+        private bool AreAtLeastThreeWest()
+        {
+            return _westCounter >= 3;
+        }
+
+        private bool AreAtLeastThreeNorth()
+        {
+            return _northCounter >= 3;
+        }
+
+        private void CheckIfTileIsWindAndIncrementAppropriateCounter(TileObject tile)
+        {
+            if (IncrementedEastCounterBecauseTileIsEastWind(tile)) return;
+            if (IncrementedSouthCounterBecauseTileIsSouthWind(tile)) return;
+            if (IncrementedWestCounterBecauseTileIsWestWind(tile)) return;
             IncrementNorthCounterIfTileIsNorthWind(tile);
         }
 
-        private bool IncrementEastCounterIfTileIsEastWind(TileObject tile)
+        private bool IncrementedEastCounterBecauseTileIsEastWind(TileObject tile)
         {
             if (IsEastWind(tile))
             {
@@ -56,7 +77,7 @@ namespace RMU.Yaku.Yakuman
             return false;
         }
 
-        private bool IncrementSouthCounterIfTileIsSouthWind(TileObject tile)
+        private bool IncrementedSouthCounterBecauseTileIsSouthWind(TileObject tile)
         {
             if (IsSouthWind(tile))
             {
@@ -66,7 +87,7 @@ namespace RMU.Yaku.Yakuman
             return false;
         }
 
-        private bool IncrementWestCounterIfTileIsWestWind(TileObject tile)
+        private bool IncrementedWestCounterBecauseTileIsWestWind(TileObject tile)
         {
             if (IsWestWind(tile))
             {
@@ -86,22 +107,27 @@ namespace RMU.Yaku.Yakuman
 
         private bool IsEastWind(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.EAST_WIND);
+            return IsGivenWind(tile, Enums.EAST);
         }
 
         private bool IsSouthWind(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.SOUTH_WIND);
+            return IsGivenWind(tile, Enums.SOUTH);
         }
 
         private bool IsWestWind(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.WEST_WIND);
+            return IsGivenWind(tile, Enums.WEST);
         }
 
         private bool IsNorthWind(TileObject tile)
         {
-            return Functions.AreTilesEquivalent(tile, StandardTileList.NORTH_WIND);
+            return IsGivenWind(tile, Enums.NORTH);
+        }
+
+        private bool IsGivenWind(TileObject tile, Enums.Wind wind)
+        {
+            return Functions.AreWindsEquivalent(tile, wind);
         }
 
         private void ResetCounters()
