@@ -8,25 +8,14 @@ namespace RMU.Hand.TestHands
     {
         public HalfFlushTestHand()
         {
-            _closedTiles = new List<TileObject>();
-            _handSorter = new Algorithms.HandSorter();
-            _tileValues = new List<int>
-            {
-                1, 1, 1,
-                2, 3, 4,
-                7, 8, 9,
-                ConstValues.EAST_WIND, ConstValues.EAST_WIND, ConstValues.EAST_WIND,
-                ConstValues.RED_DRAGON
+            _closedTiles = new List<TileObject> 
+            { 
+                StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(),
+                StandardTileList.TWO_MAN.Clone(), StandardTileList.THREE_MAN.Clone(), StandardTileList.FOUR_MAN.Clone(),
+                StandardTileList.SEVEN_MAN.Clone(), StandardTileList.EIGHT_MAN.Clone(), StandardTileList.NINE_MAN.Clone(),
+                StandardTileList.EAST_WIND.Clone(), StandardTileList.EAST_WIND.Clone(), StandardTileList.EAST_WIND.Clone(),
+                StandardTileList.RED_DRAGON.Clone()
             };
-            _tileSuits = new List<Enums.Suit>
-            {
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.WIND, Enums.WIND, Enums.WIND,
-                Enums.DRAGON
-            };
-            FillHand();
         }
     }
 }

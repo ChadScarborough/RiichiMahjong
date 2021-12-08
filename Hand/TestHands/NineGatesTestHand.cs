@@ -9,25 +9,14 @@ namespace RMU.Hand.TestHands
     {
         public NineGatesTestHand()
         {
-            _closedTiles = new List<TileObject>();
-            _handSorter = new HandSorter();
-            _tileValues = new List<int>
-            {
-                1, 1, 1,
-                2, 3, 4,
-                5, 6, 7,
-                8, 9, 9,
-                9
+            _closedTiles = new List<TileObject> 
+            { 
+                StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(),
+                StandardTileList.TWO_MAN.Clone(), StandardTileList.THREE_MAN.Clone(), StandardTileList.FOUR_MAN.Clone(),
+                StandardTileList.FIVE_MAN.Clone(), StandardTileList.SIX_MAN.Clone(), StandardTileList.SEVEN_MAN.Clone(),
+                StandardTileList.EIGHT_MAN.Clone(), StandardTileList.NINE_MAN.Clone(), StandardTileList.NINE_MAN.Clone(),
+                StandardTileList.NINE_MAN.Clone()
             };
-            _tileSuits = new List<Enums.Suit>
-            {
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.MAN
-            };
-            FillHand();
         }
     }
 }

@@ -10,17 +10,6 @@ namespace RMU.Hand.TestHands
     {
         protected List<TileObject> _closedTiles;
         protected HandSorter _handSorter;
-        protected List<int> _tileValues;
-        protected List<Enums.Suit> _tileSuits;
-        public virtual void FillHand()
-        {
-            for (int i = 0; i < ConstValues.NUMBER_OF_TILES_IN_FULL_HAND - 1; i++)
-            {
-                TileObject tile = TileFactory.CreateTile(_tileValues[i], _tileSuits[i]);
-                _closedTiles.Add(tile);
-            }
-            _closedTiles = _handSorter.SortHand(_closedTiles);
-        }
 
         public void DiscardTile(int index)
         {
@@ -39,7 +28,7 @@ namespace RMU.Hand.TestHands
 
         public void SortHand()
         {
-            _closedTiles = _handSorter.SortHand(_closedTiles);
+            throw new NotImplementedException();
         }
 
         public void CallPon(TileObject _calledTile)
@@ -105,7 +94,7 @@ namespace RMU.Hand.TestHands
                 outputList.Add(tile);
             }
             outputList.Add(_extraTile);
-            return _handSorter.SortHand(outputList);
+            return outputList;
         }
 
         public virtual bool IsOpen()

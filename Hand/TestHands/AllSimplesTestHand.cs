@@ -8,34 +8,13 @@ namespace RMU.Hand.TestHands
     {
         public AllSimplesTestHand()
         {
-            _closedTiles = new List<TileObject>();
-            _handSorter = new Algorithms.HandSorter();
-            SetTileValues();
-            SetTileSuits();
-            FillHand();
-        }
-
-        private void SetTileSuits()
-        {
-            _tileSuits = new List<Enums.Suit>
-            {
-                Enums.MAN, Enums.MAN, Enums.MAN,
-                Enums.PIN, Enums.PIN, Enums.PIN,
-                Enums.SOU, Enums.SOU, Enums.SOU,
-                Enums.PIN, Enums.PIN, Enums.PIN,
-                Enums.MAN
-            };
-        }
-
-        private void SetTileValues()
-        {
-            _tileValues = new List<int>
-            {
-                2, 3, 4,
-                5, 5, 5,
-                6, 7, 8,
-                2, 2, 2,
-                8
+            _closedTiles = new List<TileObject> 
+            { 
+                StandardTileList.TWO_MAN.Clone(), StandardTileList.THREE_MAN.Clone(), StandardTileList.FOUR_MAN.Clone(),
+                StandardTileList.FIVE_PIN.Clone(), StandardTileList.FIVE_PIN.Clone(), StandardTileList.FIVE_PIN.Clone(),
+                StandardTileList.SIX_SOU.Clone(), StandardTileList.SEVEN_SOU.Clone(), StandardTileList.EIGHT_SOU.Clone(),
+                StandardTileList.TWO_PIN.Clone(), StandardTileList.TWO_PIN.Clone(), StandardTileList.TWO_PIN.Clone(),
+                StandardTileList.EIGHT_MAN.Clone()
             };
         }
     }
