@@ -50,11 +50,6 @@ namespace RMU.Yaku
             return TileSuitMatchesPrescribedSuit(tile) || TileIsHonorTile(tile);
         }
 
-        private static bool TileIsHonorTile(TileObject tile)
-        {
-            return tile.IsHonor();
-        }
-
         private bool TileSuitMatchesPrescribedSuit(TileObject tile)
         {
             return tile.GetSuit() == _prescribedSuit;
