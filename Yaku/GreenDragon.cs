@@ -8,7 +8,7 @@ namespace RMU.Yaku
     public class GreenDragon : AbstractYaku
     {
         private int counter;
-        private List<TileObject> tiles;
+        private List<TileObject> handTiles;
 
         public GreenDragon()
         {
@@ -27,7 +27,7 @@ namespace RMU.Yaku
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
             counter = 0;
-            tiles = hand.GetAllTiles(extraTile);
+            handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool AtLeastThreeGreenDragons()
@@ -37,7 +37,7 @@ namespace RMU.Yaku
 
         private void CheckForGreenDragons()
         {
-            foreach (TileObject tile in tiles)
+            foreach (TileObject tile in handTiles)
             {
                 CheckIfGreenDragon(tile);
             }

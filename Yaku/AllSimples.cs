@@ -6,7 +6,7 @@ namespace RMU.Yaku
 {
     public class AllSimples : AbstractYaku
     {
-        private List<TileObject> tiles;
+        private List<TileObject> handTiles;
 
         public AllSimples()
         {
@@ -24,7 +24,7 @@ namespace RMU.Yaku
 
         private bool HandContainsNoTerminalsOrHonors()
         {
-            foreach (TileObject tile in tiles)
+            foreach (TileObject tile in handTiles)
             {
                 if (TileIsTerminalOrHonor(tile))
                 {
@@ -36,7 +36,7 @@ namespace RMU.Yaku
 
         private void InitializeTileList(IHand hand, TileObject extraTile)
         {
-            tiles = hand.GetAllTiles(extraTile);
+            handTiles = hand.GetAllTiles(extraTile);
         }
 
         private static bool TileIsTerminalOrHonor(TileObject tile)

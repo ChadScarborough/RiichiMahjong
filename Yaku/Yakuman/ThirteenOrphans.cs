@@ -28,7 +28,7 @@ namespace RMU.Yaku.Yakuman
 
         private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS];
         private int _multiplier = 1;
-        private List<TileObject> tileList;
+        private List<TileObject> handTiles;
 
         public ThirteenOrphans()
         {
@@ -52,14 +52,14 @@ namespace RMU.Yaku.Yakuman
 
         private void CheckHandForTerminals()
         {
-            CheckListForTerminals(tileList);
+            CheckListForTerminals(handTiles);
             MultiplyAllCountersTogether();
         }
 
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
             ResetCounters();
-            tileList = hand.GetAllTiles(extraTile);
+            handTiles = hand.GetAllTiles(extraTile);
         }
 
         private void MultiplyAllCountersTogether()
