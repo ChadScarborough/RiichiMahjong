@@ -28,16 +28,33 @@ namespace RMU.Globals
 
         public static bool AreWindsEquivalent(TileObject windTile, Enums.Wind wind)
         {
+            if (windTile.GetSuit() != Enums.WIND) return false;
             switch (windTile.GetValue())
             {
                 case ConstValues.EAST_WIND:
-                    return wind == Enums.Wind.East;
+                    return wind == Enums.EAST;
                 case ConstValues.SOUTH_WIND:
-                    return wind == Enums.Wind.South;
+                    return wind == Enums.SOUTH;
                 case ConstValues.WEST_WIND:
-                    return wind == Enums.Wind.West;
+                    return wind == Enums.WEST;
                 case ConstValues.NORTH_WIND:
-                    return wind == Enums.Wind.North;
+                    return wind == Enums.NORTH;
+                default:
+                    return false;
+            }
+        }
+
+        public static bool AreDragonsEquivalent(TileObject dragonTile, Enums.Dragon dragon)
+        {
+            if (dragonTile.GetSuit() != Enums.DRAGON) return false;
+            switch (dragonTile.GetValue())
+            {
+                case ConstValues.GREEN_DRAGON:
+                    return dragon == Enums.GREEN;
+                case ConstValues.RED_DRAGON:
+                    return dragon == Enums.RED;
+                case ConstValues.WHITE_DRAGON:
+                    return dragon == Enums.WHITE;
                 default:
                     return false;
             }
