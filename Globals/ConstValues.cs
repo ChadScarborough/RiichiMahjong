@@ -12,6 +12,6 @@
         public const int NORTH_WIND = 4;
 
         public const int NUMBER_OF_TILES_IN_FULL_HAND = 14;
-        public const int NUMBER_OF_UNIQUE_TERMINALS = 13;
+        public const int NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS = 13;
     }
 }
