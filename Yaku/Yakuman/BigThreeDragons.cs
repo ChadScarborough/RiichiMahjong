@@ -10,7 +10,7 @@ namespace RMU.Yaku.Yakuman
         private int _greenDragonCounter = 0;
         private int _redDragonCounter = 0;
         private int _whiteDragonCounter = 0;
-        private List<TileObject> tileList;
+        private List<TileObject> handTiles;
 
         public BigThreeDragons()
         {
@@ -23,13 +23,13 @@ namespace RMU.Yaku.Yakuman
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
-            CheckTileListForDragons();
+            CheckHandForDragons();
             return AreAtLeastThreeOfEachDragon();
         }
 
-        private void CheckTileListForDragons()
+        private void CheckHandForDragons()
         {
-            foreach (TileObject tile in tileList)
+            foreach (TileObject tile in handTiles)
             {
                 CheckIfTileIsDragonAndIncrementAppropriateCounter(tile);
             }
@@ -38,7 +38,7 @@ namespace RMU.Yaku.Yakuman
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
             ResetCounters();
-            tileList = hand.Listify(extraTile);
+            handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool AreAtLeastThreeOfEachDragon()

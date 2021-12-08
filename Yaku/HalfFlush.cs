@@ -28,41 +28,53 @@ namespace RMU.Yaku
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
             _hand = hand;
-            _tiles = hand.Listify(extraTile);
+            _tiles = hand.GetAllTiles(extraTile);
         }
 
         private bool EveryTileIsSameSuitOrHonor()
         {
             foreach (TileObject tile in _tiles)
             {
-                if (tile.GetSuit() == _suit) continue;
-                if (tile.IsHonor()) continue;
+                if (TileMatchesPrescribedSuitOrIsHonorTile(tile)) continue;
                 return false;
             }
             return true;
         }
 
-        private bool HandContainsHonorsAndNonHonors()
+        private bool TileMatchesPrescribedSuitOrIsHonorTile(TileObject tile)
         {
-            if (SuccessfullyFoundNonHonorTile() == false) return false;
-            if (SuccessfullyFoundHonorTile() == false) return false;
-            return true;
+            return TileSuitMatchesPrescribedSuit(tile) || TileIsHonorTile(tile);
         }
 
-        private bool SuccessfullyFoundNonHonorTile()
+        private static bool TileIsHonorTile(TileObject tile)
+        {
+            return tile.IsHonor();
+        }
+
+        private bool TileSuitMatchesPrescribedSuit(TileObject tile)
+        {
+            return tile.GetSuit() == _suit;
+        }
+
+        private bool HandContainsHonorsAndNonHonors()
+        {
+            return SuccessfullyFoundHonorTile() && SuccessfullyFoundNonHonorTileAndSetPrescribedSuit();
+        }
+
+        private bool SuccessfullyFoundNonHonorTileAndSetPrescribedSuit()
         {
             foreach (TileObject tile in _tiles)
             {
                 if (tile.IsHonor() == false)
                 {
-                    SetNonHonorSuit(tile);
+                    SetPrescribedNonHonorSuit(tile);
                     return true;
                 }
             }
             return false;
         }
 
-        private void SetNonHonorSuit(TileObject tile)
+        private void SetPrescribedNonHonorSuit(TileObject tile)
         {
             _suit = tile.GetSuit();
         }

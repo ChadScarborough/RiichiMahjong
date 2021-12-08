@@ -6,7 +6,7 @@ namespace RMU.Yaku.Yakuman
 {
     public class AllHonors : AbstractYakuman
     {
-        private List<TileObject> tileList;
+        private List<TileObject> handTiles;
 
         public AllHonors()
         {
@@ -24,9 +24,9 @@ namespace RMU.Yaku.Yakuman
 
         private bool HandContainsOnlyHonorTiles()
         {
-            foreach (TileObject tile in tileList)
+            foreach (TileObject tile in handTiles)
             {
-                if (tile.IsHonor() == false)
+                if (TileIsNotHonor(tile))
                 {
                     return false;
                 }
@@ -34,9 +34,14 @@ namespace RMU.Yaku.Yakuman
             return true;
         }
 
+        private static bool TileIsNotHonor(TileObject tile)
+        {
+            return tile.IsHonor() == false;
+        }
+
         private void InitializeTileList(IHand hand, TileObject extraTile)
         {
-            tileList = hand.Listify(extraTile);
+            handTiles = hand.GetAllTiles(extraTile);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
+using System.Collections.Generic;
 
 namespace RMU.Yaku
 {
@@ -8,6 +9,7 @@ namespace RMU.Yaku
     {
         private int _terminalCounter;
         private int _honorCounter;
+        private List<TileObject> handTiles;
 
         public AllTerminalsAndHonors()
         {
@@ -19,19 +21,25 @@ namespace RMU.Yaku
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            ResetCounters();
+            InitializeValues(hand, extraTile);
             CheckForTerminalsAndHonors(hand, extraTile);
-            return (AllTilesAreTerminalsOrHonorsAndThereIsAtLeastOneOfEach());
+            return AllTilesAreTerminalsOrHonorsAndThereIsAtLeastOneTerminalAndOneHonor();
         }
 
-        private bool AllTilesAreTerminalsOrHonorsAndThereIsAtLeastOneOfEach()
+        private void InitializeValues(IHand hand, TileObject extraTile)
+        {
+            ResetCounters();
+            handTiles = hand.GetAllTiles(extraTile);
+        }
+
+        private bool AllTilesAreTerminalsOrHonorsAndThereIsAtLeastOneTerminalAndOneHonor()
         {
             return AllTilesAreTerminalsOrHonors() && AtLeastOneTerminalAndAtLeastOneHonor();
         }
 
         private void CheckForTerminalsAndHonors(IHand hand, TileObject extraTile)
         {
-            foreach (TileObject tile in hand.Listify(extraTile))
+            foreach (TileObject tile in handTiles)
             {
                 CheckHonor(tile);
                 CheckTerminal(tile);
@@ -67,7 +75,17 @@ namespace RMU.Yaku
 
         private bool AtLeastOneTerminalAndAtLeastOneHonor()
         {
-            return _terminalCounter * _honorCounter != 0;
+            return AtLeastOneTerminal() && AtLeastOneHonor();
+        }
+
+        private bool AtLeastOneTerminal()
+        {
+            return _terminalCounter > 0;
+        }
+
+        private bool AtLeastOneHonor()
+        {
+            return _honorCounter > 0;
         }
     }
 }

@@ -10,7 +10,7 @@ namespace RMU.Yaku.Yakuman
 {
     public class ThirteenWaitThirteenOrphans : AbstractYakuman
     {
-        private TileObject[] _terminals = new TileObject[]
+        private TileObject[] _terminalsAndHonors = new TileObject[]
         {
             StandardTileList.ONE_MAN,
             StandardTileList.NINE_MAN,
@@ -27,9 +27,9 @@ namespace RMU.Yaku.Yakuman
             StandardTileList.WHITE_DRAGON
         };
 
-        private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS];
+        private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS];
         private int _multiplier = 1;
-        private List<TileObject> tileList;
+        private List<TileObject> handTiles;
 
         public ThirteenWaitThirteenOrphans()
         {
@@ -42,22 +42,37 @@ namespace RMU.Yaku.Yakuman
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
             InitializeValues(hand);
-            CheckForTerminalsInClosedTiles();
-            return ClosedTilesContainOneOfEachTerminalAndFullHandIsValidThirteenOrphans(hand, extraTile);
+            CheckForHonorsAndTerminalsInClosedTiles();
+            return ClosedTilesContainOneOfEachHonorAndTerminal_AndExtraTileIsHonorOrTerminal(extraTile);
         }
 
-        private void CheckForTerminalsInClosedTiles()
+        private void CheckForHonorsAndTerminalsInClosedTiles()
         {
-            CheckListForTerminals(tileList);
+            CheckListForHonorsAndTerminals(handTiles);
             MultiplyAllCountersTogether();
         }
 
-        private bool ClosedTilesContainOneOfEachTerminalAndFullHandIsValidThirteenOrphans(IHand hand, TileObject extraTile)
+        private bool ClosedTilesContainOneOfEachHonorAndTerminal_AndExtraTileIsHonorOrTerminal(TileObject extraTile)
         {
-            return OneOfEachTerminal() && IsThirteenOrphans(hand, extraTile);
+            return HandContainsOneOfEachHonorAndTerminal() && ExtraTileIsHonorOrTerminal(extraTile);
         }
 
-        private bool OneOfEachTerminal()
+        private bool ExtraTileIsHonorOrTerminal(TileObject extraTile)
+        {
+            return ExtraTileIsHonor(extraTile) || ExtraTileIsTerminal(extraTile);
+        }
+
+        private bool ExtraTileIsHonor(TileObject extraTile)
+        {
+            return extraTile.IsHonor();
+        }
+
+        private bool ExtraTileIsTerminal(TileObject extraTile)
+        {
+            return extraTile.IsTerminal();
+        }
+
+        private bool HandContainsOneOfEachHonorAndTerminal()
         {
             return _multiplier == 1; //If any terminal is missing from the closed tiles, the value of _multiplier will be 0
         }
@@ -65,21 +80,15 @@ namespace RMU.Yaku.Yakuman
         private void InitializeValues(IHand hand)
         {
             ClearCounters();
-            tileList = hand.GetClosedTiles();
+            handTiles = hand.GetClosedTiles();
         }
 
-        private void CheckListForTerminals(List<TileObject> tileList)
+        private void CheckListForHonorsAndTerminals(List<TileObject> tileList)
         {
             foreach (TileObject tile in tileList)
             {
-                CheckIfTileIsTerminal(tile);
+                CheckIfTileIsHonorOrTerminal(tile);
             }
-        }
-
-        private static bool IsThirteenOrphans(IHand hand, TileObject extraTile)
-        {
-            AbstractYakuman thirteenOrphans = YakumanList.THIRTEEN_ORPHANS;
-            return thirteenOrphans.CheckYaku(hand, extraTile);
         }
 
         private void MultiplyAllCountersTogether()
@@ -90,17 +99,17 @@ namespace RMU.Yaku.Yakuman
             }
         }
 
-        private void CheckIfTileIsTerminal(TileObject tile)
+        private void CheckIfTileIsHonorOrTerminal(TileObject tile)
         {
-            for (int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS; i++)
+            for (int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
             {
-                if (IncrementedAppropriateCounterBecauseTileIsTerminal(tile, i)) break;
+                if (IncrementedAppropriateCounter_BecauseTileIsHonorOrTerminal(tile, i)) break;
             }
         }
 
-        private bool IncrementedAppropriateCounterBecauseTileIsTerminal(TileObject tile, int i)
+        private bool IncrementedAppropriateCounter_BecauseTileIsHonorOrTerminal(TileObject tile, int i)
         {
-            if (TileMatchesGivenTerminal(tile, i))
+            if (TileMatchesGivenHonorOrTerminal(tile, i))
             {
                 IncrementAppropriateCounter(i);
                 return true;
@@ -108,9 +117,9 @@ namespace RMU.Yaku.Yakuman
             return false;
         }
 
-        private bool TileMatchesGivenTerminal(TileObject tile, int i)
+        private bool TileMatchesGivenHonorOrTerminal(TileObject tile, int i)
         {
-            return Functions.AreTilesEquivalent(tile, _terminals[i]);
+            return Functions.AreTilesEquivalent(tile, _terminalsAndHonors[i]);
         }
 
         private void IncrementAppropriateCounter(int i)
@@ -120,7 +129,7 @@ namespace RMU.Yaku.Yakuman
 
         private void ClearCounters()
         {
-            for (int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS; i++)
+            for (int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
             {
                 _counters[i] = 0;
             }

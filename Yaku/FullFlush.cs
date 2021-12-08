@@ -21,24 +21,33 @@ namespace RMU.Yaku
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
-            if (SuccessfullyFoundNonHonorTile() == false) return false;
+            if (DidNotFindNonHonorTileForPrescribedSuit()) return false;
             return AllSuitsAreTheSame();
+        }
+
+        private bool DidNotFindNonHonorTileForPrescribedSuit()
+        {
+            return SuccessfullyFoundNonHonorTileAndSetPrescribedSuit() == false;
         }
 
         private bool AllSuitsAreTheSame()
         {
             foreach (TileObject tile in _tiles)
             {
-                if (SuitMatchesPrescribedSuit(tile)) continue;
-                return false;
+                if (SuitDoesNotMatchPrescribedSuit(tile)) return false;
             }
             return true;
+        }
+
+        private bool SuitDoesNotMatchPrescribedSuit(TileObject tile)
+        {
+            return SuitMatchesPrescribedSuit(tile) == false;
         }
 
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
             _hand = hand;
-            _tiles = hand.Listify(extraTile);
+            _tiles = hand.GetAllTiles(extraTile);
         }
 
         private bool SuitMatchesPrescribedSuit(TileObject tile)
@@ -46,7 +55,7 @@ namespace RMU.Yaku
             return tile.GetSuit() == _suit;
         }
 
-        private bool SuccessfullyFoundNonHonorTile()
+        private bool SuccessfullyFoundNonHonorTileAndSetPrescribedSuit()
         {
             foreach(TileObject tile in _tiles)
             {

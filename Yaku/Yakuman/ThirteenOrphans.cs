@@ -26,7 +26,7 @@ namespace RMU.Yaku.Yakuman
             StandardTileList.WHITE_DRAGON
         };
 
-        private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS];
+        private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS];
         private int _multiplier = 1;
         private List<TileObject> tileList;
 
@@ -59,7 +59,7 @@ namespace RMU.Yaku.Yakuman
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
             ClearCounters();
-            tileList = hand.Listify(extraTile);
+            tileList = hand.GetAllTiles(extraTile);
         }
 
         private void MultiplyAllCountersTogether()
@@ -80,7 +80,7 @@ namespace RMU.Yaku.Yakuman
 
         private void CheckIfTileIsTerminal(TileObject tile)
         {
-            for (int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS; i++)
+            for (int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
             {
                 if(IncrementedAppropriateCounterBecauseTileIsTerminal(tile, i)) break;
             }
@@ -108,7 +108,7 @@ namespace RMU.Yaku.Yakuman
 
         private void ClearCounters()
         {
-            for(int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS; i++)
+            for(int i = 0; i < ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
             {
                 _counters[i] = 0;
             }

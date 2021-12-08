@@ -27,7 +27,7 @@ namespace RMU.Yaku
         private void InitializeValues(IHand hand, TileObject extraTile)
         {
             counter = 0;
-            tiles = hand.Listify(extraTile);
+            tiles = hand.GetAllTiles(extraTile);
         }
 
         private bool AtLeastThreeGreenDragons()

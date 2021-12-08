@@ -36,7 +36,7 @@ namespace RMU.Yaku
 
         private void InitializeTileList(IHand hand, TileObject extraTile)
         {
-            tiles = hand.Listify(extraTile);
+            tiles = hand.GetAllTiles(extraTile);
         }
 
         private static bool TileIsTerminalOrHonor(TileObject tile)

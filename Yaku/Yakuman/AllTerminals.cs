@@ -6,7 +6,7 @@ namespace RMU.Yaku.Yakuman
 {
     public class AllTerminals : AbstractYakuman
     {
-        private List<TileObject> tileList;
+        private List<TileObject> handTiles;
 
         public AllTerminals()
         {
@@ -18,15 +18,15 @@ namespace RMU.Yaku.Yakuman
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            InitializeTileList(hand, extraTile);
+            InitializeHandTiles(hand, extraTile);
             return HandContainsOnlyTerminalTiles();
         }
 
         private bool HandContainsOnlyTerminalTiles()
         {
-            foreach (TileObject tile in tileList)
+            foreach (TileObject tile in handTiles)
             {
-                if (tile.IsTerminal() == false)
+                if (TileIsNotTerminal(tile))
                 {
                     return false;
                 }
@@ -34,9 +34,14 @@ namespace RMU.Yaku.Yakuman
             return true;
         }
 
-        private void InitializeTileList(IHand hand, TileObject extraTile)
+        private static bool TileIsNotTerminal(TileObject tile)
         {
-            tileList = hand.Listify(extraTile);
+            return tile.IsTerminal() == false;
+        }
+
+        private void InitializeHandTiles(IHand hand, TileObject extraTile)
+        {
+            handTiles = hand.GetAllTiles(extraTile);
         }
     }
 }

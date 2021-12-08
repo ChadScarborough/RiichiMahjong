@@ -1,6 +1,7 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -10,6 +11,7 @@ namespace RMU.Yaku.Yakuman
         private int _southCounter;
         private int _westCounter;
         private int _northCounter;
+        private List<TileObject> handTiles;
 
         public FourBigWinds()
         {
@@ -21,14 +23,20 @@ namespace RMU.Yaku.Yakuman
 
         public override bool CheckYaku(IHand hand, TileObject extraTile)
         {
-            ResetCounters();
+            InitializeValues(hand, extraTile);
             CheckTilesForWinds(hand, extraTile);
             return AreAtLeastThreeOfEachWind();
         }
 
+        private void InitializeValues(IHand hand, TileObject extraTile)
+        {
+            ResetCounters();
+            handTiles = hand.GetAllTiles(extraTile);
+        }
+
         private void CheckTilesForWinds(IHand hand, TileObject extraTile)
         {
-            foreach (TileObject tile in hand.Listify(extraTile))
+            foreach (TileObject tile in handTiles)
             {
                 CheckIfTileIsWindAndIncrementAppropriateCounter(tile);
             }
@@ -36,25 +44,25 @@ namespace RMU.Yaku.Yakuman
 
         private bool AreAtLeastThreeOfEachWind()
         {
-            return AreAtLeastThreeEast() && AreAtLeastThreeSouth() && AreAtLeastThreeWest() && AreAtLeastThreeNorth();
+            return AreAtLeastThreeEasts() && AreAtLeastThreeSouths() && AreAtLeastThreeWests() && AreAtLeastThreeNorths();
         }
 
-        private bool AreAtLeastThreeEast()
+        private bool AreAtLeastThreeEasts()
         {
             return _eastCounter >= 3;
         }
 
-        private bool AreAtLeastThreeSouth()
+        private bool AreAtLeastThreeSouths()
         {
             return _southCounter >= 3;
         }
         
-        private bool AreAtLeastThreeWest()
+        private bool AreAtLeastThreeWests()
         {
             return _westCounter >= 3;
         }
 
-        private bool AreAtLeastThreeNorth()
+        private bool AreAtLeastThreeNorths()
         {
             return _northCounter >= 3;
         }
@@ -69,7 +77,7 @@ namespace RMU.Yaku.Yakuman
 
         private bool IncrementedEastCounterBecauseTileIsEastWind(TileObject tile)
         {
-            if (IsEastWind(tile))
+            if (TileIsEastWind(tile))
             {
                 _eastCounter++;
                 return true;
@@ -79,7 +87,7 @@ namespace RMU.Yaku.Yakuman
 
         private bool IncrementedSouthCounterBecauseTileIsSouthWind(TileObject tile)
         {
-            if (IsSouthWind(tile))
+            if (TileIsSouthWind(tile))
             {
                 _southCounter++;
                 return true;
@@ -89,7 +97,7 @@ namespace RMU.Yaku.Yakuman
 
         private bool IncrementedWestCounterBecauseTileIsWestWind(TileObject tile)
         {
-            if (IsWestWind(tile))
+            if (TileIsWestWind(tile))
             {
                 _westCounter++;
                 return true;
@@ -99,33 +107,33 @@ namespace RMU.Yaku.Yakuman
 
         private void IncrementNorthCounterIfTileIsNorthWind(TileObject tile)
         {
-            if (IsNorthWind(tile))
+            if (TileIsNorthWind(tile))
             {
                 _northCounter++;
             }
         }
 
-        private bool IsEastWind(TileObject tile)
+        private bool TileIsEastWind(TileObject tile)
         {
-            return IsGivenWind(tile, Enums.EAST);
+            return TileIsGivenWind(tile, Enums.EAST);
         }
 
-        private bool IsSouthWind(TileObject tile)
+        private bool TileIsSouthWind(TileObject tile)
         {
-            return IsGivenWind(tile, Enums.SOUTH);
+            return TileIsGivenWind(tile, Enums.SOUTH);
         }
 
-        private bool IsWestWind(TileObject tile)
+        private bool TileIsWestWind(TileObject tile)
         {
-            return IsGivenWind(tile, Enums.WEST);
+            return TileIsGivenWind(tile, Enums.WEST);
         }
 
-        private bool IsNorthWind(TileObject tile)
+        private bool TileIsNorthWind(TileObject tile)
         {
-            return IsGivenWind(tile, Enums.NORTH);
+            return TileIsGivenWind(tile, Enums.NORTH);
         }
 
-        private bool IsGivenWind(TileObject tile, Enums.Wind wind)
+        private bool TileIsGivenWind(TileObject tile, Enums.Wind wind)
         {
             return Functions.AreWindsEquivalent(tile, wind);
         }
