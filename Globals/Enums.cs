@@ -27,6 +27,12 @@
         public const Wind WEST = Wind.West;
         public const Wind NORTH = Wind.North;
 
+        public enum Dragon { Green, Red, White }
+
+        public const Dragon GREEN = Dragon.Green;
+        public const Dragon RED = Dragon.Red;
+        public const Dragon WHITE = Dragon.White;
+
         public enum CompleteHandComponentType
         {
             ClosedChii, ClosedPon, ClosedKan,
