@@ -86,7 +86,7 @@ namespace RMU.Hand.TestHands
             throw new NotImplementedException();
         }
 
-        public List<TileObject> Listify(TileObject _extraTile)
+        public List<TileObject> GetAllTiles(TileObject _extraTile)
         {
             List<TileObject> outputList = new List<TileObject>();
             foreach (TileObject tile in _closedTiles)

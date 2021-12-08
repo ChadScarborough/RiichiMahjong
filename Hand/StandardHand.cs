@@ -229,7 +229,7 @@ namespace RMU.Hand
             return sameValue && sameSuit;
         }
 
-        public List<TileObject> Listify(TileObject _extraTile)
+        public List<TileObject> GetAllTiles(TileObject _extraTile)
         {
             List<TileObject> outputList = new List<TileObject>();
             AddClosedTilesToOutputList(outputList);
