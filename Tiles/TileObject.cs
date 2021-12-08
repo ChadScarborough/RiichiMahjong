@@ -32,7 +32,7 @@ namespace RMU.Tiles
         public TileObject Clone()
         {
             Enums.Suit suit = this.GetSuit();
-            int value = this.GetValue()
+            int value = this.GetValue();
             return TileFactory.CreateTile(value, suit);
         }
     }
