@@ -11,6 +11,7 @@ namespace RMU.Yaku.YakuLists
         public static readonly AbstractYaku HALF_FLUSH = new HalfFlush();
         public static readonly AbstractYaku RED_DRAGON = new RedDragon();
         public static readonly AbstractYaku WHITE_DRAGON = new WhiteDragon();
+        public static readonly AbstractYaku LITTLE_THREE_DRAGONS = new LittleThreeDragons();
 
         private static List<AbstractYaku> _yakuList = new List<AbstractYaku>
         {
@@ -19,6 +20,7 @@ namespace RMU.Yaku.YakuLists
             FULL_FLUSH,
             GREEN_DRAGON,
             HALF_FLUSH,
+            LITTLE_THREE_DRAGONS,
             RED_DRAGON,
             WHITE_DRAGON
         };
