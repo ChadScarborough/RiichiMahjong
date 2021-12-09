@@ -22,20 +22,32 @@ namespace RMU.Shanten
         {
             for (int i = collection.GetSize() - 1; i >= 2; i--)
             {
-                for (int j = i - 1; j >= 1; j--)
+                i = CheckForChiiContainingGivenTile(collection, _outputList, tiles, i);
+            }
+        }
+
+        private static int CheckForChiiContainingGivenTile(AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
+        {
+            for (int j = i - 1; j >= 1; j--)
+            {
+                CheckForChiiContainingTwoGivenTiles(collection, _outputList, tiles, ref i, ref j);
+            }
+
+            return i;
+        }
+
+        private static void CheckForChiiContainingTwoGivenTiles(AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, ref int i, ref int j)
+        {
+            for (int k = j - 1; k >= 0; k--)
+            {
+                TileObject oneBelow = Functions.GetTileBelow(tiles[i]);
+                TileObject twoBelow = Functions.GetTileTwoBelow(tiles[i]);
+                if (TilesFormChii(tiles, j, k, oneBelow, twoBelow))
                 {
-                    for (int k = j - 1; k >= 0; k--)
-                    {
-                        TileObject oneBelow = Functions.GetTileBelow(tiles[i]);
-                        TileObject twoBelow = Functions.GetTileTwoBelow(tiles[i]);
-                        if (TilesFormChii(tiles, j, k, oneBelow, twoBelow))
-                        {
-                            ExtractTilesIntoNewCompleteHandComponentObject(collection, _outputList, tiles, i, j, k);
-                            i -= 2;
-                            j -= 1;
-                            break;
-                        }
-                    }
+                    ExtractTilesIntoNewCompleteHandComponentObject(collection, _outputList, tiles, i, j, k);
+                    i -= 2;
+                    j -= 1;
+                    break;
                 }
             }
         }
