@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using RMU.Tiles;
 using RMU.Globals;
 
@@ -20,7 +21,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
                 case Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT:
                     return CompleteHandIncompleteGroupFactory.CreateCompleteHandIncompleteGroup(tiles, componentType);
                 default:
-                    return null;
+                    throw new ArgumentException("This error should be impossible");
             }
         }
 
@@ -33,7 +34,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
                 case Enums.ISOLATED_TILE:
                     return new IsolatedTile(tile);
                 default:
-                    return null;
+                    throw new ArgumentException("This error should be impossible");
             }
         }
 

@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using RMU.Tiles;
 using RMU.Globals;
 
@@ -15,7 +16,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
                 case Enums.CLOSED_CHII:
                     return new ClosedChii(tiles);
                 default:
-                    return null;
+                    throw new ArgumentException("This error should be impossible");
             }
         }
 
@@ -35,7 +36,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
                 case Enums.CLOSED_KAN_MELD:
                     return new ClosedKan(meld);
                 default:
-                    return null;
+                    throw new ArgumentException("This error should be impossible");
             }
         }
     }

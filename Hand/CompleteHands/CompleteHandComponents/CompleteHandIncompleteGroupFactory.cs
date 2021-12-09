@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using RMU.Tiles;
 using RMU.Globals;
 
@@ -17,7 +18,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
                 case Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT:
                     return new IncompleteSequenceOpenWait(tiles);
                 default:
-                    return null;
+                    throw new ArgumentException("This error should be impossible");
             }
         }
     }
