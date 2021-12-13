@@ -7,7 +7,8 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
     public static class CompleteHandIncompleteGroupFactory
     {
-        public static ICompleteHandIncompleteGroup CreateCompleteHandIncompleteGroup(List<TileObject> tiles, Enums.CompleteHandComponentType componentType)
+        public static ICompleteHandIncompleteGroup CreateCompleteHandIncompleteGroup
+            (List<TileObject> tiles, Enums.CompleteHandComponentType componentType)
         {
             switch (componentType)
             {

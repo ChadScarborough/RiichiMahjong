@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using System;
 using RMU.Tiles;
+using RMU.Globals;
 
 namespace RMU.Shanten
 {
@@ -7,7 +9,26 @@ namespace RMU.Shanten
     {
         public DragonTileCollection(List<TileObject> _tiles)
         {
+            SetSuit();
+            foreach(TileObject tile in _tiles)
+            {
+                if(tile.GetSuit() != Enums.DRAGON)
+                {
+                    throw new ArgumentException();
+                }
+            }
             this._tiles = _tiles;
         }
-     }
+
+        public DragonTileCollection()
+        {
+            SetSuit();
+            _tiles = new List<TileObject>();
+        }
+
+        protected override void SetSuit()
+        {
+            _suit = Enums.DRAGON;
+        }
+    }
 }

@@ -1,9 +1,7 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
-using System;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -31,23 +29,31 @@ namespace RMU.Yaku.Yakuman
 
         private bool AreExactlyTwoOfOneWindAndAtLeastThreeEachOfTheOthers()
         {
-            if(_eastWindCounter == 2 && _southWindCounter >= 3 && _westWindCounter >= 3 && _northWindCounter >= 3)
-            {
-                return true;
-            }
-            if(_eastWindCounter >= 3 && _southWindCounter == 2 && _westWindCounter >= 3 && _northWindCounter >= 3)
-            {
-                return true;
-            }
-            if(_eastWindCounter >= 3 && _southWindCounter >= 3 && _westWindCounter == 2 && _northWindCounter >= 3)
-            {
-                return true;
-            }
-            if(_eastWindCounter >= 3 && _southWindCounter >= 3 && _westWindCounter >= 3 && _northWindCounter == 2)
-            {
-                return true;
-            }
+            if (ExactlyTwoEastWindsAndAtLeastThreeEachOfTheOthers()) return true;
+            if (ExactlyTwoSouthWindsAndAtLeastThreeEachOfTheOthers()) return true;
+            if (ExactlyTwoWestWindsAndAtLeastThreeEachOfTheOthers()) return true;
+            if (ExactlyTwoNorthWindsAndAtLeastThreeEachOfTheOthers()) return true;
             return false;
+        }
+
+        private bool ExactlyTwoNorthWindsAndAtLeastThreeEachOfTheOthers()
+        {
+            return _eastWindCounter >= 3 && _southWindCounter >= 3 && _westWindCounter >= 3 && _northWindCounter == 2;
+        }
+
+        private bool ExactlyTwoWestWindsAndAtLeastThreeEachOfTheOthers()
+        {
+            return _eastWindCounter >= 3 && _southWindCounter >= 3 && _westWindCounter == 2 && _northWindCounter >= 3;
+        }
+
+        private bool ExactlyTwoSouthWindsAndAtLeastThreeEachOfTheOthers()
+        {
+            return _eastWindCounter >= 3 && _southWindCounter == 2 && _westWindCounter >= 3 && _northWindCounter >= 3;
+        }
+
+        private bool ExactlyTwoEastWindsAndAtLeastThreeEachOfTheOthers()
+        {
+            return _eastWindCounter == 2 && _southWindCounter >= 3 && _westWindCounter >= 3 && _northWindCounter >= 3;
         }
 
         private void CheckHandForWindTilesAndIncrementAppropriateCounters()

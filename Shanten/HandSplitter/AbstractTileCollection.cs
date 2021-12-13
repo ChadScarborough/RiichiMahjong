@@ -7,15 +7,21 @@ namespace RMU.Shanten
     public abstract class AbstractTileCollection
     {
         protected List<TileObject> _tiles;
+        protected Enums.Suit _suit;
 
         public virtual List<TileObject> GetTiles()
         {
             return _tiles;
         }
 
-        public virtual void AddTile(TileObject tile)
+        public void AddTile(TileObject tile)
         {
-            _tiles.Add(tile);
+            if(tile.GetSuit() == _suit)
+            {
+                _tiles.Add(tile);
+                return;
+            }
+            throw new System.ArgumentException();
         }
 
         public void Clear()
@@ -39,5 +45,7 @@ namespace RMU.Shanten
                 }
             }
         }
+
+        protected abstract void SetSuit();
     }
 }

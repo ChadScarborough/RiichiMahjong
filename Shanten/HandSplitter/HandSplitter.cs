@@ -6,11 +6,16 @@ namespace RMU.Shanten
 {
     public static class HandSplitter
     {
-        private static AbstractTileCollection _manCollection, _pinCollection, _souCollection, _windCollection, _dragonCollection;
+        private static AbstractTileCollection
+            _manCollection,
+            _pinCollection,
+            _souCollection,
+            _windCollection,
+            _dragonCollection;
 
         public static List<AbstractTileCollection> SplitHandBySuit(List<TileObject> hand)
         {
-            ClearTileCollections();
+            CreatNewTileCollections();
             foreach(TileObject tile in hand)
             {
                 switch (tile.GetSuit())
@@ -38,13 +43,13 @@ namespace RMU.Shanten
             };
         }
 
-        private static void ClearTileCollections()
+        private static void CreatNewTileCollections()
         {
-            _manCollection.Clear();
-            _pinCollection.Clear();
-            _souCollection.Clear();
-            _windCollection.Clear();
-            _dragonCollection.Clear();
+            _manCollection = new ManTileCollection();
+            _pinCollection = new PinTileCollection();
+            _souCollection = new SouTileCollection();
+            _windCollection = new WindTileCollection();
+            _dragonCollection = new DragonTileCollection();
         }
     }
 }
