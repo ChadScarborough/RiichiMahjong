@@ -50,10 +50,16 @@
         public const CompleteHandComponentType INCOMPLETE_SEQUENCE_CLOSED_WAIT = CompleteHandComponentType.IncompleteSequenceClosedWait;
         public const CompleteHandComponentType INCOMPLETE_SEQUENCE_OPEN_WAIT = CompleteHandComponentType.IncompleteSequenceOpenWait;
         public const CompleteHandComponentType INCOMPLETE_SEQUENCE_EDGE_WAIT = CompleteHandComponentType.IncompleteSequenceEdgeWait;
-        public const CompleteHandComponentType PAIR = CompleteHandComponentType.Pair;
+        public const CompleteHandComponentType PAIR_COMPONENT = CompleteHandComponentType.Pair;
         public const CompleteHandComponentType ISOLATED_TILE = CompleteHandComponentType.IsolatedTile;
         public const CompleteHandComponentType DRAW_TILE = CompleteHandComponentType.DrawTile;
 
+        public enum CompleteHandGeneralComponentType { Group, Pair, Taatsu, Tile }
+
+        public const CompleteHandGeneralComponentType GROUP = CompleteHandGeneralComponentType.Group;
+        public const CompleteHandGeneralComponentType PAIR = CompleteHandGeneralComponentType.Pair;
+        public const CompleteHandGeneralComponentType TAATSU = CompleteHandGeneralComponentType.Taatsu;
+        public const CompleteHandGeneralComponentType TILE = CompleteHandGeneralComponentType.Tile;
         public enum CompleteHandWaitType { PairWait, TwoSidedTripletWait, ClosedWait, EdgeWait, OpenWait, ThirteenWait }
 
         public const CompleteHandWaitType PAIR_WAIT = CompleteHandWaitType.PairWait;
