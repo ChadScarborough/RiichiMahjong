@@ -13,7 +13,6 @@ namespace RMU.Yaku.YakuLists
         public static readonly AbstractYaku RED_DRAGON = new RedDragon();
         public static readonly AbstractYaku WHITE_DRAGON = new WhiteDragon();
 
-
         private static List<AbstractYaku> _yakuList = new List<AbstractYaku>
         {
             ALL_SIMPLES,
