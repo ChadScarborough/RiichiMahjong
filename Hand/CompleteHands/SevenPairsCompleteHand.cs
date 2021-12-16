@@ -10,8 +10,8 @@ namespace RMU.Hand.CompleteHands
 
         public SevenPairsCompleteHand
             (
-            Pair pair1, Pair pair2, Pair pair3, 
-            Pair pair4, Pair pair5, Pair pair6, 
+            PairComponent pair1, PairComponent pair2, PairComponent pair3, 
+            PairComponent pair4, PairComponent pair5, PairComponent pair6, 
             IsolatedTile isolatedTile, DrawTile drawTile
             )
         {
@@ -22,8 +22,8 @@ namespace RMU.Hand.CompleteHands
 
         private void FillList
             (
-            Pair pair1, Pair pair2, Pair pair3, 
-            Pair pair4, Pair pair5, Pair pair6, 
+            PairComponent pair1, PairComponent pair2, PairComponent pair3, 
+            PairComponent pair4, PairComponent pair5, PairComponent pair6, 
             IsolatedTile isolatedTile, DrawTile drawTile
             )
         {

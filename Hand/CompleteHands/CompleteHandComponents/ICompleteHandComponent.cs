@@ -9,5 +9,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         Enums.CompleteHandComponentType GetComponentType();
         List<TileObject> GetTiles();
         TileObject GetLeadTile();
+
+        Enums.CompleteHandGeneralComponentType GetGeneralComponentType();
     }
 }

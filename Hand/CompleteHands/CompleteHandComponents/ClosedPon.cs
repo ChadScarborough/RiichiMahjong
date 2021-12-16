@@ -11,7 +11,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         public ClosedPon(List<TileObject> closedPon)
         {
             _tiles = new List<TileObject>();
-            foreach(TileObject tile in closedPon)
+            foreach (TileObject tile in closedPon)
             {
                 _tiles.Add(tile);
             }
@@ -20,6 +20,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         public Enums.CompleteHandComponentType GetComponentType()
         {
             return Enums.CLOSED_PON;
+        }
+
+        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
+        {
+            return Enums.GROUP;
         }
 
         public TileObject GetLeadTile()

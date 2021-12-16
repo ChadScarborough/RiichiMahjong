@@ -18,6 +18,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             return Enums.ISOLATED_TILE;
         }
 
+        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
+        {
+            return Enums.TILE;
+        }
+
         public TileObject GetLeadTile()
         {
             return _tile;
@@ -27,5 +32,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             return new List<TileObject> { _tile };
         }
+
+        
     }
 }

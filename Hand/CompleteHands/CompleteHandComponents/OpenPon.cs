@@ -33,6 +33,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             return Enums.OPEN_PON;
         }
 
+        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
+        {
+            return Enums.GROUP;
+        }
+
         public TileObject GetLeadTile()
         {
             return _tiles[0];

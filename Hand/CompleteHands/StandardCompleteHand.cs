@@ -23,7 +23,7 @@ namespace RMU.Hand.CompleteHands
         public StandardCompleteHand //Two-sided triplet wait
             (
             ICompleteHandGroup group1, ICompleteHandGroup group2, ICompleteHandGroup group3, 
-            Pair pair1, Pair pair2, DrawTile drawTile
+            PairComponent pair1, PairComponent pair2, DrawTile drawTile
             )
         {
             InitializeList();
@@ -34,7 +34,7 @@ namespace RMU.Hand.CompleteHands
         public StandardCompleteHand //Closed wait
             (
             ICompleteHandGroup group1, ICompleteHandGroup group2, ICompleteHandGroup group3, 
-            IncompleteSequenceClosedWait incompleteSequence, Pair pair, DrawTile drawTile
+            IncompleteSequenceClosedWait incompleteSequence, PairComponent pair, DrawTile drawTile
             )
         {
             InitializeList();
@@ -45,7 +45,7 @@ namespace RMU.Hand.CompleteHands
         public StandardCompleteHand //Edge wait
             (
             ICompleteHandGroup group1, ICompleteHandGroup group2, ICompleteHandGroup group3,
-            IncompleteSequenceEdgeWait incompleteSequence, Pair pair, DrawTile drawTile
+            IncompleteSequenceEdgeWait incompleteSequence, PairComponent pair, DrawTile drawTile
             )
         {
             InitializeList();
@@ -56,7 +56,7 @@ namespace RMU.Hand.CompleteHands
         public StandardCompleteHand //Open wait
             (
             ICompleteHandGroup group1, ICompleteHandGroup group2, ICompleteHandGroup group3,
-            IncompleteSequenceOpenWait incompleteSequence, Pair pair, DrawTile drawTile
+            IncompleteSequenceOpenWait incompleteSequence, PairComponent pair, DrawTile drawTile
             )
         {
             InitializeList();

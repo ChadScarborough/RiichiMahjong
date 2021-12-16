@@ -4,11 +4,11 @@ using System.Collections.Generic;
 
 namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
-    public class Pair : ICompleteHandComponent
+    public class PairComponent : ICompleteHandComponent
     {
         private readonly List<TileObject> _tiles;
 
-        public Pair(List<TileObject> pair)
+        public PairComponent(List<TileObject> pair)
         {
             _tiles = new List<TileObject>();
             foreach(TileObject tile in pair)
@@ -18,6 +18,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         }
 
         public Enums.CompleteHandComponentType GetComponentType()
+        {
+            return Enums.PAIR_COMPONENT;
+        }
+
+        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
         {
             return Enums.PAIR;
         }

@@ -40,6 +40,11 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             return Enums.OPEN_KAN;
         }
 
+        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
+        {
+            return Enums.GROUP;
+        }
+
         public TileObject GetLeadTile()
         {
             return _tiles[0];

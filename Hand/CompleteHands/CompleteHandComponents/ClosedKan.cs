@@ -46,5 +46,10 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             return _tiles[0];
         }
+
+        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
+        {
+            return Enums.GROUP;
+        }
     }
 }
