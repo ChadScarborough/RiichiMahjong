@@ -45,5 +45,10 @@ namespace RMU.Shanten
         {
             this._suit = Enums.MAN;
         }
+
+        public override AbstractTileCollection Clone()
+        {
+            return new ManTileCollection(GetTiles());
+        }
     }
 }

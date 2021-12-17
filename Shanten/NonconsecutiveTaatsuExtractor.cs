@@ -7,7 +7,7 @@ namespace RMU.Shanten
 {
     public static class NonconsecutiveTaatsuExtractor
     {
-        public static List<ICompleteHandComponent> ExtractConsecutiveTaatsu(AbstractTileCollection collection)
+        public static List<ICompleteHandComponent> ExtractNonconsecutiveTaatsu(AbstractTileCollection collection)
         {
             List<TileObject> tiles = collection.GetTiles();
             List<ICompleteHandComponent> _outputList = new List<ICompleteHandComponent>();

@@ -46,6 +46,8 @@ namespace RMU.Shanten
             }
         }
 
+        public abstract AbstractTileCollection Clone();
+
         protected abstract void SetSuit();
     }
 }

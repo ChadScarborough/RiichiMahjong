@@ -25,6 +25,11 @@ namespace RMU.Shanten
             _suit = Enums.PIN;
         }
 
+        public override AbstractTileCollection Clone()
+        {
+            return new PinTileCollection(GetTiles());
+        }
+
         public PinTileCollection()
         {
             SetSuit();

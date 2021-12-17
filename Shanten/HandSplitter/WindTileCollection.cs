@@ -30,5 +30,10 @@ namespace RMU.Shanten
         {
             _suit = Enums.WIND;
         }
+
+        public override AbstractTileCollection Clone()
+        {
+            return new WindTileCollection(GetTiles());
+        }
     }
 }

@@ -10,6 +10,14 @@ namespace RMU.Globals
             return (int)MathF.Round(MathF.Min(a, MathF.Min(b, c)));
         }
 
+        public static int MinOfEight(int a, int b, int c, int d, int e, int f, int g, int h)
+        {
+            int int1 = MinOfThree(a, b, c);
+            int int2 = MinOfThree(d, e, f);
+            int int3 = Math.Min(g, h);
+            return MinOfThree(int1, int2, int3);
+        }
+
         public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2)
         {
             Enums.Suit suit1 = tile1.GetSuit();

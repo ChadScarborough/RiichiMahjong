@@ -30,5 +30,10 @@ namespace RMU.Shanten
         {
             _suit = Enums.DRAGON;
         }
+
+        public override AbstractTileCollection Clone()
+        {
+            return new DragonTileCollection(GetTiles());
+        }
     }
 }

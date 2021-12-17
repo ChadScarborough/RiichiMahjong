@@ -30,5 +30,10 @@ namespace RMU.Shanten
         {
             _suit = Enums.SOU;
         }
+
+        public override AbstractTileCollection Clone()
+        {
+            return new SouTileCollection(GetTiles());
+        }
     }
 }
