@@ -6,7 +6,7 @@ using RMU.Globals;
 
 namespace RMU.Shanten
 {
-    public static class ShantenCalculator
+    public static class StandardShantenCalculator
     {
         private static int[] _shantenValues = new int[8];
         private static List<AbstractTileCollection> newCollections;
