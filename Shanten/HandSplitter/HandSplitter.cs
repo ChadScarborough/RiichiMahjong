@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using RMU.Globals;
 using RMU.Tiles;
+using static RMU.Globals.Algorithms.CountingSortForCollections;
 
 namespace RMU.Shanten
 {
@@ -37,9 +38,13 @@ namespace RMU.Shanten
                         break;
                 }
             }
-            return new List<AbstractTileCollection> 
-            { 
-                _manCollection, _pinCollection, _souCollection, _windCollection, _dragonCollection 
+            return new List<AbstractTileCollection>
+            {
+                SortCollection(_manCollection),
+                SortCollection(_pinCollection),
+                SortCollection(_souCollection),
+                SortCollection(_windCollection),
+                SortCollection(_dragonCollection) 
             };
         }
 
