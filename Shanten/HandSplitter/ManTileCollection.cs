@@ -29,7 +29,7 @@ namespace RMU.Shanten
 
         private void CheckThatTileIsOfCorrectSuit(TileObject tile)
         {
-            if (tile.GetSuit() == _suit)
+            if (tile.GetSuit() != _suit)
             {
                 throw new ArgumentException();
             }

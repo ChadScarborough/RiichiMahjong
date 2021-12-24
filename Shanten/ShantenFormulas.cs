@@ -1,15 +1,7 @@
 ﻿namespace RMU.Shanten
 {
-    public static class ShantenFormula
+    public static class ShantenFormulas
     {
-        public static int CalculateShanten(int _groups, int _pairs, int _taatsu, int _uniqueTerminals)
-        {
-            int _standardShanten = CalculateStandardShanten(_groups, _pairs, _taatsu);
-            int _sevenPairsShanten = CalculateSevenPairsShanten(_pairs);
-            int _thirteenOrphansShanten = CalculateThirteenOrphansShanten(_uniqueTerminals);
-            return Globals.Functions.MinOfThree(_standardShanten, _sevenPairsShanten, _thirteenOrphansShanten);   
-        }
-
         public static int CalculateStandardShanten(int _groups, int _pairs, int _taatsu)
         {
             int _standardShanten = (8 - (2 * _groups) - _pairs - _taatsu);

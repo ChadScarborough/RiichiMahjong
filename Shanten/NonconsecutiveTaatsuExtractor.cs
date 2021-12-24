@@ -9,21 +9,21 @@ namespace RMU.Shanten
     {
         public static List<ICompleteHandComponent> ExtractNonconsecutiveTaatsu(AbstractTileCollection collection)
         {
-            List<TileObject> tiles = collection.GetTiles();
+            List<TileObject> _tiles = collection.GetTiles();
             List<ICompleteHandComponent> _outputList = new List<ICompleteHandComponent>();
 
             for (int i = collection.GetSize() - 1; i >= 1; i--)
             {
-                TileObject tileTwoBelow = Functions.GetTileTwoBelow(tiles[i]);
+                TileObject tileTwoBelow = Functions.GetTileTwoBelow(_tiles[i]);
                 for(int j = i - 1; j >= 0; j--)
                 {
-                    if(Functions.AreTilesEquivalent(tileTwoBelow, tiles[j]))
+                    if(Functions.AreTilesEquivalent(tileTwoBelow, _tiles[j]))
                     {
-                        List<TileObject> tileList = new List<TileObject> { tiles[j], tiles[i] };
+                        List<TileObject> tileList = new List<TileObject> { _tiles[j], _tiles[i] };
                         ICompleteHandComponent nonconsecutiveTaatsu = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.INCOMPLETE_SEQUENCE_CLOSED_WAIT);
                         _outputList.Add(nonconsecutiveTaatsu);
-                        collection.RemoveTile(tiles[j]);
-                        collection.RemoveTile(tiles[i]);
+                        collection.RemoveTile(_tiles[i]);
+                        collection.RemoveTile(_tiles[j]);
                         i--;
                         break;
                     }

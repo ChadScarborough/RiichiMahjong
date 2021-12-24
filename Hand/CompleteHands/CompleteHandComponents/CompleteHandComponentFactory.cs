@@ -11,7 +11,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         {
             switch (componentType)
             {
-                case Enums.PAIR:
+                case Enums.PAIR_COMPONENT:
                     return new PairComponent(tiles);
                 case Enums.CLOSED_CHII:
                 case Enums.CLOSED_PON:

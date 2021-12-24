@@ -47,7 +47,7 @@ namespace RMU.Shanten
         private static void CreateNewPairAndAddItToOutputList(List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
         {
             List<TileObject> tileList = new List<TileObject> { tiles[i], tiles[i - 1] };
-            ICompleteHandComponent pair = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.PAIR);
+            ICompleteHandComponent pair = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.PAIR_COMPONENT);
             _outputList.Add(pair);
         }
 

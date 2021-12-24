@@ -32,7 +32,6 @@ namespace RMU.Shanten
             {
                 CheckForChiiContainingTwoGivenTiles(collection, _outputList, tiles, ref i, ref j);
             }
-
             return i;
         }
 
@@ -45,8 +44,8 @@ namespace RMU.Shanten
                 if (TilesFormChii(tiles, j, k, oneBelow, twoBelow))
                 {
                     ExtractTilesIntoNewCompleteHandComponentObject(collection, _outputList, tiles, i, j, k);
-                    i -= 2;
-                    j -= 1;
+                    i -= 3;
+                    j = i;
                     break;
                 }
             }

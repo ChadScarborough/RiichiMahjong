@@ -169,7 +169,7 @@ namespace RMU.Shanten
             {
                 IncrementCounters(ref groups, ref pairs, ref taatsu, component);
             }
-            return ShantenFormula.CalculateStandardShanten(groups, pairs, taatsu);
+            return ShantenFormulas.CalculateStandardShanten(groups, pairs, taatsu);
         }
 
         private static void IncrementCounters(ref int groups, ref int pairs, ref int taatsu, ICompleteHandComponent component)

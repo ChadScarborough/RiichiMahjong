@@ -37,7 +37,7 @@ namespace RMU.Shanten
         private static void FindPonsAndExtractThemToNewComponent
             (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles)
         {
-            for (int i = collection.GetSize(); i >= 2; i--)
+            for (int i = collection.GetSize() - 1; i >= 2; i--)
             {
                 i = CheckForPon(collection, _outputList, tiles, i);
             }

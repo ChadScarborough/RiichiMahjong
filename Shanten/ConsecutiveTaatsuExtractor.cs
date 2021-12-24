@@ -28,7 +28,7 @@ namespace RMU.Shanten
                 {
                     List<TileObject> tileList = new List<TileObject> { tiles[j], tiles[i] };
                     ExtractTilesToNewConsecutiveTaatsuComponent(collection, tiles, _outputList, i, j, tileList);
-                    i--;
+                    i -= 1;
                     break;
                 }
             }
@@ -41,6 +41,7 @@ namespace RMU.Shanten
             if (tiles[i].GetValue() == 9 || tiles[j].GetValue() == 1)
             {
                 CreateConsecutiveTaatsu(collection, tiles, _outputList, i, j, tileList, Enums.INCOMPLETE_SEQUENCE_EDGE_WAIT);
+                return;
             }
             CreateConsecutiveTaatsu(collection, tiles, _outputList, i, j, tileList, Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT);
         }
@@ -49,8 +50,8 @@ namespace RMU.Shanten
         {
             ICompleteHandComponent consecutiveTaatsu = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, componentType);
             _outputList.Add(consecutiveTaatsu);
-            collection.RemoveTile(tiles[j]);
             collection.RemoveTile(tiles[i]);
+            collection.RemoveTile(tiles[j]);
         }
     }
 }
