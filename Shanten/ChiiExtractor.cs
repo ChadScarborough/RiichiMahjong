@@ -11,8 +11,10 @@ namespace RMU.Shanten
         {
             List<ICompleteHandComponent> _outputList;
             List<TileObject> tiles;
+            
             InitializeLists(collection, out _outputList, out tiles);
-
+            if (tiles.Count == 0) return new List<ICompleteHandComponent>();
+            if (tiles[0].IsHonor()) return new List<ICompleteHandComponent>();
             FindChiisAndExtractThemToNewComponent(collection, _outputList, tiles);
             return _outputList;
         }
@@ -41,6 +43,7 @@ namespace RMU.Shanten
             {
                 TileObject oneBelow = Functions.GetTileBelow(tiles[i]);
                 TileObject twoBelow = Functions.GetTileTwoBelow(tiles[i]);
+                if (twoBelow == null) break;
                 if (TilesFormChii(tiles, j, k, oneBelow, twoBelow))
                 {
                     ExtractTilesIntoNewCompleteHandComponentObject(collection, _outputList, tiles, i, j, k);

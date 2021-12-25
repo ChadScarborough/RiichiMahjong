@@ -15,6 +15,7 @@ namespace RMU.Shanten
             List<ICompleteHandComponent> _outputList;
             List<TileObject> tiles;
             InitializeLists(collection, out _outputList, out tiles);
+            if (tiles.Count == 0) return _outputList;
 
             FindPonsAndExtractThemToNewComponent(collection, _outputList, tiles);
             return _outputList;

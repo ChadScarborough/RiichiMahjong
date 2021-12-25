@@ -46,7 +46,7 @@ namespace RMU.Shanten
         private static int PonChiiPairConsNoncons(List<AbstractTileCollection> collections)
         {
 
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach (AbstractTileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
@@ -60,7 +60,7 @@ namespace RMU.Shanten
 
         private static int ChiiPonPairConsNoncons(List<AbstractTileCollection> collections)
         {
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach(AbstractTileCollection collection in newCollections)
             {
                 ExtractChiiToComponentsList(components, collection);
@@ -74,7 +74,7 @@ namespace RMU.Shanten
 
         private static int PonChiiConsNonconsPair(List<AbstractTileCollection> collections)
         {
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach(AbstractTileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
@@ -88,7 +88,7 @@ namespace RMU.Shanten
 
         private static int ChiiPonConsNonconsPair(List<AbstractTileCollection> collections)
         {
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach (AbstractTileCollection collection in newCollections)
             {
                 ExtractChiiToComponentsList(components, collection);
@@ -102,7 +102,7 @@ namespace RMU.Shanten
 
         private static int PonChiiConsPairNoncons(List<AbstractTileCollection> collections)
         {
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach (AbstractTileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
@@ -116,7 +116,7 @@ namespace RMU.Shanten
 
         private static int ChiiPonConsPairNoncons(List<AbstractTileCollection> collections)
         {
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach (AbstractTileCollection collection in newCollections)
             {
                 ExtractChiiToComponentsList(components, collection);
@@ -130,7 +130,7 @@ namespace RMU.Shanten
 
         private static int PonPairChiiConsNoncons(List<AbstractTileCollection> collections)
         {
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach (AbstractTileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
@@ -144,7 +144,7 @@ namespace RMU.Shanten
 
         private static int PonPairChiiNonconsCons(List<AbstractTileCollection> collections)
         {
-            InitializeLists(collections, out newCollections, out components);
+            InitializeLists(collections, out newCollections);
             foreach (AbstractTileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
@@ -156,7 +156,7 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static void InitializeLists(List<AbstractTileCollection> collections, out List<AbstractTileCollection> newCollections, out List<ICompleteHandComponent> components)
+        private static void InitializeLists(List<AbstractTileCollection> collections, out List<AbstractTileCollection> newCollections)
         {
             newCollections = CloneCollections(collections);
             components = new List<ICompleteHandComponent>();

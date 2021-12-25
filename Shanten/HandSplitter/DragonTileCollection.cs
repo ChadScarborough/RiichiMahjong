@@ -34,7 +34,12 @@ namespace RMU.Shanten
 
         public override AbstractTileCollection Clone()
         {
-            return new DragonTileCollection(GetTiles());
+            List<TileObject> outputList = new List<TileObject>();
+            foreach (TileObject tile in GetTiles())
+            {
+                outputList.Add(tile.Clone());
+            }
+            return new DragonTileCollection(outputList);
         }
     }
 }

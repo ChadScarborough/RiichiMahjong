@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using RMU.Tiles;
 
 namespace RMU.Globals
@@ -20,13 +21,20 @@ namespace RMU.Globals
 
         public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2)
         {
-            Enums.Suit suit1 = tile1.GetSuit();
-            Enums.Suit suit2 = tile2.GetSuit();
-            int value1 = tile1.GetValue();
-            int value2 = tile2.GetValue();
-            bool sameSuit = suit1 == suit2;
-            bool sameValue = value1 == value2;
-            return sameSuit && sameValue;
+            try
+            {
+                Enums.Suit suit1 = tile1.GetSuit();
+                Enums.Suit suit2 = tile2.GetSuit();
+                int value1 = tile1.GetValue();
+                int value2 = tile2.GetValue();
+                bool sameSuit = suit1 == suit2;
+                bool sameValue = value1 == value2;
+                return sameSuit && sameValue;
+            }
+            catch
+            {
+                return false;
+            }
         }
 
         public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2, TileObject tile3)
@@ -70,22 +78,50 @@ namespace RMU.Globals
 
         public static TileObject GetTileAbove(TileObject tile)
         {
-            return tile.GetTileAbove();
+            try
+            {
+                return tile.GetTileAbove();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static TileObject GetTileTwoAbove(TileObject tile)
         {
-            return tile.GetTileAbove().GetTileAbove();
+            try
+            {
+                return tile.GetTileAbove().GetTileAbove();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static TileObject GetTileBelow(TileObject tile)
         {
-            return tile.GetTileBelow();
+            try
+            {
+                return tile.GetTileBelow();
+            }
+            catch
+            {
+                return null;
+            }
         }
 
         public static TileObject GetTileTwoBelow(TileObject tile)
         {
-            return tile.GetTileBelow().GetTileBelow();
+            try
+            {
+                return tile.GetTileBelow().GetTileBelow();
+            }
+            catch
+            {
+                return null;
+            }
         }
     }
 }

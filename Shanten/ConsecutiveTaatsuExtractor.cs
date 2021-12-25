@@ -10,6 +10,8 @@ namespace RMU.Shanten
         public static List<ICompleteHandComponent> ExtractConsecutiveTaatsu(AbstractTileCollection collection)
         {
             List<TileObject> tiles = collection.GetTiles();
+            if (tiles.Count == 0) return new List<ICompleteHandComponent>();
+            if (tiles[0].IsHonor()) return new List<ICompleteHandComponent>();
             List<ICompleteHandComponent> _outputList = new List<ICompleteHandComponent>();
 
             for(int i = collection.GetSize() - 1; i >= 1; i--)

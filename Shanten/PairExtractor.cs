@@ -11,6 +11,7 @@ namespace RMU.Shanten
         {
             List<ICompleteHandComponent> _outputList = new List<ICompleteHandComponent>();
             List<TileObject> tiles = collection.GetTiles();
+            if (tiles.Count == 0) return _outputList;
 
             FindPairsAndExtractThemToNewComponent(collection, _outputList, tiles);
             return _outputList;
