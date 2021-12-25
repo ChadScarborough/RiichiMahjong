@@ -1,72 +1,58 @@
 ﻿using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using RMU.Globals;
-using RMU.Algorithms;
 using System.Collections.Generic;
 
 namespace RMU.Shanten
 {
     public static class PonExtractor
     {
-        private static HandSorter _handSorter = new HandSorter();
+        private static List<ICompleteHandComponent> _outputList;
+        private static List<TileObject> _tiles;
+        private static AbstractTileCollection _collection;
 
         public static List<ICompleteHandComponent> ExtractPon(AbstractTileCollection collection)
         {
-            List<ICompleteHandComponent> _outputList;
-            List<TileObject> tiles;
-            InitializeLists(collection, out _outputList, out tiles);
-            if (tiles.Count == 0) return _outputList;
-
-            FindPonsAndExtractThemToNewComponent(collection, _outputList, tiles);
+            InitializeLists(collection);
+            if (_tiles.Count == 0) return _outputList;
+            FindPonsAndExtractThemToNewComponent();
             return _outputList;
         }
 
-        private static void InitializeLists
-            (AbstractTileCollection collection, out List<ICompleteHandComponent> _outputList, out List<TileObject> tiles)
+        private static void InitializeLists(AbstractTileCollection collection)
         {
             _outputList = new List<ICompleteHandComponent>();
-            tiles = collection.GetTiles();
-            tiles = SortTiles(tiles);
+            _tiles = collection.GetTiles();
+            _collection = collection;
         }
 
-        private static List<TileObject> SortTiles(List<TileObject> tiles)
+        private static void FindPonsAndExtractThemToNewComponent()
         {
-            tiles = _handSorter.SortHand(tiles);
-            return tiles;
-        }
-
-        private static void FindPonsAndExtractThemToNewComponent
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles)
-        {
-            for (int i = collection.GetSize() - 1; i >= 2; i--)
+            for (int i = _collection.GetSize() - 1; i >= 2; i--)
             {
-                i = CheckForPon(collection, _outputList, tiles, i);
+                CheckForPon(ref i);
             }
         }
 
-        private static int CheckForPon
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
+        private static void CheckForPon(ref int i)
         {
-            if (Functions.AreTilesEquivalent(tiles[i], tiles[i - 1], tiles[i - 2]))
+            if (Functions.AreTilesEquivalent(_tiles[i], _tiles[i - 1], _tiles[i - 2]))
             {
-                ExtractTilesIntoNewCompleteHandComponentObject(collection, _outputList, tiles, i);
+                ExtractTilesIntoNewCompleteHandComponentObject(i);
                 i -= 2;
             }
-
-            return i;
         }
 
-        private static void ExtractTilesIntoNewCompleteHandComponentObject
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
+        private static void ExtractTilesIntoNewCompleteHandComponentObject(int i)
         {
-            TileObject t = tiles[i];
-            CreateClosedPonObjectAndAddItToOutputList(_outputList, t);
-            RemoveThreeCopiesOfTileFromCollection(collection, t);
+            TileObject tile = _tiles[i];
+            CreateClosedPonObjectAndAddItToOutputList(tile);
+            RemoveThreeCopiesOfTileFromCollection(tile);
         }
 
-        private static void CreateClosedPonObjectAndAddItToOutputList(List<ICompleteHandComponent> _outputList, TileObject t)
+        private static void CreateClosedPonObjectAndAddItToOutputList(TileObject tile)
         {
-            List<TileObject> ponTiles = new List<TileObject> { t, t, t };
+            List<TileObject> ponTiles = new List<TileObject> { tile.Clone(), tile.Clone(), tile.Clone() };
             ICompleteHandComponent closedPon = CreateClosedPon(ponTiles);
             _outputList.Add(closedPon);
         }
@@ -78,11 +64,11 @@ namespace RMU.Shanten
             return closedPon;
         }
 
-        private static void RemoveThreeCopiesOfTileFromCollection(AbstractTileCollection collection, TileObject tile)
+        private static void RemoveThreeCopiesOfTileFromCollection(TileObject tile)
         {
-            collection.RemoveTile(tile);
-            collection.RemoveTile(tile);
-            collection.RemoveTile(tile);
+            _collection.RemoveTile(tile);
+            _collection.RemoveTile(tile);
+            _collection.RemoveTile(tile);
         }
     }
 }

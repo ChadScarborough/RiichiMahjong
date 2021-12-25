@@ -7,53 +7,86 @@ namespace RMU.Shanten
 {
     public static class ConsecutiveTaatsuExtractor
     {
+        private static List<TileObject> _tiles;
+        private static List<ICompleteHandComponent> _outputList;
+        private static AbstractTileCollection _collection;
+
         public static List<ICompleteHandComponent> ExtractConsecutiveTaatsu(AbstractTileCollection collection)
         {
-            List<TileObject> tiles = collection.GetTiles();
-            if (tiles.Count == 0) return new List<ICompleteHandComponent>();
-            if (tiles[0].IsHonor()) return new List<ICompleteHandComponent>();
-            List<ICompleteHandComponent> _outputList = new List<ICompleteHandComponent>();
-
-            for(int i = collection.GetSize() - 1; i >= 1; i--)
-            {
-                TileObject tileBelow = Functions.GetTileBelow(tiles[i]);
-                i = CheckForConsecutiveTaatsu(collection, tiles, _outputList, i, tileBelow);
-            }
+            InitializeLists(collection);
+            if (CollectionIsInvalid()) return new List<ICompleteHandComponent>();
+            CheckCollectionForConsecutiveTaatus();
             return _outputList;
         }
 
-        private static int CheckForConsecutiveTaatsu(AbstractTileCollection collection, List<TileObject> tiles, List<ICompleteHandComponent> _outputList, int i, TileObject tileBelow)
+        private static void CheckCollectionForConsecutiveTaatus()
+        {
+            for (int i = _collection.GetSize() - 1; i >= 1; i--)
+            {
+                TileObject tileBelow = Functions.GetTileBelow(_tiles[i]);
+                CheckForConsecutiveTaatsu(ref i, tileBelow);
+            }
+        }
+
+        private static void InitializeLists(AbstractTileCollection collection)
+        {
+            _tiles = collection.GetTiles();
+            _outputList = new List<ICompleteHandComponent>();
+            _collection = collection;
+        }
+
+        private static bool CollectionIsInvalid()
+        {
+            if (_tiles.Count == 0) return true;
+            return _tiles[0].IsHonor();
+        }
+
+        private static void CheckForConsecutiveTaatsu(ref int i, TileObject tileBelow)
         {
             for (int j = i - 1; j >= 0; j--)
             {
-                if (Functions.AreTilesEquivalent(tileBelow, tiles[j]))
-                {
-                    List<TileObject> tileList = new List<TileObject> { tiles[j], tiles[i] };
-                    ExtractTilesToNewConsecutiveTaatsuComponent(collection, tiles, _outputList, i, j, tileList);
-                    i -= 1;
-                    break;
-                }
+                if(TilesFormConsecutiveTaatsu(ref i, j, tileBelow)) break;
             }
-
-            return i;
         }
 
-        private static void ExtractTilesToNewConsecutiveTaatsuComponent(AbstractTileCollection collection, List<TileObject> tiles, List<ICompleteHandComponent> _outputList, int i, int j, List<TileObject> tileList)
+        private static bool TilesFormConsecutiveTaatsu(ref int i, int j, TileObject tileBelow)
         {
-            if (tiles[i].GetValue() == 9 || tiles[j].GetValue() == 1)
+            if (Functions.AreTilesEquivalent(tileBelow, _tiles[j]))
             {
-                CreateConsecutiveTaatsu(collection, tiles, _outputList, i, j, tileList, Enums.INCOMPLETE_SEQUENCE_EDGE_WAIT);
+                List<TileObject> tileList = new List<TileObject> { _tiles[j], _tiles[i] };
+                ExtractTilesToNewConsecutiveTaatsuComponent(i, j, tileList);
+                i -= 1;
+                return true;
+            }
+            return false;
+        }
+
+        private static void ExtractTilesToNewConsecutiveTaatsuComponent(int i, int j, List<TileObject> tileList)
+        {
+            if (ConsecutiveTaatsuContainsTerminalTile(i, j))
+            {
+                CreateConsecutiveTaatsu(i, j, tileList, Enums.INCOMPLETE_SEQUENCE_EDGE_WAIT);
                 return;
             }
-            CreateConsecutiveTaatsu(collection, tiles, _outputList, i, j, tileList, Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT);
+            CreateConsecutiveTaatsu(i, j, tileList, Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT);
         }
 
-        private static void CreateConsecutiveTaatsu(AbstractTileCollection collection, List<TileObject> tiles, List<ICompleteHandComponent> _outputList, int i, int j, List<TileObject> tileList, Enums.CompleteHandComponentType componentType)
+        private static bool ConsecutiveTaatsuContainsTerminalTile(int i, int j)
+        {
+            return _tiles[i].GetValue() == 9 || _tiles[j].GetValue() == 1;
+        }
+
+        private static void CreateConsecutiveTaatsu(int i, int j, List<TileObject> tileList, Enums.CompleteHandComponentType componentType)
         {
             ICompleteHandComponent consecutiveTaatsu = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, componentType);
             _outputList.Add(consecutiveTaatsu);
-            collection.RemoveTile(tiles[i]);
-            collection.RemoveTile(tiles[j]);
+            ExtractTiles(i, j);
+        }
+
+        private static void ExtractTiles(int i, int j)
+        {
+            _collection.RemoveTile(_tiles[i]);
+            _collection.RemoveTile(_tiles[j]);
         }
     }
 }

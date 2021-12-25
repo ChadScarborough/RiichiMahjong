@@ -12,9 +12,9 @@
             return _standardShanten;
         }
 
-        public static int CalculateSevenPairsShanten(int _pairs)
+        public static int CalculateSevenPairsShanten(int _triplets, int _pairs)
         {
-            return 6 - _pairs;
+            return 6 - (_pairs + _triplets);
         }
 
         public static int CalculateThirteenOrphansShanten(int _uniqueTerminals)

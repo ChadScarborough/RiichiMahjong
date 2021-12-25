@@ -2,36 +2,87 @@
 using RMU.Globals;
 using RMU.Tiles;
 using RMU.Hand.CompleteHands.CompleteHandComponents;
+using static RMU.Hand.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
+using static RMU.Globals.Enums;
 
 namespace RMU.Shanten
 {
     public static class NonconsecutiveTaatsuExtractor
     {
+        private static List<TileObject> _tiles;
+        private static List<ICompleteHandComponent> _outputList;
+        private static AbstractTileCollection _collection;
+
         public static List<ICompleteHandComponent> ExtractNonconsecutiveTaatsu(AbstractTileCollection collection)
         {
-            List<TileObject> _tiles = collection.GetTiles();
-            if (_tiles.Count == 0) return new List<ICompleteHandComponent>();
-            if (_tiles[0].IsHonor()) return new List<ICompleteHandComponent>();
-            List<ICompleteHandComponent> _outputList = new List<ICompleteHandComponent>();
-
-            for (int i = collection.GetSize() - 1; i >= 1; i--)
-            {
-                TileObject tileTwoBelow = Functions.GetTileTwoBelow(_tiles[i]);
-                for(int j = i - 1; j >= 0; j--)
-                {
-                    if(Functions.AreTilesEquivalent(tileTwoBelow, _tiles[j]))
-                    {
-                        List<TileObject> tileList = new List<TileObject> { _tiles[j], _tiles[i] };
-                        ICompleteHandComponent nonconsecutiveTaatsu = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.INCOMPLETE_SEQUENCE_CLOSED_WAIT);
-                        _outputList.Add(nonconsecutiveTaatsu);
-                        collection.RemoveTile(_tiles[i]);
-                        collection.RemoveTile(_tiles[j]);
-                        i--;
-                        break;
-                    }
-                }
-            }
+            InitializeLists(collection);
+            if (CollectionIsInvalid()) return _outputList;
+            CheckCollectionForNonconsecutiveTaatsu();
             return _outputList;
+        }
+
+        private static void CheckCollectionForNonconsecutiveTaatsu()
+        {
+            for (int i = _collection.GetSize() - 1; i >= 1; i--)
+            {
+                CheckForNonconsecutiveTaatsuFromGivenTile(ref i);
+            }
+        }
+
+        private static void CheckForNonconsecutiveTaatsuFromGivenTile(ref int i)
+        {
+            TileObject tileTwoBelow = Functions.GetTileTwoBelow(_tiles[i]);
+            for (int j = i - 1; j >= 0; j--)
+            {
+                if (FoundNonconsecutiveTaatsuFromGivenTile(ref i, tileTwoBelow, j)) break;
+            }
+        }
+
+        private static bool FoundNonconsecutiveTaatsuFromGivenTile(ref int i, TileObject tileTwoBelow, int j)
+        {
+            if (TilesFormNonconsecutiveTaatsu(ref i, tileTwoBelow, j))
+            {
+                return true;
+            }
+            return false;
+        }
+
+        private static bool TilesFormNonconsecutiveTaatsu(ref int i, TileObject tileTwoBelow, int j)
+        {
+            if (Functions.AreTilesEquivalent(tileTwoBelow, _tiles[j]))
+            {
+                List<TileObject> tileList = new List<TileObject> { _tiles[j], _tiles[i] };
+                ExtractTilesToNewNonconsecutiveTaatsuComponent(ref i, j, tileList);
+                return true;
+            }
+            return false;
+        }
+
+        private static void ExtractTilesToNewNonconsecutiveTaatsuComponent(ref int i, int j, List<TileObject> tileList)
+        {
+            ICompleteHandComponent nonconsecutiveTaatsu = CreateCompleteHandComponent(tileList, INCOMPLETE_SEQUENCE_CLOSED_WAIT);
+            _outputList.Add(nonconsecutiveTaatsu);
+            ExtractTiles(_collection, _tiles, i, j);
+            i--;
+        }
+
+        private static bool CollectionIsInvalid()
+        {
+            if (_tiles.Count == 0) return true;
+            return _tiles[0].IsHonor();
+        }
+
+        private static void InitializeLists(AbstractTileCollection collection)
+        {
+            _tiles = collection.GetTiles();
+            _outputList = new List<ICompleteHandComponent>();
+            _collection = collection;
+        }
+
+        private static void ExtractTiles(AbstractTileCollection collection, List<TileObject> _tiles, int i, int j)
+        {
+            collection.RemoveTile(_tiles[i]);
+            collection.RemoveTile(_tiles[j]);
         }
     }
 }

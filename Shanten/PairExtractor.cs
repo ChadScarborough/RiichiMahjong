@@ -7,55 +7,59 @@ namespace RMU.Shanten
 {
     public class PairExtractor
     {
+        private static List<TileObject> _tiles;
+        private static List<ICompleteHandComponent> _outputList;
+        private static AbstractTileCollection _collection;
+
         public static List<ICompleteHandComponent> ExtractPair(AbstractTileCollection collection)
         {
-            List<ICompleteHandComponent> _outputList = new List<ICompleteHandComponent>();
-            List<TileObject> tiles = collection.GetTiles();
-            if (tiles.Count == 0) return _outputList;
-
-            FindPairsAndExtractThemToNewComponent(collection, _outputList, tiles);
+            InitializeLists(collection);
+            if (_tiles.Count == 0) return _outputList;
+            FindPairsAndExtractThemToNewComponent();
             return _outputList;
         }
 
-        private static void FindPairsAndExtractThemToNewComponent
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles)
+        private static void InitializeLists(AbstractTileCollection collection)
         {
-            for (int i = collection.GetSize() - 1; i >= 1; i--)
+            _outputList = new List<ICompleteHandComponent>();
+            _tiles = collection.GetTiles();
+            _collection = collection;
+        }
+
+        private static void FindPairsAndExtractThemToNewComponent()
+        {
+            for (int i = _collection.GetSize() - 1; i >= 1; i--)
             {
-                i = CheckForPair(collection, _outputList, tiles, i);
+                CheckForPair(ref i);
             }
         }
 
-        private static int CheckForPair
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
+        private static void CheckForPair(ref int i)
         {
-            if (Functions.AreTilesEquivalent(tiles[i], tiles[i - 1]))
+            if (Functions.AreTilesEquivalent(_tiles[i], _tiles[i - 1]))
             {
-                ExtractPairToNewComponent(collection, _outputList, tiles, i);
+                ExtractPairToNewComponent(i);
                 i--;
             }
-
-            return i;
         }
 
-        private static void ExtractPairToNewComponent
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
+        private static void ExtractPairToNewComponent(int i)
         {
-            CreateNewPairAndAddItToOutputList(_outputList, tiles, i);
-            RemoveTwoCopiesOfTileFromCollection(collection, tiles, i);
+            CreateNewPairAndAddItToOutputList(i);
+            RemoveTwoCopiesOfTileFromCollection(i);
         }
 
-        private static void CreateNewPairAndAddItToOutputList(List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
+        private static void CreateNewPairAndAddItToOutputList(int i)
         {
-            List<TileObject> tileList = new List<TileObject> { tiles[i], tiles[i - 1] };
+            List<TileObject> tileList = new List<TileObject> { _tiles[i], _tiles[i - 1] };
             ICompleteHandComponent pair = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.PAIR_COMPONENT);
             _outputList.Add(pair);
         }
 
-        private static void RemoveTwoCopiesOfTileFromCollection(AbstractTileCollection collection, List<TileObject> tiles, int i)
+        private static void RemoveTwoCopiesOfTileFromCollection(int i)
         {
-            collection.RemoveTile(tiles[i]);
-            collection.RemoveTile(tiles[i - 1]);
+            _collection.RemoveTile(_tiles[i]);
+            _collection.RemoveTile(_tiles[i - 1]);
         }
     }
 }

@@ -7,84 +7,103 @@ namespace RMU.Shanten
 {
     public static class ChiiExtractor
     {
+        private static List<ICompleteHandComponent> _outputList;
+        private static List<TileObject> _tiles;
+        private static AbstractTileCollection _collection;
+
         public static List<ICompleteHandComponent> ExtractChii(AbstractTileCollection collection)
         {
-            List<ICompleteHandComponent> _outputList;
-            List<TileObject> tiles;
-            
-            InitializeLists(collection, out _outputList, out tiles);
-            if (tiles.Count == 0) return new List<ICompleteHandComponent>();
-            if (tiles[0].IsHonor()) return new List<ICompleteHandComponent>();
-            FindChiisAndExtractThemToNewComponent(collection, _outputList, tiles);
+            InitializeLists(collection);
+            if (CollectionIsInvalid()) return _outputList;
+            FindChiisAndExtractThemToNewComponent();
             return _outputList;
         }
 
-        private static void FindChiisAndExtractThemToNewComponent
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles)
+        private static bool CollectionIsInvalid()
         {
-            for (int i = collection.GetSize() - 1; i >= 2; i--)
+            if (_tiles.Count == 0) return true;
+            return _tiles[0].IsHonor();
+        }
+
+        private static void FindChiisAndExtractThemToNewComponent()
+        {
+            for (int i = _collection.GetSize() - 1; i >= 2; i--)
             {
-                i = CheckForChiiContainingGivenTile(collection, _outputList, tiles, i);
+                CheckForChiiContainingGivenTile(ref i);
             }
         }
 
-        private static int CheckForChiiContainingGivenTile(AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i)
+        private static void CheckForChiiContainingGivenTile(ref int i)
         {
             for (int j = i - 1; j >= 1; j--)
             {
-                CheckForChiiContainingTwoGivenTiles(collection, _outputList, tiles, ref i, ref j);
+                CheckForChiiContainingTwoGivenTiles(ref i, ref j);
             }
-            return i;
         }
 
-        private static void CheckForChiiContainingTwoGivenTiles(AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, ref int i, ref int j)
+        private static void CheckForChiiContainingTwoGivenTiles( ref int i, ref int j)
         {
             for (int k = j - 1; k >= 0; k--)
             {
-                TileObject oneBelow = Functions.GetTileBelow(tiles[i]);
-                TileObject twoBelow = Functions.GetTileTwoBelow(tiles[i]);
-                if (twoBelow == null) break;
-                if (TilesFormChii(tiles, j, k, oneBelow, twoBelow))
-                {
-                    ExtractTilesIntoNewCompleteHandComponentObject(collection, _outputList, tiles, i, j, k);
-                    i -= 3;
-                    j = i;
-                    break;
-                }
+                if (CheckForChiiContainingThreeGivenTiles(ref i, ref j, k)) break;
             }
         }
 
-        private static bool TilesFormChii(List<TileObject> tiles, int j, int k, TileObject oneBelow, TileObject twoBelow)
+        private static bool CheckForChiiContainingThreeGivenTiles(ref int i, ref int j, int k)
         {
-            return Functions.AreTilesEquivalent(oneBelow, tiles[j]) && Functions.AreTilesEquivalent(twoBelow, tiles[k]);
+            TileObject oneBelow = Functions.GetTileBelow(_tiles[i]);
+            TileObject twoBelow = Functions.GetTileTwoBelow(_tiles[i]);
+            return CheckForChii(ref i, ref j, k, oneBelow, twoBelow);
         }
 
-        private static void ExtractTilesIntoNewCompleteHandComponentObject
-            (AbstractTileCollection collection, List<ICompleteHandComponent> _outputList, List<TileObject> tiles, int i, int j, int k)
+        private static bool CheckForChii(ref int i, ref int j, int k, TileObject oneBelow, TileObject twoBelow)
         {
-            ICompleteHandComponent closedChii = CreateClosedChii(tiles, i, j, k);
+            if (twoBelow == null) return true;
+            if (TilesFormChii(j, k, oneBelow, twoBelow))
+            {
+                ExtractTilesIntoNewCompleteHandComponentObject(i, j, k);
+                SetNewCounterValues(ref i, ref j);
+                return true;
+            }
+            return false;
+        }
+
+        private static void SetNewCounterValues(ref int i, ref int j)
+        {
+            i -= 3;
+            j = i;
+        }
+
+        private static bool TilesFormChii(int j, int k, TileObject oneBelow, TileObject twoBelow)
+        {
+            return Functions.AreTilesEquivalent(oneBelow, _tiles[j]) && Functions.AreTilesEquivalent(twoBelow, _tiles[k]);
+        }
+
+        private static void ExtractTilesIntoNewCompleteHandComponentObject(int i, int j, int k)
+        {
+            ICompleteHandComponent closedChii = CreateClosedChii(i, j, k);
             _outputList.Add(closedChii);
-            RemoveTilesFromCollection(collection, tiles, i, j, k);
+            RemoveTilesFromCollection(i, j, k);
         }
 
-        private static void RemoveTilesFromCollection(AbstractTileCollection collection, List<TileObject> tiles, int i, int j, int k)
+        private static void RemoveTilesFromCollection(int i, int j, int k)
         {
-            collection.RemoveTile(tiles[i]);
-            collection.RemoveTile(tiles[j]);
-            collection.RemoveTile(tiles[k]);
+            _collection.RemoveTile(_tiles[i]);
+            _collection.RemoveTile(_tiles[j]);
+            _collection.RemoveTile(_tiles[k]);
         }
 
-        private static ICompleteHandComponent CreateClosedChii(List<TileObject> tiles, int i, int j, int k)
+        private static ICompleteHandComponent CreateClosedChii(int i, int j, int k)
         {
-            List<TileObject> tileList = new List<TileObject> { tiles[k], tiles[j], tiles[i] };
+            List<TileObject> tileList = new List<TileObject> { _tiles[k], _tiles[j], _tiles[i] };
             return CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.CLOSED_CHII);
         }
 
-        private static void InitializeLists
-            (AbstractTileCollection collection, out List<ICompleteHandComponent> _outputList, out List<TileObject> tiles)
+        private static void InitializeLists(AbstractTileCollection collection)
         {
             _outputList = new List<ICompleteHandComponent>();
-            tiles = collection.GetTiles();
+            _tiles = collection.GetTiles();
+            _collection = collection;
         }
     }
 }
