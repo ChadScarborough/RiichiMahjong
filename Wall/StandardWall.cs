@@ -8,11 +8,11 @@ namespace RMU.Wall
 {
     public class StandardWall : IWall
     {
-        private DoublyLinkedList<TileObject> _wall = new DoublyLinkedList<TileObject>();
-        private const int NUMBER_OF_NUMERICAL_VALUES = 9;
-        private const int NUMBER_OF_WINDS = 4;
-        private const int NUMBER_OF_DRAGONS = 3;
-        private const int NUMBER_OF_COPIES = 4;
+        protected DoublyLinkedList<TileObject> _wall = new DoublyLinkedList<TileObject>();
+        protected const int NUMBER_OF_NUMERICAL_VALUES = 9;
+        protected const int NUMBER_OF_WINDS = 4;
+        protected const int NUMBER_OF_DRAGONS = 3;
+        protected const int NUMBER_OF_COPIES = 4;
 
         public StandardWall()
         {
@@ -33,7 +33,7 @@ namespace RMU.Wall
             return _wall.GetSize();
         }
 
-        private void FillWall(List<TileObject> source, DoublyLinkedList<TileObject> destination)
+        protected void FillWall(List<TileObject> source, DoublyLinkedList<TileObject> destination)
         {
             destination.Clear();
             foreach (TileObject tile in source)
@@ -42,7 +42,7 @@ namespace RMU.Wall
             }
         }
 
-        private List<TileObject> ShuffleTiles(List<TileObject> tiles)
+        protected List<TileObject> ShuffleTiles(List<TileObject> tiles)
         {
             List<TileObject> outputList = new List<TileObject>();
             Random _rand = new Random();
@@ -54,14 +54,14 @@ namespace RMU.Wall
             return outputList;
         }
 
-        private void AddRandomTileToOutputList(List<TileObject> inputList, List<TileObject> outputList, int _r, Random _rand)
+        protected void AddRandomTileToOutputList(List<TileObject> inputList, List<TileObject> outputList, int _r, Random _rand)
         {
             _r = _rand.Next(0, inputList.Count);
             outputList.Add(inputList[_r]);
             inputList.RemoveAt(_r);
         }
 
-        private List<TileObject> GenerateTiles()
+        protected List<TileObject> GenerateTiles()
         {
             List<TileObject> tileList = new List<TileObject>();
             GenerateNumberTiles(tileList);
@@ -70,39 +70,39 @@ namespace RMU.Wall
             return tileList;
         }
 
-        private void GenerateNumberTiles(List<TileObject> tileList)
+        protected void GenerateNumberTiles(List<TileObject> tileList)
         {
             GenerateManTiles(tileList);
             GeneratePinTiles(tileList);
             GenerateSouTiles(tileList);
         }
 
-        private void GenerateManTiles(List<TileObject> destination)
+        protected void GenerateManTiles(List<TileObject> destination)
         {
             GenerateTilesOfAGivenSuitAndNumber(Enums.MAN, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
-        private void GeneratePinTiles(List<TileObject> destination)
+        protected void GeneratePinTiles(List<TileObject> destination)
         {
             GenerateTilesOfAGivenSuitAndNumber(Enums.PIN, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
-        private void GenerateSouTiles(List<TileObject> destination)
+        protected void GenerateSouTiles(List<TileObject> destination)
         {
             GenerateTilesOfAGivenSuitAndNumber(Enums.SOU, NUMBER_OF_NUMERICAL_VALUES, destination);
         }
 
-        private void GenerateWindTiles(List<TileObject> destination)
+        protected void GenerateWindTiles(List<TileObject> destination)
         {
             GenerateTilesOfAGivenSuitAndNumber(Enums.WIND, NUMBER_OF_WINDS, destination);
         }
 
-        private void GenerateDragonTiles(List<TileObject> destination)
+        protected void GenerateDragonTiles(List<TileObject> destination)
         {
             GenerateTilesOfAGivenSuitAndNumber(Enums.DRAGON, NUMBER_OF_DRAGONS, destination);
         }
 
-        private void GenerateTilesOfAGivenSuitAndNumber(Enums.Suit suit, int numberOfValues, List<TileObject> destination)
+        protected virtual void GenerateTilesOfAGivenSuitAndNumber(Enums.Suit suit, int numberOfValues, List<TileObject> destination)
         {
             for(int i = 0; i < numberOfValues; i++)
             {
@@ -119,7 +119,7 @@ namespace RMU.Wall
             return DrawTile(_wall);
         }
 
-        private TileObject DrawTile(DoublyLinkedList<TileObject> wall)
+        protected TileObject DrawTile(DoublyLinkedList<TileObject> wall)
         {
             return wall.RemoveHead();
         }
@@ -129,7 +129,7 @@ namespace RMU.Wall
             return DrawTileFromEnd(_wall);
         }
 
-        private TileObject DrawTileFromEnd(DoublyLinkedList<TileObject> wall)
+        protected TileObject DrawTileFromEnd(DoublyLinkedList<TileObject> wall)
         {
             return wall.RemoveTail();
         }
