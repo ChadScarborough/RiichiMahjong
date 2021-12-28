@@ -2,43 +2,44 @@
 using RMU.Globals;
 using RMU.Tiles;
 using static RMU.Globals.Algorithms.CountingSortForCollections;
+using static RMU.Globals.Enums;
 
 namespace RMU.Shanten
 {
     public static class HandSplitter
     {
-        private static AbstractTileCollection
+        private static TileCollection
             _manCollection,
             _pinCollection,
             _souCollection,
             _windCollection,
             _dragonCollection;
 
-        public static List<AbstractTileCollection> SplitHandBySuit(List<TileObject> hand)
+        public static List<TileCollection> SplitHandBySuit(List<TileObject> hand)
         {
             CreatNewTileCollections();
             foreach(TileObject tile in hand)
             {
                 switch (tile.GetSuit())
                 {
-                    case Enums.MAN:
+                    case MAN:
                         _manCollection.AddTile(tile);
                         break;
-                    case Enums.PIN:
+                    case PIN:
                         _pinCollection.AddTile(tile);
                         break;
-                    case Enums.SOU:
+                    case SOU:
                         _souCollection.AddTile(tile);
                         break;
-                    case Enums.WIND:
+                    case WIND:
                         _windCollection.AddTile(tile);
                         break;
-                    case Enums.DRAGON:
+                    case DRAGON:
                         _dragonCollection.AddTile(tile);
                         break;
                 }
             }
-            return new List<AbstractTileCollection>
+            return new List<TileCollection>
             {
                 SortCollection(_manCollection),
                 SortCollection(_pinCollection),
@@ -50,11 +51,11 @@ namespace RMU.Shanten
 
         private static void CreatNewTileCollections()
         {
-            _manCollection = new ManTileCollection();
-            _pinCollection = new PinTileCollection();
-            _souCollection = new SouTileCollection();
-            _windCollection = new WindTileCollection();
-            _dragonCollection = new DragonTileCollection();
+            _manCollection = new TileCollection(MAN);
+            _pinCollection = new TileCollection(PIN);
+            _souCollection = new TileCollection(SOU);
+            _windCollection = new TileCollection(WIND);
+            _dragonCollection = new TileCollection(DRAGON);
         }
     }
 }
