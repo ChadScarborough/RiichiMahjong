@@ -4,11 +4,7 @@ namespace RMU.Tiles
 {
     public class DragonTileObject : TileObject
     {
-        public DragonTileObject(int value, Enums.Suit suit)
-        {
-            this._value = value;
-            this._suit = suit;
-        }
+        public DragonTileObject(int value, Enums.Suit suit) : base(value, suit) { }
 
         public override bool IsTerminal()
         {

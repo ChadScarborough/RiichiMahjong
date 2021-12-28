@@ -4,11 +4,7 @@ namespace RMU.Tiles
 {
     public class NumberTileObject : TileObject
     {
-        public NumberTileObject(int value, Enums.Suit suit)
-        {
-            this._value = value;
-            this._suit = suit;
-        }
+        public NumberTileObject(int value, Enums.Suit suit) : base(value, suit) { }
 
         public override bool IsTerminal()
         {

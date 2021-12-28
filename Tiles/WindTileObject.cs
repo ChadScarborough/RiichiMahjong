@@ -4,11 +4,7 @@ namespace RMU.Tiles
 {
     public class WindTileObject : TileObject
     {
-        public WindTileObject(int value, Enums.Suit suit)
-        {
-            this._value = value;
-            this._suit = suit;
-        }
+        public WindTileObject(int value, Enums.Suit suit) : base(value, suit) { }
 
         public override bool IsTerminal()
         {
