@@ -2,6 +2,7 @@
 using RMU.Globals;
 using RMU.Tiles;
 using RMU.Hand.CompleteHands.CompleteHandComponents;
+using static RMU.Globals.Enums;
 
 namespace RMU.Shanten
 {
@@ -9,12 +10,12 @@ namespace RMU.Shanten
     {
         private static List<TileObject> _tiles;
         private static List<ICompleteHandComponent> _outputList;
-        private static AbstractTileCollection _collection;
+        private static TileCollection _collection;
 
-        public static List<ICompleteHandComponent> ExtractConsecutiveTaatsu(AbstractTileCollection collection)
+        public static List<ICompleteHandComponent> ExtractConsecutiveTaatsu(TileCollection collection)
         {
             InitializeLists(collection);
-            if (CollectionIsInvalid()) return new List<ICompleteHandComponent>();
+            if (CollectionIsInvalid()) return _outputList;
             CheckCollectionForConsecutiveTaatus();
             return _outputList;
         }
@@ -28,7 +29,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void InitializeLists(AbstractTileCollection collection)
+        private static void InitializeLists(TileCollection collection)
         {
             _tiles = collection.GetTiles();
             _outputList = new List<ICompleteHandComponent>();
@@ -38,7 +39,17 @@ namespace RMU.Shanten
         private static bool CollectionIsInvalid()
         {
             if (_tiles.Count == 0) return true;
-            return _tiles[0].IsHonor();
+            return CollectionIsWindCollection() || CollectionIsDragonCollection();
+        }
+
+        private static bool CollectionIsDragonCollection()
+        {
+            return _collection.GetSuit() == DRAGON;
+        }
+
+        private static bool CollectionIsWindCollection()
+        {
+            return _collection.GetSuit() == WIND;
         }
 
         private static void CheckForConsecutiveTaatsu(ref int i, TileObject tileBelow)
@@ -65,10 +76,10 @@ namespace RMU.Shanten
         {
             if (ConsecutiveTaatsuContainsTerminalTile(i, j))
             {
-                CreateConsecutiveTaatsu(i, j, tileList, Enums.INCOMPLETE_SEQUENCE_EDGE_WAIT);
+                CreateConsecutiveTaatsu(i, j, tileList, INCOMPLETE_SEQUENCE_EDGE_WAIT);
                 return;
             }
-            CreateConsecutiveTaatsu(i, j, tileList, Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT);
+            CreateConsecutiveTaatsu(i, j, tileList, INCOMPLETE_SEQUENCE_OPEN_WAIT);
         }
 
         private static bool ConsecutiveTaatsuContainsTerminalTile(int i, int j)
@@ -76,7 +87,7 @@ namespace RMU.Shanten
             return _tiles[i].GetValue() == 9 || _tiles[j].GetValue() == 1;
         }
 
-        private static void CreateConsecutiveTaatsu(int i, int j, List<TileObject> tileList, Enums.CompleteHandComponentType componentType)
+        private static void CreateConsecutiveTaatsu(int i, int j, List<TileObject> tileList, CompleteHandComponentType componentType)
         {
             ICompleteHandComponent consecutiveTaatsu = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, componentType);
             _outputList.Add(consecutiveTaatsu);

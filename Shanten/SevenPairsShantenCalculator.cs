@@ -6,11 +6,11 @@ namespace RMU.Shanten
 {
     public static class SevenPairsShantenCalculator
     {
-        private static List<AbstractTileCollection> newCollections;
+        private static List<TileCollection> newCollections;
         private static List<ICompleteHandComponent> components;
         private static int _triplets, _pairs;
 
-        public static int CalculateShanten(List<AbstractTileCollection> collections)
+        public static int CalculateShanten(List<TileCollection> collections)
         {
             InitializeValues(collections);
             ExtractTripletsAndPairsAndIncrementCounters();
@@ -23,7 +23,7 @@ namespace RMU.Shanten
             IncrementCounters();
         }
 
-        private static void InitializeValues(List<AbstractTileCollection> collections)
+        private static void InitializeValues(List<TileCollection> collections)
         {
             InitializeLists();
             CloneCollections(collections);
@@ -60,12 +60,12 @@ namespace RMU.Shanten
         private static void InitializeLists()
         {
             components = new List<ICompleteHandComponent>();
-            newCollections = new List<AbstractTileCollection>();
+            newCollections = new List<TileCollection>();
         }
 
-        private static void CloneCollections(List<AbstractTileCollection> collections)
+        private static void CloneCollections(List<TileCollection> collections)
         {
-            foreach (AbstractTileCollection collection in collections)
+            foreach (TileCollection collection in collections)
             {
                 newCollections.Add(collection.Clone());
             }
@@ -73,14 +73,14 @@ namespace RMU.Shanten
 
         private static void ExtractAllTripletsAndPairs()
         {
-            foreach (AbstractTileCollection coll in newCollections)
+            foreach (TileCollection coll in newCollections)
             {
                 ExtractTriplets(coll);
                 ExtractPairs(coll);
             }
         }
 
-        private static void ExtractPairs(AbstractTileCollection coll)
+        private static void ExtractPairs(TileCollection coll)
         {
             foreach (ICompleteHandComponent component in PairExtractor.ExtractPair(coll))
             {
@@ -88,7 +88,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void ExtractTriplets(AbstractTileCollection coll)
+        private static void ExtractTriplets(TileCollection coll)
         {
             foreach (ICompleteHandComponent component in PonExtractor.ExtractPon(coll))
             {

@@ -9,9 +9,9 @@ namespace RMU.Shanten
     {
         private static List<TileObject> _tiles;
         private static List<ICompleteHandComponent> _outputList;
-        private static AbstractTileCollection _collection;
+        private static TileCollection _collection;
 
-        public static List<ICompleteHandComponent> ExtractPair(AbstractTileCollection collection)
+        public static List<ICompleteHandComponent> ExtractPair(TileCollection collection)
         {
             InitializeLists(collection);
             if (_tiles.Count == 0) return _outputList;
@@ -19,7 +19,7 @@ namespace RMU.Shanten
             return _outputList;
         }
 
-        private static void InitializeLists(AbstractTileCollection collection)
+        private static void InitializeLists(TileCollection collection)
         {
             _outputList = new List<ICompleteHandComponent>();
             _tiles = collection.GetTiles();

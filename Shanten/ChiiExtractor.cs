@@ -2,6 +2,7 @@
 using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using RMU.Globals;
+using static RMU.Globals.Enums;
 
 namespace RMU.Shanten
 {
@@ -9,9 +10,9 @@ namespace RMU.Shanten
     {
         private static List<ICompleteHandComponent> _outputList;
         private static List<TileObject> _tiles;
-        private static AbstractTileCollection _collection;
+        private static TileCollection _collection;
 
-        public static List<ICompleteHandComponent> ExtractChii(AbstractTileCollection collection)
+        public static List<ICompleteHandComponent> ExtractChii(TileCollection collection)
         {
             InitializeLists(collection);
             if (CollectionIsInvalid()) return _outputList;
@@ -22,7 +23,17 @@ namespace RMU.Shanten
         private static bool CollectionIsInvalid()
         {
             if (_tiles.Count == 0) return true;
-            return _tiles[0].IsHonor();
+            return CollectionIsWindCollection() || CollectionIsDragonCollection();
+        }
+
+        private static bool CollectionIsDragonCollection()
+        {
+            return _collection.GetSuit() == DRAGON;
+        }
+
+        private static bool CollectionIsWindCollection()
+        {
+            return _collection.GetSuit() == WIND;
         }
 
         private static void FindChiisAndExtractThemToNewComponent()
@@ -96,10 +107,10 @@ namespace RMU.Shanten
         private static ICompleteHandComponent CreateClosedChii(int i, int j, int k)
         {
             List<TileObject> tileList = new List<TileObject> { _tiles[k], _tiles[j], _tiles[i] };
-            return CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.CLOSED_CHII);
+            return CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, CLOSED_CHII);
         }
 
-        private static void InitializeLists(AbstractTileCollection collection)
+        private static void InitializeLists(TileCollection collection)
         {
             _outputList = new List<ICompleteHandComponent>();
             _tiles = collection.GetTiles();

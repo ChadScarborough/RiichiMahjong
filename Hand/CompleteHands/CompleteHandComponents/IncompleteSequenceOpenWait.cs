@@ -1,6 +1,8 @@
-﻿using RMU.Globals;
+﻿using System;
+using RMU.Globals;
 using RMU.Tiles;
 using System.Collections.Generic;
+using static RMU.Globals.Functions;
 
 namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
@@ -14,6 +16,38 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             foreach (TileObject tile in incompleteSequenceOpenWait)
             {
                 _tiles.Add(tile);
+            }
+            CheckForValidIncompleteSequenceOpenWait();
+        }
+
+        private void CheckForValidIncompleteSequenceOpenWait()
+        {
+            CheckForCorrectNumber();
+            CheckForConsecutiveIncompleteSequence();
+            CheckThatIncompleteSequenceIsNotEdgeWait();
+        }
+
+        private void CheckForCorrectNumber()
+        {
+            if(_tiles.Count != 2)
+            {
+                throw new ArgumentException("Incorrect number of tiles");
+            }
+        }
+
+        private void CheckForConsecutiveIncompleteSequence()
+        {
+            if(AreTilesEquivalent(_tiles[0], GetTileBelow(_tiles[1])) == false)
+            {
+                throw new ArgumentException("Tiles do not form consecutive incomplete sequence");
+            }
+        }
+
+        private void CheckThatIncompleteSequenceIsNotEdgeWait()
+        {
+            if(_tiles[0].GetValue() == 1 || _tiles[1].GetValue() == 9)
+            {
+                throw new ArgumentException("Tiles do not have open wait");
             }
         }
 

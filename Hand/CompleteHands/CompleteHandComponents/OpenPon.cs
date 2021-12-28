@@ -11,20 +11,33 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public OpenPon(OpenMeld openPon)
         {
-            CheckForCorrectMeldType(openPon);
             _tiles = new List<TileObject>();
             foreach(TileObject tile in openPon.GetTiles())
             {
                 _tiles.Add(tile);
             }
+            CheckForValidTriplet();
         }
 
-        private static void CheckForCorrectMeldType(OpenMeld openPon)
+        private void CheckForValidTriplet()
         {
-            Enums.MeldType meldType = openPon.GetMeldType();
-            if(meldType != Enums.PON)
+            CheckForCorrectNumber();
+            CheckThatTilesFormTriplet();
+        }
+
+        private void CheckForCorrectNumber()
+        {
+            if(_tiles.Count != 3)
             {
-                throw new ArgumentException("Attempted to pass a meld other than an open pon as an open pon");
+                throw new ArgumentException("Incorrect number of tiles");
+            }
+        }
+
+        private void CheckThatTilesFormTriplet()
+        {
+            if(Functions.AreTilesEquivalent(_tiles[0], _tiles[1], _tiles[2]) == false)
+            {
+                throw new ArgumentException("Tiles do not form triplet");
             }
         }
 

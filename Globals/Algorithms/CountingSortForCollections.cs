@@ -8,7 +8,7 @@ namespace RMU.Globals.Algorithms
 {
     public static class CountingSortForCollections
     {
-        public static AbstractTileCollection SortCollection(AbstractTileCollection collection)
+        public static TileCollection SortCollection(TileCollection collection)
         {
             List<TileObject> tiles = collection.GetTiles();
             if (tiles.Count == 0) return collection;
@@ -30,15 +30,15 @@ namespace RMU.Globals.Algorithms
             switch (suit)
             {
                 case MAN:
-                    return new ManTileCollection(outputList);
+                    return new TileCollection(MAN, outputList);
                 case PIN:
-                    return new PinTileCollection(outputList);
+                    return new TileCollection(PIN, outputList);
                 case SOU:
-                    return new SouTileCollection(outputList);
+                    return new TileCollection(SOU, outputList);
                 case WIND:
-                    return new WindTileCollection(outputList);
+                    return new TileCollection(WIND, outputList);
                 case DRAGON:
-                    return new DragonTileCollection(outputList);
+                    return new TileCollection(DRAGON, outputList);
                 default:
                     throw new ArgumentException();
             }

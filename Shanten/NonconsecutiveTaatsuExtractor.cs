@@ -11,9 +11,9 @@ namespace RMU.Shanten
     {
         private static List<TileObject> _tiles;
         private static List<ICompleteHandComponent> _outputList;
-        private static AbstractTileCollection _collection;
+        private static TileCollection _collection;
 
-        public static List<ICompleteHandComponent> ExtractNonconsecutiveTaatsu(AbstractTileCollection collection)
+        public static List<ICompleteHandComponent> ExtractNonconsecutiveTaatsu(TileCollection collection)
         {
             InitializeLists(collection);
             if (CollectionIsInvalid()) return _outputList;
@@ -69,17 +69,27 @@ namespace RMU.Shanten
         private static bool CollectionIsInvalid()
         {
             if (_tiles.Count == 0) return true;
-            return _tiles[0].IsHonor();
+            return CollectionIsWindCollection() || CollectionIsDragonCollection();
         }
 
-        private static void InitializeLists(AbstractTileCollection collection)
+        private static bool CollectionIsDragonCollection()
+        {
+            return _collection.GetSuit() == DRAGON;
+        }
+
+        private static bool CollectionIsWindCollection()
+        {
+            return _collection.GetSuit() == WIND;
+        }
+
+        private static void InitializeLists(TileCollection collection)
         {
             _tiles = collection.GetTiles();
             _outputList = new List<ICompleteHandComponent>();
             _collection = collection;
         }
 
-        private static void ExtractTiles(AbstractTileCollection collection, List<TileObject> _tiles, int i, int j)
+        private static void ExtractTiles(TileCollection collection, List<TileObject> _tiles, int i, int j)
         {
             collection.RemoveTile(_tiles[i]);
             collection.RemoveTile(_tiles[j]);

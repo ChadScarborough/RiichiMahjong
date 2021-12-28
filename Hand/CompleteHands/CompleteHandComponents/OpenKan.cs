@@ -11,27 +11,33 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public OpenKan(OpenMeld openKan)
         {
-            CheckForCorrectMeldType(openKan);
             _tiles = new List<TileObject>();
             foreach (TileObject tile in openKan.GetTiles())
             {
                 _tiles.Add(tile);
             }
+            CheckForValidQuad();
         }
 
-        private static void CheckForCorrectMeldType(OpenMeld openKan)
+        private void CheckForValidQuad()
         {
-            Enums.MeldType meldType = openKan.GetMeldType();
-            bool isOpenKan1 = meldType == Enums.OPEN_KAN_1;
-            bool isOpenKan2 = meldType == Enums.OPEN_KAN_2;
-            ThrowExceptionOnIncorrectMeldType(isOpenKan1, isOpenKan2);
+            CheckForCorrectNumber();
+            CheckThatTilesFormQuad();
         }
 
-        private static void ThrowExceptionOnIncorrectMeldType(bool isOpenKan1, bool isOpenKan2)
+        private void CheckForCorrectNumber()
         {
-            if (isOpenKan1 == false && isOpenKan2 == false)
+            if(_tiles.Count != 4)
             {
-                throw new ArgumentException("Attempted to pass a meld other than an open kan as an open kan");
+                throw new ArgumentException("Incorrect number of tiles");
+            }
+        }
+
+        private void CheckThatTilesFormQuad()
+        {
+            if(Functions.AreTilesEquivalent(_tiles[0], _tiles[1], _tiles[2], _tiles[3]) == false)
+            {
+                throw new ArgumentException("Tiles do not form quad");
             }
         }
 

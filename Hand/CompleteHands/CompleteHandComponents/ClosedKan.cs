@@ -11,9 +11,21 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
 
         public ClosedKan(OpenMeld closedKan)
         {
-            CheckForCorrectMeldType(closedKan);
             _tiles = new List<TileObject>();
             PopulateTilesList(closedKan);
+            CheckForValidQuad();
+        }
+
+        private void CheckForValidQuad()
+        {
+            if(_tiles.Count != 4)
+            {
+                throw new ArgumentException("Incorrect number of tiles");
+            }
+            if(Functions.AreTilesEquivalent(_tiles[0], _tiles[1], _tiles[2], _tiles[3]) == false)
+            {
+                throw new ArgumentException("Tiles do not form quad");
+            }
         }
 
         private void PopulateTilesList(OpenMeld closedKan)
@@ -24,13 +36,6 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             }
         }
 
-        private static void CheckForCorrectMeldType(OpenMeld closedKan)
-        {
-            if (closedKan.GetMeldType() != Enums.CLOSED_KAN_MELD)
-            {
-                throw new ArgumentException("Attempted to pass a meld other than a closed kan as a closed kan");
-            }
-        }
 
         public Enums.CompleteHandComponentType GetComponentType()
         {

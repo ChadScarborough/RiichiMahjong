@@ -9,10 +9,10 @@ namespace RMU.Shanten
     public static class StandardShantenCalculator
     {
         private static int[] _shantenValues = new int[8];
-        private static List<AbstractTileCollection> newCollections;
+        private static List<TileCollection> newCollections;
         private static List<ICompleteHandComponent> components;
 
-        public static int CalculateShanten(List<AbstractTileCollection> collections)
+        public static int CalculateShanten(List<TileCollection> collections)
         {
             ClearShantenValues();
             SetShantenValues(collections);
@@ -31,7 +31,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void SetShantenValues(List<AbstractTileCollection> collections)
+        private static void SetShantenValues(List<TileCollection> collections)
         {
             _shantenValues[0] = PonChiiPairConsNoncons(collections);
             _shantenValues[1] = ChiiPonPairConsNoncons(collections);
@@ -43,11 +43,11 @@ namespace RMU.Shanten
             _shantenValues[7] = PonPairChiiNonconsCons(collections);
         }
 
-        private static int PonChiiPairConsNoncons(List<AbstractTileCollection> collections)
+        private static int PonChiiPairConsNoncons(List<TileCollection> collections)
         {
 
             InitializeLists(collections, out newCollections);
-            foreach (AbstractTileCollection collection in newCollections)
+            foreach (TileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
                 ExtractChiiToComponentsList(components, collection);
@@ -58,10 +58,10 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static int ChiiPonPairConsNoncons(List<AbstractTileCollection> collections)
+        private static int ChiiPonPairConsNoncons(List<TileCollection> collections)
         {
             InitializeLists(collections, out newCollections);
-            foreach(AbstractTileCollection collection in newCollections)
+            foreach(TileCollection collection in newCollections)
             {
                 ExtractChiiToComponentsList(components, collection);
                 ExtractPonToComponentsList(components, collection);
@@ -72,10 +72,10 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static int PonChiiConsNonconsPair(List<AbstractTileCollection> collections)
+        private static int PonChiiConsNonconsPair(List<TileCollection> collections)
         {
             InitializeLists(collections, out newCollections);
-            foreach(AbstractTileCollection collection in newCollections)
+            foreach(TileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
                 ExtractChiiToComponentsList(components, collection);
@@ -86,10 +86,10 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static int ChiiPonConsNonconsPair(List<AbstractTileCollection> collections)
+        private static int ChiiPonConsNonconsPair(List<TileCollection> collections)
         {
             InitializeLists(collections, out newCollections);
-            foreach (AbstractTileCollection collection in newCollections)
+            foreach (TileCollection collection in newCollections)
             {
                 ExtractChiiToComponentsList(components, collection);
                 ExtractPonToComponentsList(components, collection);
@@ -100,10 +100,10 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static int PonChiiConsPairNoncons(List<AbstractTileCollection> collections)
+        private static int PonChiiConsPairNoncons(List<TileCollection> collections)
         {
             InitializeLists(collections, out newCollections);
-            foreach (AbstractTileCollection collection in newCollections)
+            foreach (TileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
                 ExtractChiiToComponentsList(components, collection);
@@ -114,10 +114,10 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static int ChiiPonConsPairNoncons(List<AbstractTileCollection> collections)
+        private static int ChiiPonConsPairNoncons(List<TileCollection> collections)
         {
             InitializeLists(collections, out newCollections);
-            foreach (AbstractTileCollection collection in newCollections)
+            foreach (TileCollection collection in newCollections)
             {
                 ExtractChiiToComponentsList(components, collection);
                 ExtractPonToComponentsList(components, collection);
@@ -128,10 +128,10 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static int PonPairChiiConsNoncons(List<AbstractTileCollection> collections)
+        private static int PonPairChiiConsNoncons(List<TileCollection> collections)
         {
             InitializeLists(collections, out newCollections);
-            foreach (AbstractTileCollection collection in newCollections)
+            foreach (TileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
                 ExtractPairToComponentsList(components, collection);
@@ -142,10 +142,10 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static int PonPairChiiNonconsCons(List<AbstractTileCollection> collections)
+        private static int PonPairChiiNonconsCons(List<TileCollection> collections)
         {
             InitializeLists(collections, out newCollections);
-            foreach (AbstractTileCollection collection in newCollections)
+            foreach (TileCollection collection in newCollections)
             {
                 ExtractPonToComponentsList(components, collection);
                 ExtractPairToComponentsList(components, collection);
@@ -156,7 +156,7 @@ namespace RMU.Shanten
             return CalculateStandardShanten(components);
         }
 
-        private static void InitializeLists(List<AbstractTileCollection> collections, out List<AbstractTileCollection> newCollections)
+        private static void InitializeLists(List<TileCollection> collections, out List<TileCollection> newCollections)
         {
             newCollections = CloneCollections(collections);
             components = new List<ICompleteHandComponent>();
@@ -190,7 +190,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void ExtractNonconsecutiveTaatsuToComponentsList(List<ICompleteHandComponent> components, AbstractTileCollection collection)
+        private static void ExtractNonconsecutiveTaatsuToComponentsList(List<ICompleteHandComponent> components, TileCollection collection)
         {
             foreach (ICompleteHandComponent component in NonconsecutiveTaatsuExtractor.ExtractNonconsecutiveTaatsu(collection))
             {
@@ -198,7 +198,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void ExtractConsecutiveTaatsuToComponentsList(List<ICompleteHandComponent> components, AbstractTileCollection collection)
+        private static void ExtractConsecutiveTaatsuToComponentsList(List<ICompleteHandComponent> components, TileCollection collection)
         {
             foreach (ICompleteHandComponent component in ConsecutiveTaatsuExtractor.ExtractConsecutiveTaatsu(collection))
             {
@@ -206,7 +206,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void ExtractPairToComponentsList(List<ICompleteHandComponent> components, AbstractTileCollection collection)
+        private static void ExtractPairToComponentsList(List<ICompleteHandComponent> components, TileCollection collection)
         {
             foreach (ICompleteHandComponent component in PairExtractor.ExtractPair(collection))
             {
@@ -214,7 +214,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void ExtractChiiToComponentsList(List<ICompleteHandComponent> components, AbstractTileCollection collection)
+        private static void ExtractChiiToComponentsList(List<ICompleteHandComponent> components, TileCollection collection)
         {
             foreach (ICompleteHandComponent component in ChiiExtractor.ExtractChii(collection))
             {
@@ -222,7 +222,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void ExtractPonToComponentsList(List<ICompleteHandComponent> components, AbstractTileCollection collection)
+        private static void ExtractPonToComponentsList(List<ICompleteHandComponent> components, TileCollection collection)
         {
             foreach (ICompleteHandComponent component in PonExtractor.ExtractPon(collection))
             {
@@ -230,10 +230,10 @@ namespace RMU.Shanten
             }
         }
 
-        private static List<AbstractTileCollection> CloneCollections(List<AbstractTileCollection> collections)
+        private static List<TileCollection> CloneCollections(List<TileCollection> collections)
         {
-            List<AbstractTileCollection> outputList = new List<AbstractTileCollection>();
-            foreach (AbstractTileCollection collection in collections)
+            List<TileCollection> outputList = new List<TileCollection>();
+            foreach (TileCollection collection in collections)
             {
                 outputList.Add(collection.Clone());
             }

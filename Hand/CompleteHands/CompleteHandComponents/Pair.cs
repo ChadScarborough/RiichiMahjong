@@ -1,4 +1,5 @@
-﻿using RMU.Globals;
+﻿using System;
+using RMU.Globals;
 using RMU.Tiles;
 using System.Collections.Generic;
 
@@ -14,6 +15,29 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
             foreach(TileObject tile in pair)
             {
                 _tiles.Add(tile);
+            }
+            CheckForValidPair();
+        }
+
+        private void CheckForValidPair()
+        {
+            CheckForCorrectNumber();
+            CheckThatTilesFormPair();
+        }
+
+        private void CheckForCorrectNumber()
+        {
+            if(_tiles.Count != 2)
+            {
+                throw new ArgumentException("Incorrect number of tiles");
+            }
+        }
+
+        private void CheckThatTilesFormPair()
+        {
+            if(Functions.AreTilesEquivalent(_tiles[0], _tiles[1]) == false)
+            {
+                throw new ArgumentException("Tiles do not form pair");
             }
         }
 

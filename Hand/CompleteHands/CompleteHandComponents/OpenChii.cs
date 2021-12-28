@@ -2,6 +2,7 @@
 using RMU.Tiles;
 using System;
 using System.Collections.Generic;
+using static RMU.Globals.Functions;
 
 namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {
@@ -10,30 +11,32 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
         private readonly List<TileObject> _tiles;
 
         public OpenChii(OpenMeld openChii)
-        {
-            CheckForCorrectMeldType(openChii);
+        { 
             _tiles = new List<TileObject>();
             foreach(TileObject tile in openChii.GetTiles())
             {
                 _tiles.Add(tile);
             }
+            CheckForValidSequence();
         }
 
-        private void CheckForCorrectMeldType(OpenMeld openChii)
+        private void CheckForValidSequence()
         {
-            Enums.MeldType meldType = openChii.GetMeldType();
-            bool isHighChii = meldType == Enums.HIGH_CHII;
-            bool isMidChii = meldType == Enums.MID_CHII;
-            bool isLowChii = meldType == Enums.LOW_CHII;
-            ThrowExceptionOnIncorrectMeldType(isHighChii, isMidChii, isLowChii);
+            CheckForCorrectNumberOfTiles();
+            CheckThatTilesFormSequence();
         }
 
-        private static void ThrowExceptionOnIncorrectMeldType(bool isHighChii, bool isMidChii, bool isLowChii)
+        private void CheckThatTilesFormSequence()
         {
-            if ((isHighChii || isMidChii || isLowChii) == false)
+            if(DoTilesFormValidSequence(_tiles[0], _tiles[1], _tiles[2]) == false)
             {
-                throw new ArgumentException("Attempted to pass a meld other than an open chii as an open chii");
+                throw new ArgumentException("Tiles do not form valid sequence");
             }
+        }
+
+        private void CheckForCorrectNumberOfTiles()
+        {
+            if (_tiles.Count != 3) { throw new ArgumentException("Incorrect number of tiles"); }
         }
 
         public Enums.CompleteHandComponentType GetComponentType()

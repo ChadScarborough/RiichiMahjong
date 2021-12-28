@@ -21,7 +21,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
                 case Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT:
                     return CompleteHandIncompleteGroupFactory.CreateCompleteHandIncompleteGroup(tiles, componentType);
                 default:
-                    throw new ArgumentException("This error should be impossible");
+                    throw new ArgumentException("Incorrect input data type");
             }
         }
 
@@ -34,7 +34,7 @@ namespace RMU.Hand.CompleteHands.CompleteHandComponents
                 case Enums.ISOLATED_TILE:
                     return new IsolatedTile(tile);
                 default:
-                    throw new ArgumentException("This error should be impossible");
+                    throw new ArgumentException("Incorrect input data type");
             }
         }
 
