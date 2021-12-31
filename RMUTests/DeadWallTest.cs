@@ -11,63 +11,63 @@ namespace RMUTests
     [TestClass]
     public class DeadWallTest
     {
-        public IWall wall = new StandardWall();
-        public IDeadWall deadWall;
+        private IWall wall = new StandardWall();
+        private IDeadWall _deadWall;
         
         [TestMethod]
         public void DoraIndicatorsList_IsNotEmpty()
         {
-            deadWall = new StandardDeadWall(wall);
-            Assert.AreNotEqual(0, deadWall.GetDoraIndicators().Count);
+            _deadWall = new StandardDeadWall(wall);
+            Assert.AreNotEqual(0, _deadWall.GetDoraIndicators().Count);
         }
 
         [TestMethod]
         public void DoraIndicatorsList_ContainsFiveTiles()
         {
-            deadWall = new StandardDeadWall(wall);
-            Assert.AreEqual(5, deadWall.GetDoraIndicators().Count);
+            _deadWall = new StandardDeadWall(wall);
+            Assert.AreEqual(5, _deadWall.GetDoraIndicators().Count);
         }
 
         [TestMethod]
         public void RevealedDoraIndicatorsList_ContainsOneTile()
         {
-            deadWall = new StandardDeadWall(wall);
-            Assert.AreEqual(1, deadWall.GetRevealedDoraIndicators().Count);
+            _deadWall = new StandardDeadWall(wall);
+            Assert.AreEqual(1, _deadWall.GetRevealedDoraIndicators().Count);
         }
 
         [TestMethod]
         public void RevealDoraIndicatorMethod_AddsNewRevealedDoraIndicator()
         {
-            deadWall = new StandardDeadWall(wall);
-            Assert.AreEqual(1, deadWall.GetRevealedDoraIndicators().Count);
-            deadWall.RevealDoraTile();
-            Assert.AreEqual(2, deadWall.GetRevealedDoraIndicators().Count);
+            _deadWall = new StandardDeadWall(wall);
+            Assert.AreEqual(1, _deadWall.GetRevealedDoraIndicators().Count);
+            _deadWall.RevealDoraTile();
+            Assert.AreEqual(2, _deadWall.GetRevealedDoraIndicators().Count);
         }
 
         [TestMethod]
         public void RevealingFiveNewDoraIndicators_ThrowsException()
         {
             Exception ex = null;
-            deadWall = new StandardDeadWall(wall);
+            _deadWall = new StandardDeadWall(wall);
             try
             {
-                deadWall.RevealDoraTile();
-                deadWall.RevealDoraTile();
-                deadWall.RevealDoraTile();
-                deadWall.RevealDoraTile();
+                _deadWall.RevealDoraTile();
+                _deadWall.RevealDoraTile();
+                _deadWall.RevealDoraTile();
+                _deadWall.RevealDoraTile();
             }
-            catch(Exception ExpectedException)
+            catch(Exception expectedException)
             {
-                ex = ExpectedException;
+                ex = expectedException;
             }
             Assert.IsNull(ex);
             try
             {
-                deadWall.RevealDoraTile();
+                _deadWall.RevealDoraTile();
             }
-            catch(Exception ExpectedException)
+            catch(Exception expectedException)
             {
-                ex = ExpectedException;
+                ex = expectedException;
             }
             Assert.IsNotNull(ex);
         }
@@ -75,22 +75,22 @@ namespace RMUTests
         [TestMethod]
         public void DrawingTile_ReducesDrawableTileCount()
         {
-            deadWall = new StandardDeadWall(wall);
-            Assert.AreEqual(4, deadWall.GetDrawableTiles().Count);
-            deadWall.DrawTile();
-            Assert.AreEqual(3, deadWall.GetDrawableTiles().Count);
+            _deadWall = new StandardDeadWall(wall);
+            Assert.AreEqual(4, _deadWall.GetDrawableTiles().Count);
+            _deadWall.DrawTile();
+            Assert.AreEqual(3, _deadWall.GetDrawableTiles().Count);
         }
 
         [TestMethod]
         public void ClearingDeadWall_AndRepopulatingIt_ProperlyFillsAllLists()
         {
-            deadWall = new StandardDeadWall(wall);
-            deadWall.Clear();
-            deadWall.PopulateDeadWall();
-            Assert.AreEqual(5, deadWall.GetDoraIndicators().Count);
-            Assert.AreEqual(1, deadWall.GetRevealedDoraIndicators().Count);
-            Assert.AreEqual(4, deadWall.GetDrawableTiles().Count);
-            Assert.AreEqual(5, deadWall.GetUraDoraIndicators().Count);
+            _deadWall = new StandardDeadWall(wall);
+            _deadWall.Clear();
+            _deadWall.PopulateDeadWall();
+            Assert.AreEqual(5, _deadWall.GetDoraIndicators().Count);
+            Assert.AreEqual(1, _deadWall.GetRevealedDoraIndicators().Count);
+            Assert.AreEqual(4, _deadWall.GetDrawableTiles().Count);
+            Assert.AreEqual(5, _deadWall.GetUraDoraIndicators().Count);
         }
     }
 }
