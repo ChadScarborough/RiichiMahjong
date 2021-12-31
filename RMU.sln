@@ -5,8 +5,6 @@ VisualStudioVersion = 16.0.31515.178
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMU", "RMU.csproj", "{AC90071E-8C1E-4AE2-A56F-F38AC167BB66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMUTests", "..\RMUTests\RMUTests.csproj", "{2CDECCA8-3B48-451D-A9F2-70D5F6E0A0FE}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMUTests", "RMUTests\RMUTests.csproj", "{D85E2519-E7AE-4628-830C-4B4B26D703BF}"
 EndProject
 Global
