@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMU", "RMU.csproj", "{AC900
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMUTests", "..\RMUTests\RMUTests.csproj", "{2CDECCA8-3B48-451D-A9F2-70D5F6E0A0FE}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMUTests", "RMUTests\RMUTests.csproj", "{D85E2519-E7AE-4628-830C-4B4B26D703BF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{2CDECCA8-3B48-451D-A9F2-70D5F6E0A0FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2CDECCA8-3B48-451D-A9F2-70D5F6E0A0FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2CDECCA8-3B48-451D-A9F2-70D5F6E0A0FE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D85E2519-E7AE-4628-830C-4B4B26D703BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D85E2519-E7AE-4628-830C-4B4B26D703BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D85E2519-E7AE-4628-830C-4B4B26D703BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D85E2519-E7AE-4628-830C-4B4B26D703BF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

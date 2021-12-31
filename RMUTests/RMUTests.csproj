@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\RMU\RMU.csproj" />
+    <ProjectReference Include="..\RMU.csproj" />
   </ItemGroup>
 
 </Project>
