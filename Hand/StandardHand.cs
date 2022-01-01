@@ -9,7 +9,7 @@ namespace RMU.Hand
 {
     public class StandardHand : IHand
     {
-        private IWall _wall;
+        private AbstractWall _wall;
         private IDeadWall _deadWall;
         private List<TileObject> _closedTiles;
         private TileObject _drawTile;
@@ -18,7 +18,7 @@ namespace RMU.Hand
         private List<OpenMeld> _openMelds;
         private bool _isOpen = false;
 
-        public StandardHand(IWall wall, IDeadWall deadWall)
+        public StandardHand(AbstractWall wall, IDeadWall deadWall)
         {
             this._wall = wall;
             this._deadWall = deadWall;

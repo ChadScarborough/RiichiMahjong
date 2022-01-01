@@ -1,4 +1,5 @@
-﻿using RMU.Tiles;
+﻿using System;
+using RMU.Tiles;
 
 namespace RMU.Globals
 {
@@ -76,5 +77,26 @@ namespace RMU.Globals
         public static TileObject GreenDragon() { return GREEN_DRAGON.Clone(); }
         public static TileObject RedDragon() { return RED_DRAGON.Clone(); }
         public static TileObject WhiteDragon() { return WHITE_DRAGON.Clone(); }
+
+        public static TileObject RedFiveMan()
+        {
+            TileObject tile = FiveMan();
+            Functions.MakeRedFive(ref tile);
+            return tile;
+        }
+
+        public static TileObject RedFivePin()
+        {
+            TileObject tile = FivePin();
+            Functions.MakeRedFive(ref tile);
+            return tile;
+        }
+
+        public static TileObject RedFiveSou()
+        {
+            TileObject tile = FiveSou();
+            Functions.MakeRedFive(ref tile);
+            return tile;
+        }
     }
 }
