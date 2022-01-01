@@ -11,7 +11,7 @@ namespace RMUTests
     [TestClass]
     public class DeadWallTest
     {
-        private IWall wall = new StandardWall();
+        private AbstractWall wall = new StandardWall();
         private IDeadWall _deadWall;
         
         [TestMethod]

@@ -14,7 +14,7 @@ namespace RMUTests
     public class PlayerTest
     {
         private ISeatWindState _seatWind = new EastWindState();
-        private IWall _wall = new StandardWall();
+        private AbstractWall _wall = new StandardWall();
 
         [TestMethod]
         public void PlayerObject_ReturnsCorrectSeatWind()

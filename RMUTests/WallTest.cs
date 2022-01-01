@@ -11,8 +11,8 @@ namespace RMUTests
     [TestClass]
     public class WallTest
     {
-        IWall wall = new StandardWall();
-        IWall redFivesWall = new StandardWall_ThreeRedFives();
+        AbstractWall wall = new StandardWall();
+        AbstractWall redFivesWall = new StandardWall_ThreeRedFives();
 
         [TestMethod]
         public void FillWallMethod_CreatesWallWith136Tiles()
