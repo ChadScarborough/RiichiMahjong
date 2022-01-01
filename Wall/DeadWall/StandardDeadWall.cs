@@ -13,11 +13,11 @@ namespace RMU.Wall.DeadWall
         private List<TileObject> _uraDoraIndicators;
         private List<TileObject> _drawableTiles;
         private List<TileObject> _extraTiles;
-        private IWall _wall;
+        private AbstractWall _wall;
 
-        public StandardDeadWall(IWall wall)
+        public StandardDeadWall(AbstractWall wall)
         {
-            this._wall = wall;
+            _wall = wall;
             _doraIndicators = new List<TileObject>();
             _revealedDoraIndicators = new List<TileObject>();
             _uraDoraIndicators = new List<TileObject>();
