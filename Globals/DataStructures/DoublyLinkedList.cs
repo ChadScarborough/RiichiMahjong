@@ -1,12 +1,12 @@
 ﻿using System;
 
-namespace RMU.DataStructures
+namespace RMU.Globals.DataStructures
 {
     public class DoublyLinkedList<T>
     {
         public class Node
         {
-            private T _value;
+            private readonly T _value;
             private Node _nextNode;
             private Node _prevNode;
 
@@ -43,7 +43,7 @@ namespace RMU.DataStructures
 
         private Node _head;
         private Node _tail;
-        private int _size = 0;
+        private int _size;
 
         public DoublyLinkedList()
         {
@@ -99,17 +99,17 @@ namespace RMU.DataStructures
             {
                 if (GetSize() == 1)
                 {
-                    Node _temp = GetHead();
+                    Node temp = GetHead();
                     _head = null;
                     _tail = null;
                     _size--;
-                    return _temp.GetValue();
+                    return temp.GetValue();
                 }
-                Node temp = _head;
-                _head = temp.GetNext();
-                temp.SetNext(null);
+                Node tempNode = _head;
+                _head = tempNode.GetNext();
+                tempNode.SetNext(null);
                 _size--;
-                return temp.GetValue();
+                return tempNode.GetValue();
             }
             throw new IndexOutOfRangeException("Tried to remove an element from an empty list");
         }
@@ -126,11 +126,11 @@ namespace RMU.DataStructures
                     _size--;
                     return temp.GetValue();
                 }
-                Node _temp = _tail;
+                Node tempNode = _tail;
                 _tail = null;
                 _head = null;
                 _size--;
-                return _temp.GetValue();
+                return tempNode.GetValue();
             }
             throw new IndexOutOfRangeException("Tried to remove an element from an empty list");
         }

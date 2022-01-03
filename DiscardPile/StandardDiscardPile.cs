@@ -5,12 +5,12 @@ namespace RMU.DiscardPile
 {
     public class StandardDiscardPile : IDiscardPile
     {
-        private DataStructures.Stack<TileObject> _displayedDiscardedTiles;
-        private List<TileObject> _allDiscardedTiles;
+        private readonly Globals.DataStructures.Stack<TileObject> _displayedDiscardedTiles;
+        private readonly List<TileObject> _allDiscardedTiles;
 
         public StandardDiscardPile()
         {
-            _displayedDiscardedTiles = new DataStructures.Stack<TileObject>(30);
+            _displayedDiscardedTiles = new Globals.DataStructures.Stack<TileObject>(30);
             _allDiscardedTiles = new List<TileObject>();
         }
 

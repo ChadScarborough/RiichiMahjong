@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using static RMU.Globals.Functions;
+﻿using static RMU.Globals.Functions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using static RMU.Globals.StandardTileList;
 using static RMU.Globals.Enums;

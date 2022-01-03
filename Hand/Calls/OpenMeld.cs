@@ -2,7 +2,7 @@
 using RMU.Globals;
 using RMU.Tiles;
 
-namespace RMU.Hand
+namespace RMU.Hand.Calls
 {
     public class OpenMeld
     {
@@ -12,11 +12,11 @@ namespace RMU.Hand
 
         //Use strategy pattern to alter behaviour based on the meld type
 
-        public OpenMeld(Enums.MeldType _meldType, TileObject _calledTile)
+        public OpenMeld(Enums.MeldType meldType, TileObject calledTile)
         {
-            this._meldType = _meldType;
-            SetMeldType(_meldType);
-            _tiles = _createMeldBehaviour.CreateMeld(_calledTile);
+            this._meldType = meldType;
+            SetMeldType(meldType);
+            _tiles = _createMeldBehaviour.CreateMeld(calledTile);
         }
 
         public void AddTile(TileObject tile)
@@ -24,9 +24,9 @@ namespace RMU.Hand
             _tiles.Add(tile);
         }
 
-        public void SetMeldType(Enums.MeldType _meldType)
+        public void SetMeldType(Enums.MeldType meldType)
         {
-            switch (_meldType)
+            switch (meldType)
             {
                 case Enums.LOW_CHII:
                     _createMeldBehaviour = new CreateLowChiiBehaviour();

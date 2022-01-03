@@ -1,4 +1,4 @@
-﻿namespace RMU.Tiles
+﻿namespace RMU.Tiles.TileDecorators
 {
     public class UraDoraDecorator : TileDecorator
     {
@@ -17,6 +17,12 @@
         public override bool IsRedFive()
         {
             return _decoratee.IsRedFive();
+        }
+
+        public override TileObject Clone()
+        {
+            TileObject clone = _decoratee.Clone();
+            return new UraDoraDecorator(clone);
         }
     }
 }

@@ -14,7 +14,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class HalfFlushTest
     {
-        private AbstractYaku _halfFlush = YakuList.HALF_FLUSH;
+        private readonly AbstractYaku _halfFlush = YakuList.HALF_FLUSH;
 
         [TestMethod]
         public void GetName_ReturnsCorrectName()

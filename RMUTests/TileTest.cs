@@ -2,6 +2,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RMU.Tiles;
 using System;
 using RMU.Globals;
+using static RMU.Globals.StandardTileList;
 
 namespace RMUTests
 {
@@ -55,11 +56,11 @@ namespace RMUTests
 
             try
             {
-                TileObject tile = TileFactory.CreateTile(12, Enums.Suit.Pin);
+                TileFactory.CreateTile(12, Enums.Suit.Pin);
             }
-            catch (Exception ExpectedException)
+            catch (Exception expectedException)
             {
-                ex = ExpectedException;
+                ex = expectedException;
             }
 
             Assert.IsNotNull(ex);
@@ -72,11 +73,11 @@ namespace RMUTests
 
             try
             {
-                TileObject tile = TileFactory.CreateTile(5, Enums.Suit.Wind);
+                TileFactory.CreateTile(5, Enums.Suit.Wind);
             }
-            catch (Exception ExpectedException)
+            catch (Exception expectedException)
             {
-                ex = ExpectedException;
+                ex = expectedException;
             }
 
             Assert.IsNotNull(ex);
@@ -89,14 +90,32 @@ namespace RMUTests
 
             try
             {
-                TileObject tile = TileFactory.CreateTile(4, Enums.Suit.Dragon);
+                TileFactory.CreateTile(4, Enums.Suit.Dragon);
             }
-            catch (Exception ExpectedException)
+            catch (Exception expectedException)
             {
-                ex = ExpectedException;
+                ex = expectedException;
             }
 
             Assert.IsNotNull(ex);
+        }
+
+        [TestMethod]
+        public void RedFiveMan_IsRedFive()
+        {
+            Assert.IsTrue(RedFiveMan().IsRedFive());
+        }
+
+        [TestMethod]
+        public void RedFivePin_IsRedFive()
+        {
+            Assert.IsTrue(RedFivePin().IsRedFive());
+        }
+
+        [TestMethod]
+        public void RedFiveSou_IsRedFive()
+        {
+            Assert.IsTrue(RedFiveSou().IsRedFive());
         }
     }
 }

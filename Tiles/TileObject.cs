@@ -7,10 +7,10 @@ namespace RMU.Tiles
         protected int _value;
         protected Enums.Suit _suit;
 
-        public TileObject(int _value, Enums.Suit _suit)
+        public TileObject(int value, Enums.Suit suit)
         {
-            this._value = _value;
-            this._suit = _suit;
+            this._value = value;
+            this._suit = suit;
         }
 
         public int GetValue()
@@ -36,7 +36,7 @@ namespace RMU.Tiles
             return null;
         }
         
-        public TileObject Clone()
+        public virtual TileObject Clone()
         {
             Enums.Suit suit = GetSuit();
             int value = GetValue();

@@ -1,7 +1,5 @@
 ﻿using System.Collections.Generic;
 using RMU.Tiles;
-using RMU.DataStructures;
-using RMU.Globals;
 
 namespace RMU.Wall
 {

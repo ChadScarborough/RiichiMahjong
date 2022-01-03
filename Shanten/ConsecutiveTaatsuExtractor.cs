@@ -2,6 +2,7 @@
 using RMU.Globals;
 using RMU.Tiles;
 using RMU.Hand.CompleteHands.CompleteHandComponents;
+using RMU.Shanten.HandSplitter;
 using static RMU.Globals.Enums;
 
 namespace RMU.Shanten

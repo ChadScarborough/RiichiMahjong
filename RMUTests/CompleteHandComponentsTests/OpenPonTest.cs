@@ -7,6 +7,7 @@ using static RMU.Globals.StandardTileList;
 using static RMU.Globals.Enums;
 using static RMU.Globals.Functions;
 using RMU.Hand;
+using RMU.Hand.Calls;
 
 namespace RMUTests.CompleteHandComponentsTests
 {

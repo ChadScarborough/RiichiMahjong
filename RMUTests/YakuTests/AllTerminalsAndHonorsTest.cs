@@ -9,7 +9,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class AllTerminalsAndHonorsTest
     {
-        private IHand _hand;
+        private AbstractHand _hand;
 
         [TestMethod]
         public void CheckYakuReturnsTrue_WhenHandContainsOnlyTerminalsAndHonors()

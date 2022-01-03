@@ -1,10 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Text;
-using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
+using RMU.Hand.Calls;
 
 namespace RMUTests
 {

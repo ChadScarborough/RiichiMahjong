@@ -13,7 +13,7 @@ namespace RMU.Yaku.YakuLists
         public static readonly AbstractYakuman THIRTEEN_ORPHANS = new ThirteenOrphans();
         public static readonly AbstractYakuman THIRTEEN_WAIT_THIRTEEN_ORPHANS = new ThirteenWaitThirteenOrphans();
 
-        private static List<AbstractYakuman> _yakumanList = new List<AbstractYakuman>
+        private static readonly List<AbstractYakuman> ListOfYakuman = new List<AbstractYakuman>
         {
             ALL_GREENS,
             ALL_HONORS,
@@ -26,7 +26,7 @@ namespace RMU.Yaku.YakuLists
 
         public static List<AbstractYakuman> GetYakumanList()
         {
-            return _yakumanList;
+            return ListOfYakuman;
         }
     }
 }

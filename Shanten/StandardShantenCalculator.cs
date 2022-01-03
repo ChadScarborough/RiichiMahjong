@@ -1,165 +1,160 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Globals;
+using RMU.Shanten.HandSplitter;
 
 namespace RMU.Shanten
 {
     public static class StandardShantenCalculator
     {
-        private static int[] _shantenValues = new int[8];
-        private static List<TileCollection> newCollections;
-        private static List<ICompleteHandComponent> components;
+        private static readonly int[] ShantenValues = new int[8];
+        private static List<TileCollection> _newCollections;
+        private static List<ICompleteHandComponent> _components;
 
         public static int CalculateShanten(List<TileCollection> collections)
         {
             ClearShantenValues();
             SetShantenValues(collections);
-            return Functions.MinOfEight
-                (
-                _shantenValues[0], _shantenValues[1], _shantenValues[2], _shantenValues[3],
-                _shantenValues[4], _shantenValues[5], _shantenValues[6], _shantenValues[7]
-                );
+            return Functions.MinOfArray(ShantenValues);
         }
 
         private static void ClearShantenValues()
         {
             for (int i = 0; i < 8; i++)
             {
-                _shantenValues[i] = 0;
+                ShantenValues[i] = 0;
             }
         }
 
         private static void SetShantenValues(List<TileCollection> collections)
         {
-            _shantenValues[0] = PonChiiPairConsNoncons(collections);
-            _shantenValues[1] = ChiiPonPairConsNoncons(collections);
-            _shantenValues[2] = PonChiiConsNonconsPair(collections);
-            _shantenValues[3] = ChiiPonConsNonconsPair(collections);
-            _shantenValues[4] = PonChiiConsPairNoncons(collections);
-            _shantenValues[5] = ChiiPonConsPairNoncons(collections);
-            _shantenValues[6] = PonPairChiiConsNoncons(collections);
-            _shantenValues[7] = PonPairChiiNonconsCons(collections);
+            ShantenValues[0] = PonChiiPairConsNoncons(collections);
+            ShantenValues[1] = ChiiPonPairConsNoncons(collections);
+            ShantenValues[2] = PonChiiConsNonconsPair(collections);
+            ShantenValues[3] = ChiiPonConsNonconsPair(collections);
+            ShantenValues[4] = PonChiiConsPairNoncons(collections);
+            ShantenValues[5] = ChiiPonConsPairNoncons(collections);
+            ShantenValues[6] = PonPairChiiConsNoncons(collections);
+            ShantenValues[7] = PonPairChiiNonconsCons(collections);
         }
 
         private static int PonChiiPairConsNoncons(List<TileCollection> collections)
         {
 
-            InitializeLists(collections, out newCollections);
-            foreach (TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach (TileCollection collection in _newCollections)
             {
-                ExtractPonToComponentsList(components, collection);
-                ExtractChiiToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static int ChiiPonPairConsNoncons(List<TileCollection> collections)
         {
-            InitializeLists(collections, out newCollections);
-            foreach(TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach(TileCollection collection in _newCollections)
             {
-                ExtractChiiToComponentsList(components, collection);
-                ExtractPonToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static int PonChiiConsNonconsPair(List<TileCollection> collections)
         {
-            InitializeLists(collections, out newCollections);
-            foreach(TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach(TileCollection collection in _newCollections)
             {
-                ExtractPonToComponentsList(components, collection);
-                ExtractChiiToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static int ChiiPonConsNonconsPair(List<TileCollection> collections)
         {
-            InitializeLists(collections, out newCollections);
-            foreach (TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach (TileCollection collection in _newCollections)
             {
-                ExtractChiiToComponentsList(components, collection);
-                ExtractPonToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static int PonChiiConsPairNoncons(List<TileCollection> collections)
         {
-            InitializeLists(collections, out newCollections);
-            foreach (TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach (TileCollection collection in _newCollections)
             {
-                ExtractPonToComponentsList(components, collection);
-                ExtractChiiToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static int ChiiPonConsPairNoncons(List<TileCollection> collections)
         {
-            InitializeLists(collections, out newCollections);
-            foreach (TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach (TileCollection collection in _newCollections)
             {
-                ExtractChiiToComponentsList(components, collection);
-                ExtractPonToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static int PonPairChiiConsNoncons(List<TileCollection> collections)
         {
-            InitializeLists(collections, out newCollections);
-            foreach (TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach (TileCollection collection in _newCollections)
             {
-                ExtractPonToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
-                ExtractChiiToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static int PonPairChiiNonconsCons(List<TileCollection> collections)
         {
-            InitializeLists(collections, out newCollections);
-            foreach (TileCollection collection in newCollections)
+            InitializeLists(collections, out _newCollections);
+            foreach (TileCollection collection in _newCollections)
             {
-                ExtractPonToComponentsList(components, collection);
-                ExtractPairToComponentsList(components, collection);
-                ExtractChiiToComponentsList(components, collection);
-                ExtractNonconsecutiveTaatsuToComponentsList(components, collection);
-                ExtractConsecutiveTaatsuToComponentsList(components, collection);
+                ExtractPonToComponentsList(_components, collection);
+                ExtractPairToComponentsList(_components, collection);
+                ExtractChiiToComponentsList(_components, collection);
+                ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
+                ExtractConsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateStandardShanten(components);
+            return CalculateStandardShanten(_components);
         }
 
         private static void InitializeLists(List<TileCollection> collections, out List<TileCollection> newCollections)
         {
             newCollections = CloneCollections(collections);
-            components = new List<ICompleteHandComponent>();
+            _components = new List<ICompleteHandComponent>();
         }
 
         private static int CalculateStandardShanten(List<ICompleteHandComponent> components)
@@ -184,8 +179,6 @@ namespace RMU.Shanten
                     break;
                 case (Enums.TAATSU):
                     taatsu++;
-                    break;
-                default:
                     break;
             }
         }

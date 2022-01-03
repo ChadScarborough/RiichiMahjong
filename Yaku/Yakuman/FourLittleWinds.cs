@@ -2,6 +2,7 @@
 using RMU.Tiles;
 using RMU.Globals;
 using System.Collections.Generic;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -20,7 +21,7 @@ namespace RMU.Yaku.Yakuman
             _getNameBehaviour = new StandardGetNameBehaviour();
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
             CheckHandForWindTilesAndIncrementAppropriateCounters();
@@ -83,7 +84,7 @@ namespace RMU.Yaku.Yakuman
             }
         }
 
-        private void InitializeValues(IHand hand, TileObject extraTile)
+        private void InitializeValues(AbstractHand hand, TileObject extraTile)
         {
             ResetCounters();
             _handTiles = hand.GetAllTiles(extraTile);

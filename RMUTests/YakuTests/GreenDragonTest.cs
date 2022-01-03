@@ -13,7 +13,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class GreenDragonTest
     {
-        private AbstractYaku _greenDragon = YakuList.GREEN_DRAGON;
+        private readonly AbstractYaku _greenDragon = YakuList.GREEN_DRAGON;
 
         [TestMethod]
         public void Yaku_ReturnsCorrectStringName()

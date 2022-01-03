@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using RMU.DataStructures;
+using RMU.Globals.DataStructures;
 using RMU.Tiles;
 
 namespace RMU.Wall
@@ -12,25 +12,24 @@ namespace RMU.Wall
             _wall = new DoublyLinkedList<TileObject>();
         }
         
-        protected DoublyLinkedList<TileObject> _wall;
+        private readonly DoublyLinkedList<TileObject> _wall;
         
-        protected List<TileObject> ShuffleTiles(List<TileObject> tiles)
+        private List<TileObject> ShuffleTiles(List<TileObject> tiles)
         {
             List<TileObject> outputList = new List<TileObject>();
-            Random _rand = new Random();
-            int _r = 0;
+            Random rand = new Random();
             while (tiles.Count > 0)
             {
-                AddRandomTileToOutputList(tiles, outputList, _r, _rand);
+                AddRandomTileToOutputList(tiles, outputList, rand);
             }
             return outputList;
         }
         
-        private void AddRandomTileToOutputList(List<TileObject> inputList, List<TileObject> outputList, int _r, Random _rand)
+        private void AddRandomTileToOutputList(List<TileObject> inputList, List<TileObject> outputList, Random rand)
         {
-            _r = _rand.Next(0, inputList.Count);
-            outputList.Add(inputList[_r]);
-            inputList.RemoveAt(_r);
+            int r = rand.Next(0, inputList.Count);
+            outputList.Add(inputList[r]);
+            inputList.RemoveAt(r);
         }
         
         public TileObject DrawTileFromWall()
@@ -70,7 +69,7 @@ namespace RMU.Wall
             }
         }
         
-        protected List<TileObject> GenerateTiles(List<TileObject> tiles)
+        private List<TileObject> GenerateTiles(List<TileObject> tiles)
         {
             List<TileObject> tileList = new List<TileObject>();
             foreach (TileObject tile in tiles)
@@ -85,9 +84,22 @@ namespace RMU.Wall
             return _wall.GetSize();
         }
 
-        public void Clear()
+        private void Clear()
         {
             _wall.Clear();
+        }
+
+        public List<TileObject> GetWallTiles()
+        {
+            List<TileObject> outputList = new List<TileObject>();
+            DoublyLinkedList<TileObject>.Node node = _wall.GetHead();
+            while (node != null)
+            {
+                outputList.Add(node.GetValue());
+                node = node.GetNext();
+            }
+            
+            return outputList;
         }
     }
 }

@@ -1,10 +1,10 @@
 ﻿using RMU.Hand;
 
-namespace RMU.Yaku
+namespace RMU.Yaku.StrategyBehaviours
 {
     public class StandardGetValueBehaviour : IGetValueBehaviour
     {
-        public int GetValue(int value, IHand hand)
+        public int GetValue(int value, AbstractHand hand)
         {
             return value;
         }

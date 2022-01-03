@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
-using RMU.Globals;
 using RMU.Tiles;
 using static RMU.Globals.Algorithms.CountingSortForCollections;
 using static RMU.Globals.Enums;
 
-namespace RMU.Shanten
+namespace RMU.Shanten.HandSplitter
 {
     public static class HandSplitter
     {

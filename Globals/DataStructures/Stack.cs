@@ -1,9 +1,9 @@
-﻿namespace RMU.DataStructures
+﻿namespace RMU.Globals.DataStructures
 {
     public class Stack<T>
     {
-        private int _size = 0;
-        private T[] _stack;
+        private int _size;
+        private readonly T[] _stack;
 
         public Stack(int maxCapacity)
         {

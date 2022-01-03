@@ -1,9 +1,8 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
-using System;
 using System.Collections.Generic;
-using System.Text;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -23,7 +22,7 @@ namespace RMU.Yaku.Yakuman
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
             if (FirstTileIsHonor()) return false; //Hand should contain no honor tiles, so if the first tile is an honor tile, the hand automatically fails
@@ -69,7 +68,7 @@ namespace RMU.Yaku.Yakuman
             return _handTiles[0].IsHonor();
         }
 
-        private void InitializeValues(IHand hand, TileObject extraTile)
+        private void InitializeValues(AbstractHand hand, TileObject extraTile)
         {
             _handTiles = hand.GetAllTiles(extraTile);
             _tileCounters = new int[ConstValues.NUMBER_OF_UNIQUE_NUMERICAL_VALUES];

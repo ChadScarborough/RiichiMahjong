@@ -1,5 +1,6 @@
 ﻿using System;
 using RMU.Tiles;
+using RMU.Tiles.TileDecorators;
 
 namespace RMU.Globals
 {
@@ -16,6 +17,21 @@ namespace RMU.Globals
             int int2 = MinOfThree(d, e, f);
             int int3 = Math.Min(g, h);
             return MinOfThree(int1, int2, int3);
+        }
+
+        public static int MinOfArray(int[] array)
+        {
+            int length = array.Length;
+            int min = array[0];
+            for (int i = 1; i < length; i++)
+            {
+                if (array[i] < min)
+                {
+                    min = array[i];
+                }
+            }
+
+            return min;
         }
 
         public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2)
@@ -36,12 +52,14 @@ namespace RMU.Globals
             }
         }
 
-        public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2, TileObject tile3)
+        public static bool AreTilesEquivalent
+            (TileObject tile1, TileObject tile2, TileObject tile3)
         {
             return AreTilesEquivalent(tile1, tile2) && AreTilesEquivalent(tile2, tile3);
         }
 
-        public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2, TileObject tile3, TileObject tile4)
+        public static bool AreTilesEquivalent
+            (TileObject tile1, TileObject tile2, TileObject tile3, TileObject tile4)
         {
             return AreTilesEquivalent(tile1, tile2, tile3) && AreTilesEquivalent(tile3, tile4);
         }
@@ -63,7 +81,8 @@ namespace RMU.Globals
             return false;
         }
 
-        public static bool DoTilesFormValidSequence(TileObject bottomTile, TileObject middleTile, TileObject topTile)
+        public static bool DoTilesFormValidSequence
+            (TileObject bottomTile, TileObject middleTile, TileObject topTile)
         {
             bool sameSuit = bottomTile.GetSuit() == middleTile.GetSuit() && middleTile.GetSuit() == topTile.GetSuit();
             bool bottomTwoTilesCorrect = AreTilesEquivalent(bottomTile, GetTileBelow(middleTile));

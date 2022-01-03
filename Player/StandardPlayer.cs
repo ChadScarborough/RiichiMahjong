@@ -7,16 +7,16 @@ namespace RMU.Player
     public class StandardPlayer : IPlayer
     {
         private ISeatWindState _seatWind;
-        private IHand _hand;
+        private AbstractHand _hand;
         private IPlayer _playerOnLeft;
         private IPlayer _playerAcross;
         private IPlayer _playerOnRight;
         private int _score;
 
-        public StandardPlayer(ISeatWindState _seatWind, IHand _hand)
+        public StandardPlayer(ISeatWindState seatWind, AbstractHand hand)
         {
-            this._seatWind = _seatWind;
-            this._hand = _hand;
+            this._seatWind = seatWind;
+            this._hand = hand;
         }
 
         public Enums.Wind GetSeatWind()
@@ -29,9 +29,9 @@ namespace RMU.Player
             this._seatWind = seatWindState;
         }
 
-        public void SetScore(int _score)
+        public void SetScore(int score)
         {
-            this._score = _score;
+            this._score = score;
         }
 
         public int GetScore()

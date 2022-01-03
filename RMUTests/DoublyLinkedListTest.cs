@@ -1,73 +1,73 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.DataStructures;
 using System;
+using RMU.Globals.DataStructures;
 
 namespace RMUTests
 {
     [TestClass]
     public class DoublyLinkedListTest
     {
-        DoublyLinkedList<int> doublyLinkedList = new DoublyLinkedList<int>();
+        DoublyLinkedList<int> _doublyLinkedList = new DoublyLinkedList<int>();
 
         [TestMethod]
         public void ListIsEmpty_WhenInitialized()
         {
-            Assert.AreEqual(0, doublyLinkedList.GetSize());
-            Assert.IsTrue(doublyLinkedList.IsEmpty());
+            Assert.AreEqual(0, _doublyLinkedList.GetSize());
+            Assert.IsTrue(_doublyLinkedList.IsEmpty());
         }
 
         [TestMethod]
         public void ListContainsOneElement_AfterAddingOneElement()
         {
-            doublyLinkedList.AddHead(69);
-            Assert.IsFalse(doublyLinkedList.IsEmpty());
-            Assert.AreEqual(1, doublyLinkedList.GetSize());
+            _doublyLinkedList.AddHead(69);
+            Assert.IsFalse(_doublyLinkedList.IsEmpty());
+            Assert.AreEqual(1, _doublyLinkedList.GetSize());
         }
 
         [TestMethod]
         public void ListReturnsValueOfNodeX_WhenNodeXIsRemovedFromHeadEnd()
         {
-            doublyLinkedList.AddHead(69);
-            Assert.AreEqual(69, doublyLinkedList.RemoveHead());
-            Assert.IsTrue(doublyLinkedList.IsEmpty());
+            _doublyLinkedList.AddHead(69);
+            Assert.AreEqual(69, _doublyLinkedList.RemoveHead());
+            Assert.IsTrue(_doublyLinkedList.IsEmpty());
         }
 
         [TestMethod]
         public void ListReturnsValueOfNodeX_WhenNodeXIsRemovedFromTailEnd()
         {
-            doublyLinkedList.AddTail(69);
-            Assert.AreEqual(69, doublyLinkedList.RemoveTail());
-            Assert.IsTrue(doublyLinkedList.IsEmpty());
+            _doublyLinkedList.AddTail(69);
+            Assert.AreEqual(69, _doublyLinkedList.RemoveTail());
+            Assert.IsTrue(_doublyLinkedList.IsEmpty());
         }
 
         [TestMethod]
         public void FirstNodeAddedRemainsAsTail_AfterAddingOnTheHeadEnd()
         {
-            doublyLinkedList.AddHead(69);
-            doublyLinkedList.AddHead(2);
-            doublyLinkedList.AddHead(420);
-            Assert.AreEqual(69, doublyLinkedList.GetTail().GetValue());
-            Assert.AreEqual(420, doublyLinkedList.GetHead().GetValue());
-            Assert.AreEqual(3, doublyLinkedList.GetSize());
+            _doublyLinkedList.AddHead(69);
+            _doublyLinkedList.AddHead(2);
+            _doublyLinkedList.AddHead(420);
+            Assert.AreEqual(69, _doublyLinkedList.GetTail().GetValue());
+            Assert.AreEqual(420, _doublyLinkedList.GetHead().GetValue());
+            Assert.AreEqual(3, _doublyLinkedList.GetSize());
         }
 
         [TestMethod]
         public void FirstNodeAddedRemainsAsHead_AfterAddingOnTheTailEnd()
         {
-            doublyLinkedList.AddTail(69);
-            doublyLinkedList.AddTail(2);
-            doublyLinkedList.AddTail(420);
-            Assert.AreEqual(69, doublyLinkedList.GetHead().GetValue());
-            Assert.AreEqual(420, doublyLinkedList.GetTail().GetValue());
-            Assert.AreEqual(3, doublyLinkedList.GetSize());
+            _doublyLinkedList.AddTail(69);
+            _doublyLinkedList.AddTail(2);
+            _doublyLinkedList.AddTail(420);
+            Assert.AreEqual(69, _doublyLinkedList.GetHead().GetValue());
+            Assert.AreEqual(420, _doublyLinkedList.GetTail().GetValue());
+            Assert.AreEqual(3, _doublyLinkedList.GetSize());
         }
 
         [TestMethod]
         public void GetNextMethod_ReturnsNextNodeInTheList()
         {
-            doublyLinkedList.AddHead(69);
-            doublyLinkedList.AddHead(420);
-            Assert.AreEqual(69, doublyLinkedList.GetHead().GetNext().GetValue());
+            _doublyLinkedList.AddHead(69);
+            _doublyLinkedList.AddHead(420);
+            Assert.AreEqual(69, _doublyLinkedList.GetHead().GetNext().GetValue());
         }
 
         [TestMethod]
@@ -75,15 +75,15 @@ namespace RMUTests
         {
             Exception ex = null;
 
-            Assert.IsTrue(doublyLinkedList.IsEmpty());
+            Assert.IsTrue(_doublyLinkedList.IsEmpty());
 
             try
             {
-                doublyLinkedList.RemoveHead();
+                _doublyLinkedList.RemoveHead();
             }
-            catch(Exception ExpectedException)
+            catch(Exception expectedException)
             {
-                ex = ExpectedException;
+                ex = expectedException;
             }
 
             Assert.IsNotNull(ex);
@@ -92,11 +92,11 @@ namespace RMUTests
 
             try
             {
-                doublyLinkedList.RemoveTail();
+                _doublyLinkedList.RemoveTail();
             }
-            catch (Exception ExpectedException)
+            catch (Exception expectedException)
             {
-                ex = ExpectedException;
+                ex = expectedException;
             }
 
             Assert.IsNotNull(ex);
@@ -105,11 +105,11 @@ namespace RMUTests
         [TestMethod]
         public void ListIsEmpty_AfterClearing()
         {
-            doublyLinkedList.AddHead(69);
-            doublyLinkedList.AddHead(420);
-            Assert.IsFalse(doublyLinkedList.IsEmpty());
-            doublyLinkedList.Clear();
-            Assert.IsTrue(doublyLinkedList.IsEmpty());
+            _doublyLinkedList.AddHead(69);
+            _doublyLinkedList.AddHead(420);
+            Assert.IsFalse(_doublyLinkedList.IsEmpty());
+            _doublyLinkedList.Clear();
+            Assert.IsTrue(_doublyLinkedList.IsEmpty());
         }
     }
 }

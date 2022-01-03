@@ -1,12 +1,13 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using System.Collections.Generic;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku.Yakuman
 {
     public class AllTerminals : AbstractYakuman
     {
-        private List<TileObject> handTiles;
+        private List<TileObject> _handTiles;
 
         public AllTerminals()
         {
@@ -16,7 +17,7 @@ namespace RMU.Yaku.Yakuman
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeHandTiles(hand, extraTile);
             return HandContainsOnlyTerminalTiles();
@@ -24,7 +25,7 @@ namespace RMU.Yaku.Yakuman
 
         private bool HandContainsOnlyTerminalTiles()
         {
-            foreach (TileObject tile in handTiles)
+            foreach (TileObject tile in _handTiles)
             {
                 if (TileIsNotTerminal(tile))
                 {
@@ -39,9 +40,9 @@ namespace RMU.Yaku.Yakuman
             return tile.IsTerminal() == false;
         }
 
-        private void InitializeHandTiles(IHand hand, TileObject extraTile)
+        private void InitializeHandTiles(AbstractHand hand, TileObject extraTile)
         {
-            handTiles = hand.GetAllTiles(extraTile);
+            _handTiles = hand.GetAllTiles(extraTile);
         }
     }
 }

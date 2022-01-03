@@ -2,6 +2,7 @@
 using RMU.Tiles;
 using RMU.Globals;
 using System.Collections.Generic;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -10,7 +11,7 @@ namespace RMU.Yaku.Yakuman
         private int _greenDragonCounter = 0;
         private int _redDragonCounter = 0;
         private int _whiteDragonCounter = 0;
-        private List<TileObject> handTiles;
+        private List<TileObject> _handTiles;
 
         public BigThreeDragons()
         {
@@ -20,7 +21,7 @@ namespace RMU.Yaku.Yakuman
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
             CheckHandForDragons();
@@ -29,16 +30,16 @@ namespace RMU.Yaku.Yakuman
 
         private void CheckHandForDragons()
         {
-            foreach (TileObject tile in handTiles)
+            foreach (TileObject tile in _handTiles)
             {
                 CheckIfTileIsDragonAndIncrementAppropriateCounter(tile);
             }
         }
 
-        private void InitializeValues(IHand hand, TileObject extraTile)
+        private void InitializeValues(AbstractHand hand, TileObject extraTile)
         {
             ResetCounters();
-            handTiles = hand.GetAllTiles(extraTile);
+            _handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool AreAtLeastThreeOfEachDragon()

@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.Shanten;
-using static RMU.Shanten.HandSplitter;
+using static RMU.Shanten.HandSplitter.HandSplitter;
 using RMU.Hand.TestHands;
 using RMU.Hand;
+using RMU.Shanten.HandSplitter;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 
@@ -17,7 +15,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void HandSplitter_DoesNotReturnNull_WhenGivenTilesAsInput()
         {
-            IHand hand = new OpenTestHand();
+            AbstractHand hand = new OpenTestHand();
             List<TileCollection> collections = SplitHandBySuit(hand.GetClosedTiles());
             Assert.IsNotNull(collections);
         }
@@ -25,7 +23,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void HandSplitter_SplitsHandTilesBySuit()
         {
-            IHand hand = new OpenTestHand();
+            AbstractHand hand = new OpenTestHand();
             List<TileCollection> collections = SplitHandBySuit(hand.GetClosedTiles());
             TileCollection man = collections[0];
             TileCollection pin = collections[1];

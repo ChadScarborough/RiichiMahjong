@@ -1,16 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using RMU.Globals;
 using RMU.Tiles;
 using RMU.Hand;
-using RMU.Yaku.YakuLists;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku.Yakuman
 {
     public class ThirteenWaitThirteenOrphans : AbstractYakuman
     {
-        private TileObject[] _terminalsAndHonors = new TileObject[]
+        private readonly TileObject[] _terminalsAndHonors =
         {
             StandardTileList.ONE_MAN,
             StandardTileList.NINE_MAN,
@@ -27,9 +25,9 @@ namespace RMU.Yaku.Yakuman
             StandardTileList.WHITE_DRAGON
         };
 
-        private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS];
+        private readonly int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS];
         private int _multiplier = 1;
-        private List<TileObject> handTiles;
+        private List<TileObject> _handTiles;
 
         public ThirteenWaitThirteenOrphans()
         {
@@ -39,7 +37,7 @@ namespace RMU.Yaku.Yakuman
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeValues(hand);
             CheckForHonorsAndTerminalsInClosedTiles();
@@ -48,7 +46,7 @@ namespace RMU.Yaku.Yakuman
 
         private void CheckForHonorsAndTerminalsInClosedTiles()
         {
-            CheckListForHonorsAndTerminals(handTiles);
+            CheckListForHonorsAndTerminals(_handTiles);
             MultiplyAllCountersTogether();
         }
 
@@ -74,13 +72,14 @@ namespace RMU.Yaku.Yakuman
 
         private bool HandContainsOneOfEachHonorAndTerminal()
         {
-            return _multiplier == 1; //If any terminal is missing from the closed tiles, the value of _multiplier will be 0
+            return _multiplier == 1; 
+            //If any terminal is missing from the closed tiles, the value of _multiplier will be 0
         }
 
-        private void InitializeValues(IHand hand)
+        private void InitializeValues(AbstractHand hand)
         {
             ClearCounters();
-            handTiles = hand.GetClosedTiles();
+            _handTiles = hand.GetClosedTiles();
         }
 
         private void CheckListForHonorsAndTerminals(List<TileObject> tileList)

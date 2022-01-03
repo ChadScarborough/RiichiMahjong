@@ -1,13 +1,14 @@
 ﻿using System.Collections.Generic;
 using RMU.Hand.CompleteHands.CompleteHandComponents;
+using RMU.Shanten.HandSplitter;
 using static RMU.Globals.Enums;
 
 namespace RMU.Shanten
 {
     public static class SevenPairsShantenCalculator
     {
-        private static List<TileCollection> newCollections;
-        private static List<ICompleteHandComponent> components;
+        private static List<TileCollection> _newCollections;
+        private static List<ICompleteHandComponent> _components;
         private static int _triplets, _pairs;
 
         public static int CalculateShanten(List<TileCollection> collections)
@@ -32,7 +33,7 @@ namespace RMU.Shanten
         private static void IncrementCounters()
         {
             ResetCounters();
-            foreach (ICompleteHandComponent component in components)
+            foreach (ICompleteHandComponent component in _components)
             {
                 IncrementAppropriateCounter(component);
             }
@@ -59,21 +60,21 @@ namespace RMU.Shanten
 
         private static void InitializeLists()
         {
-            components = new List<ICompleteHandComponent>();
-            newCollections = new List<TileCollection>();
+            _components = new List<ICompleteHandComponent>();
+            _newCollections = new List<TileCollection>();
         }
 
         private static void CloneCollections(List<TileCollection> collections)
         {
             foreach (TileCollection collection in collections)
             {
-                newCollections.Add(collection.Clone());
+                _newCollections.Add(collection.Clone());
             }
         }
 
         private static void ExtractAllTripletsAndPairs()
         {
-            foreach (TileCollection coll in newCollections)
+            foreach (TileCollection coll in _newCollections)
             {
                 ExtractTriplets(coll);
                 ExtractPairs(coll);
@@ -84,7 +85,7 @@ namespace RMU.Shanten
         {
             foreach (ICompleteHandComponent component in PairExtractor.ExtractPair(coll))
             {
-                components.Add(component);
+                _components.Add(component);
             }
         }
 
@@ -92,7 +93,7 @@ namespace RMU.Shanten
         {
             foreach (ICompleteHandComponent component in PonExtractor.ExtractPon(coll))
             {
-                components.Add(component);
+                _components.Add(component);
             }
         }
     }

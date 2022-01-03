@@ -2,13 +2,14 @@
 using RMU.Tiles;
 using RMU.Globals;
 using System.Collections.Generic;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku
 {
     public class HalfFlush : AbstractYaku
     {
         private Enums.Suit _prescribedSuit;
-        private List<TileObject> handTiles;
+        private List<TileObject> _handTiles;
 
         public HalfFlush()
         {
@@ -18,7 +19,7 @@ namespace RMU.Yaku
             _getValueBehaviour = new OpenDependentGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeHandTiles(hand, extraTile);
             if (HandDoesNotContainBothHonorsAndNonHonors()) return false;
@@ -30,14 +31,14 @@ namespace RMU.Yaku
             return HandContainsHonorsAndNonHonors() == false;
         }
 
-        private void InitializeHandTiles(IHand hand, TileObject extraTile)
+        private void InitializeHandTiles(AbstractHand hand, TileObject extraTile)
         {
-            handTiles = hand.GetAllTiles(extraTile);
+            _handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool EveryTileIsSameSuitOrHonor()
         {
-            foreach (TileObject tile in handTiles)
+            foreach (TileObject tile in _handTiles)
             {
                 if (TileMatchesPrescribedSuitOrIsHonorTile(tile)) continue;
                 return false;
@@ -62,7 +63,7 @@ namespace RMU.Yaku
 
         private bool SuccessfullyFoundNonHonorTileAndSetPrescribedSuit()
         {
-            foreach (TileObject tile in handTiles)
+            foreach (TileObject tile in _handTiles)
             {
                 if (TileIsNonHonorTile(tile))
                 {
@@ -85,7 +86,7 @@ namespace RMU.Yaku
 
         private bool SuccessfullyFoundHonorTile()
         {
-            foreach(TileObject tile in handTiles)
+            foreach(TileObject tile in _handTiles)
             {
                 if (TileIsHonorTile(tile))
                 {

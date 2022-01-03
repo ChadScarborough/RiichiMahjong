@@ -1,13 +1,13 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.DataStructures;
 using System;
+using RMU.Globals.DataStructures;
 
 namespace RMUTests
 {
     [TestClass]
     public class QueueTest
     {
-        Queue<int> _queue = new Queue<int>();
+        readonly Queue<int> _queue = new Queue<int>();
 
         [TestMethod]
         public void QueueIsEmpty_OnInitialization()

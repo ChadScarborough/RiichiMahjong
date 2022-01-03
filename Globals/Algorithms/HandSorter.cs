@@ -1,13 +1,12 @@
 ﻿using System.Collections.Generic;
 using RMU.Tiles;
-using RMU.Globals;
 
-namespace RMU.Algorithms
+namespace RMU.Globals.Algorithms
 {
     public class HandSorter
     {
         private List<Enums.Suit> _suitPriority;
-        private ISortingAlgorithm _sortingAlgorithm;
+        private readonly ISortingAlgorithm _sortingAlgorithm;
 
         public HandSorter()
         {
@@ -23,9 +22,9 @@ namespace RMU.Algorithms
             return list;
         }
 
-        public void SetSuitPriority(Enums.Suit _firstSuit, Enums.Suit _secondSuit, Enums.Suit _thirdSuit, Enums.Suit _fourthSuit, Enums.Suit _fifthSuit)
+        public void SetSuitPriority(Enums.Suit firstSuit, Enums.Suit secondSuit, Enums.Suit thirdSuit, Enums.Suit fourthSuit, Enums.Suit fifthSuit)
         {
-            this._suitPriority = new List<Enums.Suit>() { _firstSuit, _secondSuit, _thirdSuit, _fourthSuit, _fifthSuit };
+            this._suitPriority = new List<Enums.Suit>() { firstSuit, secondSuit, thirdSuit, fourthSuit, fifthSuit };
         }
     }
 }

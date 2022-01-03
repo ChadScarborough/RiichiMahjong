@@ -2,18 +2,18 @@
 using System.Collections.Generic;
 using RMU.Globals;
 
-namespace RMU.Hand
+namespace RMU.Hand.Calls
 {
     public class CreateMidChiiBehaviour : ICreateMeldBehaviour
     {
-        public List<TileObject> CreateMeld(TileObject _calledTile)
+        public List<TileObject> CreateMeld(TileObject calledTile)
         {
-            int value = _calledTile.GetValue();
-            Enums.Suit suit = _calledTile.GetSuit();
+            int value = calledTile.GetValue();
+            Enums.Suit suit = calledTile.GetSuit();
 
             TileObject lowTile = TileFactory.CreateTile(value - 1, suit);
             TileObject highTile = TileFactory.CreateTile(value + 1, suit);
-            return new List<TileObject> { lowTile, _calledTile, highTile };
+            return new List<TileObject> { lowTile, calledTile, highTile };
         }
     }
 }

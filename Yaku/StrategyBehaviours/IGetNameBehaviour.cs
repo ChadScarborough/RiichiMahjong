@@ -1,4 +1,4 @@
-﻿namespace RMU.Yaku
+﻿namespace RMU.Yaku.StrategyBehaviours
 {
     public interface IGetNameBehaviour
     {

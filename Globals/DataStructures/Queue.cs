@@ -1,8 +1,8 @@
-﻿namespace RMU.DataStructures
+﻿namespace RMU.Globals.DataStructures
 {
     public class Queue<T>
     {
-        private DoublyLinkedList<T> _queue;
+        private readonly DoublyLinkedList<T> _queue;
 
         public Queue()
         {

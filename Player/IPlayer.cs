@@ -6,7 +6,7 @@ namespace RMU.Player
     {
         int GetScore();
         Enums.Wind GetSeatWind();
-        void SetScore(int _score);
+        void SetScore(int score);
         void SetSeatWind(ISeatWindState seatWindState);
         void SetPlayerOnLeft(IPlayer player);
         void SetPlayerAcross(IPlayer player);

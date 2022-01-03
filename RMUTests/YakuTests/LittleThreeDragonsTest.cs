@@ -10,7 +10,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class LittleThreeDragonsTest
     {
-        private IHand _hand;
+        private AbstractHand _hand;
 
         [TestMethod]
         public void CheckYakuReturnsTrue_WhenGivenThreeRedAndGreenDragons_AndTwoWhiteDragons()

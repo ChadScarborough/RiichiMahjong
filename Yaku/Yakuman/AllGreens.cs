@@ -1,9 +1,8 @@
 ﻿using RMU.Hand;
 using RMU.Tiles;
 using RMU.Globals;
-using System;
+using RMU.Yaku.StrategyBehaviours;
 using System.Collections.Generic;
-using System.Text;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -28,13 +27,13 @@ namespace RMU.Yaku.Yakuman
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeHand(hand, extraTile);
             return AllTilesInHandAreGreen();
         }
 
-        private void InitializeHand(IHand hand, TileObject extraTile)
+        private void InitializeHand(AbstractHand hand, TileObject extraTile)
         {
             _handTiles = hand.GetAllTiles(extraTile);
         }

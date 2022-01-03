@@ -2,10 +2,10 @@
 using RMU.Tiles;
 using RMU.Globals;
 
-namespace RMU.Algorithms
+namespace RMU.Globals.Algorithms
 {
     public interface ISortingAlgorithm
     {
-        List<TileObject> SortHand(List<TileObject> Tiles, List<Enums.Suit> SuitPriority);
+        List<TileObject> SortHand(List<TileObject> tiles, List<Enums.Suit> suitPriority);
     }
 }

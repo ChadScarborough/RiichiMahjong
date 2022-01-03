@@ -2,6 +2,7 @@
 using System;
 using RMU.Tiles;
 using RMU.Globals;
+using RMU.Hand.Calls;
 
 namespace RMU.Hand.CompleteHands.CompleteHandComponents
 {

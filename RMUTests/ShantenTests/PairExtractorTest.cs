@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RMU.Shanten;
 using RMU.Tiles;
 using static RMU.Globals.StandardTileList;
 using static RMU.Globals.Enums;
 using RMU.Hand.CompleteHands.CompleteHandComponents;
+using RMU.Shanten.HandSplitter;
 
 namespace RMUTests.ShantenTests
 {

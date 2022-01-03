@@ -1,86 +1,85 @@
 ﻿using RMU.Tiles;
-using RMU.Globals;
 using System.Collections.Generic;
 
-namespace RMU.Algorithms
+namespace RMU.Globals.Algorithms
 {
     public class RadixSort : ISortingAlgorithm
     {
         private const int UNIQUE_NUMBERS = 9;
         private const int UNIQUE_SUITS = 5;
-        private List<DataStructures.Queue<TileObject>> NumberBuckets;
-        private List<DataStructures.Queue<TileObject>> SuitBuckets;
+        private readonly List<DataStructures.Queue<TileObject>> _numberBuckets;
+        private readonly List<DataStructures.Queue<TileObject>> _suitBuckets;
         public RadixSort()
         {
-            NumberBuckets = new List<DataStructures.Queue<TileObject>>();
-            SuitBuckets = new List<DataStructures.Queue<TileObject>>();
-            CreateBuckets(NumberBuckets, UNIQUE_NUMBERS);
-            CreateBuckets(SuitBuckets, UNIQUE_SUITS);
+            _numberBuckets = new List<DataStructures.Queue<TileObject>>();
+            _suitBuckets = new List<DataStructures.Queue<TileObject>>();
+            CreateBuckets(_numberBuckets, UNIQUE_NUMBERS);
+            CreateBuckets(_suitBuckets, UNIQUE_SUITS);
         }
 
-        private void CreateBuckets(List<DataStructures.Queue<TileObject>> Buckets, int Quantity)
+        private void CreateBuckets(List<DataStructures.Queue<TileObject>> buckets, int quantity)
         {
-            for (int i = 0; i < Quantity; i++)
+            for (int i = 0; i < quantity; i++)
             {
                 DataStructures.Queue<TileObject> queue = new DataStructures.Queue<TileObject>();
-                Buckets.Add(queue);
+                buckets.Add(queue);
             }
         }
 
-        public List<TileObject> SortHand(List<TileObject> Tiles, List<Enums.Suit> SuitPriority)
+        public List<TileObject> SortHand(List<TileObject> tiles, List<Enums.Suit> suitPriority)
         {
-            SortTilesByNumber(Tiles);
-            SortTilesBySuit(Tiles, SuitPriority);
-            return Tiles;
+            SortTilesByNumber(tiles);
+            SortTilesBySuit(tiles, suitPriority);
+            return tiles;
         }
 
-        private void SortTilesBySuit(List<TileObject> Tiles, List<Enums.Suit> SuitPriority)
+        private void SortTilesBySuit(List<TileObject> tiles, List<Enums.Suit> suitPriority)
         {
-            FillSuitBuckets(Tiles, SuitPriority);
-            Tiles.Clear();
-            EmptyBuckets(Tiles, SuitBuckets);
+            FillSuitBuckets(tiles, suitPriority);
+            tiles.Clear();
+            EmptyBuckets(tiles, _suitBuckets);
         }
 
-        private void FillSuitBuckets(List<TileObject> Tiles, List<Enums.Suit> SuitPriority)
+        private void FillSuitBuckets(List<TileObject> tiles, List<Enums.Suit> suitPriority)
         {
-            foreach (TileObject tile in Tiles)
+            foreach (TileObject tile in tiles)
             {
                 Enums.Suit suit = tile.GetSuit();
-                int index = SuitPriority.IndexOf(suit);
-                SuitBuckets[index].Enqueue(tile);
+                int index = suitPriority.IndexOf(suit);
+                _suitBuckets[index].Enqueue(tile);
             }
         }
 
-        private void SortTilesByNumber(List<TileObject> Tiles)
+        private void SortTilesByNumber(List<TileObject> tiles)
         {
-            FillNumberBuckets(Tiles);
-            Tiles.Clear();
-            EmptyBuckets(Tiles, NumberBuckets);
+            FillNumberBuckets(tiles);
+            tiles.Clear();
+            EmptyBuckets(tiles, _numberBuckets);
         }
 
-        private void FillNumberBuckets(List<TileObject> Tiles)
+        private void FillNumberBuckets(List<TileObject> tiles)
         {
-            foreach (TileObject tile in Tiles)
+            foreach (TileObject tile in tiles)
             {
                 int index = tile.GetValue() - 1;
-                NumberBuckets[index].Enqueue(tile);
+                _numberBuckets[index].Enqueue(tile);
             }
         }
 
-        private static void EmptyQueues(List<TileObject> Tiles, DataStructures.Queue<TileObject> queue)
+        private static void EmptyQueues(List<TileObject> tiles, DataStructures.Queue<TileObject> queue)
         {
             while (!queue.IsEmpty())
             {
                 TileObject tile = queue.Dequeue();
-                Tiles.Add(tile);
+                tiles.Add(tile);
             }
         }
 
-        private void EmptyBuckets(List<TileObject> Tiles, List<DataStructures.Queue<TileObject>> buckets)
+        private void EmptyBuckets(List<TileObject> tiles, List<DataStructures.Queue<TileObject>> buckets)
         {
             foreach (DataStructures.Queue<TileObject> queue in buckets)
             {
-                EmptyQueues(Tiles, queue);
+                EmptyQueues(tiles, queue);
             }
         }
     }

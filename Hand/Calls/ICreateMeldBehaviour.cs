@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using RMU.Tiles;
 
-namespace RMU.Hand
+namespace RMU.Hand.Calls
 {
     public interface ICreateMeldBehaviour
     {
-        public List<TileObject> CreateMeld(TileObject _calledTile);
+        public List<TileObject> CreateMeld(TileObject calledTile);
     }
 }

@@ -2,13 +2,14 @@
 using RMU.Tiles;
 using System.Collections.Generic;
 using RMU.Globals;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku
 {
     public class FullFlush : AbstractYaku
     {
         private Enums.Suit _prescribedSuit;
-        private List<TileObject> handTiles;
+        private List<TileObject> _handTiles;
 
         public FullFlush()
         {
@@ -18,7 +19,7 @@ namespace RMU.Yaku
             _getValueBehaviour = new OpenDependentGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeHandTiles(hand, extraTile);
             if (DidNotFindNonHonorTileForPrescribedSuit()) return false;
@@ -32,7 +33,7 @@ namespace RMU.Yaku
 
         private bool AllSuitsAreTheSame()
         {
-            foreach (TileObject tile in handTiles)
+            foreach (TileObject tile in _handTiles)
             {
                 if (SuitDoesNotMatchPrescribedSuit(tile)) return false;
             }
@@ -44,9 +45,9 @@ namespace RMU.Yaku
             return SuitMatchesPrescribedSuit(tile) == false;
         }
 
-        private void InitializeHandTiles(IHand hand, TileObject extraTile)
+        private void InitializeHandTiles(AbstractHand hand, TileObject extraTile)
         {
-            handTiles = hand.GetAllTiles(extraTile);
+            _handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool SuitMatchesPrescribedSuit(TileObject tile)
@@ -56,7 +57,7 @@ namespace RMU.Yaku
 
         private bool SuccessfullyFoundNonHonorTileAndSetPrescribedSuit()
         {
-            foreach(TileObject tile in handTiles)
+            foreach(TileObject tile in _handTiles)
             {
                 if (TileIsNotHonor(tile))
                 {

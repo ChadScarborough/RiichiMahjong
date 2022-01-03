@@ -1,10 +1,10 @@
 ﻿using RMU.Hand;
 
-namespace RMU.Yaku
+namespace RMU.Yaku.StrategyBehaviours
 {
     public class OpenDependentGetValueBehaviour : IGetValueBehaviour
     {
-        public int GetValue(int value, IHand hand)
+        public int GetValue(int value, AbstractHand hand)
         {
             if (hand.IsOpen())
             {

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
-using RMU.Shanten;
+using RMU.Shanten.HandSplitter;
 
 namespace RMU.Globals.Algorithms
 {

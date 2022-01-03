@@ -1,4 +1,6 @@
-﻿namespace RMU.Tiles
+﻿using RMU.Globals;
+
+namespace RMU.Tiles.TileDecorators
 {
     public class RedFiveDecorator : TileDecorator
     {
@@ -12,6 +14,12 @@
         public override bool IsRedFive()
         {
             return true;
+        }
+
+        public override TileObject Clone()
+        {
+            TileObject clone = _decoratee.Clone();
+            return new RedFiveDecorator(clone);
         }
     }
 }

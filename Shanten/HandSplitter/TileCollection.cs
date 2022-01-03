@@ -2,7 +2,7 @@
 using RMU.Tiles;
 using RMU.Globals;
 
-namespace RMU.Shanten
+namespace RMU.Shanten.HandSplitter
 {
     public class TileCollection
     {

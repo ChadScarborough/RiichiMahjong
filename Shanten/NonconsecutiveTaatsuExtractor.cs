@@ -2,6 +2,7 @@
 using RMU.Globals;
 using RMU.Tiles;
 using RMU.Hand.CompleteHands.CompleteHandComponents;
+using RMU.Shanten.HandSplitter;
 using static RMU.Hand.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 using static RMU.Globals.Enums;
 
@@ -89,10 +90,10 @@ namespace RMU.Shanten
             _collection = collection;
         }
 
-        private static void ExtractTiles(TileCollection collection, List<TileObject> _tiles, int i, int j)
+        private static void ExtractTiles(TileCollection collection, List<TileObject> tiles, int i, int j)
         {
-            collection.RemoveTile(_tiles[i]);
-            collection.RemoveTile(_tiles[j]);
+            collection.RemoveTile(tiles[i]);
+            collection.RemoveTile(tiles[j]);
         }
     }
 }

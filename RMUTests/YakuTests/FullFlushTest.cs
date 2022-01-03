@@ -13,7 +13,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class FullFlushTest
     {
-        private AbstractYaku _fullFlush = YakuList.FULL_FLUSH;
+        private readonly AbstractYaku _fullFlush = YakuList.FULL_FLUSH;
 
         [TestMethod]
         public void Yaku_ReturnsCorrectStringName()

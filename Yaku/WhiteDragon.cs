@@ -2,13 +2,14 @@
 using System.Collections.Generic;
 using RMU.Tiles;
 using RMU.Globals;
+using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku
 {
     public class WhiteDragon : AbstractYaku
     {
-        private int counter;
-        private List<TileObject> handTiles;
+        private int _counter;
+        private List<TileObject> _handTiles;
 
         public WhiteDragon()
         {
@@ -17,27 +18,27 @@ namespace RMU.Yaku
             _getNameBehaviour = new StandardGetNameBehaviour();
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
             CheckForWhiteDragons();
             return AtLeastThreeWhiteDragons();
         }
 
-        private void InitializeValues(IHand hand, TileObject extraTile)
+        private void InitializeValues(AbstractHand hand, TileObject extraTile)
         {
-            counter = 0;
-            handTiles = hand.GetAllTiles(extraTile);
+            _counter = 0;
+            _handTiles = hand.GetAllTiles(extraTile);
         }
 
         private bool AtLeastThreeWhiteDragons()
         {
-            return counter >= 3;
+            return _counter >= 3;
         }
 
         private void CheckForWhiteDragons()
         {
-            foreach (TileObject tile in handTiles)
+            foreach (TileObject tile in _handTiles)
             {
                 CheckIfWhiteDragon(tile);
             }
@@ -47,7 +48,7 @@ namespace RMU.Yaku
         {
             if (IsTileWhiteDragon(tile))
             {
-                counter++;
+                _counter++;
             }
         }
 

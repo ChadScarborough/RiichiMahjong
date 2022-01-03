@@ -9,7 +9,7 @@ namespace RMUTests.YakuTests.YakumanTests
     [TestClass]
     public class FourBigWindsTest
     {
-        private IHand _hand;
+        private AbstractHand _hand;
 
         [TestMethod]
         public void CheckYakuReturnsTrue_WhenGivenAtLeastThreeOfEachWind()

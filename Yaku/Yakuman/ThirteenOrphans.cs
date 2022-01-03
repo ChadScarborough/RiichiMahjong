@@ -1,6 +1,5 @@
-﻿using System;
+﻿using RMU.Yaku.StrategyBehaviours;
 using System.Collections.Generic;
-using System.Text;
 using RMU.Globals;
 using RMU.Hand;
 using RMU.Tiles;
@@ -28,7 +27,7 @@ namespace RMU.Yaku.Yakuman
 
         private int[] _counters = new int[ConstValues.NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS];
         private int _multiplier = 1;
-        private List<TileObject> handTiles;
+        private List<TileObject> _handTiles;
 
         public ThirteenOrphans()
         {
@@ -38,7 +37,7 @@ namespace RMU.Yaku.Yakuman
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(IHand hand, TileObject extraTile)
+        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
             CheckHandForTerminals();
@@ -52,14 +51,14 @@ namespace RMU.Yaku.Yakuman
 
         private void CheckHandForTerminals()
         {
-            CheckListForTerminals(handTiles);
+            CheckListForTerminals(_handTiles);
             MultiplyAllCountersTogether();
         }
 
-        private void InitializeValues(IHand hand, TileObject extraTile)
+        private void InitializeValues(AbstractHand hand, TileObject extraTile)
         {
             ResetCounters();
-            handTiles = hand.GetAllTiles(extraTile);
+            _handTiles = hand.GetAllTiles(extraTile);
         }
 
         private void MultiplyAllCountersTogether()

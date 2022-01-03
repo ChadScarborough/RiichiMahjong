@@ -2,10 +2,11 @@
 using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using RMU.Globals;
+using RMU.Shanten.HandSplitter;
 
 namespace RMU.Shanten
 {
-    public class PairExtractor
+    public static class PairExtractor
     {
         private static List<TileObject> _tiles;
         private static List<ICompleteHandComponent> _outputList;

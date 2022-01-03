@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RMU.Hand.TestHands;
 using RMU.Tiles;
 using RMU.Yaku;
@@ -13,7 +10,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class AllSimplesTest
     {
-        private AbstractYaku _allSimples = YakuList.ALL_SIMPLES;
+        private readonly AbstractYaku _allSimples = YakuList.ALL_SIMPLES;
 
         [TestMethod]
         public void Yaku_ReturnsCorrectStringName()

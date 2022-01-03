@@ -1,4 +1,4 @@
-﻿namespace RMU.Tiles
+﻿namespace RMU.Tiles.TileDecorators
 {
     public abstract class TileDecorator : TileObject
     {
