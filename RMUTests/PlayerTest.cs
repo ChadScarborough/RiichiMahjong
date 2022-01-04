@@ -18,7 +18,7 @@ namespace RMUTests
         public void PlayerObject_ReturnsCorrectSeatWind()
         {
             IDeadWall deadWall = new StandardDeadWall(_wall);
-            AbstractHand hand = new StandardHand(_wall, deadWall);
+            AbstractHand hand = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player = new StandardPlayer(_seatWind, hand);
             Assert.AreEqual(Enums.Wind.East, player.GetSeatWind());
         }
@@ -26,7 +26,7 @@ namespace RMUTests
         public void PlayerObject_ReturnsCorrectSeatWind_AfterChangingWinds()
         {
             IDeadWall deadWall = new StandardDeadWall(_wall);
-            AbstractHand hand = new StandardHand(_wall, deadWall);
+            AbstractHand hand = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player = new StandardPlayer(_seatWind, hand);
             player.SetSeatWind(new NorthWindState());
             Assert.AreEqual(Enums.Wind.North, player.GetSeatWind());
@@ -40,7 +40,7 @@ namespace RMUTests
         public void GettingScore_ReturnsSetScore()
         {
             IDeadWall deadWall = new StandardDeadWall(_wall);
-            AbstractHand hand = new StandardHand(_wall, deadWall);
+            AbstractHand hand = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player = new StandardPlayer(_seatWind, hand);
             Assert.AreEqual(0, player.GetScore());
             player.SetScore(20000);
@@ -51,9 +51,9 @@ namespace RMUTests
         public void GetPlayerOnLeft_ReturnsPlayerSetToLeft()
         {
             IDeadWall deadWall = new StandardDeadWall(_wall);
-            AbstractHand hand = new StandardHand(_wall, deadWall);
+            AbstractHand hand = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player = new StandardPlayer(_seatWind, hand);
-            AbstractHand hand2 = new StandardHand(_wall, deadWall);
+            AbstractHand hand2 = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player2 = new StandardPlayer(new NorthWindState(), hand2);
             Assert.IsNull(player.GetPlayerOnLeft());
             player.SetPlayerOnLeft(player2);
@@ -65,9 +65,9 @@ namespace RMUTests
         public void GetPlayerAcross_ReturnsPlayerSetAcross()
         {
             IDeadWall deadWall = new StandardDeadWall(_wall);
-            AbstractHand hand = new StandardHand(_wall, deadWall);
+            AbstractHand hand = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player = new StandardPlayer(_seatWind, hand);
-            AbstractHand hand2 = new StandardHand(_wall, deadWall);
+            AbstractHand hand2 = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player2 = new StandardPlayer(new WestWindState(), hand2);
             Assert.IsNull(player.GetPlayerAcross());
             player.SetPlayerAcross(player2);
@@ -79,9 +79,9 @@ namespace RMUTests
         public void GetPlayerOnRight_ReturnsPlayerSetToRight()
         {
             IDeadWall deadWall = new StandardDeadWall(_wall);
-            AbstractHand hand = new StandardHand(_wall, deadWall);
+            AbstractHand hand = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player = new StandardPlayer(_seatWind, hand);
-            AbstractHand hand2 = new StandardHand(_wall, deadWall);
+            AbstractHand hand2 = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player2 = new StandardPlayer(new SouthWindState(), hand2);
             Assert.IsNull(player.GetPlayerOnRight());
             player.SetPlayerOnRight(player2);
@@ -94,7 +94,7 @@ namespace RMUTests
         {
             Exception ex = null;
             IDeadWall deadWall = new StandardDeadWall(_wall);
-            AbstractHand hand = new StandardHand(_wall, deadWall);
+            AbstractHand hand = new StandardFourPlayerHand(_wall, deadWall);
             IPlayer player = new StandardPlayer(_seatWind, hand);
             Assert.IsNull(ex);
             try
