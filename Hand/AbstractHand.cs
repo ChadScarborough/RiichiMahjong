@@ -94,30 +94,6 @@ namespace RMU.Hand
             return false;
         }
 
-        public virtual void CallPon(TileObject calledTile)
-        {
-            ICallCommand callPon = new CallPonCommand(this, calledTile);
-            callPon.Execute();
-        }
-
-        public virtual void CallClosedKan(TileObject calledTile)
-        {
-            ICallCommand callClosedKan = new CallClosedKanCommand(this, calledTile);
-            callClosedKan.Execute();
-        }
-        
-        public virtual void CallOpenKan1(TileObject calledTile)
-        {
-            ICallCommand callOpenKan1 = new CallOpenKan1Command(this, calledTile);
-            callOpenKan1.Execute();
-        }
-        
-        public virtual void CallOpenKan2(TileObject calledTile)
-        {
-            ICallCommand callOpenKan2 = new CallOpenKan2Command(this, calledTile);
-            callOpenKan2.Execute();
-        }
-
         protected virtual void AddDrawTileToHand()
         {
             _closedTiles.Add(_drawTile);

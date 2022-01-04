@@ -3,7 +3,7 @@ using RMU.Wall.DeadWall;
 
 namespace RMU.Hand
 {
-    public class StandardFourPlayerHand : AbstractHand
+    public class StandardFourPlayerHand : AbstractFourPlayerHand
     {
         public StandardFourPlayerHand(AbstractWall wall, IDeadWall deadWall) : base(wall, deadWall)
         {
