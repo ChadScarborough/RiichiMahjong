@@ -19,7 +19,7 @@ namespace RMU.Hand
         private readonly StandardDiscardPile _discardPile;
         private readonly HandSorter _handSorter;
         private readonly List<OpenMeld> _openMelds;
-        protected bool _isOpen = false;
+        private bool _isOpen;
 
         protected AbstractHand(AbstractWall wall, IDeadWall deadWall)
         {
@@ -29,6 +29,11 @@ namespace RMU.Hand
             _handSorter = new HandSorter();
             _closedTiles = new List<TileObject>();
             _openMelds = new List<OpenMeld>();
+        }
+
+        public void OpenHand()
+        {
+            _isOpen = true;
         }
         
         public virtual void DiscardTile(int index)
@@ -57,18 +62,18 @@ namespace RMU.Hand
             _drawTile = _deadWall.DrawTile();
         }
         
-        public virtual void SortHand()
+        protected virtual void SortHand()
         {
             _closedTiles = _handSorter.SortHand(_closedTiles);
         }
         
-        protected void CreateOpenMeld(TileObject calledTile, MeldType meldType)
+        public void CreateOpenMeld(TileObject calledTile, MeldType meldType)
         {
             OpenMeld openMeld = new OpenMeld(meldType, calledTile);
             this._openMelds.Add(openMeld);
         }
         
-        protected void RemoveCopyOfTile(TileObject calledTile)
+        public void RemoveCopyOfTile(TileObject calledTile)
         {
             for (int i = _closedTiles.Count - 1; i >= 0; i--)
             {
@@ -79,7 +84,7 @@ namespace RMU.Hand
             }
         }
         
-        protected bool IsDuplicateTile(TileObject closedTile, TileObject calledTile, int index)
+        private bool IsDuplicateTile(TileObject closedTile, TileObject calledTile, int index)
         {
             if (AreTilesEquivalent(closedTile, calledTile))
             {
@@ -91,86 +96,28 @@ namespace RMU.Hand
 
         public virtual void CallPon(TileObject calledTile)
         {
-            CreateOpenMeld(calledTile, PON);
-            for (int i = 0; i < 2; i++)
-            {
-                RemoveCopyOfTile(calledTile);
-            }
+            ICallCommand callPon = new CallPonCommand(this, calledTile);
+            callPon.Execute();
         }
 
         public virtual void CallClosedKan(TileObject calledTile)
         {
-            CreateOpenMeld(calledTile, CLOSED_KAN_MELD);
-            for (int i = 0; i < 4; i++)
-            {
-                RemoveCopyOfTile(calledTile);
-            }
-            if (AreTilesEquivalent(_drawTile, calledTile))
-            {
-                _drawTile = null;
-            }
+            ICallCommand callClosedKan = new CallClosedKanCommand(this, calledTile);
+            callClosedKan.Execute();
         }
         
         public virtual void CallOpenKan1(TileObject calledTile)
         {
-            _isOpen = true;
-            CreateOpenMeld(calledTile, OPEN_KAN_1);
-            for (int i = 0; i < 3; i++)
-            {
-                RemoveCopyOfTile(calledTile);
-            }
+            ICallCommand callOpenKan1 = new CallOpenKan1Command(this, calledTile);
+            callOpenKan1.Execute();
         }
         
         public virtual void CallOpenKan2(TileObject calledTile)
         {
-            foreach(OpenMeld openMeld in _openMelds)
-            {
-                if(SuccessfullyTurnedPonIntoOpenKan2(calledTile, openMeld))
-                {
-                    return;
-                }
-            }
+            ICallCommand callOpenKan2 = new CallOpenKan2Command(this, calledTile);
+            callOpenKan2.Execute();
         }
-        
-        private bool SuccessfullyTurnedPonIntoOpenKan2(TileObject calledTile, OpenMeld openMeld)
-        {
-            TileObject openMeldTile = openMeld.GetTiles()[0];
-            if (openMeld.GetMeldType() == PON && AreTilesEquivalent(openMeldTile, calledTile))
-            {
-                return ChangePonToOpenKan2(calledTile, openMeld);
-            }
-            return false;
-        }
-        
-        private bool ChangePonToOpenKan2(TileObject calledTile, OpenMeld openMeld)
-        {
-            openMeld.SetMeldType(OPEN_KAN_2);
-            openMeld.AddTile(calledTile);
-            if (AreTilesEquivalent(_drawTile, calledTile))
-            {
-                _drawTile = null;
-                return true;
-            }
-            foreach (TileObject tile in _closedTiles)
-            {
-                if (RemovedTileFromHand(tile)) 
-                { 
-                    return true; 
-                }
-            }
-            return false;
-        }
-        
-        private bool RemovedTileFromHand(TileObject tile)
-        {
-            if (AreTilesEquivalent(_drawTile, tile))
-            {
-                _closedTiles.Remove(tile);
-                return true;
-            }
-            return false;
-        }
-        
+
         protected virtual void AddDrawTileToHand()
         {
             _closedTiles.Add(_drawTile);
@@ -233,6 +180,11 @@ namespace RMU.Hand
             {
                 outputList.Add(tile);
             }
+        }
+
+        public void RemoveDrawTile()
+        {
+            _drawTile = null;
         }
     }
 }

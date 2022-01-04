@@ -1,7 +1,7 @@
+using RMU.Hand.Calls;
 using RMU.Tiles;
 using RMU.Wall;
 using RMU.Wall.DeadWall;
-using static RMU.Globals.Enums;
 
 namespace RMU.Hand
 {
@@ -13,35 +13,20 @@ namespace RMU.Hand
         
         public virtual void CallLowChii(TileObject calledTile)
         {
-            _isOpen = true;
-            CreateOpenMeld(calledTile, LOW_CHII);
-            for (int i = 0; i < 2; i++)
-            {
-                TileObject tempTile = TileFactory.CreateTile(calledTile.GetValue() - (i + 1), calledTile.GetSuit());
-                RemoveCopyOfTile(tempTile);
-            }
+            ICallCommand callLowChiiCommand = new CallLowChiiCommand(this, calledTile);
+            callLowChiiCommand.Execute();
         }
         
         public virtual void CallMidChii(TileObject calledTile)
         {
-            _isOpen = true;
-            CreateOpenMeld(calledTile, MID_CHII);
-            for (int i = 0; i < 2; i++)
-            {
-                TileObject tempTile = TileFactory.CreateTile(calledTile.GetValue() - ((2 * i) - 1), calledTile.GetSuit());
-                RemoveCopyOfTile(tempTile);
-            }
+            ICallCommand callMidChiiCommand = new CallMidChiiCommand(this, calledTile);
+            callMidChiiCommand.Execute();
         }
         
         public virtual void CallHighChii(TileObject calledTile)
         {
-            _isOpen = true;
-            CreateOpenMeld(calledTile, HIGH_CHII);
-            for (int i = 0; i < 2; i++)
-            {
-                TileObject tempTile = TileFactory.CreateTile(calledTile.GetValue() + (i + 1), calledTile.GetSuit());
-                RemoveCopyOfTile(tempTile);
-            }
+            ICallCommand callHighChiiCommand = new CallHighChiiCommand(this, calledTile);
+            callHighChiiCommand.Execute();
         }
     }
 }
