@@ -1,7 +1,8 @@
+using RMU.Hand;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CallCommands
 {
     public class CallOpenKan1Command : ICallCommand
     {
@@ -22,6 +23,11 @@ namespace RMU.Hand.Calls
             {
                 _handMakingCall.RemoveCopyOfTile(_calledTile);
             }
+        }
+
+        public int GetPriority()
+        {
+            return 2;
         }
     }
 }

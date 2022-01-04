@@ -1,6 +1,6 @@
 using RMU.Hand;
 using RMU.Tiles;
-using RMU.Hand.Calls;
+using RMU.Calls.CallCommands;
 
 namespace RMU.Player
 {

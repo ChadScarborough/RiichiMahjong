@@ -1,8 +1,9 @@
+using RMU.Hand;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 using static RMU.Globals.Functions;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CallCommands
 {
     public class CallClosedKanCommand : ICallCommand
     {
@@ -26,6 +27,11 @@ namespace RMU.Hand.Calls
             {
                 _handMakingCall.RemoveDrawTile();
             }
+        }
+
+        public int GetPriority()
+        {
+            return 2;
         }
     }
 }

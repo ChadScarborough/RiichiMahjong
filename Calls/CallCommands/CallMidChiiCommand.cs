@@ -1,7 +1,8 @@
+using RMU.Hand;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CallCommands
 {
     public class CallMidChiiCommand : ICallCommand
     {
@@ -23,6 +24,11 @@ namespace RMU.Hand.Calls
                 TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() - ((2 * i) - 1), _calledTile.GetSuit());
                 _handMakingCall.RemoveCopyOfTile(tempTile);
             }
+        }
+
+        public int GetPriority()
+        {
+            return 1;
         }
     }
 }

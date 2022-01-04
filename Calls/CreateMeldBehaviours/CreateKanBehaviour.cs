@@ -1,7 +1,7 @@
 ﻿using RMU.Tiles;
 using System.Collections.Generic;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CreateMeldBehaviours
 {
     public class CreateKanBehaviour : ICreateMeldBehaviour
     {

@@ -1,8 +1,10 @@
+using RMU.Hand;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 using static RMU.Globals.Functions;
+using RMU.Calls.CreateMeldBehaviours;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CallCommands
 {
     public class CallOpenKan2Command : ICallCommand
     {
@@ -63,6 +65,11 @@ namespace RMU.Hand.Calls
                 return true;
             }
             return false;
+        }
+
+        public int GetPriority()
+        {
+            return 0;
         }
     }
 }

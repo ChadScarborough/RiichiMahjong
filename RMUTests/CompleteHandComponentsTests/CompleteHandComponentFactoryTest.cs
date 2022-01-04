@@ -8,8 +8,7 @@ using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using static RMU.Globals.StandardTileList;
 using static RMU.Globals.Enums;
-using RMU.Hand;
-using RMU.Hand.Calls;
+using RMU.Calls.CreateMeldBehaviours;
 
 namespace RMUTests.CompleteHandComponentsTests
 {

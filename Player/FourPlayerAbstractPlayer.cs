@@ -1,5 +1,5 @@
 using RMU.Hand;
-using RMU.Hand.Calls;
+using RMU.Calls.CallCommands;
 using RMU.Tiles;
 
 namespace RMU.Player

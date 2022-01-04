@@ -2,7 +2,7 @@
 using RMU.Globals;
 using RMU.Tiles;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CreateMeldBehaviours
 {
     public class OpenMeld
     {
@@ -53,12 +53,12 @@ namespace RMU.Hand.Calls
 
         public Enums.MeldType GetMeldType()
         {
-            return this._meldType;
+            return _meldType;
         }
 
         public List<TileObject> GetTiles()
         {
-            return this._tiles;
+            return _tiles;
         }
     }
 }

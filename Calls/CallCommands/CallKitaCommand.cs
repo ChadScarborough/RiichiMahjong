@@ -1,9 +1,10 @@
+using RMU.Hand;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 using static RMU.Globals.Functions;
 using static RMU.Globals.StandardTileList;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CallCommands
 {
     public class CallKitaCommand : ICallCommand
     {
@@ -33,6 +34,11 @@ namespace RMU.Hand.Calls
                     return;
                 }
             }
+        }
+
+        public int GetPriority()
+        {
+            return 0;
         }
     }
 }

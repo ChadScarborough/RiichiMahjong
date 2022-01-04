@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using RMU.Tiles;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CreateMeldBehaviours
 {
     public interface ICreateMeldBehaviour
     {

@@ -1,8 +1,8 @@
 ﻿using System;
+using RMU.Calls.CallCommands;
 using RMU.Hand;
 using RMU.Globals;
 using RMU.Tiles;
-using RMU.Hand.Calls;
 
 namespace RMU.Player
 {
@@ -115,6 +115,12 @@ namespace RMU.Player
         {
             ICallCommand callOpenKan2 = new CallOpenKan2Command(_hand, calledTile);
             callOpenKan2.Execute();
+        }
+
+        public void CallRon(TileObject calledTile)
+        {
+            ICallCommand callRon = new CallRonCommand(_hand, calledTile);
+            callRon.Execute(); 
         }
     }
 }

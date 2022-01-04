@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using RMU.Globals;
 
-namespace RMU.Hand.Calls
+namespace RMU.Calls.CreateMeldBehaviours
 {
     public class CreateLowChiiBehaviour : ICreateMeldBehaviour
     {

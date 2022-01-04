@@ -1,7 +1,7 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RMU.Tiles;
 using RMU.Globals;
-using RMU.Hand.Calls;
+using RMU.Calls.CreateMeldBehaviours;
 
 namespace RMUTests
 {

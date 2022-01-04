@@ -2,7 +2,7 @@
 using RMU.Wall;
 using RMU.Wall.DeadWall;
 using RMU.DiscardPile;
-using RMU.Hand.Calls;
+using RMU.Calls.CreateMeldBehaviours;
 using static RMU.Globals.Functions;
 using static RMU.Globals.Enums;
 using RMU.Globals.Algorithms;
