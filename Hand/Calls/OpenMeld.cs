@@ -7,14 +7,12 @@ namespace RMU.Hand.Calls
     public class OpenMeld
     {
         private Enums.MeldType _meldType;
-        private List<TileObject> _tiles;
+        private readonly List<TileObject> _tiles;
         private ICreateMeldBehaviour _createMeldBehaviour;
-
-        //Use strategy pattern to alter behaviour based on the meld type
 
         public OpenMeld(Enums.MeldType meldType, TileObject calledTile)
         {
-            this._meldType = meldType;
+            _meldType = meldType;
             SetMeldType(meldType);
             _tiles = _createMeldBehaviour.CreateMeld(calledTile);
         }
@@ -45,7 +43,10 @@ namespace RMU.Hand.Calls
                     _createMeldBehaviour = new CreateKanBehaviour();
                     break;
                 case Enums.OPEN_KAN_2:
-                    this._meldType = Enums.MeldType.OpenKan2;
+                    _meldType = Enums.MeldType.OpenKan2;
+                    break;
+                case Enums.KITA:
+                    _createMeldBehaviour = new CreateKitaBehaviour();
                     break;
             }
         }

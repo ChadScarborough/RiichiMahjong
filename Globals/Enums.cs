@@ -2,7 +2,7 @@
 {
     public static class Enums
     {
-        public enum MeldType { LowChii, MidChii, HighChii, Pon, OpenKan1, OpenKan2, ClosedKan }
+        public enum MeldType { LowChii, MidChii, HighChii, Pon, OpenKan1, OpenKan2, ClosedKan, Kita }
 
         public const MeldType LOW_CHII = MeldType.LowChii;
         public const MeldType MID_CHII = MeldType.MidChii;
@@ -11,6 +11,7 @@
         public const MeldType OPEN_KAN_1 = MeldType.OpenKan1;
         public const MeldType OPEN_KAN_2 = MeldType.OpenKan2;
         public const MeldType CLOSED_KAN_MELD = MeldType.ClosedKan;
+        public const MeldType KITA = MeldType.Kita;
 
         public enum Suit { Man, Pin, Sou, Wind, Dragon }
 
