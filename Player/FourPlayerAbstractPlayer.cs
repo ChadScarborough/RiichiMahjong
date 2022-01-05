@@ -1,6 +1,7 @@
 using RMU.Hand;
 using RMU.Calls.CallCommands;
 using RMU.Tiles;
+using static RMU.Globals.Enums;
 
 namespace RMU.Player
 {
@@ -8,7 +9,7 @@ namespace RMU.Player
     {
         private readonly AbstractFourPlayerHand _hand;
         
-        protected FourPlayerAbstractPlayer(ISeatWindState seatWind, AbstractFourPlayerHand hand) : base(seatWind, hand)
+        protected FourPlayerAbstractPlayer(Wind seatWind, AbstractFourPlayerHand hand) : base(seatWind, hand)
         {
             _hand = hand;
         }

@@ -3,42 +3,43 @@ using RMU.Calls.CallCommands;
 using RMU.Hand;
 using RMU.Globals;
 using RMU.Tiles;
+using static RMU.Globals.Enums;
 
 namespace RMU.Player
 {
     public abstract class AbstractPlayer
     {
-        private ISeatWindState _seatWind;
+        private Wind _seatWind;
         private readonly AbstractHand _hand;
         private AbstractPlayer _playerOnLeft;
         private AbstractPlayer _playerAcross;
         private AbstractPlayer _playerOnRight;
         private int _score;
 
-        protected AbstractPlayer(ISeatWindState seatWind, AbstractHand hand)
+        protected AbstractPlayer(Wind seatWind, AbstractHand hand)
         {
             _seatWind = seatWind;
             _hand = hand;
         }
 
-        public Enums.Wind GetSeatWind()
+        public Wind GetSeatWind()
         {
-            return _seatWind.GetSeatWind();
+            return _seatWind;
         }
 
-        public void SetSeatWind(ISeatWindState seatWindState)
+        public void SetSeatWind(Wind seatWind)
         {
-            this._seatWind = seatWindState;
+            _seatWind = seatWind;
         }
 
         public void SetScore(int score)
         {
-            this._score = score;
+            _score = score;
         }
 
         public int GetScore()
         {
-            return this._score;
+            return _score;
         }
 
         public void SetPlayerOnLeft(AbstractPlayer player)
