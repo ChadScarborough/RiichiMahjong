@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using RMU.Player;
 
@@ -12,7 +13,7 @@ namespace RMU.Calls.PotentialCalls
             _priorityQueue = new List<PotentialCall>();
         }
 
-        public void AddPotentialCallToQueue(PotentialCall potentialCall)
+        public void AddCall(PotentialCall potentialCall)
         {
             for (int i = 0; i < _priorityQueue.Count; i++)
             {
@@ -30,7 +31,7 @@ namespace RMU.Calls.PotentialCalls
             _priorityQueue.Clear();
         }
 
-        public void RemoveAllCallsFromGivenPlayer(AbstractPlayer player)
+        public void RemoveByPlayer(AbstractPlayer player)
         {
             for (int i = _priorityQueue.Count - 1; i >= 0; i--)
             {
@@ -41,7 +42,7 @@ namespace RMU.Calls.PotentialCalls
             }
         }
 
-        public void RemoveAllCallsBelowGivenPriority(int priority)
+        public void RemoveByPriority(int priority)
         {
             for (int i = _priorityQueue.Count - 1; i >= 0; i--)
             {
