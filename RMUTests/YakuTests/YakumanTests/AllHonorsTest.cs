@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RMU.Yaku.Yakuman;
-using RMU.Hand.TestHands;
 using RMU.Tiles;
 using RMU.Globals;
+using RMU.Hands.TestHands;
 using RMU.Yaku.YakuLists;
 
 namespace RMUTests.YakuTests.YakumanTests

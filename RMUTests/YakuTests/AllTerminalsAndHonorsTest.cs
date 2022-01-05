@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.Hand;
-using RMU.Hand.TestHands;
+using RMU.Hands;
+using RMU.Hands.TestHands;
 using static RMU.Yaku.YakuLists.YakuList;
 using static RMU.Globals.StandardTileList;
 
@@ -9,7 +9,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class AllTerminalsAndHonorsTest
     {
-        private AbstractHand _hand;
+        private Hand _hand;
 
         [TestMethod]
         public void CheckYakuReturnsTrue_WhenHandContainsOnlyTerminalsAndHonors()

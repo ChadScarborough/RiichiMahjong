@@ -7,7 +7,7 @@ namespace RMUTests
     [TestClass]
     public class WallTest
     {
-        private AbstractWall _wall;
+        private Wall _wall;
 
         [TestMethod]
         public void FourPlayerWallNoRedFives_InitializesWith136Tiles()

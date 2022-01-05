@@ -1,12 +1,12 @@
 using System;
 using RMU.Globals;
-using RMU.Player;
+using RMU.Players;
 
 namespace RMU.Calls.PotentialCalls
 {
     public static class PotentialCallFactory
     {
-        public static PotentialCall CreatePotentialCall(AbstractPlayer playerMakingCall, Enums.PotentialCallType callType)
+        public static PotentialCall CreatePotentialCall(Player playerMakingCall, Enums.PotentialCallType callType)
         {
             switch (callType)
             {

@@ -1,10 +1,10 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.Hand.CompleteHands.CompleteHandComponents;
-using static RMU.Hand.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 using static RMU.Globals.StandardTileList;
 using static RMU.Globals.Enums;
 using static RMU.Globals.Functions;
 using RMU.Calls.CreateMeldBehaviours;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 
 namespace RMUTests.CompleteHandComponentsTests
 {

@@ -1,4 +1,4 @@
-using RMU.Hand;
+using RMU.Players;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 using static RMU.Globals.Functions;
@@ -6,18 +6,14 @@ using static RMU.Globals.StandardTileList;
 
 namespace RMU.Calls.CallCommands
 {
-    public class CallKitaCommand : ICallCommand
+    public class CallKitaCommand : CallCommand
     {
-        private readonly AbstractHand _handMakingCall;
-        private readonly TileObject _calledTile;
-        
-        public CallKitaCommand(AbstractHand handMakingCall, TileObject calledTile)
+        public CallKitaCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
         {
-            _handMakingCall = handMakingCall;
-            _calledTile = calledTile;
+
         }
         
-        public void Execute()
+        public override void Execute()
         {
             _handMakingCall.CreateOpenMeld(_calledTile, KITA);
             if (AreTilesEquivalent(_handMakingCall.GetDrawTile(), NORTH_WIND))
@@ -36,7 +32,7 @@ namespace RMU.Calls.CallCommands
             }
         }
 
-        public int GetPriority()
+        public override int GetPriority()
         {
             return 0;
         }

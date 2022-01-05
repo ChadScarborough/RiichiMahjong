@@ -1,21 +1,17 @@
-using RMU.Hand;
+using RMU.Players;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 
 namespace RMU.Calls.CallCommands
 {
-    public class CallPonCommand : ICallCommand
+    public class CallPonCommand : CallCommand
     {
-        private readonly TileObject _calledTile;
-        private readonly AbstractHand _handMakingCall;
-        
-        public CallPonCommand(AbstractHand handMakingCall, TileObject calledTile)
+        public CallPonCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
         {
-            _handMakingCall = handMakingCall;
-            _calledTile = calledTile;
+
         }
         
-        public void Execute()
+        public override void Execute()
         {
             _handMakingCall.CreateOpenMeld(_calledTile, PON);
             for (int i = 0; i < 2; i++)
@@ -24,7 +20,7 @@ namespace RMU.Calls.CallCommands
             }
         }
 
-        public int GetPriority()
+        public override int GetPriority()
         {
             return 2;
         }

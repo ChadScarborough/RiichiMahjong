@@ -1,11 +1,11 @@
 using static RMU.Globals.Enums;
-using RMU.Player;
+using RMU.Players;
 
 namespace RMU.Calls.PotentialCalls
 {
     public class PotentialLowChii : PotentialCall
     {
-        public PotentialLowChii(AbstractPlayer playerMakingCall) : base(playerMakingCall)
+        public PotentialLowChii(Player playerMakingCall) : base(playerMakingCall)
         {
         }
 

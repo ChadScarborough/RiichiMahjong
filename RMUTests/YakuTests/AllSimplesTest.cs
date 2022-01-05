@@ -1,9 +1,9 @@
 ﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.Hand.TestHands;
 using RMU.Tiles;
 using RMU.Yaku;
 using RMU.Yaku.YakuLists;
 using RMU.Globals;
+using RMU.Hands.TestHands;
 
 namespace RMUTests.YakuTests
 {

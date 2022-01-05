@@ -1,6 +1,6 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.Hand;
-using RMU.Hand.TestHands;
+using RMU.Hands;
+using RMU.Hands.TestHands;
 using RMU.Yaku;
 using static RMU.Yaku.YakuLists.YakuList;
 using static RMU.Globals.StandardTileList;
@@ -10,7 +10,7 @@ namespace RMUTests.YakuTests
     [TestClass]
     public class LittleThreeDragonsTest
     {
-        private AbstractHand _hand;
+        private Hand _hand;
 
         [TestMethod]
         public void CheckYakuReturnsTrue_WhenGivenThreeRedAndGreenDragons_AndTwoWhiteDragons()

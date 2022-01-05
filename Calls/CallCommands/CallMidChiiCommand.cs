@@ -1,32 +1,29 @@
-using RMU.Hand;
+using RMU.Globals;
+using RMU.Hands;
+using RMU.Players;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 
 namespace RMU.Calls.CallCommands
 {
-    public class CallMidChiiCommand : ICallCommand
+    public class CallMidChiiCommand : CallCommand
     {
-        private readonly AbstractHand _handMakingCall;
-        private readonly TileObject _calledTile;
-        
-        public CallMidChiiCommand(AbstractHand handMakingCall, TileObject calledTile)
+        public CallMidChiiCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
         {
-            _handMakingCall = handMakingCall;
-            _calledTile = calledTile;
+
         }
         
-        public void Execute()
+        public override void Execute()
         {
             _handMakingCall.OpenHand();
             _handMakingCall.CreateOpenMeld(_calledTile, MID_CHII);
-            for (int i = 0; i < 2; i++)
-            {
-                TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() - ((2 * i) - 1), _calledTile.GetSuit());
-                _handMakingCall.RemoveCopyOfTile(tempTile);
-            }
+            TileObject tileAbove = Functions.GetTileAbove(_calledTile);
+            TileObject tileBelow = Functions.GetTileBelow(_calledTile);
+            _handMakingCall.RemoveCopyOfTile(tileAbove);
+            _handMakingCall.RemoveCopyOfTile(tileBelow);
         }
 
-        public int GetPriority()
+        public override int GetPriority()
         {
             return 1;
         }

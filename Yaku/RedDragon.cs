@@ -1,7 +1,7 @@
-﻿using RMU.Hand;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RMU.Tiles;
 using RMU.Globals;
+using RMU.Hands;
 using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku
@@ -18,14 +18,14 @@ namespace RMU.Yaku
             _getNameBehaviour = new StandardGetNameBehaviour();
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
-        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
+        public override bool CheckYaku(Hand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
             CheckForRedDragons();
             return AtLeastThreeRedDragons();
         }
 
-        private void InitializeValues(AbstractHand hand, TileObject extraTile)
+        private void InitializeValues(Hand hand, TileObject extraTile)
         {
             _counter = 0;
             _handTiles = hand.GetAllTiles(extraTile);

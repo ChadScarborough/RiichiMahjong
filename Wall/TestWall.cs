@@ -3,7 +3,7 @@ using RMU.Tiles;
 
 namespace RMU.Wall
 {
-    public class TestWall : AbstractWall
+    public class TestWall : Wall
     {
         public TestWall(List<TileObject> tiles)
         {

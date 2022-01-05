@@ -1,7 +1,7 @@
 ﻿using RMU.Yaku.StrategyBehaviours;
 using System.Collections.Generic;
 using RMU.Globals;
-using RMU.Hand;
+using RMU.Hands;
 using RMU.Tiles;
 
 namespace RMU.Yaku
@@ -21,7 +21,7 @@ namespace RMU.Yaku
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
+        public override bool CheckYaku(Hand hand, TileObject extraTile)
         {
             InitializeValues(hand, extraTile);
             CheckHandForDragonTilesAndIncrementCounters();
@@ -87,7 +87,7 @@ namespace RMU.Yaku
             return Functions.AreDragonsEquivalent(tile, Enums.GREEN);
         }
 
-        private void InitializeValues(AbstractHand hand, TileObject extraTile)
+        private void InitializeValues(Hand hand, TileObject extraTile)
         {
             ResetCounters();
             _handTiles = hand.GetAllTiles(extraTile);

@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using RMU.Hand.CompleteHands.CompleteHandComponents;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Shanten.HandSplitter;
 using static RMU.Globals.Enums;
 

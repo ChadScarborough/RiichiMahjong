@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Shanten;
-using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Shanten.HandSplitter;
 using RMU.Tiles;
 using static RMU.Globals.Enums;

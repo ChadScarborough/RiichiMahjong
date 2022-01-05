@@ -1,10 +1,10 @@
 using System;
 using System.Collections.Generic;
-using RMU.Player;
+using RMU.Players;
 
 namespace RMU.Calls.PotentialCalls
 {
-    public class PriorityQueueForPotentialCalls
+    public class PriorityQueueForPotentialCalls : IPriorityQueue
     {
         private readonly List<PotentialCall> _priorityQueue;
 
@@ -13,7 +13,7 @@ namespace RMU.Calls.PotentialCalls
             _priorityQueue = new List<PotentialCall>();
         }
 
-        public void AddCall(PotentialCall potentialCall)
+        private void AddPotentialCall(PotentialCall potentialCall)
         {
             for (int i = 0; i < _priorityQueue.Count; i++)
             {
@@ -26,12 +26,23 @@ namespace RMU.Calls.PotentialCalls
             }
         }
 
+        public void AddCall(ICallObject callObject)
+        {
+            if (callObject.GetType() == typeof(PotentialCall))
+            {
+                AddPotentialCall((PotentialCall)callObject);
+                return;
+            }
+
+            throw new ArgumentException("Invalid type");
+        }
+
         public void Clear()
         {
             _priorityQueue.Clear();
         }
 
-        public void RemoveByPlayer(AbstractPlayer player)
+        public void RemoveByPlayer(Player player)
         {
             for (int i = _priorityQueue.Count - 1; i >= 0; i--)
             {

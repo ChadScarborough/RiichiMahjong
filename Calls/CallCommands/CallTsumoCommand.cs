@@ -1,15 +1,22 @@
 using System;
+using RMU.Players;
+using RMU.Tiles;
 
 namespace RMU.Calls.CallCommands
 {
-    public class CallTsumoCommand : ICallCommand
+    public class CallTsumoCommand : CallCommand
     {
-        public void Execute()
+        public CallTsumoCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        {
+            
+        }
+        
+        public override void Execute()
         {
             Console.WriteLine("Tsumo!"); //Obviously not the final code
         }
 
-        public int GetPriority()
+        public override int GetPriority()
         {
             return 0;
         }

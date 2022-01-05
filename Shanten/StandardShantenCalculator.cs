@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Globals;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Shanten.HandSplitter;
 
 namespace RMU.Shanten

@@ -1,7 +1,7 @@
-﻿using RMU.Hand;
-using RMU.Tiles;
+﻿using RMU.Tiles;
 using RMU.Globals;
 using System.Collections.Generic;
+using RMU.Hands;
 using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku
@@ -19,7 +19,7 @@ namespace RMU.Yaku
             _getValueBehaviour = new OpenDependentGetValueBehaviour();
         }
 
-        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
+        public override bool CheckYaku(Hand hand, TileObject extraTile)
         {
             InitializeHandTiles(hand, extraTile);
             if (HandDoesNotContainBothHonorsAndNonHonors()) return false;
@@ -31,7 +31,7 @@ namespace RMU.Yaku
             return HandContainsHonorsAndNonHonors() == false;
         }
 
-        private void InitializeHandTiles(AbstractHand hand, TileObject extraTile)
+        private void InitializeHandTiles(Hand hand, TileObject extraTile)
         {
             _handTiles = hand.GetAllTiles(extraTile);
         }

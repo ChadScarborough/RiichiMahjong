@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
+using RMU.Hands;
+using RMU.Hands.TestHands;
 using static RMU.Shanten.StandardShantenCalculator;
-using RMU.Hand.TestHands;
-using RMU.Hand;
 using RMU.Shanten.HandSplitter;
 
 namespace RMUTests.ShantenTests
@@ -10,7 +10,7 @@ namespace RMUTests.ShantenTests
     [TestClass]
     public class StandardShantenCalculatorTest
     {
-        private AbstractHand _hand;
+        private Hand _hand;
         private List<TileCollection> _collections;
 
         [TestMethod]

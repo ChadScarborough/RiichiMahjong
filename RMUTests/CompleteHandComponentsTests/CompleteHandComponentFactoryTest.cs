@@ -1,14 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using static RMU.Hand.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
-using static RMU.Hand.CompleteHands.CompleteHandComponents.CompleteHandGroupFactory;
-using static RMU.Hand.CompleteHands.CompleteHandComponents.CompleteHandIncompleteGroupFactory;
-using RMU.Hand.CompleteHands.CompleteHandComponents;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandGroupFactory;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandIncompleteGroupFactory;
 using RMU.Tiles;
 using static RMU.Globals.StandardTileList;
 using static RMU.Globals.Enums;
 using RMU.Calls.CreateMeldBehaviours;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 
 namespace RMUTests.CompleteHandComponentsTests
 {

@@ -1,23 +1,19 @@
-using RMU.Hand;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
 using static RMU.Globals.Functions;
 using RMU.Calls.CreateMeldBehaviours;
+using RMU.Players;
 
 namespace RMU.Calls.CallCommands
 {
-    public class CallOpenKan2Command : ICallCommand
+    public class CallOpenKan2Command : CallCommand
     {
-        private readonly AbstractHand _handMakingCall;
-        private readonly TileObject _calledTile;
-
-        public CallOpenKan2Command(AbstractHand handMakingCall, TileObject calledTile)
+        public CallOpenKan2Command(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
         {
-            _handMakingCall = handMakingCall;
-            _calledTile = calledTile;
+
         }
         
-        public void Execute()
+        public override void Execute()
         {
             foreach(OpenMeld openMeld in _handMakingCall.GetOpenMelds())
             {
@@ -67,7 +63,7 @@ namespace RMU.Calls.CallCommands
             return false;
         }
 
-        public int GetPriority()
+        public override int GetPriority()
         {
             return 0;
         }

@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using RMU.Hand.TestHands;
 using RMU.Yaku;
 using RMU.Tiles;
 using RMU.Globals;
+using RMU.Hands.TestHands;
 using RMU.Yaku.YakuLists;
 
 namespace RMUTests.YakuTests

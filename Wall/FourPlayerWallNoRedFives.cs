@@ -1,6 +1,6 @@
 ﻿namespace RMU.Wall
 {
-    public class FourPlayerWallNoRedFives : AbstractWall
+    public class FourPlayerWallNoRedFives : Wall
     {
         public FourPlayerWallNoRedFives()
         {

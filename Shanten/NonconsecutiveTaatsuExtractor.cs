@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using RMU.Globals;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using RMU.Hand.CompleteHands.CompleteHandComponents;
 using RMU.Shanten.HandSplitter;
-using static RMU.Hand.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 using static RMU.Globals.Enums;
 
 namespace RMU.Shanten

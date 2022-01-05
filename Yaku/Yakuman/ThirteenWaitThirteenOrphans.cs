@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using RMU.Globals;
+using RMU.Hands;
 using RMU.Tiles;
-using RMU.Hand;
 using RMU.Yaku.StrategyBehaviours;
 
 namespace RMU.Yaku.Yakuman
@@ -37,7 +37,7 @@ namespace RMU.Yaku.Yakuman
             _getValueBehaviour = new StandardGetValueBehaviour();
         }
 
-        public override bool CheckYaku(AbstractHand hand, TileObject extraTile)
+        public override bool CheckYaku(Hand hand, TileObject extraTile)
         {
             InitializeValues(hand);
             CheckForHonorsAndTerminalsInClosedTiles();
@@ -76,7 +76,7 @@ namespace RMU.Yaku.Yakuman
             //If any terminal is missing from the closed tiles, the value of _multiplier will be 0
         }
 
-        private void InitializeValues(AbstractHand hand)
+        private void InitializeValues(Hand hand)
         {
             ClearCounters();
             _handTiles = hand.GetClosedTiles();
