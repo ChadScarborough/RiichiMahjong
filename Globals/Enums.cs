@@ -75,5 +75,15 @@
         public const CompleteHandType STANDARD = CompleteHandType.Standard;
         public const CompleteHandType SEVEN_PAIRS = CompleteHandType.SevenPairs;
         public const CompleteHandType THIRTEEN_ORPHANS = CompleteHandType.ThirteenOrphans;
+        
+        public enum PotentialCallType {Pon, LowChii, MidChii, HighChii, ClosedKan, OpenKan1, Ron}
+
+        public const PotentialCallType PON_POTENTIAL_CALL_TYPE = PotentialCallType.Pon;
+        public const PotentialCallType LOW_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.LowChii;
+        public const PotentialCallType MID_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.MidChii;
+        public const PotentialCallType HIGH_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.HighChii;
+        public const PotentialCallType CLOSED_KAN_POTENTIAL_CALL_TYPE = PotentialCallType.ClosedKan;
+        public const PotentialCallType OPEN_KAN_1_POTENTIAL_CALL_TYPE = PotentialCallType.OpenKan1;
+        public const PotentialCallType RON_POTENTIAL_CALL_TYPE = PotentialCallType.Ron;
     }
 }
