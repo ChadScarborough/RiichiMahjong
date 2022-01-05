@@ -1,7 +1,6 @@
 ﻿using System;
 using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
-using RMU.Globals;
 using RMU.Hands;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
@@ -102,14 +101,14 @@ namespace RMU.Players
             }
         }
 
-        public void SetPriorityQueueForPotentialCalls(PriorityQueueForPotentialCalls _queue)
+        public void SetPriorityQueueForPotentialCalls(PriorityQueueForPotentialCalls queue)
         {
-            _priorityQueueForPotentialCalls = _queue;
+            _priorityQueueForPotentialCalls = queue;
         }
 
-        public void SetPriorityQueueForCallCommands(PriorityQueueForCallCommands _queue)
+        public void SetPriorityQueueForCallCommands(PriorityQueueForCallCommands queue)
         {
-            _priorityQueueForCallCommands = _queue;
+            _priorityQueueForCallCommands = queue;
         }
 
         protected void MakeCall(CallCommand command)
