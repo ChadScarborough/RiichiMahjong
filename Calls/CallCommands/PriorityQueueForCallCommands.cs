@@ -66,6 +66,10 @@ namespace RMU.Calls.CallCommands
 
         public void Execute()
         {
+            if (_priorityQueue.Count == 0)
+            {
+                return;
+            }
             if (_priorityQueue[0].GetPriority() == 3)
             {
                 foreach (CallCommand command in _priorityQueue)
@@ -75,10 +79,10 @@ namespace RMU.Calls.CallCommands
                         command.Execute();
                         continue;
                     }
+                    command.Execute();
                     Clear();
                     return;
                 }
-
                 Clear();
                 return;
             }

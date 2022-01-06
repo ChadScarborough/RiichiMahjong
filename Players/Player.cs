@@ -111,11 +111,24 @@ namespace RMU.Players
             _priorityQueueForCallCommands = queue;
         }
 
+        public void CancelCalls()
+        {
+            _priorityQueueForPotentialCalls.RemoveByPlayer(this);
+            if (_priorityQueueForPotentialCalls.IsEmpty())
+            {
+                _priorityQueueForCallCommands.Execute();
+            }
+        }
+        
         protected void MakeCall(CallCommand command)
         {
             _priorityQueueForPotentialCalls.RemoveByPlayer(this);
             _priorityQueueForPotentialCalls.RemoveByPriority(command.GetPriority());
             _priorityQueueForCallCommands.AddCall(command);
+            if (_priorityQueueForPotentialCalls.IsEmpty())
+            {
+                _priorityQueueForCallCommands.Execute();
+            }
         }
         
         public void CallPon(TileObject calledTile)

@@ -13,6 +13,11 @@ namespace RMU.Calls.PotentialCalls
             _priorityQueue = new List<PotentialCall>();
         }
 
+        public bool IsEmpty()
+        {
+            return _priorityQueue.Count == 0;
+        }
+
         private void AddPotentialCall(PotentialCall potentialCall)
         {
             for (int i = 0; i < _priorityQueue.Count; i++)
