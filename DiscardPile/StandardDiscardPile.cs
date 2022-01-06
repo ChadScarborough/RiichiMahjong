@@ -10,7 +10,7 @@ namespace RMU.DiscardPile
 
         public StandardDiscardPile()
         {
-            _displayedDiscardedTiles = new Globals.DataStructures.Stack<TileObject>(30);
+            _displayedDiscardedTiles = new Globals.DataStructures.Stack<TileObject>();
             _allDiscardedTiles = new List<TileObject>();
         }
 

@@ -6,7 +6,7 @@ namespace RMUTests
     [TestClass]
     public class StackTest
     {
-        readonly Stack<int> _stack = new Stack<int>(5);
+        readonly Stack<int> _stack = new Stack<int>();
 
         [TestMethod]
         public void StackIsEmpty_OnInitialization()

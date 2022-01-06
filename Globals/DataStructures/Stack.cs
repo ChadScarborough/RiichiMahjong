@@ -1,38 +1,41 @@
-﻿namespace RMU.Globals.DataStructures
+﻿using System.Collections.Generic;
+
+namespace RMU.Globals.DataStructures
 {
     public class Stack<T>
     {
-        private int _size;
-        private readonly T[] _stack;
+        private readonly List<T> _stack;
 
-        public Stack(int maxCapacity)
+        public Stack()
         {
-            _stack = new T[maxCapacity];
+            _stack = new List<T>();
         }
 
         public bool IsEmpty()
         {
-            return (_size == 0);
+            return (_stack.Count == 0);
         }
 
         public void Push(T value)
         {
-            _stack[_size++] = value;
+            _stack.Add(value);
         }
 
         public T Pop()
         {
-            return _stack[--_size];
+            T t = _stack[^1];
+            _stack.RemoveAt(_stack.Count - 1);
+            return t;
         }
 
         public int GetSize()
         {
-            return _size;
+            return _stack.Count;
         }
 
         public void Clear()
         {
-            _size = 0;
+            _stack.Clear();
         }
     }
 }
