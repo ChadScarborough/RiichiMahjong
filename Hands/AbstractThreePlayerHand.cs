@@ -1,10 +1,10 @@
-using RMU.Wall.DeadWall;
+using RMU.Wall;
 
 namespace RMU.Hands
 {
     public class AbstractThreePlayerHand : Hand
     {
-        protected AbstractThreePlayerHand(Wall.Wall wall, IDeadWall deadWall) : base(wall, deadWall)
+        protected AbstractThreePlayerHand(WallObject wallObject) : base(wallObject)
         {
         }
     }

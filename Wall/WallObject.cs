@@ -7,12 +7,12 @@ namespace RMU.Wall
         protected Wall _wall;
         protected IDeadWall _deadWall;
 
-        public Wall GetWall()
+        public virtual Wall GetWall()
         {
             return _wall;
         }
 
-        public IDeadWall GetDeadWall()
+        public virtual IDeadWall GetDeadWall()
         {
             return _deadWall;
         }

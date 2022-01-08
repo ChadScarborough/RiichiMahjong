@@ -32,7 +32,7 @@ namespace RMU.Wall
             inputList.RemoveAt(r);
         }
         
-        public TileObject DrawTileFromWall()
+        public virtual TileObject DrawTileFromWall()
         {
             return DrawTile(_wall);
         }
@@ -42,7 +42,7 @@ namespace RMU.Wall
             return wall.RemoveHead();
         }
 
-        public TileObject DrawTileFromEndOfWall()
+        public virtual TileObject DrawTileFromEndOfWall()
         {
             return DrawTileFromEnd(_wall);
         }
@@ -79,7 +79,7 @@ namespace RMU.Wall
             return tileList;
         }
 
-        public int GetSize()
+        public virtual int GetSize()
         {
             return _wall.GetSize();
         }
@@ -89,7 +89,7 @@ namespace RMU.Wall
             _wall.Clear();
         }
 
-        public List<TileObject> GetWallTiles()
+        public virtual List<TileObject> GetWallTiles()
         {
             List<TileObject> outputList = new List<TileObject>();
             DoublyLinkedList<TileObject>.Node node = _wall.GetHead();

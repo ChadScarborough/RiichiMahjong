@@ -22,13 +22,14 @@ namespace RMU.Calls.CallCommands
                     _priorityQueue.Insert(i, callCommand);
                     return;
                 }
-                _priorityQueue.Add(callCommand);
             }
+            _priorityQueue.Add(callCommand);
         }
 
         public void AddCall(ICallObject callObject)
         {
-            if (callObject.GetType() == typeof(CallCommand))
+            Type type = callObject.GetType();
+            if (type.IsSubclassOf(typeof(CallCommand)))
             {
                 AddCallCommand((CallCommand)callObject);
                 return;

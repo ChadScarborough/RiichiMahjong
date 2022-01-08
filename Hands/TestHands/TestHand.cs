@@ -1,11 +1,12 @@
 ﻿using System.Collections.Generic;
 using RMU.Tiles;
+using RMU.Wall;
 
 namespace RMU.Hands.TestHands
 {
     public abstract class TestHand : Hand
     {
-        protected TestHand() : base(null, null)
+        protected TestHand() : base(new NullWallObject())
         {
         }
 

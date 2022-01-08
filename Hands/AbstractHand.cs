@@ -3,6 +3,7 @@ using RMU.Calls.CreateMeldBehaviours;
 using RMU.DiscardPile;
 using RMU.Globals.Algorithms;
 using RMU.Tiles;
+using RMU.Wall;
 using RMU.Wall.DeadWall;
 using static RMU.Globals.Functions;
 using static RMU.Globals.Enums;
@@ -20,10 +21,10 @@ namespace RMU.Hands
         private readonly List<OpenMeld> _openMelds;
         private bool _isOpen;
 
-        protected Hand(Wall.Wall wall, IDeadWall deadWall)
+        protected Hand(WallObject wallObject)
         {
-            _wall = wall;
-            _deadWall = deadWall;
+            _wall = wallObject.GetWall();
+            _deadWall = wallObject.GetDeadWall();
             _discardPile = new StandardDiscardPile();
             _handSorter = new HandSorter();
             _closedTiles = new List<TileObject>();

@@ -12,21 +12,19 @@ namespace RMUTests
     public class PlayerTest
     {
         private readonly Wind _seatWind = EAST;
-        private readonly Wall _wall = new FourPlayerWallNoRedFives();
+        private readonly WallObject _wallObject = new FourPlayerWallObjectNoRedFives();
 
         [TestMethod]
         public void PlayerObject_ReturnsCorrectSeatWind()
         {
-            IDeadWall deadWall = new FourPlayerDeadWall(_wall);
-            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wallObject);
             Player player = new FourPlayerStandardPlayer(_seatWind, hand);
             Assert.AreEqual(Wind.East, player.GetSeatWind());
         }
         [TestMethod]
         public void PlayerObject_ReturnsCorrectSeatWind_AfterChangingWinds()
         {
-            IDeadWall deadWall = new FourPlayerDeadWall(_wall);
-            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wallObject);
             Player player = new FourPlayerStandardPlayer(_seatWind, hand);
             player.SetSeatWind(NORTH);
             Assert.AreEqual(Wind.North, player.GetSeatWind());
@@ -39,8 +37,7 @@ namespace RMUTests
         [TestMethod]
         public void GettingScore_ReturnsSetScore()
         {
-            IDeadWall deadWall = new FourPlayerDeadWall(_wall);
-            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wallObject);
             Player player = new FourPlayerStandardPlayer(_seatWind, hand);
             Assert.AreEqual(0, player.GetScore());
             player.SetScore(20000);
@@ -50,10 +47,9 @@ namespace RMUTests
         [TestMethod]
         public void GetPlayerOnLeft_ReturnsPlayerSetToLeft()
         {
-            IDeadWall deadWall = new FourPlayerDeadWall(_wall);
-            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wallObject);
             Player player = new FourPlayerStandardPlayer(_seatWind, hand);
-            AbstractFourPlayerHand hand2 = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand2 = new StandardFourPlayerHand(_wallObject);
             Player player2 = new FourPlayerStandardPlayer(NORTH, hand2);
             Assert.IsNull(player.GetPlayerOnLeft());
             player.SetPlayerOnLeft(player2);
@@ -64,10 +60,9 @@ namespace RMUTests
         [TestMethod]
         public void GetPlayerAcross_ReturnsPlayerSetAcross()
         {
-            IDeadWall deadWall = new FourPlayerDeadWall(_wall);
-            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wallObject);
             Player player = new FourPlayerStandardPlayer(_seatWind, hand);
-            AbstractFourPlayerHand hand2 = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand2 = new StandardFourPlayerHand(_wallObject);
             Player player2 = new FourPlayerStandardPlayer(WEST, hand2);
             Assert.IsNull(player.GetPlayerAcross());
             player.SetPlayerAcross(player2);
@@ -78,10 +73,9 @@ namespace RMUTests
         [TestMethod]
         public void GetPlayerOnRight_ReturnsPlayerSetToRight()
         {
-            IDeadWall deadWall = new FourPlayerDeadWall(_wall);
-            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wallObject);
             Player player = new FourPlayerStandardPlayer(_seatWind, hand);
-            AbstractFourPlayerHand hand2 = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand2 = new StandardFourPlayerHand(_wallObject);
             Player player2 = new FourPlayerStandardPlayer(SOUTH, hand2);
             Assert.IsNull(player.GetPlayerOnRight());
             player.SetPlayerOnRight(player2);
@@ -93,8 +87,7 @@ namespace RMUTests
         public void SettingAPlayerInMultiplePositions_ThrowsAnException()
         {
             Exception ex = null;
-            IDeadWall deadWall = new FourPlayerDeadWall(_wall);
-            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wall, deadWall);
+            AbstractFourPlayerHand hand = new StandardFourPlayerHand(_wallObject);
             Player player = new FourPlayerStandardPlayer(_seatWind, hand);
             Assert.IsNull(ex);
             try

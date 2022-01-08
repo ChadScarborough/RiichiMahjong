@@ -58,4 +58,8 @@
     <Compile Remove="RMUTests\YakuTests\YakumanTests\AllHonorsTest.cs" />
     <Compile Remove="RMUTests\YakuTests\YakumanTests\AllTerminalsTest.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="GameLogic" />
+  </ItemGroup>
 </Project>

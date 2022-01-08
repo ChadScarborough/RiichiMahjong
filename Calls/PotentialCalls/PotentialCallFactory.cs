@@ -18,8 +18,6 @@ namespace RMU.Calls.PotentialCalls
                     return new PotentialMidChii(playerMakingCall);
                 case Enums.PotentialCallType.HighChii:
                     return new PotentialHighChii(playerMakingCall);
-                case Enums.PotentialCallType.ClosedKan:
-                    return new PotentialClosedKan(playerMakingCall);
                 case Enums.PotentialCallType.OpenKan1:
                     return new PotentialOpenKan1(playerMakingCall);
                 case Enums.PotentialCallType.Ron:

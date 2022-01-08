@@ -82,7 +82,6 @@
         public const PotentialCallType LOW_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.LowChii;
         public const PotentialCallType MID_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.MidChii;
         public const PotentialCallType HIGH_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.HighChii;
-        public const PotentialCallType CLOSED_KAN_POTENTIAL_CALL_TYPE = PotentialCallType.ClosedKan;
         public const PotentialCallType OPEN_KAN_1_POTENTIAL_CALL_TYPE = PotentialCallType.OpenKan1;
         public const PotentialCallType RON_POTENTIAL_CALL_TYPE = PotentialCallType.Ron;
     }

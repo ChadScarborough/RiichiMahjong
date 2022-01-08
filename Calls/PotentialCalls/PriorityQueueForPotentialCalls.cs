@@ -27,13 +27,14 @@ namespace RMU.Calls.PotentialCalls
                     _priorityQueue.Insert(i, potentialCall);
                     return;
                 }
-                _priorityQueue.Add(potentialCall);
             }
+            _priorityQueue.Add(potentialCall);
         }
 
         public void AddCall(ICallObject callObject)
         {
-            if (callObject.GetType() == typeof(PotentialCall))
+            Type type = callObject.GetType();
+            if (type.IsSubclassOf(typeof(PotentialCall)))
             {
                 AddPotentialCall((PotentialCall)callObject);
                 return;
@@ -67,6 +68,20 @@ namespace RMU.Calls.PotentialCalls
                     _priorityQueue.RemoveAt(i);
                 }
             }
+        }
+
+        public List<PotentialCall> GetCallsByPlayer(Player player)
+        {
+            List<PotentialCall> outputList = new List<PotentialCall>();
+            foreach (PotentialCall call in _priorityQueue)
+            {
+                if (call.GetPlayerMakingCall() == player)
+                {
+                    outputList.Add(call);
+                }
+            }
+
+            return outputList;
         }
     }
 }
