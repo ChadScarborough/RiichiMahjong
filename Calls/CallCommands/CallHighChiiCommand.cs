@@ -1,3 +1,4 @@
+using RMU.Globals;
 using RMU.Hands;
 using RMU.Players;
 using RMU.Tiles;
@@ -16,11 +17,10 @@ namespace RMU.Calls.CallCommands
         {
             _handMakingCall.OpenHand();
             _handMakingCall.CreateOpenMeld(_calledTile, HIGH_CHII);
-            for (int i = 0; i < 2; i++)
-            {
-                TileObject tempTile = TileFactory.CreateTile(_calledTile.GetValue() + (i + 1), _calledTile.GetSuit());
-                _handMakingCall.RemoveCopyOfTile(tempTile);
-            }
+            TileObject oneAbove = Functions.GetTileAbove(_calledTile);
+            TileObject twoAbove = Functions.GetTileTwoAbove(_calledTile);
+            _handMakingCall.RemoveCopyOfTile(oneAbove);
+            _handMakingCall.RemoveCopyOfTile(twoAbove);
         }
 
         public override int GetPriority()

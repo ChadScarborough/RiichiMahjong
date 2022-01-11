@@ -8,12 +8,9 @@ namespace RMU.Calls.CreateMeldBehaviours
     {
         public List<TileObject> CreateMeld(TileObject calledTile)
         {
-            int value = calledTile.GetValue();
-            Enums.Suit suit = calledTile.GetSuit();
-
-            TileObject lowTile = TileFactory.CreateTile(value - 1, suit);
-            TileObject highTile = TileFactory.CreateTile(value + 1, suit);
-            return new List<TileObject> { lowTile, calledTile, highTile };
+            TileObject oneBelow = Functions.GetTileBelow(calledTile);
+            TileObject oneAbove = Functions.GetTileAbove(calledTile);
+            return new List<TileObject> { oneBelow, calledTile, oneAbove };
         }
     }
 }

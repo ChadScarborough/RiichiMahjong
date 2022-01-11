@@ -7,7 +7,12 @@ namespace RMU.Calls.CreateMeldBehaviours
     {
         public List<TileObject> CreateMeld(TileObject calledTile)
         {
-            return new List<TileObject> { calledTile.Clone(), calledTile.Clone(), calledTile.Clone() };
+            return new List<TileObject>
+            {
+                calledTile.Clone(), 
+                calledTile.Clone(), 
+                calledTile.Clone()
+            };
         }
     }
 }

@@ -6,7 +6,6 @@ namespace RMU.Calls.PotentialCalls
     public abstract class PotentialCall : ICallObject
     {
         private readonly Player _playerMakingCall;
-        private IPriorityQueue _priorityQueue;
 
         protected PotentialCall(Player playerMakingCall)
         {
@@ -22,7 +21,7 @@ namespace RMU.Calls.PotentialCalls
 
         public void SetQueue(IPriorityQueue priorityQueue)
         {
-            _priorityQueue = priorityQueue;
+            
         }
 
         public abstract int GetPriority();
