@@ -5,7 +5,7 @@ namespace RMU.Hands.TenpaiHands
 {
     public class StandardTenpaiHand : ITenpaiHand
     {
-        List<ICompleteHandComponent> _components;
+        private readonly List<ICompleteHandComponent> _components;
 
         public StandardTenpaiHand(List<ICompleteHandComponent> components)
         {

@@ -7,7 +7,7 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Shanten
 {
-    public static class ChiiExtractor
+    public static class ChiiFromTopExtractor
     {
         private static List<ICompleteHandComponent> _outputList;
         private static List<TileObject> _tiles;
