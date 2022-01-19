@@ -49,6 +49,7 @@ namespace RMU.Shanten
         {
             for (int j = i - 1; j >= 1; j--)
             {
+                if (AreTilesConsecutive(j, i) == false) break;
                 CheckForChiiContainingTwoGivenTiles(ref i, ref j);
             }
         }
@@ -57,6 +58,7 @@ namespace RMU.Shanten
         {
             for (int k = j - 1; k >= 0; k--)
             {
+                if (AreTilesConsecutive(k, j) == false) break;
                 if (CheckForChiiContainingThreeGivenTiles(ref i, ref j, k)) break;
             }
         }
@@ -116,6 +118,16 @@ namespace RMU.Shanten
             _outputList = new List<ICompleteHandComponent>();
             _tiles = collection.GetTiles();
             _collection = collection;
+        }
+
+        private static bool AreTilesConsecutive(int lower, int upper)
+        {
+            if (_tiles[lower].GetValue() < _tiles[upper].GetValue() - 1)
+            {
+                return false;
+            }
+
+            return true;
         }
     }
 }

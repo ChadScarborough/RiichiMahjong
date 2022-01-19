@@ -37,7 +37,6 @@ namespace RMU.Shanten
             for (int i = 0; i < _tiles.Count - 2; i++)
             {
                 CheckForChiiWithGivenBottomTile(i);
-
                 if (_foundChii) break;
             }
         }
@@ -46,8 +45,8 @@ namespace RMU.Shanten
         {
             for (int j = i + 1; j < _tiles.Count - 1; j++)
             {
+                if (AreTilesConsecutive(i, j) == false) break;
                 CheckForChiiWithGivenBottomTwoTiles(i, j);
-
                 if (_foundChii) break;
             }
         }
@@ -56,6 +55,7 @@ namespace RMU.Shanten
         {
             for (int k = j + 1; k < _tiles.Count; k++)
             {
+                if (AreTilesConsecutive(j, k) == false) break;
                 if (TilesFormChii(i, j, k))
                 {
                     CreateChiiComponent(i, j, k);
@@ -115,6 +115,16 @@ namespace RMU.Shanten
         private static bool CollectionIsWindCollection()
         {
             return _collection.GetSuit() == WIND;
+        }
+
+        private static bool AreTilesConsecutive(int lower, int upper)
+        {
+            if (_tiles[lower].GetValue() == _tiles[upper].GetValue() - 1)
+            {
+                return true;
+            }
+
+            return false;
         }
     }
 }
