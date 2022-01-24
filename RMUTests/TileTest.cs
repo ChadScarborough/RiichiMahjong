@@ -20,17 +20,17 @@ namespace RMUTests
         [TestMethod]
         public void DragonTileReturnsValueAssignedToIt()
         {
-            TileObject tile = TileFactory.CreateTile(ConstValues.RED_DRAGON, Enums.Suit.Dragon);
+            TileObject tile = TileFactory.CreateTile(ConstValues.RED_DRAGON_C, Enums.Suit.Dragon);
 
-            Assert.AreEqual(ConstValues.RED_DRAGON, tile.GetValue());
+            Assert.AreEqual(ConstValues.RED_DRAGON_C, tile.GetValue());
         }
 
         [TestMethod]
         public void WindTileReturnsValueAssignedToIt()
         {
-            TileObject tile = TileFactory.CreateTile(ConstValues.WEST_WIND, Enums.Suit.Wind);
+            TileObject tile = TileFactory.CreateTile(ConstValues.WEST_WIND_C, Enums.Suit.Wind);
 
-            Assert.AreEqual(ConstValues.WEST_WIND, tile.GetValue());
+            Assert.AreEqual(ConstValues.WEST_WIND_C, tile.GetValue());
         }
 
         [TestMethod]
@@ -39,8 +39,8 @@ namespace RMUTests
             TileObject manTile = TileFactory.CreateTile(3, Enums.Suit.Man);
             TileObject pinTile = TileFactory.CreateTile(5, Enums.Suit.Pin);
             TileObject souTile = TileFactory.CreateTile(6, Enums.Suit.Sou);
-            TileObject windTile = TileFactory.CreateTile(ConstValues.NORTH_WIND, Enums.Suit.Wind);
-            TileObject dragonTile = TileFactory.CreateTile(ConstValues.WHITE_DRAGON, Enums.Suit.Dragon);
+            TileObject windTile = TileFactory.CreateTile(ConstValues.NORTH_WIND_C, Enums.Suit.Wind);
+            TileObject dragonTile = TileFactory.CreateTile(ConstValues.WHITE_DRAGON_C, Enums.Suit.Dragon);
 
             Assert.AreEqual(Enums.Suit.Man, manTile.GetSuit());
             Assert.AreEqual(Enums.Suit.Pin, pinTile.GetSuit());

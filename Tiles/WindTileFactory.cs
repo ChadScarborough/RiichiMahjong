@@ -7,7 +7,7 @@ namespace RMU.Tiles
     {
         public static WindTileObject CreateTile(int value, Enums.Suit suit)
         {
-            if(value >= ConstValues.EAST_WIND && value <= ConstValues.NORTH_WIND)
+            if(value is >= ConstValues.EAST_WIND_C and <= ConstValues.NORTH_WIND_C)
             {
                 return new WindTileObject(value, suit);
             }

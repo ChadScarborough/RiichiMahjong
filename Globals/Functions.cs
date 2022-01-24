@@ -69,13 +69,13 @@ namespace RMU.Globals
             if (windTile.GetSuit() != Enums.WIND) return false;
             switch (windTile.GetValue())
             {
-                case ConstValues.EAST_WIND:
+                case ConstValues.EAST_WIND_C:
                     return wind == Enums.EAST;
-                case ConstValues.SOUTH_WIND:
+                case ConstValues.SOUTH_WIND_C:
                     return wind == Enums.SOUTH;
-                case ConstValues.WEST_WIND:
+                case ConstValues.WEST_WIND_C:
                     return wind == Enums.WEST;
-                case ConstValues.NORTH_WIND:
+                case ConstValues.NORTH_WIND_C:
                     return wind == Enums.NORTH;
             }
             return false;
@@ -96,11 +96,11 @@ namespace RMU.Globals
             if (dragonTile.GetSuit() != Enums.DRAGON) return false;
             switch (dragonTile.GetValue())
             {
-                case ConstValues.GREEN_DRAGON:
+                case ConstValues.GREEN_DRAGON_C:
                     return dragon == Enums.GREEN;
-                case ConstValues.RED_DRAGON:
+                case ConstValues.RED_DRAGON_C:
                     return dragon == Enums.RED;
-                case ConstValues.WHITE_DRAGON:
+                case ConstValues.WHITE_DRAGON_C:
                     return dragon == Enums.WHITE;
             }
             return false;
@@ -172,6 +172,12 @@ namespace RMU.Globals
                 return;
             }
             throw new ArgumentException("Input tile did not have value 5");
+        }
+
+        public static int BoolToInt(bool input)
+        {
+            if (input) return 1;
+            return 0;
         }
     }
 }

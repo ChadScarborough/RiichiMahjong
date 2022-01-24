@@ -35,13 +35,13 @@ namespace RMU.Globals
         public static readonly TileObject EIGHT_SOU    = TileFactory.CreateTile(8, SOU);
         public static readonly TileObject NINE_SOU     = TileFactory.CreateTile(9, SOU);
 
-        public static readonly TileObject EAST_WIND    = TileFactory.CreateTile(ConstValues.EAST_WIND,    WIND);
-        public static readonly TileObject SOUTH_WIND   = TileFactory.CreateTile(ConstValues.SOUTH_WIND,   WIND);
-        public static readonly TileObject WEST_WIND    = TileFactory.CreateTile(ConstValues.WEST_WIND,    WIND);
-        public static readonly TileObject NORTH_WIND   = TileFactory.CreateTile(ConstValues.NORTH_WIND,   WIND);
-        public static readonly TileObject GREEN_DRAGON = TileFactory.CreateTile(ConstValues.GREEN_DRAGON, DRAGON);
-        public static readonly TileObject RED_DRAGON   = TileFactory.CreateTile(ConstValues.RED_DRAGON,   DRAGON);
-        public static readonly TileObject WHITE_DRAGON = TileFactory.CreateTile(ConstValues.WHITE_DRAGON, DRAGON);
+        public static readonly TileObject EAST_WIND    = TileFactory.CreateTile(ConstValues.EAST_WIND_C,    WIND);
+        public static readonly TileObject SOUTH_WIND   = TileFactory.CreateTile(ConstValues.SOUTH_WIND_C,   WIND);
+        public static readonly TileObject WEST_WIND    = TileFactory.CreateTile(ConstValues.WEST_WIND_C,    WIND);
+        public static readonly TileObject NORTH_WIND   = TileFactory.CreateTile(ConstValues.NORTH_WIND_C,   WIND);
+        public static readonly TileObject GREEN_DRAGON = TileFactory.CreateTile(ConstValues.GREEN_DRAGON_C, DRAGON);
+        public static readonly TileObject RED_DRAGON   = TileFactory.CreateTile(ConstValues.RED_DRAGON_C,   DRAGON);
+        public static readonly TileObject WHITE_DRAGON = TileFactory.CreateTile(ConstValues.WHITE_DRAGON_C, DRAGON);
 
         public static TileObject OneMan()      { return ONE_MAN.Clone(); }
         public static TileObject TwoMan()      { return TWO_MAN.Clone(); }

@@ -7,7 +7,7 @@ namespace RMU.Tiles
     {
         public static DragonTileObject CreateTile(int value, Enums.Suit suit)
         {
-            if (value >= ConstValues.GREEN_DRAGON && value <= ConstValues.WHITE_DRAGON)
+            if (value >= ConstValues.GREEN_DRAGON_C && value <= ConstValues.WHITE_DRAGON_C)
             {
                 return new DragonTileObject(value, suit);
             }
