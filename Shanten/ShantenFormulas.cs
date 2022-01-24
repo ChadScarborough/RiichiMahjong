@@ -1,4 +1,6 @@
-﻿namespace RMU.Shanten
+﻿using RMU.Globals;
+
+namespace RMU.Shanten
 {
     public static class ShantenFormulas
     {
@@ -17,9 +19,9 @@
             return 6 - (pairs + triplets);
         }
 
-        public static int CalculateThirteenOrphansShanten(int uniqueTerminals)
+        public static int CalculateThirteenOrphansShanten(int uniqueTerminals, bool isTerminalPair)
         {
-            return 13 - uniqueTerminals; //TODO: Make sure this logic works in the typical case where a hand is tenpai with only 12 unique terminals
+            return 13 - (uniqueTerminals + Functions.BoolToInt(isTerminalPair));
         }
     }
 }
