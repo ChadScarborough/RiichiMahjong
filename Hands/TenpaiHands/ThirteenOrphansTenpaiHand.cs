@@ -7,6 +7,11 @@ namespace RMU.Hands.TenpaiHands
     public class ThirteenOrphansTenpaiHand : ITenpaiHand
     {
         private readonly List<TileObject> _waits;
+
+        public ThirteenOrphansTenpaiHand(List<ICompleteHandComponent> components)
+        {
+            
+        }
         
         public List<ICompleteHandComponent> GetComponents()
         {

@@ -7,13 +7,21 @@ namespace RMU.Hands.TenpaiHands
 {
     public static class TenpaiHandFactory
     {
-        //TODO: Add Thirteen orphans to logic
-        
         public static ITenpaiHand CreateTenpaiHand(List<ICompleteHandComponent> components)
         {
-            return CreateSevenPairsHand(components);
+            return CreateThirteenOrphansHand(components);
         }
 
+        private static ITenpaiHand CreateThirteenOrphansHand(List<ICompleteHandComponent> components)
+        {
+            if (components.Count >= 12)
+            {
+                return new ThirteenOrphansTenpaiHand(components);
+            }
+
+            return CreateSevenPairsHand(components);
+        } 
+        
         private static ITenpaiHand CreateSevenPairsHand(List<ICompleteHandComponent> components)
         {
             if (components.Count > 6)
