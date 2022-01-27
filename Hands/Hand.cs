@@ -2,6 +2,8 @@
 using RMU.Calls.CreateMeldBehaviours;
 using RMU.DiscardPile;
 using RMU.Globals.Algorithms;
+using RMU.Hands.TenpaiHands;
+using RMU.Shanten;
 using RMU.Tiles;
 using RMU.Wall;
 using RMU.Wall.DeadWall;
@@ -20,6 +22,9 @@ namespace RMU.Hands
         private readonly HandSorter _handSorter;
         private readonly List<OpenMeld> _openMelds;
         private bool _isOpen;
+        private readonly List<ITenpaiHand> _tenpaiHands;
+        private readonly List<TileObject> _waits;
+        private int _shanten;
 
         protected Hand(WallObject wallObject)
         {
@@ -29,6 +34,8 @@ namespace RMU.Hands
             _handSorter = new HandSorter();
             _closedTiles = new List<TileObject>();
             _openMelds = new List<OpenMeld>();
+            _tenpaiHands = new List<ITenpaiHand>();
+            _waits = new List<TileObject>();
         }
 
         public void OpenHand()
@@ -161,6 +168,47 @@ namespace RMU.Hands
         public void RemoveDrawTile()
         {
             _drawTile = null;
+        }
+
+        public List<ITenpaiHand> GetTenpaiHands()
+        {
+            return _tenpaiHands;
+        }
+
+        public List<TileObject> GetWaits()
+        {
+            return _waits;
+        }
+
+        public int GetShanten()
+        {
+            return _shanten;
+        }
+
+        public void CheckShanten()
+        {
+            ClearTenpaiHands();
+            _shanten = ShantenCalculator.CalculateShanten(this);
+        }
+
+        private void ClearTenpaiHands()
+        {
+            _tenpaiHands.Clear();
+        }
+
+        public void AddTenpaiHand(ITenpaiHand tenpaiHand)
+        {
+            _tenpaiHands.Add(tenpaiHand);
+        }
+
+        public void ClearWaits()
+        {
+            _waits.Clear();
+        }
+
+        public void AddWait(TileObject tile)
+        {
+            _waits.Add(tile);
         }
     }
 }
