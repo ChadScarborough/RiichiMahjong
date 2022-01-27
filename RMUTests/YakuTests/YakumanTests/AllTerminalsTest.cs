@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RMU.Yaku.Yakuman;
 using RMU.Tiles;
 using RMU.Globals;
@@ -13,7 +10,7 @@ namespace RMUTests.YakuTests.YakumanTests
     [TestClass]
     public class AllTerminalsTest
     {
-        private AbstractYakuman _allTerminals = YakumanList.ALL_TERMINALS;
+        private readonly AbstractYakuman _allTerminals = YakumanList.ALL_TERMINALS;
 
         [TestMethod]
         public void Yaku_ReturnsCorrectStringName()
@@ -30,7 +27,7 @@ namespace RMUTests.YakuTests.YakumanTests
         [TestMethod]
         public void CheckYakuReturnsFalse_WhenHandOnlyContainsHonorTiles()
         {
-            TileObject tile = TileFactory.CreateTile(ConstValues.SOUTH_WIND, Enums.Suit.Wind);
+            TileObject tile = TileFactory.CreateTile(ConstValues.SOUTH_WIND_C, Enums.Suit.Wind);
             Assert.IsFalse(_allTerminals.CheckYaku(TestHandList.DRAGON_TEST_HAND, tile));
         }
 
