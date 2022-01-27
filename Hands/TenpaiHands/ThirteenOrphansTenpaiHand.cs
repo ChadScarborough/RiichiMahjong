@@ -9,15 +9,17 @@ namespace RMU.Hands.TenpaiHands
     public class ThirteenOrphansTenpaiHand : ITenpaiHand
     {
         private readonly List<TileObject> _waits;
+        private readonly List<ICompleteHandComponent> _components;
 
         public ThirteenOrphansTenpaiHand(List<ICompleteHandComponent> components)
         {
+            _components = components;
             //TODO: Add logic to actually determine wait (may involve creating a separate class)
         }
         
         public List<ICompleteHandComponent> GetComponents()
         {
-            throw new System.NotImplementedException();
+            return _components;
         }
 
         public List<TileObject> GetWaits()
