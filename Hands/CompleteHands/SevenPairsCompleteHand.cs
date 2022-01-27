@@ -1,6 +1,10 @@
 ﻿using System.Collections.Generic;
 using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
+using RMU.Hands.TenpaiHands;
+using RMU.Tiles;
+using static RMU.Globals.Enums;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 
 namespace RMU.Hands.CompleteHands
 {
@@ -8,32 +12,10 @@ namespace RMU.Hands.CompleteHands
     {
         private List<ICompleteHandComponent> _completeHand;
 
-        public SevenPairsCompleteHand
-            (
-            PairComponent pair1, PairComponent pair2, PairComponent pair3, 
-            PairComponent pair4, PairComponent pair5, PairComponent pair6, 
-            IsolatedTile isolatedTile, DrawTile drawTile
-            )
+        public SevenPairsCompleteHand(ITenpaiHand tenpaiHand, TileObject tile)
         {
-            _completeHand = new List<ICompleteHandComponent>();
-            FillList(pair1, pair2, pair3, pair4, pair5, pair6, isolatedTile, drawTile);
-            //Seven pairs is always 25 fu
-        }
-
-        private void FillList
-            (
-            PairComponent pair1, PairComponent pair2, PairComponent pair3, 
-            PairComponent pair4, PairComponent pair5, PairComponent pair6, 
-            IsolatedTile isolatedTile, DrawTile drawTile
-            )
-        {
-            _completeHand.Add(pair1);
-            _completeHand.Add(pair2);
-            _completeHand.Add(pair3);
-            _completeHand.Add(pair4);
-            _completeHand.Add(pair5);
-            _completeHand.Add(pair6);
-            _completeHand.Add(isolatedTile);
+            _completeHand = tenpaiHand.GetComponents();
+            ICompleteHandComponent drawTile = CreateCompleteHandComponent(tile, DRAW_TILE);
             _completeHand.Add(drawTile);
         }
 

@@ -1,4 +1,7 @@
 using System.Collections.Generic;
+using RMU.Hands;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
+using RMU.Hands.TenpaiHands;
 using RMU.Shanten.HandSplitter;
 using RMU.Tiles;
 using static RMU.Globals.StandardTileList;
@@ -9,7 +12,7 @@ namespace RMU.Shanten;
 
 public static class ThirteenOrphansShantenCalculator
 {
-    private static readonly TileObject[] TerminalsAndHonors = new TileObject[]
+    private static readonly TileObject[] TerminalsAndHonors =
     {
         ONE_MAN, NINE_MAN,
         ONE_PIN, NINE_PIN,
@@ -23,13 +26,43 @@ public static class ThirteenOrphansShantenCalculator
     private static readonly int[] Counters = new int[13];
     private static int _uniqueTerminals;
     private static bool _isDuplicateTerminal;
+    private static List<ICompleteHandComponent> _components;
+    private static List<TileCollection> _collections;
 
-    public static int CalculateShanten(List<TileCollection> collections)
+    public static int CalculateShanten(Hand hand, List<TileCollection> collections)
     {
+        _collections = collections;
+        _components = new List<ICompleteHandComponent>();
         ResetCounters();
         CountTerminalsAndHonors(collections);
         CalculateUniqueTerminalsAndWhetherThereAreDuplicates();
-        return ShantenFormulas.CalculateThirteenOrphansShanten(_uniqueTerminals, _isDuplicateTerminal);
+        int shanten = ShantenFormulas.CalculateThirteenOrphansShanten(_uniqueTerminals, _isDuplicateTerminal);
+        if (shanten == 0)
+        {
+            ExtractComponentsFromHand();
+            hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));
+        }
+
+        return shanten;
+    }
+
+    private static void ExtractComponentsFromHand()
+    {
+        foreach (TileCollection collection in _collections)
+        {
+            foreach (ICompleteHandComponent component in PairExtractor.ExtractPair(collection))
+            {
+                _components.Add(component);
+            }
+        }
+
+        foreach (TileCollection collection in _collections)
+        {
+            foreach (ICompleteHandComponent component in IsolatedTileExtractor.ExtractIsolatedTiles(collection))
+            {
+                _components.Add(component);
+            }
+        }
     }
 
     private static void CalculateUniqueTerminalsAndWhetherThereAreDuplicates()

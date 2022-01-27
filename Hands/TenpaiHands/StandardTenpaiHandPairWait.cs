@@ -26,5 +26,10 @@ namespace RMU.Hands.TenpaiHands
                 }
             }
         }
+
+        public override CompleteHandWaitType GetWaitType()
+        {
+            return PAIR_WAIT;
+        }
     }
 }

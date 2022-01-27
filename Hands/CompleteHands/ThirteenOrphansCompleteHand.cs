@@ -2,29 +2,39 @@
 using System.Collections.Generic;
 using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
+using RMU.Hands.TenpaiHands;
+using RMU.Tiles;
+using static RMU.Globals.Enums;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 
 namespace RMU.Hands.CompleteHands
 {
     public class ThirteenOrphansCompleteHand : ICompleteHand
     {
-        public ThirteenOrphansCompleteHand()
+        private List<ICompleteHandComponent> _completeHand;
+        private CompleteHandWaitType _waitType;
+        
+        public ThirteenOrphansCompleteHand(ITenpaiHand tenpaiHand, TileObject tile)
         {
-            //Take in list of isolated terminals (and likely one pair) and store them as ICompleteHandComponent
+            _completeHand = tenpaiHand.GetComponents();
+            ICompleteHandComponent drawTile = CreateCompleteHandComponent(tile, DRAW_TILE);
+            _completeHand.Add(drawTile);
+            _waitType = tenpaiHand.GetWaitType();
         }
 
         public List<ICompleteHandComponent> GetCompleteHand()
         {
-            throw new NotImplementedException();
+            return _completeHand;
         }
 
-        public Enums.CompleteHandType GetCompleteHandType()
+        public CompleteHandType GetCompleteHandType()
         {
-            return Enums.THIRTEEN_ORPHANS;
+            return THIRTEEN_ORPHANS;
         }
 
-        public Enums.CompleteHandWaitType GetWaitType()
+        public CompleteHandWaitType GetWaitType()
         {
-            throw new NotImplementedException();
+            return _waitType;
         }
     }
 }

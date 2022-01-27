@@ -1,5 +1,7 @@
 ﻿using System.Collections.Generic;
+using RMU.Hands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
+using RMU.Hands.TenpaiHands;
 using RMU.Shanten.HandSplitter;
 using static RMU.Globals.Enums;
 
@@ -11,11 +13,17 @@ namespace RMU.Shanten
         private static List<ICompleteHandComponent> _components;
         private static int _triplets, _pairs;
 
-        public static int CalculateShanten(List<TileCollection> collections)
+        public static int CalculateShanten(Hand hand, List<TileCollection> collections)
         {
             InitializeValues(collections);
             ExtractTripletsAndPairsAndIncrementCounters();
-            return ShantenFormulas.CalculateSevenPairsShanten(_triplets, _pairs);
+            int shanten = ShantenFormulas.CalculateSevenPairsShanten(_triplets, _pairs);
+            if (shanten == 0)
+            {
+                hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));   
+            }
+
+            return shanten;
         }
 
         private static void ExtractTripletsAndPairsAndIncrementCounters()

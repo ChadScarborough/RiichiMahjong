@@ -1,6 +1,8 @@
 using System.Collections.Generic;
+using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
+using static RMU.Globals.Enums;
 
 namespace RMU.Hands.TenpaiHands
 {
@@ -10,7 +12,7 @@ namespace RMU.Hands.TenpaiHands
 
         public ThirteenOrphansTenpaiHand(List<ICompleteHandComponent> components)
         {
-            
+            //TODO: Add logic to actually determine wait (may involve creating a separate class)
         }
         
         public List<ICompleteHandComponent> GetComponents()
@@ -21,6 +23,11 @@ namespace RMU.Hands.TenpaiHands
         public List<TileObject> GetWaits()
         {
             return _waits;
+        }
+
+        public Enums.CompleteHandWaitType GetWaitType()
+        {
+            return THIRTEEN_WAIT; 
         }
     }
 }

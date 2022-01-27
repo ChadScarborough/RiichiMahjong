@@ -1,28 +1,32 @@
 using System;
 using System.Collections.Generic;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
+using RMU.Tiles;
 using static RMU.Globals.Enums;
 
 namespace RMU.Hands.TenpaiHands
 {
     public static class TenpaiHandFactory
     {
-        public static ITenpaiHand CreateTenpaiHand(List<ICompleteHandComponent> components)
+        public static ITenpaiHand CreateTenpaiHand(Hand hand, List<ICompleteHandComponent> components)
         {
-            return CreateThirteenOrphansHand(components);
+            hand.ClearWaits();
+            return CreateThirteenOrphansHand(hand, components);
         }
 
-        private static ITenpaiHand CreateThirteenOrphansHand(List<ICompleteHandComponent> components)
+        private static ITenpaiHand CreateThirteenOrphansHand(Hand hand, List<ICompleteHandComponent> components)
         {
             if (components.Count >= 12)
             {
-                return new ThirteenOrphansTenpaiHand(components);
+                ITenpaiHand outputHand = new ThirteenOrphansTenpaiHand(components);
+                AddWaitsToHand(hand, outputHand);
+                return outputHand;
             }
 
-            return CreateSevenPairsHand(components);
-        } 
-        
-        private static ITenpaiHand CreateSevenPairsHand(List<ICompleteHandComponent> components)
+            return CreateSevenPairsHand(hand, components);
+        }
+
+        private static ITenpaiHand CreateSevenPairsHand(Hand hand, List<ICompleteHandComponent> components)
         {
             if (components.Count > 6)
             {
@@ -37,26 +41,30 @@ namespace RMU.Hands.TenpaiHands
 
                 if (p == 6)
                 {
-                    return new SevenPairsTenpaiHand(components);
+                    ITenpaiHand outputHand =  new SevenPairsTenpaiHand(components);
+                    AddWaitsToHand(hand, outputHand);
+                    return outputHand;
                 }
             }
-            return CreatePairWaitHand(components);
+            return CreatePairWaitHand(hand, components);
         }
 
-        private static ITenpaiHand CreatePairWaitHand(List<ICompleteHandComponent> components)
+        private static ITenpaiHand CreatePairWaitHand(Hand hand, List<ICompleteHandComponent> components)
         {
             foreach (ICompleteHandComponent component in components)
             {
                 if (component.GetComponentType() == ISOLATED_TILE)
                 {
-                    return new StandardTenpaiHandPairWait(components);
+                    ITenpaiHand outputHand = new StandardTenpaiHandPairWait(components);
+                    AddWaitsToHand(hand, outputHand);
+                    return outputHand;
                 }
             }
 
-            return CreateTwoSidedTripletWaitHand(components);
+            return CreateTwoSidedTripletWaitHand(hand, components);
         }
 
-        private static ITenpaiHand CreateTwoSidedTripletWaitHand(List<ICompleteHandComponent> components)
+        private static ITenpaiHand CreateTwoSidedTripletWaitHand(Hand hand, List<ICompleteHandComponent> components)
         {
             int p = 0;
             foreach (ICompleteHandComponent component in components)
@@ -69,49 +77,65 @@ namespace RMU.Hands.TenpaiHands
 
             if (p == 2)
             {
-                return new StandardTenpaiHandTwoSidedTripletWait(components);
+                ITenpaiHand outputHand =  new StandardTenpaiHandTwoSidedTripletWait(components);
+                AddWaitsToHand(hand, outputHand);
+                return outputHand;
             }
 
-            return CreateClosedWaitHand(components);
+            return CreateClosedWaitHand(hand, components);
         }
 
-        private static ITenpaiHand CreateClosedWaitHand(List<ICompleteHandComponent> components)
+        private static ITenpaiHand CreateClosedWaitHand(Hand hand, List<ICompleteHandComponent> components)
         {
             foreach (ICompleteHandComponent component in components)
             {
                 if (component.GetComponentType() == INCOMPLETE_SEQUENCE_CLOSED_WAIT)
                 {
-                    return new StandardTenpaiHandClosedWait(components);
+                    ITenpaiHand outputHand =  new StandardTenpaiHandClosedWait(components);
+                    AddWaitsToHand(hand, outputHand);
+                    return outputHand;
                 }
             }
 
-            return CreateEdgeWaitHand(components);
+            return CreateEdgeWaitHand(hand, components);
         }
 
-        private static ITenpaiHand CreateEdgeWaitHand(List<ICompleteHandComponent> components)
+        private static ITenpaiHand CreateEdgeWaitHand(Hand hand, List<ICompleteHandComponent> components)
         {
             foreach (ICompleteHandComponent component in components)
             {
                 if (component.GetComponentType() == INCOMPLETE_SEQUENCE_EDGE_WAIT)
                 {
-                    return new StandardTenpaiHandEdgeWait(components);
+                    ITenpaiHand outputHand = new StandardTenpaiHandEdgeWait(components);
+                    AddWaitsToHand(hand, outputHand);
+                    return outputHand;
                 }
             }
 
-            return CreateOpenWaitHand(components);
+            return CreateOpenWaitHand(hand, components);
         }
 
-        private static ITenpaiHand CreateOpenWaitHand(List<ICompleteHandComponent> components)
+        private static ITenpaiHand CreateOpenWaitHand(Hand hand, List<ICompleteHandComponent> components)
         {
             foreach (ICompleteHandComponent component in components)
             {
                 if (component.GetComponentType() == INCOMPLETE_SEQUENCE_OPEN_WAIT)
                 {
-                    return new StandardTenpaiHandOpenWait(components);
+                    ITenpaiHand outputHand = new StandardTenpaiHandOpenWait(components);
+                    AddWaitsToHand(hand, outputHand);
+                    return outputHand;
                 }
             }
 
             throw new Exception("Hand does not form valid tenpai hand");
+        }
+        
+        private static void AddWaitsToHand(Hand hand, ITenpaiHand outputHand)
+        {
+            foreach (TileObject tile in outputHand.GetWaits())
+            {
+                hand.AddWait(tile);
+            }
         }
     }
 }

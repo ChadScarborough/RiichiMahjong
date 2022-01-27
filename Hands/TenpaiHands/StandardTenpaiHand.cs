@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 
@@ -23,5 +24,7 @@ namespace RMU.Hands.TenpaiHands
         {
             return _waits;
         }
+
+        public abstract Enums.CompleteHandWaitType GetWaitType();
     }
 }

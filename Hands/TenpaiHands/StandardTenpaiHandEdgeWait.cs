@@ -36,5 +36,10 @@ namespace RMU.Hands.TenpaiHands
                 }
             }
         }
+
+        public override CompleteHandWaitType GetWaitType()
+        {
+            return EDGE_WAIT;
+        }
     }
 }

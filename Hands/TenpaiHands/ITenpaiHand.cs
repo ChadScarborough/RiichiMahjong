@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 
@@ -8,5 +9,6 @@ namespace RMU.Hands.TenpaiHands
     {
         List<ICompleteHandComponent> GetComponents();
         List<TileObject> GetWaits();
+        Enums.CompleteHandWaitType GetWaitType();
     }
 }

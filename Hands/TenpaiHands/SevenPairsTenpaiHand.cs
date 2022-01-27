@@ -26,6 +26,11 @@ namespace RMU.Hands.TenpaiHands
             return _waits;
         }
 
+        public CompleteHandWaitType GetWaitType()
+        {
+            return PAIR_WAIT;
+        }
+
         private void GenerateWaits()
         {
             foreach (ICompleteHandComponent component in _components)

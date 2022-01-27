@@ -12,13 +12,15 @@ namespace RMUTests.ShantenTests
     {
         private Hand _hand;
         private List<TileCollection> _collections;
+        private int _numberOfOpenMelds;
 
         [TestMethod]
         public void HandWithFourTripletsAndASingleTile_HasShantenValueZero()
         {
             _hand = new DragonTestHand();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(0, CalculateShanten(_collections));
+            _numberOfOpenMelds = _hand.GetOpenMelds().Count;
+            Assert.AreEqual(0, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -26,7 +28,8 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryAllManTestHand();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(0, CalculateShanten(_collections));
+            _numberOfOpenMelds = _hand.GetOpenMelds().Count;
+            Assert.AreEqual(0, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -34,7 +37,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryAllPinTestHand();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(1, CalculateShanten(_collections));
+            Assert.AreEqual(1, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -42,7 +45,8 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryAllSouTestHand();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(0, CalculateShanten(_collections));
+            _numberOfOpenMelds = _hand.GetOpenMelds().Count;
+            Assert.AreEqual(0, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -50,7 +54,8 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand1();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(5, CalculateShanten(_collections));
+            _numberOfOpenMelds = _hand.GetOpenMelds().Count;
+            Assert.AreEqual(5, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -58,7 +63,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand2();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(4, CalculateShanten(_collections));
+            Assert.AreEqual(4, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -66,7 +71,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand3();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(2, CalculateShanten(_collections));
+            Assert.AreEqual(2, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -74,7 +79,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand4();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(3, CalculateShanten(_collections));
+            Assert.AreEqual(3, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -82,7 +87,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand5();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(3, CalculateShanten(_collections));
+            Assert.AreEqual(3, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -90,7 +95,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand6();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(5, CalculateShanten(_collections));
+            Assert.AreEqual(5, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -98,7 +103,8 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand7();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(5, CalculateShanten(_collections));
+            _numberOfOpenMelds = _hand.GetOpenMelds().Count;
+            Assert.AreEqual(5, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -106,7 +112,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand8();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(5, CalculateShanten(_collections));
+            Assert.AreEqual(5, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -114,7 +120,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand9();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(3, CalculateShanten(_collections));
+            Assert.AreEqual(3, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
 
         [TestMethod]
@@ -122,7 +128,7 @@ namespace RMUTests.ShantenTests
         {
             _hand = new ArbitraryTestHand10();
             _collections = HandSplitter.SplitHandBySuit(_hand.GetClosedTiles());
-            Assert.AreEqual(3, CalculateShanten(_collections));
+            Assert.AreEqual(3, CalculateShanten(_hand, _collections, _numberOfOpenMelds));
         }
     }
 }

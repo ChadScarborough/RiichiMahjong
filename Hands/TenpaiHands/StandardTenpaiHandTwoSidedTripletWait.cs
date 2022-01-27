@@ -31,5 +31,10 @@ namespace RMU.Hands.TenpaiHands
                 }
             }
         }
+
+        public override CompleteHandWaitType GetWaitType()
+        {
+            return TWO_SIDED_TRIPLET_WAIT;
+        }
     }
 }
