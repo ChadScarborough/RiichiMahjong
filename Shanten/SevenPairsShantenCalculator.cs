@@ -1,9 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using RMU.Hands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten.HandSplitter;
+using RMU.Tiles;
 using static RMU.Globals.Enums;
+using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 
 namespace RMU.Shanten
 {
@@ -20,6 +23,7 @@ namespace RMU.Shanten
             int shanten = ShantenFormulas.CalculateSevenPairsShanten(_triplets, _pairs);
             if (shanten == 0)
             {
+                ConvertRemainingTileToIsolatedTileObject(collections);
                 hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));   
             }
 
@@ -102,6 +106,18 @@ namespace RMU.Shanten
             foreach (ICompleteHandComponent component in PonExtractor.ExtractPon(coll))
             {
                 _components.Add(component);
+            }
+        }
+
+        private static void ConvertRemainingTileToIsolatedTileObject(List<TileCollection> collections)
+        {
+            foreach (TileCollection collection in collections)
+            {
+                foreach (TileObject tile in collection.GetTiles())
+                {
+                    ICompleteHandComponent component = CreateCompleteHandComponent(tile, ISOLATED_TILE);
+                    _components.Add(component);
+                }
             }
         }
     }

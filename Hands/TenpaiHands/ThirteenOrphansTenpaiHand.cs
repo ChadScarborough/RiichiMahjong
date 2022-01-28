@@ -27,5 +27,9 @@ namespace RMU.Hands.TenpaiHands
         }
 
         public abstract CompleteHandWaitType GetWaitType();
+        public CompleteHandType GetHandType()
+        {
+            return THIRTEEN_ORPHANS;
+        }
     }
 }

@@ -18,4 +18,8 @@
     <ProjectReference Include="..\RMU.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="TenpaiTests" />
+  </ItemGroup>
+
 </Project>

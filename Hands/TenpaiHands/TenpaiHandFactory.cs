@@ -39,7 +39,7 @@ namespace RMU.Hands.TenpaiHands
 
         private static ITenpaiHand CreateSevenPairsHand(Hand hand, List<ICompleteHandComponent> components)
         {
-            if (components.Count > 6)
+            if (components.Count >= 6)
             {
                 int p = 0;
                 foreach (ICompleteHandComponent component in components)

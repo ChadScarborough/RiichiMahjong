@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public ArbitraryTestHand1()
         {
-            _closedTiles = new List<TileObject> ///Should be Five from tenpai
+            _closedTiles = new List<TileObject> //Should be three from tenpai (five as standard hand, three as seven pairs)
             {
                 SouthWind(), OneMan(), OneMan(), EightSou(), GreenDragon(), RedDragon(),
                 FourSou(), NorthWind(), FourPin(), WestWind(), NinePin(), GreenDragon(), NorthWind()

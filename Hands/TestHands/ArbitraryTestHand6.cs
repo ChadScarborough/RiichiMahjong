@@ -6,7 +6,7 @@ namespace RMU.Hands.TestHands
 {
     public class ArbitraryTestHand6 : TestHand
     {
-        public ArbitraryTestHand6() //Should have shanten value five
+        public ArbitraryTestHand6() //Should have shanten value four (5 standard, 4 seven pairs)
         {
             _closedTiles = new List<TileObject> 
             {

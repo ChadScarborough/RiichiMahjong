@@ -64,15 +64,16 @@ namespace RMU.Shanten
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
-        private static int CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero()
+        private static int CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(List<TileCollection> collections)
         {
             int shanten = CalculateStandardShanten(_components);
 
             if (shanten == 0)
             {
+                ExtractIsolatedTiles(collections);
                 foreach (OpenMeld openMeld in _hand.GetOpenMelds())
                 {
                     ICompleteHandComponent component =
@@ -86,6 +87,18 @@ namespace RMU.Shanten
             return shanten;
         }
 
+        private static void ExtractIsolatedTiles(List<TileCollection> collections)
+        {
+            foreach (TileCollection collection in collections)
+            {
+                List<ICompleteHandComponent> isolatedTiles = IsolatedTileExtractor.ExtractIsolatedTiles(collection);
+                foreach (ICompleteHandComponent component in isolatedTiles)
+                {
+                    _components.Add(component);
+                }
+            }
+        }
+
         private static int TopchiiPonPairConsNoncons(List<TileCollection> collections)
         {
             InitializeLists(collections, out _newCollections);
@@ -97,7 +110,7 @@ namespace RMU.Shanten
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonTopchiiConsNonconsPair(List<TileCollection> collections)
@@ -111,7 +124,7 @@ namespace RMU.Shanten
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractPairToComponentsList(_components, collection);
             } 
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int TopchiiPonConsNonconsPair(List<TileCollection> collections)
@@ -125,7 +138,7 @@ namespace RMU.Shanten
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractPairToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonTopchiiConsPairNoncons(List<TileCollection> collections)
@@ -139,7 +152,7 @@ namespace RMU.Shanten
                 ExtractPairToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int TopchiiPonConsPairNoncons(List<TileCollection> collections)
@@ -153,7 +166,7 @@ namespace RMU.Shanten
                 ExtractPairToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonPairTopchiiConsNoncons(List<TileCollection> collections)
@@ -167,7 +180,7 @@ namespace RMU.Shanten
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonPairTopchiiNonconsCons(List<TileCollection> collections)
@@ -181,7 +194,7 @@ namespace RMU.Shanten
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
         
         private static int PonBottomchiiPairConsNoncons(List<TileCollection> collections)
@@ -196,7 +209,7 @@ namespace RMU.Shanten
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int BottomchiiPonPairConsNoncons(List<TileCollection> collections)
@@ -210,7 +223,7 @@ namespace RMU.Shanten
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonBottomchiiConsNonconsPair(List<TileCollection> collections)
@@ -224,7 +237,7 @@ namespace RMU.Shanten
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractPairToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int BottomchiiPonConsNonconsPair(List<TileCollection> collections)
@@ -238,7 +251,7 @@ namespace RMU.Shanten
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractPairToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonBottomchiiConsPairNoncons(List<TileCollection> collections)
@@ -252,7 +265,7 @@ namespace RMU.Shanten
                 ExtractPairToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int BottomchiiPonConsPairNoncons(List<TileCollection> collections)
@@ -266,7 +279,7 @@ namespace RMU.Shanten
                 ExtractPairToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonPairBottomchiiConsNoncons(List<TileCollection> collections)
@@ -280,7 +293,7 @@ namespace RMU.Shanten
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static int PonPairBottomchiiNonconsCons(List<TileCollection> collections)
@@ -294,7 +307,7 @@ namespace RMU.Shanten
                 ExtractNonconsecutiveTaatsuToComponentsList(_components, collection);
                 ExtractConsecutiveTaatsuToComponentsList(_components, collection);
             }
-            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero();
+            return CalculateShantenValueAndCreateTenpaiHandIfShantenIsZero(collections);
         }
 
         private static void InitializeLists(List<TileCollection> collections, out List<TileCollection> newCollections)

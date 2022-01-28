@@ -10,5 +10,6 @@ namespace RMU.Hands.TenpaiHands
         List<ICompleteHandComponent> GetComponents();
         List<TileObject> GetWaits();
         Enums.CompleteHandWaitType GetWaitType();
+        Enums.CompleteHandType GetHandType();
     }
 }

@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using static RMU.Globals.Enums;
@@ -29,6 +30,11 @@ namespace RMU.Hands.TenpaiHands
         public CompleteHandWaitType GetWaitType()
         {
             return PAIR_WAIT;
+        }
+
+        public CompleteHandType GetHandType()
+        {
+            return SEVEN_PAIRS;
         }
 
         private void GenerateWaits()

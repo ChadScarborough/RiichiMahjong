@@ -26,5 +26,9 @@ namespace RMU.Hands.TenpaiHands
         }
 
         public abstract Enums.CompleteHandWaitType GetWaitType();
+        public Enums.CompleteHandType GetHandType()
+        {
+            return Enums.STANDARD;
+        }
     }
 }

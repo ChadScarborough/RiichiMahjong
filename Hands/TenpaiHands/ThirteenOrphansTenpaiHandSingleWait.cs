@@ -78,9 +78,14 @@ public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
         {
             if (counters[j] == 0)
             {
-                _waits.Add(_terminals[j].Clone());
+                SetTileAsWait(j);
                 return;
             }
         }
+    }
+
+    private void SetTileAsWait(int j)
+    {
+        _waits.Add(_terminals[j].Clone());
     }
 }
