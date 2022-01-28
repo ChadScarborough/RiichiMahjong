@@ -18,7 +18,18 @@ namespace RMU.Hands.TenpaiHands
         {
             if (components.Count >= 12)
             {
-                ITenpaiHand outputHand = new ThirteenOrphansTenpaiHand(components);
+                ITenpaiHand outputHand;
+                foreach (ICompleteHandComponent component in components)
+                {
+                    if (component.GetComponentType() == PAIR_COMPONENT)
+                    {
+                        outputHand = new ThirteenOrphansTenpaiHandSingleWait(components);
+                        AddWaitsToHand(hand, outputHand);
+                        return outputHand;
+                    }
+                }
+
+                outputHand = new ThirteenOrphansTenpaiHandThirteenWait(components);
                 AddWaitsToHand(hand, outputHand);
                 return outputHand;
             }

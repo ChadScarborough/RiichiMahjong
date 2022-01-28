@@ -6,15 +6,14 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Hands.TenpaiHands
 {
-    public class ThirteenOrphansTenpaiHand : ITenpaiHand
+    public abstract class ThirteenOrphansTenpaiHand : ITenpaiHand
     {
-        private readonly List<TileObject> _waits;
-        private readonly List<ICompleteHandComponent> _components;
+        protected List<TileObject> _waits;
+        protected readonly List<ICompleteHandComponent> _components;
 
-        public ThirteenOrphansTenpaiHand(List<ICompleteHandComponent> components)
+        protected ThirteenOrphansTenpaiHand(List<ICompleteHandComponent> components)
         {
             _components = components;
-            //TODO: Add logic to actually determine wait (may involve creating a separate class)
         }
         
         public List<ICompleteHandComponent> GetComponents()
@@ -22,14 +21,11 @@ namespace RMU.Hands.TenpaiHands
             return _components;
         }
 
-        public List<TileObject> GetWaits()
+        public virtual List<TileObject> GetWaits()
         {
             return _waits;
         }
 
-        public Enums.CompleteHandWaitType GetWaitType()
-        {
-            return THIRTEEN_WAIT; 
-        }
+        public abstract CompleteHandWaitType GetWaitType();
     }
 }
