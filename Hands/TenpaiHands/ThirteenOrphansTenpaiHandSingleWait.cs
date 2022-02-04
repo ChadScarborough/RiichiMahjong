@@ -29,7 +29,7 @@ public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
 
     public override Enums.CompleteHandWaitType GetWaitType()
     {
-        return Enums.PAIR_WAIT;
+        return Enums.SINGLE_WAIT;
     }
 
     private void SetWaits()

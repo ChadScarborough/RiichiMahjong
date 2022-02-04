@@ -19,5 +19,6 @@ public class ThirteenOrphansSingleWaitTestHand : TestHand
             RedDragon(),
             RedDragon()
         };
+        //Waiting on White Dragon
     }
 }

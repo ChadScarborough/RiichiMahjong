@@ -20,7 +20,7 @@ public static class CompleteHandFactory
             return new StandardCompleteHand(hand, extraTile);
         }
 
-        if (hand.GetType().IsSubclassOf(typeof(SevenPairsTenpaiHand)))
+        if (hand.GetType() == typeof(SevenPairsTenpaiHand))
         {
             return new SevenPairsCompleteHand(hand, extraTile);
         }

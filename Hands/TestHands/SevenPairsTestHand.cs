@@ -18,5 +18,6 @@ public class SevenPairsTestHand : TestHand
             SouthWind(), SouthWind(),
             RedDragon()
         };
+        //Waiting on Red Dragon
     }
 }

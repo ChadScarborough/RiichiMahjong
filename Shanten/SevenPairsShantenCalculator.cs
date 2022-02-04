@@ -23,7 +23,14 @@ namespace RMU.Shanten
             int shanten = ShantenFormulas.CalculateSevenPairsShanten(_triplets, _pairs);
             if (shanten == 0)
             {
-                ConvertRemainingTileToIsolatedTileObject(collections);
+                foreach (TileCollection collection in _newCollections)
+                {
+                    List<ICompleteHandComponent> isolatedTiles = IsolatedTileExtractor.ExtractIsolatedTiles(collection);
+                    foreach (ICompleteHandComponent component in isolatedTiles)
+                    {
+                        _components.Add(component);
+                    }
+                }
                 hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));   
             }
 
@@ -106,18 +113,6 @@ namespace RMU.Shanten
             foreach (ICompleteHandComponent component in PonExtractor.ExtractPon(coll))
             {
                 _components.Add(component);
-            }
-        }
-
-        private static void ConvertRemainingTileToIsolatedTileObject(List<TileCollection> collections)
-        {
-            foreach (TileCollection collection in collections)
-            {
-                foreach (TileObject tile in collection.GetTiles())
-                {
-                    ICompleteHandComponent component = CreateCompleteHandComponent(tile, ISOLATED_TILE);
-                    _components.Add(component);
-                }
             }
         }
     }
