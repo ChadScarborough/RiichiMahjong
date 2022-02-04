@@ -1,6 +1,8 @@
 ﻿using System;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using RMU.Tiles.TileDecorators;
+using static RMU.Globals.Enums;
 
 namespace RMU.Globals
 {
@@ -178,6 +180,17 @@ namespace RMU.Globals
         {
             if (input) return 1;
             return 0;
+        }
+
+        public static bool AreComponentsEquivalent(ICompleteHandComponent component1, ICompleteHandComponent component2)
+        {
+            TileObject tile1 = component1.GetLeadTile();
+            TileObject tile2 = component2.GetLeadTile();
+            CompleteHandComponentType componentType1 = component1.GetComponentType();
+            CompleteHandComponentType componentType2 = component2.GetComponentType();
+            bool sameTile = AreTilesEquivalent(tile1, tile2);
+            bool sameComponentType = componentType1 == componentType2;
+            return sameTile && sameComponentType;
         }
     }
 }
