@@ -61,7 +61,7 @@
         public const CompleteHandGeneralComponentType PAIR = CompleteHandGeneralComponentType.Pair;
         public const CompleteHandGeneralComponentType TAATSU = CompleteHandGeneralComponentType.Taatsu;
         public const CompleteHandGeneralComponentType TILE = CompleteHandGeneralComponentType.Tile;
-        public enum CompleteHandWaitType { PairWait, TwoSidedTripletWait, ClosedWait, EdgeWait, OpenWait, ThirteenWait }
+        public enum CompleteHandWaitType { PairWait, TwoSidedTripletWait, ClosedWait, EdgeWait, OpenWait, ThirteenWait, SingleWait }
 
         public const CompleteHandWaitType PAIR_WAIT = CompleteHandWaitType.PairWait;
         public const CompleteHandWaitType TWO_SIDED_TRIPLET_WAIT = CompleteHandWaitType.TwoSidedTripletWait;
@@ -69,6 +69,7 @@
         public const CompleteHandWaitType EDGE_WAIT = CompleteHandWaitType.EdgeWait;
         public const CompleteHandWaitType OPEN_WAIT = CompleteHandWaitType.OpenWait;
         public const CompleteHandWaitType THIRTEEN_WAIT = CompleteHandWaitType.ThirteenWait;
+        public const CompleteHandWaitType SINGLE_WAIT = CompleteHandWaitType.SingleWait;
 
         public enum CompleteHandType { Standard, SevenPairs, ThirteenOrphans }
 
