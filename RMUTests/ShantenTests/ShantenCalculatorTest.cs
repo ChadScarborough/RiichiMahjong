@@ -127,4 +127,12 @@ public class ShantenCalculatorTest
         int shanten = ShantenCalculator.CalculateShanten(hand);
         Assert.AreEqual(3, shanten);
     }
+
+    [TestMethod]
+    public void TwoIncompleteSequencesTestHand_HasShantenValueOne()
+    {
+        Hand hand = new TwoIncompleteSequencesTestHand();
+        int shanten = ShantenCalculator.CalculateShanten(hand);
+        Assert.AreEqual(1, shanten);
+    }
 }
