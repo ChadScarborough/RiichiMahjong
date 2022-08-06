@@ -7,6 +7,10 @@ namespace RMU.Wall
         public FourPlayerWallObjectNoRedFives()
         {
             _wall = new FourPlayerWallNoRedFives();
+        }
+        
+        public override void GenerateDeadWall()
+        {
             _deadWall = new FourPlayerDeadWall(_wall);
         }
     }
