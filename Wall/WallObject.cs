@@ -16,5 +16,7 @@ namespace RMU.Wall
         {
             return _deadWall;
         }
+        
+        public abstract void GenerateDeadWall();
     }
 }
