@@ -34,5 +34,15 @@ namespace RMU.DiscardPile
         {
             return _allDiscardedTiles.Count;
         }
+
+        public List<TileObject> GetDisplayedDiscardedTiles()
+        {
+            List<TileObject> outputList = new List<TileObject>();
+            foreach(TileObject tile in _displayedDiscardedTiles)
+            {
+                outputList.Add(tile);
+            }
+            return outputList;
+        }
     }
 }

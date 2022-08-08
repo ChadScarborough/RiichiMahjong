@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System.Collections;
+using System.Collections.Generic;
 
 namespace RMU.Globals.DataStructures
 {
@@ -36,6 +37,11 @@ namespace RMU.Globals.DataStructures
         public void Clear()
         {
             _stack.Clear();
+        }
+
+        public IEnumerator GetEnumerator()
+        {
+            return _stack.GetEnumerator();
         }
     }
 }

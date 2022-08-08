@@ -182,6 +182,7 @@ namespace RMU.Hands
 
         public int GetShanten()
         {
+            CheckShanten();
             return _shanten;
         }
 

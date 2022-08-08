@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using RMU.Globals.DataStructures;
 using RMU.Tiles;
 
@@ -13,24 +12,6 @@ namespace RMU.Wall
         }
         
         private readonly DoublyLinkedList<TileObject> _wall;
-        
-        private List<TileObject> ShuffleTiles(List<TileObject> tiles)
-        {
-            List<TileObject> outputList = new List<TileObject>();
-            Random rand = new Random();
-            while (tiles.Count > 0)
-            {
-                AddRandomTileToOutputList(tiles, outputList, rand);
-            }
-            return outputList;
-        }
-        
-        private void AddRandomTileToOutputList(List<TileObject> inputList, List<TileObject> outputList, Random rand)
-        {
-            int r = rand.Next(0, inputList.Count);
-            outputList.Add(inputList[r]);
-            inputList.RemoveAt(r);
-        }
         
         public virtual TileObject DrawTileFromWall()
         {
@@ -52,11 +33,10 @@ namespace RMU.Wall
             return wall.RemoveTail();
         }
 
-        protected void PopulateWall(List<TileObject> tiles)
+        public void PopulateWall(List<TileObject> tiles)
         {
             Clear();
             List<TileObject> tempList = GenerateTiles(tiles);
-            tempList = ShuffleTiles(tempList);
             FillWall(tempList, _wall);
         }
         

@@ -19,5 +19,10 @@ namespace RMU.Wall
         {
             return new NullDeadWall();
         }
+
+        public override void GenerateDeadWall()
+        {
+            throw new System.NotImplementedException();
+        }
     }
 }
