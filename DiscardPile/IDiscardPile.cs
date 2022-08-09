@@ -1,4 +1,5 @@
 ﻿using RMU.Tiles;
+using System.Collections.Generic;
 
 namespace RMU.DiscardPile
 {
@@ -8,5 +9,6 @@ namespace RMU.DiscardPile
         void DiscardTile(TileObject tile);
         int GetDisplayedTileCount();
         int GetTotalDiscardedCount();
+        List<TileObject> GetDisplayedDiscardedTiles();
     }
 }
