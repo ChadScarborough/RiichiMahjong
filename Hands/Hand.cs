@@ -211,5 +211,10 @@ namespace RMU.Hands
         {
             _waits.Add(tile);
         }
+
+        public StandardDiscardPile GetDiscardPile()
+        {
+            return _discardPile;
+        }
     }
 }
