@@ -53,6 +53,7 @@ namespace RMU.Hands
         
         public virtual void DrawTileFromWall()
         {
+            if(GetClosedTiles().Count >= 14) return;
             if(_drawTile != null)
             {
                 AddDrawTileToHand();
