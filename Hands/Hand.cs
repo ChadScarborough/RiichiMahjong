@@ -48,7 +48,6 @@ namespace RMU.Hands
             _discardPile.DiscardTile(_closedTiles[index]);
             _closedTiles.RemoveAt(index);
             AddDrawTileToHand();
-            SortHand();
         }
         
         public virtual void DrawTileFromWall()
@@ -135,10 +134,26 @@ namespace RMU.Hands
         public virtual List<TileObject> GetAllTiles(TileObject extraTile)
         {
             List<TileObject> outputList = new List<TileObject>();
-            AddClosedTilesToOutputList(outputList);
-            AddEachOpenMeldToOutputList(outputList);
+            CompileAllTiles(outputList);
             AddExtraTileToOutputList(extraTile, outputList);
             return _handSorter.SortHand(outputList);
+        }
+
+        public virtual List<TileObject> GetAllTiles()
+        {
+            List <TileObject> outputList = new List<TileObject>();
+            CompileAllTiles(outputList);
+            if(_drawTile != null)
+            {
+                AddExtraTileToOutputList(_drawTile, outputList);
+            }
+            return _handSorter.SortHand(outputList);
+        }
+
+        private void CompileAllTiles(List<TileObject> tileList)
+        {
+            AddClosedTilesToOutputList(tileList);
+            AddEachOpenMeldToOutputList(tileList);
         }
 
         private static void AddExtraTileToOutputList(TileObject extraTile, List<TileObject> outputList)
