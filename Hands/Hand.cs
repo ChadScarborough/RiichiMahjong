@@ -53,6 +53,7 @@ namespace RMU.Hands
         
         public virtual void DrawTileFromWall()
         {
+            if (_closedTiles.Count >= 13 && _drawTile != null) return;
             if(_drawTile != null)
             {
                 AddDrawTileToHand();
@@ -62,14 +63,15 @@ namespace RMU.Hands
         
         public virtual void DrawTileFromDeadWall()
         {
-            if(_drawTile != null)
+            if (_closedTiles.Count >= 13 && _drawTile != null) return;
+            if (_drawTile != null)
             {
                 AddDrawTileToHand();
             }
             _drawTile = _deadWall.DrawTile();
         }
         
-        protected virtual void SortHand()
+        private void SortHand()
         {
             _closedTiles = _handSorter.SortHand(_closedTiles);
         }
