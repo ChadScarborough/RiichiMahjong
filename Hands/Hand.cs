@@ -109,6 +109,7 @@ namespace RMU.Hands
         {
             _closedTiles.Add(_drawTile);
             _drawTile = null;
+            SortHand();
         }
         
         public virtual List<TileObject> GetClosedTiles()
