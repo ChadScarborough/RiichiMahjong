@@ -45,6 +45,7 @@ namespace RMU.Hands
         
         public virtual void DiscardTile(int index)
         {
+            if (index >= _closedTiles.Count) return;
             _discardPile.DiscardTile(_closedTiles[index]);
             _closedTiles.RemoveAt(index);
             AddDrawTileToHand();
