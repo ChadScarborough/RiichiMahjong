@@ -106,6 +106,7 @@ namespace RMU.Hands
 
         protected virtual void AddDrawTileToHand()
         {
+            if (_drawTile == null) return;
             _closedTiles.Add(_drawTile);
             _drawTile = null;
             SortHand();
