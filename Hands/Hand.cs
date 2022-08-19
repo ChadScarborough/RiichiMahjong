@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System;
 using RMU.Calls.CreateMeldBehaviours;
 using RMU.DiscardPile;
 using RMU.Globals.Algorithms;
@@ -53,6 +54,10 @@ namespace RMU.Hands
         
         public virtual void DrawTileFromWall()
         {
+            if (_wall.GetSize() <= 0)
+            {
+                throw new IndexOutOfRangeException("Tried to draw a tile from an empty wall");
+            }
             SortHand();
             if (_closedTiles.Count >= 13 && _drawTile != null) return;
             if(_drawTile != null)
