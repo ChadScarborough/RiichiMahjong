@@ -51,6 +51,13 @@ namespace RMU.Hands
             _closedTiles.RemoveAt(index);
             AddDrawTileToHand();
         }
+
+        public void DiscardDrawTile()
+        {
+            if (_drawTile == null) return;
+            _discardPile.DiscardTile(_drawTile);
+            _drawTile = null;
+        }
         
         public virtual void DrawTileFromWall()
         {
