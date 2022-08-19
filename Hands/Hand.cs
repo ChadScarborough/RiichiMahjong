@@ -110,7 +110,7 @@ namespace RMU.Hands
             return false;
         }
 
-        protected virtual void AddDrawTileToHand()
+        public virtual void AddDrawTileToHand()
         {
             if (_drawTile == null) return;
             _closedTiles.Add(_drawTile);
