@@ -120,6 +120,7 @@ namespace RMU.Hands
         public virtual void AddDrawTileToHand()
         {
             if (_drawTile == null) return;
+            if (_closedTiles.Count >= 13) return;
             _closedTiles.Add(_drawTile);
             _drawTile = null;
             SortHand();
