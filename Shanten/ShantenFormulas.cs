@@ -17,6 +17,7 @@ namespace RMU.Shanten
 
         public static int CalculateSevenPairsShanten(int triplets, int pairs)
         {
+            if (pairs == 5 && triplets == 1) return 1;
             return 6 - (pairs + triplets);
         }
 
