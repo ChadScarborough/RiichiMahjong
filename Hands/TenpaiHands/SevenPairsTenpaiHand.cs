@@ -41,7 +41,7 @@ namespace RMU.Hands.TenpaiHands
         {
             foreach (ICompleteHandComponent component in _components)
             {
-                if (component.GetComponentType() == ISOLATED_TILE)
+                if (component.GetComponentType() != PAIR_COMPONENT)
                 {
                     _waits = new List<TileObject>
                     {
