@@ -10,14 +10,22 @@ namespace RMU.Globals
     {
         public static int MinOfThree(int a, int b, int c)
         {
-            return (int)MathF.Round(MathF.Min(a, MathF.Min(b, c)));
+            if (a <= b && a <= c) return a;
+            if (b <= a && b <= c) return b;
+            return c;
+        }
+
+        private static int Min(int a, int b)
+        {
+            if (a < b) return a;
+            return b;
         }
 
         public static int MinOfEight(int a, int b, int c, int d, int e, int f, int g, int h)
         {
             int int1 = MinOfThree(a, b, c);
             int int2 = MinOfThree(d, e, f);
-            int int3 = Math.Min(g, h);
+            int int3 = Min(g, h);
             return MinOfThree(int1, int2, int3);
         }
 
@@ -40,8 +48,8 @@ namespace RMU.Globals
         {
             try
             {
-                Enums.Suit suit1 = tile1.GetSuit();
-                Enums.Suit suit2 = tile2.GetSuit();
+                Suit suit1 = tile1.GetSuit();
+                Suit suit2 = tile2.GetSuit();
                 int value1 = tile1.GetValue();
                 int value2 = tile2.GetValue();
                 bool sameSuit = suit1 == suit2;
@@ -66,19 +74,19 @@ namespace RMU.Globals
             return AreTilesEquivalent(tile1, tile2, tile3) && AreTilesEquivalent(tile3, tile4);
         }
 
-        public static bool AreWindsEquivalent(TileObject windTile, Enums.Wind wind)
+        public static bool AreWindsEquivalent(TileObject windTile, Wind wind)
         {
-            if (windTile.GetSuit() != Enums.WIND) return false;
+            if (windTile.GetSuit() != WIND) return false;
             switch (windTile.GetValue())
             {
                 case ConstValues.EAST_WIND_C:
-                    return wind == Enums.EAST;
+                    return wind == EAST;
                 case ConstValues.SOUTH_WIND_C:
-                    return wind == Enums.SOUTH;
+                    return wind == SOUTH;
                 case ConstValues.WEST_WIND_C:
-                    return wind == Enums.WEST;
+                    return wind == WEST;
                 case ConstValues.NORTH_WIND_C:
-                    return wind == Enums.NORTH;
+                    return wind == NORTH;
             }
             return false;
         }
@@ -92,18 +100,18 @@ namespace RMU.Globals
             return sameSuit && bottomTwoTilesCorrect && topTwoTilesCorrect;
         }
 
-        public static bool AreDragonsEquivalent(TileObject dragonTile, Enums.Dragon dragon)
+        public static bool AreDragonsEquivalent(TileObject dragonTile, Dragon dragon)
         {
             if (dragonTile == null) return false;
-            if (dragonTile.GetSuit() != Enums.DRAGON) return false;
+            if (dragonTile.GetSuit() != DRAGON) return false;
             switch (dragonTile.GetValue())
             {
                 case ConstValues.GREEN_DRAGON_C:
-                    return dragon == Enums.GREEN;
+                    return dragon == GREEN;
                 case ConstValues.RED_DRAGON_C:
-                    return dragon == Enums.RED;
+                    return dragon == RED;
                 case ConstValues.WHITE_DRAGON_C:
-                    return dragon == Enums.WHITE;
+                    return dragon == WHITE;
             }
             return false;
         }
