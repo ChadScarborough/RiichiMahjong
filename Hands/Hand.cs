@@ -92,8 +92,8 @@ namespace RMU.Hands
         
         public void CreateOpenMeld(TileObject calledTile, MeldType meldType)
         {
-            OpenMeld openMeld = new OpenMeld(meldType, calledTile);
-            this._openMelds.Add(openMeld);
+            OpenMeld openMeld = new(meldType, calledTile);
+            _openMelds.Add(openMeld);
         }
         
         public void RemoveCopyOfTile(TileObject calledTile)
@@ -148,7 +148,7 @@ namespace RMU.Hands
         
         public virtual List<TileObject> GetAllTiles(TileObject extraTile)
         {
-            List<TileObject> outputList = new List<TileObject>();
+            List<TileObject> outputList = new();
             CompileAllTiles(outputList);
             AddExtraTileToOutputList(extraTile, outputList);
             return _handSorter.SortHand(outputList);
@@ -156,7 +156,7 @@ namespace RMU.Hands
 
         public virtual List<TileObject> GetAllTiles()
         {
-            List <TileObject> outputList = new List<TileObject>();
+            List <TileObject> outputList = new();
             CompileAllTiles(outputList);
             if(_drawTile != null)
             {
@@ -250,6 +250,11 @@ namespace RMU.Hands
         public StandardDiscardPile GetDiscardPile()
         {
             return _discardPile;
+        }
+
+        public void SetDrawTile(TileObject tile)
+        {
+            _drawTile = tile;
         }
     }
 }
