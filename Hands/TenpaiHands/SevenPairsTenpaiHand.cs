@@ -14,6 +14,7 @@ namespace RMU.Hands.TenpaiHands
         public SevenPairsTenpaiHand(List<ICompleteHandComponent> components)
         {
             _components = components;
+            _waits = new();
             GenerateWaits();
         }
         
@@ -43,10 +44,7 @@ namespace RMU.Hands.TenpaiHands
             {
                 if (component.GetComponentType() != PAIR_COMPONENT)
                 {
-                    _waits = new List<TileObject>
-                    {
-                        component.GetLeadTile().Clone()
-                    };
+                    _waits.Add(component.GetLeadTile().Clone());
                     return;
                 }
             }
