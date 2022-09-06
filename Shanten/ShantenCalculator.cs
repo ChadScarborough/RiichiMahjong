@@ -9,7 +9,7 @@ public static class ShantenCalculator
 {
     public static int CalculateShanten(Hand hand)
     {
-        List<TileCollection> collections = HandSplitter.HandSplitter.SplitHandBySuit(hand.GetClosedTiles());
+        List<TileCollection> collections = HandSplitter.HandSplitter.SplitHandBySuit(hand.GetTilesInHand());
         int numberOfOpenMelds = hand.GetOpenMelds().Count;
         int sevenPairsShanten = 6, thirteenOrphansShanten = 6;
 

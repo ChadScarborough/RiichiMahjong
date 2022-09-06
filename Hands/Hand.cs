@@ -130,6 +130,14 @@ namespace RMU.Hands
         {
             return _closedTiles;
         }
+
+        public List<TileObject> GetTilesInHand()
+        {
+            List<TileObject> t = _closedTiles.GetRange(0, _closedTiles.Count);
+            if (_drawTile != null)
+                t.Add(_drawTile);
+            return t;
+        }
         
         public virtual List<OpenMeld> GetOpenMelds()
         {
@@ -254,7 +262,7 @@ namespace RMU.Hands
 
         public void SetDrawTile(TileObject tile)
         {
-            _drawTile = tile;
+            _drawTile =
         }
     }
 }
