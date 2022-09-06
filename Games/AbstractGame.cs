@@ -12,6 +12,11 @@ namespace RMU.Games
         protected Wall.Wall _wall;
         protected IDeadWall _deadWall;
 
+        public Player[] GetPlayers()
+        {
+            return _players;
+        }
+
         public Player GetEastPlayer()
         {
             return GetPlayerByWind(EAST);
