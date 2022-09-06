@@ -47,6 +47,11 @@ namespace RMU.Games
             return _deadWall;
         }
 
+        public WallObject GetWallObject()
+        {
+            return _wallObject;
+        }
+
         private Player GetPlayerByWind(Wind wind)
         {
             foreach (Player p in _players)
