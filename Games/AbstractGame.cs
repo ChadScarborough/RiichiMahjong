@@ -17,6 +17,7 @@ namespace RMU.Games
         protected void Start()
         {
             _activePlayer = GetEastPlayer();
+            _activePlayer.GetHand().DrawTileFromWall();
         }
 
         public void NextPlayer()
@@ -25,6 +26,7 @@ namespace RMU.Games
                 _activePlayer = _activePlayer.GetPlayerOnRight();
             else
                 _activePlayer = _activePlayer.GetPlayerAcross();
+            _activePlayer.GetHand().DrawTileFromWall();
         }
 
         public Player GetActivePlayer()
