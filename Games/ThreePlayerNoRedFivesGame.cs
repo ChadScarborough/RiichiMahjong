@@ -7,6 +7,7 @@ namespace RMU.Games
         public ThreePlayerNoRedFivesGame()
         {
             _wallObject = new ThreePlayerWallObjectNoRedFives();
+            base.Init();
         }
     }
 }

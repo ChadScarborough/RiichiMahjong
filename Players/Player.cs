@@ -3,6 +3,7 @@ using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
 using RMU.Hands;
 using RMU.Tiles;
+using RMU.Games;
 using static RMU.Globals.Enums;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
 
@@ -16,6 +17,7 @@ namespace RMU.Players
         private Player _playerAcross;
         private Player _playerOnRight;
         private int _score;
+        private AbstractGame _game;
         protected PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
         private PriorityQueueForCallCommands _priorityQueueForCallCommands;
         protected AvailablePotentialCalls _availablePotentialCalls;
@@ -24,10 +26,34 @@ namespace RMU.Players
         private bool _canOpenKan1;
         private bool _canRon;
         
-        protected Player(Wind seatWind, Hand hand)
+        protected Player(Wind seatWind, Hand hand, AbstractGame game)
         {
             _seatWind = seatWind;
             _hand = hand;
+            _game = game;
+        }
+
+        public bool IsActivePlayer()
+        {
+            return _game.GetActivePlayer().Equals(this);
+        }
+
+        public void Discard(int index)
+        {
+            if (IsActivePlayer())
+            {
+                _hand.DiscardTile(index);
+                _game.NextPlayer();
+            }
+        }
+
+        public void DiscardDrawTile()
+        {
+            if (IsActivePlayer())
+            {
+                _hand.DiscardDrawTile();
+                _game.NextPlayer();
+            }
         }
 
         public void SetAvailablePotentialCalls()

@@ -6,8 +6,7 @@ namespace RMU.Games
 {
     public abstract class ThreePlayerGame : AbstractGame
     {
-
-        public ThreePlayerGame()
+        protected void Init()
         {
             _players = new ThreePlayerAbstractPlayer[3];
             _players[0] = new ThreePlayerStandardPlayer(EAST, new StandardThreePlayerHand(_wallObject));
@@ -16,6 +15,7 @@ namespace RMU.Games
             _wall = _wallObject.GetWall();
             _deadWall = _wallObject.GetDeadWall();
             ArrangePlayers();
+            Start();
         }
 
         private void ArrangePlayers()

@@ -12,6 +12,26 @@ namespace RMU.Games
         protected Wall.Wall _wall;
         protected IDeadWall _deadWall;
 
+        private Player _activePlayer;
+
+        protected void Start()
+        {
+            _activePlayer = GetEastPlayer();
+        }
+
+        public void NextPlayer()
+        {
+            if (_activePlayer.GetPlayerOnRight() != null)
+                _activePlayer = _activePlayer.GetPlayerOnRight();
+            else
+                _activePlayer = _activePlayer.GetPlayerAcross();
+        }
+
+        public Player GetActivePlayer()
+        {
+            return _activePlayer;
+        }
+
         public Player[] GetPlayers()
         {
             return _players;

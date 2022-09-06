@@ -4,9 +4,10 @@ namespace RMU.Games
 {
     public class FourPlayerNoRedFivesGame : FourPlayerGame
     {
-        public FourPlayerNoRedFivesGame()
+        public FourPlayerNoRedFivesGame() : base()
         {
             _wallObject = new FourPlayerWallObjectNoRedFives();
+            base.Init();
         }
     }
 }

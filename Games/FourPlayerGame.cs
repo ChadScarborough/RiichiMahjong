@@ -6,7 +6,7 @@ namespace RMU.Games
 {
     public abstract class FourPlayerGame : AbstractGame
     {
-        public FourPlayerGame()
+        protected void Init()
         {
             _players = new FourPlayerAbstractPlayer[4];
             _players[0] = new FourPlayerStandardPlayer(EAST, new StandardFourPlayerHand(_wallObject));
@@ -16,6 +16,7 @@ namespace RMU.Games
             _wall = _wallObject.GetWall();
             _deadWall = _wallObject.GetDeadWall();
             ArrangePlayers();
+            base.Start();
         }
 
         private void ArrangePlayers()
