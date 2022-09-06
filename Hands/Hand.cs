@@ -262,7 +262,7 @@ namespace RMU.Hands
 
         public void SetDrawTile(TileObject tile)
         {
-            _drawTile =
+            _drawTile = tile;
         }
     }
 }
