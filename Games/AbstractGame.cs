@@ -23,10 +23,15 @@ namespace RMU.Games
         public void NextPlayer()
         {
             if (_activePlayer.GetPlayerOnRight() != null)
-                _activePlayer = _activePlayer.GetPlayerOnRight();
+                SetActivePlayer(_activePlayer.GetPlayerOnRight());
             else
-                _activePlayer = _activePlayer.GetPlayerAcross();
-            _activePlayer.GetHand().DrawTileFromWall();
+                SetActivePlayer(_activePlayer.GetPlayerAcross());
+        }
+
+        private void SetActivePlayer(Player player)
+        {
+            _activePlayer = player;
+            _activePlayer.DrawTile();
         }
 
         public Player GetActivePlayer()

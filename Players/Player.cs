@@ -56,6 +56,16 @@ namespace RMU.Players
             }
         }
 
+        public void DrawTile()
+        {
+            _hand.DrawTileFromWall();
+        }
+
+        public void DrawTileFromDeadWall()
+        {
+            _hand.DrawTileFromDeadWall();
+        }
+
         public void SetAvailablePotentialCalls()
         {
             _availablePotentialCalls = new AvailablePotentialCalls(this, _priorityQueueForPotentialCalls);
