@@ -9,10 +9,10 @@ namespace RMU.Games
         protected void Init()
         {
             _players = new FourPlayerAbstractPlayer[4];
-            _players[0] = new FourPlayerStandardPlayer(EAST, new StandardFourPlayerHand(_wallObject));
-            _players[1] = new FourPlayerStandardPlayer(SOUTH, new StandardFourPlayerHand(_wallObject));
-            _players[2] = new FourPlayerStandardPlayer(WEST, new StandardFourPlayerHand(_wallObject));
-            _players[3] = new FourPlayerStandardPlayer(NORTH, new StandardFourPlayerHand(_wallObject));
+            _players[0] = new FourPlayerStandardPlayer(EAST, new StandardFourPlayerHand(_wallObject), this);
+            _players[1] = new FourPlayerStandardPlayer(SOUTH, new StandardFourPlayerHand(_wallObject), this);
+            _players[2] = new FourPlayerStandardPlayer(WEST, new StandardFourPlayerHand(_wallObject), this);
+            _players[3] = new FourPlayerStandardPlayer(NORTH, new StandardFourPlayerHand(_wallObject), this);
             _wall = _wallObject.GetWall();
             _deadWall = _wallObject.GetDeadWall();
             ArrangePlayers();

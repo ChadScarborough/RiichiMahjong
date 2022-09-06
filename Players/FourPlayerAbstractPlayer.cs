@@ -2,6 +2,7 @@ using System;
 using RMU.Calls.CallCommands;
 using RMU.Hands;
 using RMU.Tiles;
+using RMU.Games;
 using static RMU.Globals.Enums;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
 
@@ -15,7 +16,7 @@ namespace RMU.Players
         private bool _canMidChii;
         private bool _canHighChii;
         
-        protected FourPlayerAbstractPlayer(Wind seatWind, AbstractFourPlayerHand hand) : base(seatWind, hand)
+        protected FourPlayerAbstractPlayer(Wind seatWind, AbstractFourPlayerHand hand, AbstractGame game) : base(seatWind, hand, game)
         {
             _hand = hand;
         }

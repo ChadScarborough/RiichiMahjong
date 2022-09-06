@@ -8,7 +8,7 @@ using static RMU.Globals.Enums;
 
 namespace RMUTests
 {
-    [TestClass]
+    /*
     public class PlayerTest
     {
         private readonly Wind _seatWind = EAST;
@@ -101,4 +101,5 @@ namespace RMUTests
             Assert.IsNotNull(ex);
         }
     }
+    */
 }
