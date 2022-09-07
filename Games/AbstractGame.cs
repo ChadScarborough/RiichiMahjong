@@ -110,5 +110,10 @@ namespace RMU.Games
             SetActivePlayer(null);
             _scoreObject = new HandScore(player, satisfiedYaku);
         }
+
+        public HandScore GetHandScore()
+        {
+            return _scoreObject;
+        }
     }
 }
