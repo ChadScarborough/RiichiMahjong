@@ -5,11 +5,11 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class MixedTripletSequenceYaku : Yaku
+public class MixedTripleSequenceYaku : YakuBase
 {
     private new readonly StandardCompleteHand _completeHand;
     
-    public MixedTripletSequenceYaku(ICompleteHand completeHand) : base(completeHand)
+    public MixedTripleSequenceYaku(ICompleteHand completeHand) : base(completeHand)
     {
         _name = "Mixed Triple Sequence";
         _value = 2;

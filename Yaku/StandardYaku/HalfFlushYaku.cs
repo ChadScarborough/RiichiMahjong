@@ -4,7 +4,7 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class HalfFlushYaku : Yaku
+public class HalfFlushYaku : YakuBase
 {
     public HalfFlushYaku(ICompleteHand completeHand) : base(completeHand)
     {

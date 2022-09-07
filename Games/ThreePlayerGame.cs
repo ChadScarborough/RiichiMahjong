@@ -29,5 +29,16 @@ namespace RMU.Games
             _players[2].SetPlayerOnLeft(_players[1]);
             _players[2].SetPlayerAcross(_players[0]);
         }
+
+        protected override Wind GetNewWind(Wind originalWind)
+        {
+            return originalWind switch
+            {
+                EAST => WEST,
+                SOUTH => EAST,
+                WEST => SOUTH,
+                _ => throw new System.Exception("Invalid Wind")
+            };
+        }
     }
 }

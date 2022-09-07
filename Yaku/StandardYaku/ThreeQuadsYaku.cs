@@ -4,7 +4,7 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class ThreeQuadsYaku : Yaku
+public class ThreeQuadsYaku : YakuBase
 {
     private new readonly StandardCompleteHand _completeHand;
     

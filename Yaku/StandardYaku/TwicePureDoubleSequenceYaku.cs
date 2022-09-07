@@ -5,7 +5,7 @@ using static RMU.Globals.Functions;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class TwicePureDoubleSequenceYaku : Yaku
+public class TwicePureDoubleSequenceYaku : YakuBase
 {
     private new readonly  StandardCompleteHand _completeHand;
     

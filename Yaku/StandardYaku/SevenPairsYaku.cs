@@ -3,7 +3,7 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class SevenPairsYaku : Yaku
+public class SevenPairsYaku : YakuBase
 {
     public SevenPairsYaku(ICompleteHand completeHand) : base(completeHand)
     {

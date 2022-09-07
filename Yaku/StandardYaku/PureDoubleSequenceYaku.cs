@@ -6,7 +6,7 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class PureDoubleSequenceYaku : Yaku
+public class PureDoubleSequenceYaku : YakuBase
 {
     private new readonly StandardCompleteHand _completeHand;
     

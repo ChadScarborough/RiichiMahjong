@@ -2,14 +2,14 @@ using RMU.Hands.CompleteHands;
 
 namespace RMU.Yaku.StandardYaku;
 
-public abstract class Yaku
+public abstract class YakuBase
 {
     protected IGetValueBehaviour _getValueBehaviour;
     protected readonly ICompleteHand _completeHand;
     protected int _value;
     protected string _name;
 
-    protected Yaku(ICompleteHand completeHand)
+    protected YakuBase(ICompleteHand completeHand)
     {
         _completeHand = completeHand;
     }

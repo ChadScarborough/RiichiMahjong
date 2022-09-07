@@ -17,5 +17,7 @@ namespace RMU.Hands.CompleteHands
         List<ICompleteHandComponent> GetPairs();
         List<ICompleteHandComponent> GetIsolatedTiles();
         List<TileObject> GetTiles();
+        void SetYaku(List<Yaku.StandardYaku.YakuBase> satisfiedYaku);
+        List<Yaku.StandardYaku.YakuBase> GetYaku();
     }
 }

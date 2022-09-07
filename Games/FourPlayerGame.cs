@@ -21,9 +21,9 @@ namespace RMU.Games
 
         private void ArrangePlayers()
         {
-            _players[0].SetPlayerOnRight(_players[1]);
-            _players[0].SetPlayerAcross(_players[2]);
             _players[0].SetPlayerOnLeft(_players[3]);
+            _players[0].SetPlayerAcross(_players[2]);
+            _players[0].SetPlayerOnRight(_players[1]);
 
             _players[1].SetPlayerOnLeft(_players[0]);
             _players[1].SetPlayerAcross(_players[3]);
@@ -36,6 +36,18 @@ namespace RMU.Games
             _players[3].SetPlayerOnLeft(_players[2]);
             _players[3].SetPlayerAcross(_players[1]);
             _players[3].SetPlayerOnRight(_players[0]);
+        }
+
+        protected override Wind GetNewWind(Wind originalWind)
+        {
+            return originalWind switch
+            {
+                EAST => NORTH,
+                SOUTH => EAST,
+                WEST => SOUTH,
+                NORTH => WEST,
+                _ => throw new System.Exception("Invalid wind")
+            };
         }
     }
 }

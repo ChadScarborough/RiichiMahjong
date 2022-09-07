@@ -5,7 +5,7 @@ using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class HalfOutsideHandYaku : Yaku
+public class HalfOutsideHandYaku : YakuBase
 {
     public HalfOutsideHandYaku(ICompleteHand completeHand) : base(completeHand)
     {

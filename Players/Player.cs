@@ -6,6 +6,11 @@ using RMU.Tiles;
 using RMU.Games;
 using static RMU.Globals.Enums;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
+using RMU.Hands.CompleteHands;
+using RMU.Hands.TenpaiHands;
+using RMU.Globals;
+using System.Collections.Generic;
+using RMU.Yaku.StandardYaku;
 
 namespace RMU.Players
 {
@@ -21,10 +26,13 @@ namespace RMU.Players
         protected PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
         private PriorityQueueForCallCommands _priorityQueueForCallCommands;
         protected AvailablePotentialCalls _availablePotentialCalls;
+        private ICompleteHand _completeHand;
+        private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
 
         private bool _canPon;
         private bool _canOpenKan1;
         private bool _canRon;
+        private bool _canTsumo;
         
         protected Player(Wind seatWind, Hand hand, AbstractGame game)
         {
@@ -59,11 +67,13 @@ namespace RMU.Players
         public void DrawTile()
         {
             _hand.DrawTileFromWall();
+            CheckForTsumo();
         }
 
         public void DrawTileFromDeadWall()
         {
             _hand.DrawTileFromDeadWall();
+            CheckForTsumo();
         }
 
         public void SetAvailablePotentialCalls()
@@ -178,6 +188,27 @@ namespace RMU.Players
             }
         }
         
+        public bool CanPon()
+        {
+            return _canPon;
+        }
+
+        public bool CanOpenKan1()
+        {
+            return _canOpenKan1;
+        }
+
+        public bool CanRon()
+        {
+            return _canRon;
+        }
+
+        public bool CanTsumo()
+        {
+            CheckForTsumo();
+            return _canTsumo;
+        }
+
         public void CallPon(TileObject calledTile)
         {
             UpdateAvailableCalls();
@@ -224,6 +255,11 @@ namespace RMU.Players
             }
         }
 
+        public void CallTsumo()
+        {
+            _game.CallTsumo(this, _satisfiedYaku);
+        }
+
         public virtual void GeneratePotentialDiscardCalls(TileObject lastTile)
         {
             GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
@@ -236,6 +272,84 @@ namespace RMU.Players
             _canPon = _availablePotentialCalls.CanCallPon();
             _canOpenKan1 = _availablePotentialCalls.CanCallOpenKan1();
             _canRon = _availablePotentialCalls.CanCallRon();
+        }
+
+        private void CheckForTsumo()
+        {
+            InitializeValuesForTsumoCheck();
+            if (IsActivePlayer() is false)
+                return;
+            if (_hand.GetShanten() > -1)
+                return;
+
+            List<ICompleteHand> completeHands = GetAllCompleteHandsForTsumoCheck();
+            bool yakuSatisfied = AtLeastOneYakuSatisfied(completeHands);
+            _canTsumo = yakuSatisfied;
+
+            if (_canTsumo)
+            {
+                DetermineStrongestCompleteHand(completeHands);
+            }
+        }
+
+        private void DetermineStrongestCompleteHand(List<ICompleteHand> completeHands)
+        {
+            ICompleteHand strongestHand = completeHands[0];
+            int highestValue = 0;
+            foreach (ICompleteHand completeHand in completeHands)
+            {
+                int han = 0;
+                foreach (Yaku.StandardYaku.YakuBase yaku in completeHand.GetYaku())
+                {
+                    han += yaku.GetValue();
+                }
+                if (han > highestValue)
+                {
+                    highestValue = han;
+                    strongestHand = completeHand;
+                }
+            }
+            _completeHand = strongestHand;
+        }
+
+        private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
+        {
+            bool yakuSatisfied = false;
+            foreach (ICompleteHand completeHand in completeHands)
+            {
+                StandardYakuList yakuList = new StandardYakuList(completeHand);
+                List<Yaku.StandardYaku.YakuBase> satisfiedYaku = yakuList.CheckYaku();
+                completeHand.SetYaku(satisfiedYaku);
+                if (satisfiedYaku.Count > 0) yakuSatisfied = true;
+            }
+
+            return yakuSatisfied;
+        }
+
+        private List<ICompleteHand> GetAllCompleteHandsForTsumoCheck()
+        {
+            // Get every valid complete configuration of the hand
+            List<ICompleteHand> completeHands = new List<ICompleteHand>();
+            foreach (ITenpaiHand tenpaiHand in _hand.GetTenpaiHands())
+            {
+                foreach (TileObject waitTile in tenpaiHand.GetWaits())
+                {
+                    if (Functions.AreTilesEquivalent(waitTile, _hand.GetDrawTile()))
+                    {
+                        completeHands.Add(CompleteHandFactory.CreateCompleteHand(tenpaiHand, _hand.GetDrawTile()));
+                        break;
+                    }
+                }
+            }
+
+            return completeHands;
+        }
+
+        private void InitializeValuesForTsumoCheck()
+        {
+            _canTsumo = false;
+            _completeHand = null;
+            _satisfiedYaku = null;
         }
     }
 }

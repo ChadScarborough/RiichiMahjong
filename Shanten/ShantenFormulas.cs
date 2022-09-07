@@ -7,11 +7,11 @@ namespace RMU.Shanten
         public static int CalculateStandardShanten(int groups, int pairs, int taatsu)
         {
             int standardShanten = (8 - ((2 * groups) + (pairs + taatsu)));
+            //Two groups, three pairs, one taatsu should not be considered tenpai
             if(standardShanten <= 0 && pairs == 0 && taatsu >= 1) 
             {
                 return standardShanten + 1;
             }
-            //Prevents the treating of a hand with four melds and an incomplete sequence as complete, and other related situations
             return standardShanten;
         }
 

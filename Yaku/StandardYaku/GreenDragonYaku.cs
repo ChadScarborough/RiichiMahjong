@@ -3,7 +3,7 @@ using static RMU.Globals.StandardTileList;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class GreenDragonYaku : Yaku
+public class GreenDragonYaku : YakuBase
 {
     public GreenDragonYaku(ICompleteHand completeHand) : base(completeHand)
     {

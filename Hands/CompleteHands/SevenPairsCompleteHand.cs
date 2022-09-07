@@ -16,6 +16,7 @@ namespace RMU.Hands.CompleteHands
         private readonly List<ICompleteHandComponent> _constructedHand;
         private readonly TileObject _drawTile;
         private readonly List<TileObject> _tiles;
+        private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
 
         public SevenPairsCompleteHand(ITenpaiHand tenpaiHand, TileObject tile)
         {
@@ -117,6 +118,16 @@ namespace RMU.Hands.CompleteHands
         public List<TileObject> GetTiles()
         {
             return _tiles;
+        }
+
+        public void SetYaku(List<Yaku.StandardYaku.YakuBase> satisfiedYaku)
+        {
+            _satisfiedYaku = satisfiedYaku;
+        }
+
+        public List<Yaku.StandardYaku.YakuBase> GetYaku()
+        {
+            return _satisfiedYaku;
         }
     }
 }
