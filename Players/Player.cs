@@ -257,6 +257,7 @@ namespace RMU.Players
 
         public void CallTsumo()
         {
+            if (_canTsumo == false) return;
             _game.CallTsumo(this, _satisfiedYaku);
         }
 

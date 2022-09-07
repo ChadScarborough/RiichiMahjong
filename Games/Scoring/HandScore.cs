@@ -30,24 +30,12 @@ namespace RMU.Games.Scoring
             _name += $"{_hanValue} han";
         }
 
-        public Player GetPlayer()
-        {
-            return _player;
-        }
+        public Player GetPlayer() => _player;
 
-        public List<YakuBase> GetYaku()
-        {
-            return _satisfiedYaku;
-        }
+        public List<YakuBase> GetYaku() => _satisfiedYaku;
 
-        public int GetHanValue()
-        {
-            return _hanValue;
-        }
+        public int GetHanValue() => _hanValue;
 
-        public override string ToString()
-        {
-            return _name;
-        }
+        public override string ToString() => _name;
     }
 }
