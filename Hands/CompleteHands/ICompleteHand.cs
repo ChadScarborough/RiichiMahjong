@@ -2,6 +2,7 @@
 using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
+using RMU.Players;
 
 namespace RMU.Hands.CompleteHands
 {
@@ -19,5 +20,6 @@ namespace RMU.Hands.CompleteHands
         List<TileObject> GetTiles();
         void SetYaku(List<Yaku.StandardYaku.YakuBase> satisfiedYaku);
         List<Yaku.StandardYaku.YakuBase> GetYaku();
+        Player GetPlayer();
     }
 }

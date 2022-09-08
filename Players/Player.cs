@@ -337,7 +337,7 @@ namespace RMU.Players
                 {
                     if (Functions.AreTilesEquivalent(waitTile, _hand.GetDrawTile()))
                     {
-                        completeHands.Add(CompleteHandFactory.CreateCompleteHand(tenpaiHand, _hand.GetDrawTile()));
+                        completeHands.Add(CompleteHandFactory.CreateCompleteHand(tenpaiHand, _hand.GetDrawTile(), this));
                         break;
                     }
                 }

@@ -4,6 +4,7 @@ using RMU.Globals.Algorithms;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Tiles;
+using RMU.Players;
 using static RMU.Globals.Enums;
 using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 using static RMU.Globals.Functions;
@@ -21,10 +22,12 @@ namespace RMU.Hands.CompleteHands
         private readonly List<ICompleteHandComponent> _sequences;
         private readonly List<ICompleteHandComponent> _pairs;
         private readonly List<TileObject> _tiles;
+        private readonly Player _player;
         private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
 
-        public StandardCompleteHand(ITenpaiHand tenpaiHand, TileObject drawTile)
+        public StandardCompleteHand(ITenpaiHand tenpaiHand, TileObject drawTile, Player player)
         {
+            _player = player;
             _components = tenpaiHand.GetComponents();
             _drawTile = drawTile;
             _components.Add(CreateCompleteHandComponent(drawTile, DRAW_TILE));
@@ -353,6 +356,11 @@ namespace RMU.Hands.CompleteHands
         public List<Yaku.StandardYaku.YakuBase> GetYaku()
         {
             return _satisfiedYaku;
+        }
+
+        public Player GetPlayer()
+        {
+            return _player;
         }
     }
 }
