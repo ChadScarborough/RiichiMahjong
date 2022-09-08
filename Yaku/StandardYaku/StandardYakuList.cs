@@ -21,6 +21,7 @@ namespace RMU.Yaku.StandardYaku
                 new AllSimplesYaku(_completeHand),
                 new AllTerminalsAndHonorsYaku(_completeHand),
                 new AllTripletsYaku(_completeHand),
+                new FullyConcealedHandYaku(_completeHand),
                 new FullFlushYaku(_completeHand),
                 new FullyOutsideHandYaku(_completeHand),
                 new GreenDragonYaku(_completeHand),
