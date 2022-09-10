@@ -2,11 +2,6 @@
 using static RMU.Globals.Enums;
 using RMU.Hands;
 using RMU.Hands.TestHands;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RMU.Players
 {
@@ -14,6 +9,11 @@ namespace RMU.Players
     {
         public TestPlayer(Wind wind, TestHand hand, OnePlayerTestGame game) : base(wind, hand, game)
         {
+        }
+
+        public override bool IsActivePlayer()
+        {
+            return true;
         }
     }
 }

@@ -41,7 +41,7 @@ namespace RMU.Players
             _game = game;
         }
 
-        public bool IsActivePlayer()
+        public virtual bool IsActivePlayer()
         {
             return _game.GetActivePlayer().Equals(this);
         }
