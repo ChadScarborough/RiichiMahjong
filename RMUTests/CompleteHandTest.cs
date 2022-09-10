@@ -10,7 +10,7 @@ using static RMU.Hands.CompleteHands.CompleteHandFactory;
 using static RMU.Globals.Enums;
 
 namespace RMUTests;
-
+/*
 [TestClass]
 public class CompleteHandTest
 {
@@ -126,3 +126,4 @@ public class CompleteHandTest
         Assert.AreEqual(STANDARD, completeHand.GetCompleteHandType());
     }
 }
+*/
