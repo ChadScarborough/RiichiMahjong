@@ -352,5 +352,17 @@ namespace RMU.Players
             _completeHand = null;
             _satisfiedYaku = null;
         }
+
+        public List<YakuBase> GetYaku()
+        {
+            try
+            {
+                return _satisfiedYaku;
+            }
+            catch
+            {
+                return new List<YakuBase>();
+            }
+        }
     }
 }

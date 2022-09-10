@@ -47,14 +47,14 @@ namespace RMU.Hands.CompleteHands
             return _completeHand;
         }
 
-        public Enums.CompleteHandWaitType GetWaitType()
+        public CompleteHandWaitType GetWaitType()
         {
-            return Enums.PAIR_WAIT;
+            return PAIR_WAIT;
         }
 
-        public Enums.CompleteHandType GetCompleteHandType()
+        public CompleteHandType GetCompleteHandType()
         {
-            return Enums.SEVEN_PAIRS;
+            return SEVEN_PAIRS;
         }
 
         public bool IsOpen()
