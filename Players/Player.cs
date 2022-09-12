@@ -27,7 +27,7 @@ namespace RMU.Players
         private PriorityQueueForCallCommands _priorityQueueForCallCommands;
         protected AvailablePotentialCalls _availablePotentialCalls;
         private ICompleteHand _completeHand;
-        private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
+        protected List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
 
         private bool _canPon;
         private bool _canOpenKan1;
@@ -300,7 +300,7 @@ namespace RMU.Players
             foreach (ICompleteHand completeHand in completeHands)
             {
                 int han = 0;
-                foreach (Yaku.StandardYaku.YakuBase yaku in completeHand.GetYaku())
+                foreach (YakuBase yaku in completeHand.GetYaku())
                 {
                     han += yaku.GetValue();
                 }
@@ -311,6 +311,7 @@ namespace RMU.Players
                 }
             }
             _completeHand = strongestHand;
+            _satisfiedYaku = _completeHand.GetYaku();
         }
 
         private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
@@ -319,11 +320,10 @@ namespace RMU.Players
             foreach (ICompleteHand completeHand in completeHands)
             {
                 StandardYakuList yakuList = new StandardYakuList(completeHand);
-                List<Yaku.StandardYaku.YakuBase> satisfiedYaku = yakuList.CheckYaku();
+                List<YakuBase> satisfiedYaku = yakuList.CheckYaku();
                 completeHand.SetYaku(satisfiedYaku);
                 if (satisfiedYaku.Count > 0) yakuSatisfied = true;
             }
-
             return yakuSatisfied;
         }
 
@@ -355,14 +355,8 @@ namespace RMU.Players
 
         public List<YakuBase> GetYaku()
         {
-            try
-            {
-                return _satisfiedYaku;
-            }
-            catch
-            {
-                return new List<YakuBase>();
-            }
+            _satisfiedYaku ??= new List<YakuBase>();
+            return _satisfiedYaku;
         }
     }
 }

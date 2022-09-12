@@ -18,7 +18,7 @@ namespace RMU.Players
         
         protected FourPlayerAbstractPlayer(Wind seatWind, AbstractFourPlayerHand hand, AbstractGame game) : base(seatWind, hand, game)
         {
-            _hand = hand;
+            //_hand = hand;
         }
 
         public void CallLowChii(TileObject calledTile)
