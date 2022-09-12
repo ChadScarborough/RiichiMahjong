@@ -13,7 +13,7 @@ public static class CompleteHandFactory
     {
         if (ContainsTile(hand.GetWaits(), extraTile) == false)
         {
-            return null;
+            throw new Exception("Cannot create complete hand because the extra tile is not one of the hand's waits");
         }
 
         if (hand.GetType().IsSubclassOf(typeof(StandardTenpaiHand)))

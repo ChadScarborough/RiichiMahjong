@@ -27,7 +27,7 @@ namespace RMU.Players
         private PriorityQueueForCallCommands _priorityQueueForCallCommands;
         protected AvailablePotentialCalls _availablePotentialCalls;
         private ICompleteHand _completeHand;
-        protected List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
+        protected List<YakuBase> _satisfiedYaku;
 
         private bool _canPon;
         private bool _canOpenKan1;
@@ -284,8 +284,7 @@ namespace RMU.Players
                 return;
 
             List<ICompleteHand> completeHands = GetAllCompleteHandsForTsumoCheck();
-            bool yakuSatisfied = AtLeastOneYakuSatisfied(completeHands);
-            _canTsumo = yakuSatisfied;
+            _canTsumo = AtLeastOneYakuSatisfied(completeHands);
 
             if (_canTsumo)
             {
@@ -316,15 +315,14 @@ namespace RMU.Players
 
         private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
         {
-            bool yakuSatisfied = false;
             foreach (ICompleteHand completeHand in completeHands)
             {
-                StandardYakuList yakuList = new StandardYakuList(completeHand);
+                StandardYakuList yakuList = new(completeHand);
                 List<YakuBase> satisfiedYaku = yakuList.CheckYaku();
                 completeHand.SetYaku(satisfiedYaku);
-                if (satisfiedYaku.Count > 0) yakuSatisfied = true;
+                if (satisfiedYaku.Count > 0) return true;
             }
-            return yakuSatisfied;
+            return false;
         }
 
         private List<ICompleteHand> GetAllCompleteHandsForTsumoCheck()
