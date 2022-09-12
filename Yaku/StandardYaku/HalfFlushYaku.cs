@@ -18,7 +18,7 @@ public class HalfFlushYaku : YakuBase
         if (_completeHand.GetCompleteHandType() is THIRTEEN_ORPHANS) return false;
 
         Suit suit = _completeHand.GetConstructedHandComponents()[0].GetLeadTile().GetSuit();
-        if (suit is not MAN and not PIN and not SOU) return false;
+        if (suit != MAN && suit != PIN && suit != SOU) return false;
         
         foreach (ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())
         {
@@ -28,6 +28,12 @@ public class HalfFlushYaku : YakuBase
             }
         }
 
-        return true;
+        foreach(ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())
+        {
+            if (component.GetLeadTile().IsHonor())
+                return true;
+        }
+
+        return false;
     }
 }
