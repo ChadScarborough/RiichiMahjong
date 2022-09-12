@@ -279,9 +279,15 @@ namespace RMU.Players
         {
             InitializeValuesForTsumoCheck();
             if (IsActivePlayer() is false)
+            {
+                _canTsumo = false;
                 return;
+            }
             if (_hand.GetShanten() > -1)
+            {
+                _canTsumo = false;
                 return;
+            }
 
             List<ICompleteHand> completeHands = GetAllCompleteHandsForTsumoCheck();
             _canTsumo = AtLeastOneYakuSatisfied(completeHands);
