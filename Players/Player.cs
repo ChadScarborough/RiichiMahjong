@@ -11,6 +11,7 @@ using RMU.Hands.TenpaiHands;
 using RMU.Globals;
 using System.Collections.Generic;
 using RMU.Yaku.StandardYaku;
+using System.Diagnostics;
 
 namespace RMU.Players
 {
@@ -279,18 +280,15 @@ namespace RMU.Players
         {
             InitializeValuesForTsumoCheck();
             if (IsActivePlayer() is false)
-            {
-                _canTsumo = false;
                 return;
-            }
             if (_hand.GetShanten() > -1)
-            {
-                _canTsumo = false;
                 return;
-            }
 
             List<ICompleteHand> completeHands = GetAllCompleteHandsForTsumoCheck();
+            if (completeHands.Count == 0)
+                throw new Exception("No complete hands constructed");
             _canTsumo = AtLeastOneYakuSatisfied(completeHands);
+            Debug.Print(completeHands.ToString());
 
             if (_canTsumo)
             {
@@ -366,7 +364,7 @@ namespace RMU.Players
         public string GetCompleteHandType()
         {
             if (_completeHand == null)
-                return "";
+                return "None";
             return _completeHand.GetCompleteHandType().ToString();
         }
     }
