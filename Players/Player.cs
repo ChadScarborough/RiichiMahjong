@@ -358,5 +358,12 @@ namespace RMU.Players
             _satisfiedYaku ??= new List<YakuBase>();
             return _satisfiedYaku;
         }
+
+        public string GetCompleteHandType()
+        {
+            if (_completeHand == null)
+                return "";
+            return _completeHand.GetCompleteHandType().ToString();
+        }
     }
 }
