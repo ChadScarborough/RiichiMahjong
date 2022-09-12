@@ -317,14 +317,15 @@ namespace RMU.Players
 
         private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
         {
+            bool yakuSatisfied = false;
             foreach (ICompleteHand completeHand in completeHands)
             {
                 StandardYakuList yakuList = new(completeHand);
                 List<YakuBase> satisfiedYaku = yakuList.CheckYaku();
                 completeHand.SetYaku(satisfiedYaku);
-                if (satisfiedYaku.Count > 0) return true;
+                if (satisfiedYaku.Count > 0) yakuSatisfied = true;
             }
-            return false;
+            return yakuSatisfied;
         }
 
         private List<ICompleteHand> GetAllCompleteHandsForTsumoCheck()
