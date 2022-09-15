@@ -20,14 +20,9 @@ public class PureDoubleSequenceYaku : YakuBase
 
     public override bool Check()
     {
-        if (_completeHand.GetCompleteHandType() is not STANDARD)
-        {
-            return false;
-        }
-        if (_completeHand.IsOpen())
-        {
-            return false;
-        }
+        if (_completeHand is null) return false;
+        if (_completeHand.GetCompleteHandType() is not STANDARD) return false;
+        if (_completeHand.IsOpen()) return false;
         
         List<ICompleteHandComponent> components = _completeHand.GetSequences();
 

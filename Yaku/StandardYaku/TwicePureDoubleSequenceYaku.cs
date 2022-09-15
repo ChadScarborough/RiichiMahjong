@@ -19,6 +19,7 @@ public class TwicePureDoubleSequenceYaku : YakuBase
 
     public override bool Check()
     {
+        if (_completeHand is null) return false;
         if (_completeHand.IsOpen()) return false;
 
         List<ICompleteHandComponent> components = _completeHand.GetSequences();

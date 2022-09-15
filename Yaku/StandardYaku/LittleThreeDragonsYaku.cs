@@ -18,6 +18,7 @@ public class LittleThreeDragonsYaku : YakuBase
 
     public override bool Check()
     {
+        if (_completeHand is null) return false;
         int tripletCounter = 0;
         int pairCounter = 0;
         foreach (ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())

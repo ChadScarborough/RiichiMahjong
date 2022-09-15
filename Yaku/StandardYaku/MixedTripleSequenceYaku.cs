@@ -19,7 +19,9 @@ public class MixedTripleSequenceYaku : YakuBase
 
     public override bool Check()
     {
+        if (_completeHand is null) return false;
         List<ICompleteHandComponent> components = _completeHand.GetSequences();
+        if (components.Count < 3) return false;
         
         for (int i = 0; i < 2; i++)
         {

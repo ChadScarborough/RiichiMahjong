@@ -18,6 +18,8 @@ public class AllTripletsYaku : YakuBase
 
     public override bool Check()
     {
+        if (_completeHand is null) return false;
+        if (_completeHand.GetCompleteHandType() is not STANDARD) return false;
         return _completeHand.GetTriplets().Count == 4;
     }
 }

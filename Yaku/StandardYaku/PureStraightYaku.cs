@@ -19,6 +19,7 @@ public class PureStraightYaku : YakuBase
 
     public override bool Check()
     {
+        if (_completeHand is null) return false;
         if (_completeHand.GetCompleteHandType() is not STANDARD) return false;
         List<ICompleteHandComponent> components = _completeHand.GetSequences();
         if (components.Count < 3) return false;
