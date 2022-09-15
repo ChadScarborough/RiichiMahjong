@@ -22,7 +22,7 @@ public class AllTerminalsAndHonorsYaku : YakuBase
                 return false;
             }
 
-            if (component.GetLeadTile().IsHonor() is false || component.GetLeadTile().IsTerminal() is false)
+            if (component.GetLeadTile().IsHonor() is false && component.GetLeadTile().IsTerminal() is false)
             {
                 return false;
             }

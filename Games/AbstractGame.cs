@@ -35,7 +35,7 @@ namespace RMU.Games
 
         protected abstract Wind GetNewWind(Wind originalWind);
 
-        public void NextPlayer()
+        public virtual void NextPlayer()
         {
             if (_activePlayer.GetPlayerOnRight() != null)
                 SetActivePlayer(_activePlayer.GetPlayerOnRight());

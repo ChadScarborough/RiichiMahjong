@@ -38,15 +38,7 @@ namespace RMU.Hands.CompleteHands
             _sequences = new List<ICompleteHandComponent>();
             _pairs = new List<ICompleteHandComponent>();
             _tiles = new List<TileObject>();
-            foreach (ICompleteHandComponent component in tenpaiHand.GetComponents())
-            {
-                if (component.GetComponentType() is OPEN_KAN or OPEN_PON or OPEN_CHII)
-                {
-                    _isOpen = true;
-                    break;
-                }
-                _isOpen = false;
-            }
+            _isOpen = player.GetHand().IsOpen();
             
             switch (_waitType)
             {

@@ -20,5 +20,10 @@ namespace RMU.Games
         {
             return Enums.Wind.East;
         }
+
+        public override void NextPlayer()
+        {
+            
+        }
     }
 }
