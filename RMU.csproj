@@ -58,4 +58,10 @@
     <Compile Remove="RMUTests\YakuTests\YakumanTests\AllHonorsTest.cs" />
     <Compile Remove="RMUTests\YakuTests\YakumanTests\AllTerminalsTest.cs" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="GodotSharp">
+      <HintPath>..\..\..\..\Documents\Godot Projects\ProjectTransCrab\.mono\assemblies\Debug\GodotSharp.dll</HintPath>
+    </Reference>
+  </ItemGroup>
 </Project>

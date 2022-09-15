@@ -1,4 +1,5 @@
 ﻿using System;
+using Godot;
 using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
 using RMU.Hands;
@@ -285,7 +286,7 @@ namespace RMU.Players
 
             List<ICompleteHand> completeHands = GetAllCompleteHandsForTsumoCheck();
             if (completeHands.Count == 0)
-                throw new Exception("No complete hands constructed");
+                Console.WriteLine("No complete hands constructed");
             _canTsumo = AtLeastOneYakuSatisfied(completeHands);
 
             if (_canTsumo)
@@ -330,8 +331,7 @@ namespace RMU.Players
 
         private List<ICompleteHand> GetAllCompleteHandsForTsumoCheck()
         {
-            // Get every valid complete configuration of the hand
-            List<ICompleteHand> completeHands = new List<ICompleteHand>();
+            List<ICompleteHand> completeHands = new();
             foreach (ITenpaiHand tenpaiHand in _hand.GetTenpaiHands())
             {
                 foreach (TileObject waitTile in tenpaiHand.GetWaits())
@@ -339,7 +339,6 @@ namespace RMU.Players
                     if (Functions.AreTilesEquivalent(waitTile, _hand.GetDrawTile()))
                     {
                         completeHands.Add(CompleteHandFactory.CreateCompleteHand(tenpaiHand, _hand.GetDrawTile(), this));
-                        break;
                     }
                 }
             }
@@ -365,6 +364,21 @@ namespace RMU.Players
             if (_completeHand == null)
                 return "None";
             return _completeHand.GetCompleteHandType().ToString();
+        }
+
+        public int NumberOfTenpaiHands()
+        {
+            return _hand.GetTenpaiHands().Count;
+        }
+
+        public int[] NumberOfWaitsPerTenpaiHand()
+        {
+            int[] waits = new int[NumberOfTenpaiHands()];
+            for(int i = 0; i < NumberOfTenpaiHands(); i++)
+            {
+                waits[i] = _hand.GetTenpaiHands()[i].GetWaits().Count;
+            }
+            return waits;
         }
     }
 }

@@ -231,8 +231,20 @@ namespace RMU.Hands
 
         public void CheckShanten()
         {
+            List<ITenpaiHand> tempTenpaiHands = new();
+            foreach(ITenpaiHand tenpaiHand in _tenpaiHands)
+            {
+                tempTenpaiHands.Add(tenpaiHand);
+            }
             ClearTenpaiHands();
             _shanten = ShantenCalculator.CalculateShanten(this);
+            if (_shanten < 0)
+            {
+                foreach(ITenpaiHand tenpaiHand in tempTenpaiHands)
+                {
+                    _tenpaiHands.Add(tenpaiHand);
+                }
+            }
         }
 
         private void ClearTenpaiHands()

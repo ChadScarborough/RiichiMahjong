@@ -62,5 +62,10 @@ namespace RMU.Tiles
         {
             return false;
         }
+
+        public override string ToString()
+        {
+            return _value.ToString() + " " + _suit.ToString();
+        }
     }
 }

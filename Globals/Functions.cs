@@ -46,6 +46,7 @@ namespace RMU.Globals
 
         public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2)
         {
+            if (tile1 is null || tile2 is null) return false;
             try
             {
                 Suit suit1 = tile1.GetSuit();
