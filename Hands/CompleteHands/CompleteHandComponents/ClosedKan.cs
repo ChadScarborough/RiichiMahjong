@@ -8,11 +8,11 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public class ClosedKan : ICompleteHandGroup
     {
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
 
         public ClosedKan(OpenMeld closedKan)
         {
-            _tiles = new List<TileObject>();
+            _tiles = new List<Tile>();
             PopulateTilesList(closedKan);
             CheckForValidQuad();
         }
@@ -31,7 +31,7 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 
         private void PopulateTilesList(OpenMeld closedKan)
         {
-            foreach (TileObject tile in closedKan.GetTiles())
+            foreach (Tile tile in closedKan.GetTiles())
             {
                 _tiles.Add(tile);
             }
@@ -43,12 +43,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             return Enums.CLOSED_KAN_COMPONENT;
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }
 
-        public TileObject GetLeadTile()
+        public Tile GetLeadTile()
         {
             return _tiles[0];
         }

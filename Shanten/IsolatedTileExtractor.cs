@@ -11,7 +11,7 @@ public static class IsolatedTileExtractor
     public static List<ICompleteHandComponent> ExtractIsolatedTiles(TileCollection collection)
     {
         List<ICompleteHandComponent> outputList = new List<ICompleteHandComponent>();
-        foreach (TileObject tile in collection.GetTiles())
+        foreach (Tile tile in collection.GetTiles())
         {
             ICompleteHandComponent component = CompleteHandComponentFactory.CreateCompleteHandComponent(tile, ISOLATED_TILE);
             outputList.Add(component);

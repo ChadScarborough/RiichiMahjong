@@ -17,7 +17,7 @@ namespace RMUTests.CompleteHandComponentsTests
 
         private void Setup()
         {
-            _incompleteSequenceClosedWait = CreateCompleteHandComponent(new List<TileObject> { SevenMan(), NineMan() }, INCOMPLETE_SEQUENCE_CLOSED_WAIT);
+            _incompleteSequenceClosedWait = CreateCompleteHandComponent(new List<Tile> { SevenMan(), NineMan() }, INCOMPLETE_SEQUENCE_CLOSED_WAIT);
         }
 
         [TestMethod]

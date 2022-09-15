@@ -7,7 +7,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallRiichiCommand : CallCommand
     {
-        public CallRiichiCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallRiichiCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
 
         }

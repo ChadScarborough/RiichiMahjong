@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public AllTerminalsTestHand()
         {
-            _closedTiles = new List<TileObject>
+            _closedTiles = new List<Tile>
             {
                 StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(),
                 StandardTileList.NINE_MAN.Clone(), StandardTileList.NINE_MAN.Clone(), StandardTileList.NINE_MAN.Clone(),

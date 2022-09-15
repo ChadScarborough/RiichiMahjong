@@ -8,7 +8,7 @@ public class EdgeWaitTestHand : TestHand
 {
     public EdgeWaitTestHand()
     {
-        _closedTiles = new List<TileObject>
+        _closedTiles = new List<Tile>
         {
             OneMan(), TwoMan(),
             ThreePin(), ThreePin(), ThreePin(),

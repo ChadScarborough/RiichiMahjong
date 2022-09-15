@@ -9,7 +9,7 @@ namespace RMU.Hands.TestHands
     {
         public CallsTestHand() : base(new NullWallObject())
         {
-            _closedTiles = new List<TileObject>
+            _closedTiles = new List<Tile>
             {
                 OneMan(), TwoMan(), FourMan(), FiveMan(),
                 FiveSou(), FiveSou(),

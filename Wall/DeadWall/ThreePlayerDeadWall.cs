@@ -11,19 +11,19 @@ namespace RMU.Wall.DeadWall
     {
         private const int NUMBER_OF_DORA_INDICATORS = 5;
         private const int NUMBER_OF_DRAWABLE_TILES = 4;
-        private readonly List<TileObject> _doraIndicators;
-        private readonly List<TileObject> _revealedDoraIndicators;
-        private readonly List<TileObject> _uraDoraIndicators;
-        private readonly List<TileObject> _drawableTiles;
+        private readonly List<Tile> _doraIndicators;
+        private readonly List<Tile> _revealedDoraIndicators;
+        private readonly List<Tile> _uraDoraIndicators;
+        private readonly List<Tile> _drawableTiles;
         private readonly Wall _wall;
 
         public ThreePlayerDeadWall(Wall wall)
         {
             _wall = wall;
-            _doraIndicators = new List<TileObject>();
-            _revealedDoraIndicators = new List<TileObject>();
-            _uraDoraIndicators = new List<TileObject>();
-            _drawableTiles = new List<TileObject>();
+            _doraIndicators = new List<Tile>();
+            _revealedDoraIndicators = new List<Tile>();
+            _uraDoraIndicators = new List<Tile>();
+            _drawableTiles = new List<Tile>();
             PopulateDeadWall();
         }
 
@@ -35,30 +35,30 @@ namespace RMU.Wall.DeadWall
             _drawableTiles.Clear();
         }
 
-        public TileObject DrawTile()
+        public Tile DrawTile()
         {
-            TileObject drawTile = _drawableTiles[0];
+            Tile drawTile = _drawableTiles[0];
             _drawableTiles.RemoveAt(0);
             _drawableTiles.Add(_wall.DrawTileFromEndOfWall());
             return drawTile;
         }
 
-        public List<TileObject> GetDoraIndicators()
+        public List<Tile> GetDoraIndicators()
         {
             return _doraIndicators;
         }
 
-        public List<TileObject> GetDrawableTiles()
+        public List<Tile> GetDrawableTiles()
         {
             return _drawableTiles;
         }
 
-        public List<TileObject> GetRevealedDoraIndicators()
+        public List<Tile> GetRevealedDoraIndicators()
         {
             return _revealedDoraIndicators;
         }
 
-        public List<TileObject> GetUraDoraIndicators()
+        public List<Tile> GetUraDoraIndicators()
         {
             return _uraDoraIndicators;
         }
@@ -86,7 +86,7 @@ namespace RMU.Wall.DeadWall
             PopulateList(_drawableTiles, NUMBER_OF_DRAWABLE_TILES);
         }
 
-        private void PopulateList(List<TileObject> list, int quantity)
+        private void PopulateList(List<Tile> list, int quantity)
         {
             for (int i = 0; i < quantity; i++)
             {

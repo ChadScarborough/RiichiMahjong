@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public NineGatesTestHand()
         {
-            _closedTiles = new List<TileObject> 
+            _closedTiles = new List<Tile> 
             { 
                 StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(), StandardTileList.ONE_MAN.Clone(),
                 StandardTileList.TWO_MAN.Clone(), StandardTileList.THREE_MAN.Clone(), StandardTileList.FOUR_MAN.Clone(),

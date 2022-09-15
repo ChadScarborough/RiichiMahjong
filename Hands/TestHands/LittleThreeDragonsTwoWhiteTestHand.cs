@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public LittleThreeDragonsTwoWhiteTestHand()
         {
-            _closedTiles = new List<TileObject>
+            _closedTiles = new List<Tile>
             {
                 RedDragon(), RedDragon(), RedDragon(),
                 GreenDragon(), GreenDragon(), GreenDragon(),

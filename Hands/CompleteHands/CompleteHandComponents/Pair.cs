@@ -7,12 +7,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public class PairComponent : ICompleteHandComponent
     {
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
 
-        public PairComponent(List<TileObject> pair)
+        public PairComponent(List<Tile> pair)
         {
-            _tiles = new List<TileObject>();
-            foreach(TileObject tile in pair)
+            _tiles = new List<Tile>();
+            foreach(Tile tile in pair)
             {
                 _tiles.Add(tile);
             }
@@ -51,12 +51,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             return Enums.PAIR;
         }
 
-        public TileObject GetLeadTile()
+        public Tile GetLeadTile()
         {
             return _tiles[0];
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }

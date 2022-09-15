@@ -17,7 +17,7 @@ namespace RMUTests.CompleteHandComponentsTests
 
         private void Setup()
         {
-            _closedPon = CreateCompleteHandComponent(new List<TileObject> { SouthWind(), SouthWind(), SouthWind() }, CLOSED_PON);
+            _closedPon = CreateCompleteHandComponent(new List<Tile> { SouthWind(), SouthWind(), SouthWind() }, CLOSED_PON);
         }
 
         [TestMethod]
@@ -64,7 +64,7 @@ namespace RMUTests.CompleteHandComponentsTests
             Exception exception = null;
             try
             {
-                _closedPon = CreateCompleteHandComponent(new List<TileObject> { GREEN_DRAGON, GREEN_DRAGON }, CLOSED_PON);
+                _closedPon = CreateCompleteHandComponent(new List<Tile> { GREEN_DRAGON, GREEN_DRAGON }, CLOSED_PON);
             }
             catch(Exception ex)
             {
@@ -79,7 +79,7 @@ namespace RMUTests.CompleteHandComponentsTests
             Exception exception = null;
             try
             {
-                _closedPon = CreateCompleteHandComponent(new List<TileObject> { GREEN_DRAGON, GREEN_DRAGON, RED_DRAGON }, CLOSED_PON);
+                _closedPon = CreateCompleteHandComponent(new List<Tile> { GREEN_DRAGON, GREEN_DRAGON, RED_DRAGON }, CLOSED_PON);
             }
             catch (Exception ex)
             {

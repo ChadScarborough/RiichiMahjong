@@ -31,7 +31,7 @@ public class FullyOutsideHandYaku : YakuBase
 
     private bool ComponentDoesNotContainTerminal(ICompleteHandComponent component)
     {
-        foreach (TileObject tile in component.GetTiles())
+        foreach (Tile tile in component.GetTiles())
         {
             if (tile.IsTerminal()) return false;
         }

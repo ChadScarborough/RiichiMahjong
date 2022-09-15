@@ -8,7 +8,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallOpenKan2Command : CallCommand
     {
-        public CallOpenKan2Command(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallOpenKan2Command(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
 
         }
@@ -24,9 +24,9 @@ namespace RMU.Calls.CallCommands
             }
         }
         
-        private bool SuccessfullyTurnedPonIntoOpenKan2(TileObject calledTile, OpenMeld openMeld)
+        private bool SuccessfullyTurnedPonIntoOpenKan2(Tile calledTile, OpenMeld openMeld)
         {
-            TileObject openMeldTile = openMeld.GetTiles()[0];
+            Tile openMeldTile = openMeld.GetTiles()[0];
             if (openMeld.GetMeldType() == PON && AreTilesEquivalent(openMeldTile, calledTile))
             {
                 return ChangePonToOpenKan2(calledTile, openMeld);
@@ -34,7 +34,7 @@ namespace RMU.Calls.CallCommands
             return false;
         }
         
-        private bool ChangePonToOpenKan2(TileObject calledTile, OpenMeld openMeld)
+        private bool ChangePonToOpenKan2(Tile calledTile, OpenMeld openMeld)
         {
             openMeld.SetMeldType(OPEN_KAN_2);
             openMeld.AddTile(calledTile);
@@ -43,7 +43,7 @@ namespace RMU.Calls.CallCommands
                 _handMakingCall.RemoveDrawTile();
                 return true;
             }
-            foreach (TileObject tile in _handMakingCall.GetClosedTiles())
+            foreach (Tile tile in _handMakingCall.GetClosedTiles())
             {
                 if (RemovedTileFromHand(tile)) 
                 { 
@@ -53,7 +53,7 @@ namespace RMU.Calls.CallCommands
             return false;
         }
         
-        private bool RemovedTileFromHand(TileObject tile)
+        private bool RemovedTileFromHand(Tile tile)
         {
             if (AreTilesEquivalent(_handMakingCall.GetDrawTile(), tile))
             {

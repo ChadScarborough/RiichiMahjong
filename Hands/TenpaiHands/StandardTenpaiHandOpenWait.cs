@@ -19,8 +19,8 @@ namespace RMU.Hands.TenpaiHands
             {
                 if (component.GetComponentType() == INCOMPLETE_SEQUENCE_OPEN_WAIT)
                 {
-                    TileObject tile = component.GetLeadTile();
-                    _waits = new List<TileObject>
+                    Tile tile = component.GetLeadTile();
+                    _waits = new List<Tile>
                     {
                         GetTileBelow(tile),
                         GetTileTwoAbove(tile)

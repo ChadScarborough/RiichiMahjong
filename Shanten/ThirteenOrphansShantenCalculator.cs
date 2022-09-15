@@ -12,7 +12,7 @@ namespace RMU.Shanten;
 
 public static class ThirteenOrphansShantenCalculator
 {
-    private static readonly TileObject[] TerminalsAndHonors =
+    private static readonly Tile[] TerminalsAndHonors =
     {
         ONE_MAN, NINE_MAN,
         ONE_PIN, NINE_PIN,
@@ -101,13 +101,13 @@ public static class ThirteenOrphansShantenCalculator
 
     private static void CheckCollectionForTerminalsOrHonors(TileCollection collection)
     {
-        foreach (TileObject tile in collection.GetTiles())
+        foreach (Tile tile in collection.GetTiles())
         {
             CheckIfTileIsTerminalOrHonorAndIncrementAppropriateCounter(tile);
         }
     }
 
-    private static void CheckIfTileIsTerminalOrHonorAndIncrementAppropriateCounter(TileObject tile)
+    private static void CheckIfTileIsTerminalOrHonorAndIncrementAppropriateCounter(Tile tile)
     {
         if (TileIsNotTerminalOrHonor(tile)) return;
         for (int i = 0; i < NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
@@ -116,12 +116,12 @@ public static class ThirteenOrphansShantenCalculator
         }
     }
 
-    private static bool TileIsNotTerminalOrHonor(TileObject tile)
+    private static bool TileIsNotTerminalOrHonor(Tile tile)
     {
         return (tile.IsHonor() || tile.IsTerminal()) == false;
     }
 
-    private static bool IncrementAppropriateCounterIfTileIsTerminalOrHonor(TileObject tile, int i)
+    private static bool IncrementAppropriateCounterIfTileIsTerminalOrHonor(Tile tile, int i)
     {
         if (AreTilesEquivalent(TerminalsAndHonors[i], tile))
         {

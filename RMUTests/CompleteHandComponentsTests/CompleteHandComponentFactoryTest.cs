@@ -20,14 +20,14 @@ namespace RMUTests.CompleteHandComponentsTests
         [TestMethod]
         public void FactorySuccessfullyCreates_ClosedChii()
         {
-            _component = CreateCompleteHandComponent(new List<TileObject> { OneMan(), TwoMan(), ThreeMan()}, CLOSED_CHII);
+            _component = CreateCompleteHandComponent(new List<Tile> { OneMan(), TwoMan(), ThreeMan()}, CLOSED_CHII);
             Assert.IsNotNull(_component);
         }
 
         [TestMethod]
         public void FactorySuccessfullyCreates_ClosedPon()
         {
-            _component = CreateCompleteHandComponent(new List<TileObject> { OneMan(), OneMan(), OneMan() }, CLOSED_PON);
+            _component = CreateCompleteHandComponent(new List<Tile> { OneMan(), OneMan(), OneMan() }, CLOSED_PON);
             Assert.IsNotNull(_component);
         }
 
@@ -49,21 +49,21 @@ namespace RMUTests.CompleteHandComponentsTests
         [TestMethod]
         public void FactorySuccessfullyCreates_IncompleteSequenceClosedWait()
         {
-            _component = CreateCompleteHandComponent(new List<TileObject> { FourPin(), SixPin() }, INCOMPLETE_SEQUENCE_CLOSED_WAIT);
+            _component = CreateCompleteHandComponent(new List<Tile> { FourPin(), SixPin() }, INCOMPLETE_SEQUENCE_CLOSED_WAIT);
             Assert.IsNotNull(_component);
         }
 
         [TestMethod]
         public void FactorySuccessfullyCreates_IncompleteSequenceEdgeWait()
         {
-            _component = CreateCompleteHandComponent(new List<TileObject> { EightSou(), NineSou() }, INCOMPLETE_SEQUENCE_EDGE_WAIT);
+            _component = CreateCompleteHandComponent(new List<Tile> { EightSou(), NineSou() }, INCOMPLETE_SEQUENCE_EDGE_WAIT);
             Assert.IsNotNull(_component);
         }
 
         [TestMethod]
         public void FactorySuccessfullyCreates_IncompleteSequenceOpenWait()
         {
-            _component = CreateCompleteHandComponent(new List<TileObject> { FourMan(), FiveMan() }, INCOMPLETE_SEQUENCE_OPEN_WAIT);
+            _component = CreateCompleteHandComponent(new List<Tile> { FourMan(), FiveMan() }, INCOMPLETE_SEQUENCE_OPEN_WAIT);
             Assert.IsNotNull(_component);
         }
 
@@ -101,7 +101,7 @@ namespace RMUTests.CompleteHandComponentsTests
         [TestMethod]
         public void FactorySuccessfullyCreates_Pair()
         {
-            _component = CreateCompleteHandComponent(new List<TileObject> { TwoMan(), TwoMan() }, PAIR_COMPONENT);
+            _component = CreateCompleteHandComponent(new List<Tile> { TwoMan(), TwoMan() }, PAIR_COMPONENT);
             Assert.IsNotNull(_component);
         }
 
@@ -126,7 +126,7 @@ namespace RMUTests.CompleteHandComponentsTests
             Exception exception = null;
             try
             {
-                _component = CreateCompleteHandComponent(new List<TileObject> { TwoSou(), ThreeSou(), FourSou() }, ISOLATED_TILE);
+                _component = CreateCompleteHandComponent(new List<Tile> { TwoSou(), ThreeSou(), FourSou() }, ISOLATED_TILE);
             }
             catch(Exception ex)
             {
@@ -141,7 +141,7 @@ namespace RMUTests.CompleteHandComponentsTests
             Exception exception = null;
             try
             {
-                _component = CreateCompleteHandGroup(new List<TileObject> { TwoSou(), ThreeSou(), FourSou() }, ISOLATED_TILE);
+                _component = CreateCompleteHandGroup(new List<Tile> { TwoSou(), ThreeSou(), FourSou() }, ISOLATED_TILE);
             }
             catch (Exception ex)
             {
@@ -156,7 +156,7 @@ namespace RMUTests.CompleteHandComponentsTests
             Exception exception = null;
             try
             {
-                _component = CreateCompleteHandIncompleteGroup(new List<TileObject> { TwoSou(), ThreeSou(), FourSou() }, ISOLATED_TILE);
+                _component = CreateCompleteHandIncompleteGroup(new List<Tile> { TwoSou(), ThreeSou(), FourSou() }, ISOLATED_TILE);
             }
             catch (Exception ex)
             {

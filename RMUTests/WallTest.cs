@@ -56,7 +56,7 @@ namespace RMUTests
         {
             int redFives = 0;
             _wall = new FourPlayerWallNoRedFives();
-            foreach (TileObject tile in _wall.GetWallTiles())
+            foreach (Tile tile in _wall.GetWallTiles())
             {
                 if (tile.IsRedFive())
                 {
@@ -71,7 +71,7 @@ namespace RMUTests
         {
             int redFives = 0;
             _wall = new FourPlayerWallThreeRedFives();
-            foreach (TileObject tile in _wall.GetWallTiles())
+            foreach (Tile tile in _wall.GetWallTiles())
             {
                 if (tile.IsRedFive())
                 {
@@ -86,7 +86,7 @@ namespace RMUTests
         {
             int redFives = 0;
             _wall = new FourPlayerWallFourRedFives();
-            foreach (TileObject tile in _wall.GetWallTiles())
+            foreach (Tile tile in _wall.GetWallTiles())
             {
                 if (tile.IsRedFive())
                 {
@@ -102,7 +102,7 @@ namespace RMUTests
         {
             int redFives = 0;
             _wall = new ThreePlayerWallNoRedFives();
-            foreach (TileObject tile in _wall.GetWallTiles())
+            foreach (Tile tile in _wall.GetWallTiles())
             {
                 if (tile.IsRedFive())
                 {
@@ -118,7 +118,7 @@ namespace RMUTests
         {
             int redFives = 0;
             _wall = new ThreePlayerWallTwoRedFives();
-            foreach (TileObject tile in _wall.GetWallTiles())
+            foreach (Tile tile in _wall.GetWallTiles())
             {
                 if (tile.IsRedFive())
                 {

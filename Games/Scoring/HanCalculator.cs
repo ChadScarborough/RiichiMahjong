@@ -14,7 +14,7 @@ namespace RMU.Games.Scoring
             {
                 hanValue += yaku.GetValue();
             }
-            foreach(TileObject tile in winningPlayer.GetHand().GetAllTiles())
+            foreach(Tile tile in winningPlayer.GetHand().GetAllTiles())
             {
                 if (tile.IsRedFive()) hanValue++;
                 hanValue += tile.GetDoraValue();

@@ -8,7 +8,7 @@ namespace RMU.Hands.TenpaiHands
 {
     public abstract class ThirteenOrphansTenpaiHand : ITenpaiHand
     {
-        protected List<TileObject> _waits;
+        protected List<Tile> _waits;
         protected readonly List<ICompleteHandComponent> _components;
 
         protected ThirteenOrphansTenpaiHand(List<ICompleteHandComponent> components)
@@ -21,7 +21,7 @@ namespace RMU.Hands.TenpaiHands
             return _components;
         }
 
-        public virtual List<TileObject> GetWaits()
+        public virtual List<Tile> GetWaits()
         {
             return _waits;
         }

@@ -15,14 +15,14 @@ namespace RMU.Hands.CompleteHands
         private readonly List<ICompleteHandComponent> _completeHand;
         private readonly CompleteHandWaitType _waitType;
         private readonly List<ICompleteHandComponent> _constructedHand;
-        private readonly TileObject _drawTile;
+        private readonly Tile _drawTile;
         private readonly List<ICompleteHandComponent> _isolatedTiles;
         private readonly List<ICompleteHandComponent> _pairs;
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
         private readonly Player _player;
         private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
 
-        public ThirteenOrphansCompleteHand(ITenpaiHand tenpaiHand, TileObject tile, Player player)
+        public ThirteenOrphansCompleteHand(ITenpaiHand tenpaiHand, Tile tile, Player player)
         {
             _player = player;
             _completeHand = tenpaiHand.GetComponents();
@@ -33,7 +33,7 @@ namespace RMU.Hands.CompleteHands
             _isolatedTiles = new List<ICompleteHandComponent>();
             _pairs = new List<ICompleteHandComponent>();
             _constructedHand = new List<ICompleteHandComponent>();
-            _tiles = new List<TileObject>();
+            _tiles = new List<Tile>();
 
             if (_waitType is SINGLE_WAIT)
             {
@@ -64,7 +64,7 @@ namespace RMU.Hands.CompleteHands
                 {
                     if (AreTilesEquivalent(component.GetLeadTile(), _drawTile))
                     {
-                        List<TileObject> tileList = new List<TileObject> {_drawTile, component.GetLeadTile()};
+                        List<Tile> tileList = new List<Tile> {_drawTile, component.GetLeadTile()};
                         ICompleteHandComponent pair = CreateCompleteHandComponent(tileList, PAIR_COMPONENT);
                         _constructedHand.Add(pair);
                         _pairs.Add(pair);
@@ -77,7 +77,7 @@ namespace RMU.Hands.CompleteHands
 
             foreach (ICompleteHandComponent component in _constructedHand)
             {
-                foreach (TileObject t in component.GetTiles())
+                foreach (Tile t in component.GetTiles())
                 {
                     _tiles.Add(t);
                 }
@@ -131,7 +131,7 @@ namespace RMU.Hands.CompleteHands
             return _isolatedTiles;
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }

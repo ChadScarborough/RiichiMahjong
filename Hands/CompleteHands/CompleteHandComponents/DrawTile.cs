@@ -6,9 +6,9 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public class DrawTile : ICompleteHandComponent
     {
-        private readonly TileObject _tile;
+        private readonly Tile _tile;
 
-        public DrawTile(TileObject drawTile)
+        public DrawTile(Tile drawTile)
         {
             _tile = drawTile;
         }
@@ -23,14 +23,14 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             return Enums.TILE;
         }
 
-        public TileObject GetLeadTile()
+        public Tile GetLeadTile()
         {
             return _tile;
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
-            return new List<TileObject> { _tile };
+            return new List<Tile> { _tile };
         }
     }
 }

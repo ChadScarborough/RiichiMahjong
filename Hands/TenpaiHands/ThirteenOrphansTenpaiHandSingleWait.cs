@@ -10,7 +10,7 @@ namespace RMU.Hands.TenpaiHands;
 
 public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
 {
-    private readonly TileObject[] _terminals = 
+    private readonly Tile[] _terminals = 
     {
         ONE_MAN, NINE_MAN,
         ONE_PIN, NINE_PIN,
@@ -34,7 +34,7 @@ public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
 
     private void SetWaits()
     {
-        _waits = new List<TileObject>();
+        _waits = new List<Tile>();
         int[] counters = new int[NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS];
         CountAllTilesInHand(counters);
         FindMissingTileAndSetItAsWait(counters);
@@ -54,13 +54,13 @@ public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
         IncrementAppropriateCounter(counters, tile);
     }
 
-    private static TileObject GetTileFromComponent(ICompleteHandComponent component)
+    private static Tile GetTileFromComponent(ICompleteHandComponent component)
     {
-        TileObject tile = component.GetLeadTile();
+        Tile tile = component.GetLeadTile();
         return tile;
     }
 
-    private void IncrementAppropriateCounter(int[] counters, TileObject tile)
+    private void IncrementAppropriateCounter(int[] counters, Tile tile)
     {
         for (int i = 0; i < NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
         {

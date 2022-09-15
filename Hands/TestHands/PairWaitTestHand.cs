@@ -8,7 +8,7 @@ public class PairWaitTestHand : TestHand
 {
     public PairWaitTestHand()
     {
-        _closedTiles = new List<TileObject>
+        _closedTiles = new List<Tile>
         {
             OneMan(), OneMan(), OneMan(),
             ThreePin(), ThreePin(), ThreePin(),

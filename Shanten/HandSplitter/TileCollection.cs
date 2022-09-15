@@ -6,31 +6,31 @@ namespace RMU.Shanten.HandSplitter
 {
     public class TileCollection
     {
-        private List<TileObject> _tiles;
+        private List<Tile> _tiles;
         private Enums.Suit _suit;
 
         public TileCollection(Enums.Suit suit)
         {
-            _tiles = new List<TileObject>();
+            _tiles = new List<Tile>();
             SetSuit(suit);
         }
 
-        public TileCollection(Enums.Suit suit, List<TileObject> tiles)
+        public TileCollection(Enums.Suit suit, List<Tile> tiles)
         {
             SetSuit(suit);
-            _tiles = new List<TileObject>();
-            foreach(TileObject tile in tiles)
+            _tiles = new List<Tile>();
+            foreach(Tile tile in tiles)
             {
                 AddTile(tile);
             }
         }
 
-        public virtual List<TileObject> GetTiles()
+        public virtual List<Tile> GetTiles()
         {
             return _tiles;
         }
 
-        public void AddTile(TileObject tile)
+        public void AddTile(Tile tile)
         {
             if(tile.GetSuit() == this.GetSuit())
             {
@@ -50,9 +50,9 @@ namespace RMU.Shanten.HandSplitter
             return _tiles.Count;
         }
 
-        public void RemoveTile(TileObject tile)
+        public void RemoveTile(Tile tile)
         {
-            foreach(TileObject t in _tiles)
+            foreach(Tile t in _tiles)
             {
                 if(Functions.AreTilesEquivalent(t, tile))
                 {
@@ -65,7 +65,7 @@ namespace RMU.Shanten.HandSplitter
         public TileCollection Clone()
         {
             TileCollection tc = new TileCollection(_suit);
-            foreach(TileObject tile in GetTiles())
+            foreach(Tile tile in GetTiles())
             {
                 tc.AddTile(tile);
             }

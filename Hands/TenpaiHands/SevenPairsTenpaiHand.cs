@@ -9,7 +9,7 @@ namespace RMU.Hands.TenpaiHands
     public class SevenPairsTenpaiHand : ITenpaiHand
     {
         private readonly List<ICompleteHandComponent> _components;
-        private List<TileObject> _waits;
+        private List<Tile> _waits;
         
         public SevenPairsTenpaiHand(List<ICompleteHandComponent> components)
         {
@@ -23,7 +23,7 @@ namespace RMU.Hands.TenpaiHands
             return _components;
         }
 
-        public List<TileObject> GetWaits()
+        public List<Tile> GetWaits()
         {
             return _waits;
         }

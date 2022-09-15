@@ -8,12 +8,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public class OpenPon : ICompleteHandGroup
     {
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
 
         public OpenPon(OpenMeld openPon)
         {
-            _tiles = new List<TileObject>();
-            foreach(TileObject tile in openPon.GetTiles())
+            _tiles = new List<Tile>();
+            foreach(Tile tile in openPon.GetTiles())
             {
                 _tiles.Add(tile);
             }
@@ -52,12 +52,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             return Enums.GROUP;
         }
 
-        public TileObject GetLeadTile()
+        public Tile GetLeadTile()
         {
             return _tiles[0];
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }

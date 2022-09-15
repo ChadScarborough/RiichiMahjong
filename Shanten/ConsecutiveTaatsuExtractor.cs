@@ -9,7 +9,7 @@ namespace RMU.Shanten
 {
     public static class ConsecutiveTaatsuExtractor
     {
-        private static List<TileObject> _tiles;
+        private static List<Tile> _tiles;
         private static List<ICompleteHandComponent> _outputList;
         private static TileCollection _collection;
 
@@ -25,7 +25,7 @@ namespace RMU.Shanten
         {
             for (int i = _collection.GetSize() - 1; i >= 1; i--)
             {
-                TileObject tileBelow = Functions.GetTileBelow(_tiles[i]);
+                Tile tileBelow = Functions.GetTileBelow(_tiles[i]);
                 CheckForConsecutiveTaatsu(ref i, tileBelow);
             }
         }
@@ -53,7 +53,7 @@ namespace RMU.Shanten
             return _collection.GetSuit() == WIND;
         }
 
-        private static void CheckForConsecutiveTaatsu(ref int i, TileObject tileBelow)
+        private static void CheckForConsecutiveTaatsu(ref int i, Tile tileBelow)
         {
             for (int j = i - 1; j >= 0; j--)
             {
@@ -61,11 +61,11 @@ namespace RMU.Shanten
             }
         }
 
-        private static bool TilesFormConsecutiveTaatsu(ref int i, int j, TileObject tileBelow)
+        private static bool TilesFormConsecutiveTaatsu(ref int i, int j, Tile tileBelow)
         {
             if (Functions.AreTilesEquivalent(tileBelow, _tiles[j]))
             {
-                List<TileObject> tileList = new List<TileObject> { _tiles[j], _tiles[i] };
+                List<Tile> tileList = new List<Tile> { _tiles[j], _tiles[i] };
                 ExtractTilesToNewConsecutiveTaatsuComponent(i, j, tileList);
                 i -= 1;
                 return true;
@@ -73,7 +73,7 @@ namespace RMU.Shanten
             return false;
         }
 
-        private static void ExtractTilesToNewConsecutiveTaatsuComponent(int i, int j, List<TileObject> tileList)
+        private static void ExtractTilesToNewConsecutiveTaatsuComponent(int i, int j, List<Tile> tileList)
         {
             if (ConsecutiveTaatsuContainsTerminalTile(i, j))
             {
@@ -88,7 +88,7 @@ namespace RMU.Shanten
             return _tiles[i].GetValue() == 9 || _tiles[j].GetValue() == 1;
         }
 
-        private static void CreateConsecutiveTaatsu(int i, int j, List<TileObject> tileList, CompleteHandComponentType componentType)
+        private static void CreateConsecutiveTaatsu(int i, int j, List<Tile> tileList, CompleteHandComponentType componentType)
         {
             ICompleteHandComponent consecutiveTaatsu = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, componentType);
             _outputList.Add(consecutiveTaatsu);

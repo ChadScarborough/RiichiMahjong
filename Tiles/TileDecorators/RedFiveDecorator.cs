@@ -4,7 +4,7 @@ namespace RMU.Tiles.TileDecorators
 {
     public class RedFiveDecorator : TileDecorator
     {
-        public RedFiveDecorator(TileObject tile) : base(tile) { }
+        public RedFiveDecorator(Tile tile) : base(tile) { }
 
         public override bool IsDoraTile()
         {
@@ -16,9 +16,9 @@ namespace RMU.Tiles.TileDecorators
             return true;
         }
 
-        public override TileObject Clone()
+        public override Tile Clone()
         {
-            TileObject clone = _decoratee.Clone();
+            Tile clone = _decoratee.Clone();
             return new RedFiveDecorator(clone);
         }
     }

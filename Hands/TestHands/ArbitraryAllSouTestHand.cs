@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public ArbitraryAllSouTestHand()
         {
-            _closedTiles = new List<TileObject> //Should be tenpai
+            _closedTiles = new List<Tile> //Should be tenpai
             {
                 SixSou(), TwoSou(), OneSou(), ThreeSou(), TwoSou(), TwoSou(), SixSou(),
                 SevenSou(), SixSou(), FiveSou(), TwoSou(), SevenSou(), NineSou()

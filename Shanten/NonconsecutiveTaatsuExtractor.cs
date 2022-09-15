@@ -10,7 +10,7 @@ namespace RMU.Shanten
 {
     public static class NonconsecutiveTaatsuExtractor
     {
-        private static List<TileObject> _tiles;
+        private static List<Tile> _tiles;
         private static List<ICompleteHandComponent> _outputList;
         private static TileCollection _collection;
 
@@ -32,14 +32,14 @@ namespace RMU.Shanten
 
         private static void CheckForNonconsecutiveTaatsuFromGivenTile(ref int i)
         {
-            TileObject tileTwoBelow = Functions.GetTileTwoBelow(_tiles[i]);
+            Tile tileTwoBelow = Functions.GetTileTwoBelow(_tiles[i]);
             for (int j = i - 1; j >= 0; j--)
             {
                 if (FoundNonconsecutiveTaatsuFromGivenTile(ref i, tileTwoBelow, j)) break;
             }
         }
 
-        private static bool FoundNonconsecutiveTaatsuFromGivenTile(ref int i, TileObject tileTwoBelow, int j)
+        private static bool FoundNonconsecutiveTaatsuFromGivenTile(ref int i, Tile tileTwoBelow, int j)
         {
             if (TilesFormNonconsecutiveTaatsu(ref i, tileTwoBelow, j))
             {
@@ -48,18 +48,18 @@ namespace RMU.Shanten
             return false;
         }
 
-        private static bool TilesFormNonconsecutiveTaatsu(ref int i, TileObject tileTwoBelow, int j)
+        private static bool TilesFormNonconsecutiveTaatsu(ref int i, Tile tileTwoBelow, int j)
         {
             if (Functions.AreTilesEquivalent(tileTwoBelow, _tiles[j]))
             {
-                List<TileObject> tileList = new List<TileObject> { _tiles[j], _tiles[i] };
+                List<Tile> tileList = new List<Tile> { _tiles[j], _tiles[i] };
                 ExtractTilesToNewNonconsecutiveTaatsuComponent(ref i, j, tileList);
                 return true;
             }
             return false;
         }
 
-        private static void ExtractTilesToNewNonconsecutiveTaatsuComponent(ref int i, int j, List<TileObject> tileList)
+        private static void ExtractTilesToNewNonconsecutiveTaatsuComponent(ref int i, int j, List<Tile> tileList)
         {
             ICompleteHandComponent nonconsecutiveTaatsu = CreateCompleteHandComponent(tileList, INCOMPLETE_SEQUENCE_CLOSED_WAIT);
             _outputList.Add(nonconsecutiveTaatsu);
@@ -90,7 +90,7 @@ namespace RMU.Shanten
             _collection = collection;
         }
 
-        private static void ExtractTiles(TileCollection collection, List<TileObject> tiles, int i, int j)
+        private static void ExtractTiles(TileCollection collection, List<Tile> tiles, int i, int j)
         {
             collection.RemoveTile(tiles[i]);
             collection.RemoveTile(tiles[j]);

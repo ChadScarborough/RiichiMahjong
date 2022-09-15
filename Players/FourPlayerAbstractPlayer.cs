@@ -21,7 +21,7 @@ namespace RMU.Players
             //_hand = hand;
         }
 
-        public void CallLowChii(TileObject calledTile)
+        public void CallLowChii(Tile calledTile)
         {
             UpdateAvailableCalls();
             if (_canLowChii)
@@ -32,7 +32,7 @@ namespace RMU.Players
             }
         }
 
-        public void CallMidChii(TileObject calledTile)
+        public void CallMidChii(Tile calledTile)
         {
             UpdateAvailableCalls();
             if (_canMidChii)
@@ -43,7 +43,7 @@ namespace RMU.Players
             }
         }
 
-        public void CallHighChii(TileObject calledTile)
+        public void CallHighChii(Tile calledTile)
         {
             UpdateAvailableCalls();
             if (_canHighChii)
@@ -54,7 +54,7 @@ namespace RMU.Players
             }
         }
 
-        public override void GeneratePotentialDiscardCalls(TileObject lastTile)
+        public override void GeneratePotentialDiscardCalls(Tile lastTile)
         {
             base.GeneratePotentialDiscardCalls(lastTile);
             GeneratePotentialLowChiiCall(this, _priorityQueueForPotentialCalls, lastTile);

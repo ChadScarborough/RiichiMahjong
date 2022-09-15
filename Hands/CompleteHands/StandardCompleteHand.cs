@@ -17,15 +17,15 @@ namespace RMU.Hands.CompleteHands
         private readonly List<ICompleteHandComponent> _constructedHand;
         private readonly CompleteHandWaitType _waitType;
         private readonly bool _isOpen;
-        private readonly TileObject _drawTile;
+        private readonly Tile _drawTile;
         private readonly List<ICompleteHandComponent> _triplets;
         private readonly List<ICompleteHandComponent> _sequences;
         private readonly List<ICompleteHandComponent> _pairs;
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
         private readonly Player _player;
         private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
 
-        public StandardCompleteHand(ITenpaiHand tenpaiHand, TileObject drawTile, Player player)
+        public StandardCompleteHand(ITenpaiHand tenpaiHand, Tile drawTile, Player player)
         {
             _player = player;
             _components = tenpaiHand.GetComponents();
@@ -37,7 +37,7 @@ namespace RMU.Hands.CompleteHands
             _triplets = new List<ICompleteHandComponent>();
             _sequences = new List<ICompleteHandComponent>();
             _pairs = new List<ICompleteHandComponent>();
-            _tiles = new List<TileObject>();
+            _tiles = new List<Tile>();
             _isOpen = player.GetHand().IsOpen();
             
             switch (_waitType)
@@ -83,7 +83,7 @@ namespace RMU.Hands.CompleteHands
                         throw new Exception("I don't know what the heck happened, honestly");
                 }
 
-                foreach (TileObject tile in component.GetTiles())
+                foreach (Tile tile in component.GetTiles())
                 {
                     _tiles.Add(tile);
                 }
@@ -120,7 +120,7 @@ namespace RMU.Hands.CompleteHands
             return new List<ICompleteHandComponent>();
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }
@@ -143,7 +143,7 @@ namespace RMU.Hands.CompleteHands
         private void ConstructPairWaitHand()
         {
             ICompleteHandComponent isolatedTile = new IsolatedTile(null);
-            List<TileObject> tileList = new List<TileObject>();
+            List<Tile> tileList = new List<Tile>();
             foreach (ICompleteHandComponent component in _components)
             {
                 if (component.GetGeneralComponentType() is GROUP or PAIR)
@@ -181,7 +181,7 @@ namespace RMU.Hands.CompleteHands
         {
             ICompleteHandComponent incompletePair = null;
             ICompleteHandComponent completePair = null;
-            List<TileObject> tileList = new List<TileObject>();
+            List<Tile> tileList = new List<Tile>();
 
             foreach (ICompleteHandComponent component in _components)
             {
@@ -219,7 +219,7 @@ namespace RMU.Hands.CompleteHands
         private void ConstructEdgeWaitHand()
         {
             ICompleteHandComponent edgeWaitTaatsu = null;
-            List<TileObject> tileList;
+            List<Tile> tileList;
             foreach (ICompleteHandComponent component in _components)
             {
                 if (component.GetGeneralComponentType() is GROUP or PAIR)
@@ -236,11 +236,11 @@ namespace RMU.Hands.CompleteHands
 
             if (edgeWaitTaatsu.GetLeadTile().GetValue() is 1)
             {
-                tileList = new List<TileObject> {edgeWaitTaatsu.GetLeadTile(), edgeWaitTaatsu.GetTiles()[1], _drawTile};
+                tileList = new List<Tile> {edgeWaitTaatsu.GetLeadTile(), edgeWaitTaatsu.GetTiles()[1], _drawTile};
             }
             else
             {
-                tileList = new List<TileObject> {_drawTile, edgeWaitTaatsu.GetLeadTile(), edgeWaitTaatsu.GetTiles()[1]};
+                tileList = new List<Tile> {_drawTile, edgeWaitTaatsu.GetLeadTile(), edgeWaitTaatsu.GetTiles()[1]};
             }
 
             ICompleteHandComponent completeSequence = CreateCompleteHandComponent(tileList, CLOSED_CHII);
@@ -264,11 +264,11 @@ namespace RMU.Hands.CompleteHands
                 }
             }
 
-            List<TileObject> tileList;
+            List<Tile> tileList;
             
             try
             {
-                tileList = new List<TileObject>
+                tileList = new List<Tile>
                 {
                     closedWaitTaatsu.GetLeadTile(),
                     _drawTile,
@@ -317,18 +317,18 @@ namespace RMU.Hands.CompleteHands
                 throw new Exception("Invalid hand composition");
             }
 
-            List<TileObject> tileList;
+            List<Tile> tileList;
 
             if (drawTileIsBelowTaatsu)
             {
-                tileList = new List<TileObject>
+                tileList = new List<Tile>
                 {
                     _drawTile, openWaitTaatsu.GetLeadTile(), openWaitTaatsu.GetTiles()[1]
                 };
             }
             else
             {
-                tileList = new List<TileObject>
+                tileList = new List<Tile>
                 {
                     openWaitTaatsu.GetLeadTile(), openWaitTaatsu.GetTiles()[1], _drawTile
                 };

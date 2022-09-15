@@ -1,16 +1,19 @@
 using System;
 using System.Collections.Generic;
 using RMU.Players;
+using RMU.Games;
 
 namespace RMU.Calls.CallCommands
 {
     public class PriorityQueueForCallCommands : IPriorityQueue
     {
         private readonly List<CallCommand> _priorityQueue;
+        private readonly AbstractGame _game;
 
-        public PriorityQueueForCallCommands()
+        public PriorityQueueForCallCommands(AbstractGame game)
         {
             _priorityQueue = new List<CallCommand>();
+            _game = game;
         }
 
         private void AddCallCommand(CallCommand callCommand)

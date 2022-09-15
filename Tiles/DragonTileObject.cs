@@ -2,7 +2,7 @@
 
 namespace RMU.Tiles
 {
-    public class DragonTileObject : TileObject
+    public class DragonTileObject : Tile
     {
         public DragonTileObject(int value, Enums.Suit suit) : base(value, suit) { }
 

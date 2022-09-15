@@ -8,7 +8,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallMidChiiCommand : CallCommand
     {
-        public CallMidChiiCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallMidChiiCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
 
         }
@@ -17,8 +17,8 @@ namespace RMU.Calls.CallCommands
         {
             _handMakingCall.OpenHand();
             _handMakingCall.CreateOpenMeld(_calledTile, MID_CHII);
-            TileObject tileAbove = Functions.GetTileAbove(_calledTile);
-            TileObject tileBelow = Functions.GetTileBelow(_calledTile);
+            Tile tileAbove = Functions.GetTileAbove(_calledTile);
+            Tile tileBelow = Functions.GetTileBelow(_calledTile);
             _handMakingCall.RemoveCopyOfTile(tileAbove);
             _handMakingCall.RemoveCopyOfTile(tileBelow);
         }

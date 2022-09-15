@@ -198,28 +198,28 @@ namespace RMUTests
         [TestMethod]
         public void GetTileAbove_ReturnsTileOfSameSuit_AndValueOneAboveInputTile()
         {
-            TileObject inputTile = OneMan();
+            Tile inputTile = OneMan();
             Assert.IsTrue(AreTilesEquivalent(TWO_MAN, GetTileAbove(inputTile)));
         }
 
         [TestMethod]
         public void GetTileAbove_ReturnsNull_WhenGivenDragonTile()
         {
-            TileObject inputTile = RedDragon();
+            Tile inputTile = RedDragon();
             Assert.IsNull(GetTileAbove(inputTile));
         }
 
         [TestMethod]
         public void GetTileAbove_ReturnsNull_WhenGivenWindTile()
         {
-            TileObject inputTile = WestWind();
+            Tile inputTile = WestWind();
             Assert.IsNull(GetTileAbove(inputTile));
         }
 
         [TestMethod]
         public void GetTileAboveReturnsNull_WhenGivenNumberTileWithValueNine()
         {
-            TileObject inputTile = NinePin();
+            Tile inputTile = NinePin();
             Assert.IsNull(GetTileAbove(inputTile));
         }
 
@@ -232,28 +232,28 @@ namespace RMUTests
         [TestMethod]
         public void GetTileBelow_ReturnsTileOfSameSuit_AndValueOneBelowInputTile()
         {
-            TileObject inputTile = TwoSou();
+            Tile inputTile = TwoSou();
             Assert.IsTrue(AreTilesEquivalent(OneSou(), GetTileBelow(inputTile)));
         }
 
         [TestMethod]
         public void GetTileBelow_ReturnsNull_WhenGivenDragonTileAsInput()
         {
-            TileObject inputTile = WhiteDragon();
+            Tile inputTile = WhiteDragon();
             Assert.IsNull(GetTileBelow(inputTile));
         }
 
         [TestMethod]
         public void GetTileBelow_ReturnsNull_WhenGivenWindTileAsInput()
         {
-            TileObject inputTile = SouthWind();
+            Tile inputTile = SouthWind();
             Assert.IsNull(GetTileBelow(inputTile));
         }
 
         [TestMethod]
         public void GetTileBelow_ReturnsNull_WhenGivenNumberTileWithValueOne()
         {
-            TileObject inputTile = OnePin();
+            Tile inputTile = OnePin();
             Assert.IsNull(GetTileBelow(inputTile));
         }
 
@@ -266,35 +266,35 @@ namespace RMUTests
         [TestMethod]
         public void GetTileTwoAbove_ReturnsTileOfSameSuit_AndValueTwoAboveInputTile()
         {
-            TileObject inputTile = OneMan();
+            Tile inputTile = OneMan();
             Assert.IsTrue(AreTilesEquivalent(THREE_MAN, GetTileTwoAbove(inputTile)));
         }
 
         [TestMethod]
         public void GetTileTwoAbove_ReturnsNull_WhenGivenDragonTile()
         {
-            TileObject inputTile = RedDragon();
+            Tile inputTile = RedDragon();
             Assert.IsNull(GetTileTwoAbove(inputTile));
         }
 
         [TestMethod]
         public void GetTileTwoAbove_ReturnsNull_WhenGivenWindTile()
         {
-            TileObject inputTile = WestWind();
+            Tile inputTile = WestWind();
             Assert.IsNull(GetTileTwoAbove(inputTile));
         }
 
         [TestMethod]
         public void GetTwoTileAboveReturnsNull_WhenGivenNumberTileWithValueNine()
         {
-            TileObject inputTile = NinePin();
+            Tile inputTile = NinePin();
             Assert.IsNull(GetTileTwoAbove(inputTile));
         }
 
         [TestMethod]
         public void GetTwoTileAboveReturnsNull_WhenGivenNumberTileWithValueEight()
         {
-            TileObject inputTile = EightPin();
+            Tile inputTile = EightPin();
             Assert.IsNull(GetTileTwoAbove(inputTile));
         }
 
@@ -307,35 +307,35 @@ namespace RMUTests
         [TestMethod]
         public void GetTileTwoBelow_ReturnsTileOfSameSuit_AndValueTwoBelowInputTile()
         {
-            TileObject inputTile = ThreeSou();
+            Tile inputTile = ThreeSou();
             Assert.IsTrue(AreTilesEquivalent(OneSou(), GetTileTwoBelow(inputTile)));
         }
 
         [TestMethod]
         public void GetTileTwoBelow_ReturnsNull_WhenGivenDragonTileAsInput()
         {
-            TileObject inputTile = WhiteDragon();
+            Tile inputTile = WhiteDragon();
             Assert.IsNull(GetTileTwoBelow(inputTile));
         }
 
         [TestMethod]
         public void GetTileTwoBelow_ReturnsNull_WhenGivenWindTileAsInput()
         {
-            TileObject inputTile = SouthWind();
+            Tile inputTile = SouthWind();
             Assert.IsNull(GetTileTwoBelow(inputTile));
         }
 
         [TestMethod]
         public void GetTileTwoBelow_ReturnsNull_WhenGivenNumberTileWithValueOne()
         {
-            TileObject inputTile = OnePin();
+            Tile inputTile = OnePin();
             Assert.IsNull(GetTileTwoBelow(inputTile));
         }
 
         [TestMethod]
         public void GetTileTwoBelow_ReturnsNull_WhenGivenNumberTileWithValueTwo()
         {
-            TileObject inputTile = TwoPin();
+            Tile inputTile = TwoPin();
             Assert.IsNull(GetTileTwoBelow(inputTile));
         }
 

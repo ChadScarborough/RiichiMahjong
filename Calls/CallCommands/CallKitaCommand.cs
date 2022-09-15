@@ -8,7 +8,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallKitaCommand : CallCommand
     {
-        public CallKitaCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallKitaCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
 
         }
@@ -22,7 +22,7 @@ namespace RMU.Calls.CallCommands
                 return;
             }
 
-            foreach (TileObject tile in _handMakingCall.GetClosedTiles())
+            foreach (Tile tile in _handMakingCall.GetClosedTiles())
             {
                 if (AreTilesEquivalent(tile, NORTH_WIND))
                 {

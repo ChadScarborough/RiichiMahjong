@@ -1,10 +1,10 @@
 ﻿namespace RMU.Tiles.TileDecorators
 {
-    public abstract class TileDecorator : TileObject
+    public abstract class TileDecorator : Tile
     {
-        protected TileObject _decoratee;
+        protected Tile _decoratee;
 
-        public TileDecorator(TileObject tile) : base(tile.GetValue(), tile.GetSuit())
+        public TileDecorator(Tile tile) : base(tile.GetValue(), tile.GetSuit())
         {
             _decoratee = tile;
         }
@@ -39,12 +39,12 @@
             return _decoratee.IsRedFive();
         }
 
-        public override TileObject GetTileAbove()
+        public override Tile GetTileAbove()
         {
             return _decoratee.GetTileAbove();
         }
 
-        public override TileObject GetTileBelow()
+        public override Tile GetTileBelow()
         {
             return _decoratee.GetTileBelow();
         }

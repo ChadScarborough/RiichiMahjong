@@ -7,11 +7,11 @@ namespace RMU.Calls.CreateMeldBehaviours
 {
     public class CreateKitaBehaviour : ICreateMeldBehaviour
     {
-        public List<TileObject> CreateMeld(TileObject calledTile)
+        public List<Tile> CreateMeld(Tile calledTile)
         {
             if (Functions.AreWindsEquivalent(calledTile, Enums.NORTH))
             {
-                return new List<TileObject> { calledTile };
+                return new List<Tile> { calledTile };
             }
 
             throw new Exception("Tried to create Kita with non-North tile");

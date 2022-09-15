@@ -143,7 +143,7 @@ namespace RMU.Hands.TenpaiHands
         
         private static void AddWaitsToHand(Hand hand, ITenpaiHand outputHand)
         {
-            foreach (TileObject tile in outputHand.GetWaits())
+            foreach (Tile tile in outputHand.GetWaits())
             {
                 hand.AddWait(tile);
             }

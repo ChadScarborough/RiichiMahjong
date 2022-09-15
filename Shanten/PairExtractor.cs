@@ -8,7 +8,7 @@ namespace RMU.Shanten
 {
     public static class PairExtractor
     {
-        private static List<TileObject> _tiles;
+        private static List<Tile> _tiles;
         private static List<ICompleteHandComponent> _outputList;
         private static TileCollection _collection;
 
@@ -52,7 +52,7 @@ namespace RMU.Shanten
 
         private static void CreateNewPairAndAddItToOutputList(int i)
         {
-            List<TileObject> tileList = new List<TileObject> { _tiles[i], _tiles[i - 1] };
+            List<Tile> tileList = new List<Tile> { _tiles[i], _tiles[i - 1] };
             ICompleteHandComponent pair = CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, Enums.PAIR_COMPONENT);
             _outputList.Add(pair);
         }

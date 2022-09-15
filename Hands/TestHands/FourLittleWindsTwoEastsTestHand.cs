@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public FourLittleWindsTwoEastsTestHand()
         {
-            _closedTiles = new List<TileObject>
+            _closedTiles = new List<Tile>
             {
                 EastWind(), EastWind(),
                 SouthWind(), SouthWind(), SouthWind(),

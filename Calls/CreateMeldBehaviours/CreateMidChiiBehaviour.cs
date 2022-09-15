@@ -6,11 +6,11 @@ namespace RMU.Calls.CreateMeldBehaviours
 {
     public class CreateMidChiiBehaviour : ICreateMeldBehaviour
     {
-        public List<TileObject> CreateMeld(TileObject calledTile)
+        public List<Tile> CreateMeld(Tile calledTile)
         {
-            TileObject oneBelow = Functions.GetTileBelow(calledTile);
-            TileObject oneAbove = Functions.GetTileAbove(calledTile);
-            return new List<TileObject> { oneBelow, calledTile, oneAbove };
+            Tile oneBelow = Functions.GetTileBelow(calledTile);
+            Tile oneAbove = Functions.GetTileAbove(calledTile);
+            return new List<Tile> { oneBelow, calledTile, oneAbove };
         }
     }
 }

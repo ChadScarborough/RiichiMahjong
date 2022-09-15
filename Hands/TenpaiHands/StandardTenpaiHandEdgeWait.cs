@@ -19,17 +19,17 @@ namespace RMU.Hands.TenpaiHands
             {
                 if (component.GetComponentType() == INCOMPLETE_SEQUENCE_EDGE_WAIT)
                 {
-                    TileObject tile = component.GetLeadTile();
+                    Tile tile = component.GetLeadTile();
                     if (tile.GetValue() == 1)
                     {
-                        _waits = new List<TileObject>
+                        _waits = new List<Tile>
                         {
                             CreateTile(3, tile.GetSuit())
                         };
                         return;
                     }
 
-                    _waits = new List<TileObject>
+                    _waits = new List<Tile>
                     {
                         CreateTile(8, tile.GetSuit())
                     };

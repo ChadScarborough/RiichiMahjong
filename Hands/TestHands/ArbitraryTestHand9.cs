@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public ArbitraryTestHand9() //Should have shanten value three
         {
-            _closedTiles = new List<TileObject>
+            _closedTiles = new List<Tile>
             {
                 SouthWind(), FiveMan(), ThreeSou(), FourMan(), SevenMan(), EightPin(), FivePin(),
                 TwoSou(), TwoSou(), TwoPin(), ThreePin(), TwoSou(), SixMan()

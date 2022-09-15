@@ -8,7 +8,7 @@ public class ThirteenOrphansThirteenWaitTestHand : TestHand
 {
     public ThirteenOrphansThirteenWaitTestHand()
     {
-        _closedTiles = new List<TileObject>
+        _closedTiles = new List<Tile>
         {
             OneMan(), NineMan(),
             OnePin(), NinePin(),

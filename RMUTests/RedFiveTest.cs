@@ -9,7 +9,7 @@ namespace RMUTests
     [TestClass]
     public class RedFiveTest
     {
-        private TileObject _tile;
+        private Tile _tile;
 
         private void Setup()
         {

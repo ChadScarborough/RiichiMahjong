@@ -2,7 +2,7 @@
 {
     public class UraDoraDecorator : TileDecorator
     {
-        public UraDoraDecorator(TileObject tile) : base(tile) { }
+        public UraDoraDecorator(Tile tile) : base(tile) { }
 
         public override int GetUraDoraValue()
         {
@@ -19,9 +19,9 @@
             return _decoratee.IsRedFive();
         }
 
-        public override TileObject Clone()
+        public override Tile Clone()
         {
-            TileObject clone = _decoratee.Clone();
+            Tile clone = _decoratee.Clone();
             return new UraDoraDecorator(clone);
         }
     }

@@ -9,7 +9,7 @@ namespace RMU.Hands.CompleteHands;
 
 public static class CompleteHandFactory
 {
-    public static ICompleteHand CreateCompleteHand(ITenpaiHand hand, TileObject extraTile, Player player)
+    public static ICompleteHand CreateCompleteHand(ITenpaiHand hand, Tile extraTile, Player player)
     {
         if (ContainsTile(hand.GetWaits(), extraTile) == false)
         {
@@ -34,9 +34,9 @@ public static class CompleteHandFactory
         throw new Exception("I don't know how, but something went wrong");
     }
 
-    private static bool ContainsTile(List<TileObject> tileList, TileObject tile)
+    private static bool ContainsTile(List<Tile> tileList, Tile tile)
     {
-        foreach (TileObject t in tileList)
+        foreach (Tile t in tileList)
         {
             if (AreTilesEquivalent(t, tile))
             {

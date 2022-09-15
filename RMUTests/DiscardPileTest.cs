@@ -21,7 +21,7 @@ namespace RMUTests
         [TestMethod]
         public void DiscardPileContainsOneTile_AfterOneDiscard()
         {
-            TileObject tile = TileFactory.CreateTile(2, Enums.Suit.Sou);
+            Tile tile = TileFactory.CreateTile(2, Enums.Suit.Sou);
 
             _discardPile.DiscardTile(tile);
             Assert.AreEqual(1, _discardPile.GetDisplayedTileCount());
@@ -31,7 +31,7 @@ namespace RMUTests
         [TestMethod]
         public void DiscardPileRetainsDiscardedTiles_AfterBeingCalled()
         {
-            TileObject tile = TileFactory.CreateTile(2, Enums.Suit.Sou);
+            Tile tile = TileFactory.CreateTile(2, Enums.Suit.Sou);
 
             _discardPile.DiscardTile(tile);
             _discardPile.CallTile();

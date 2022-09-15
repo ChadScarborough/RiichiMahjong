@@ -5,9 +5,9 @@ namespace RMU.Calls.CreateMeldBehaviours
 {
     public class CreatePonBehaviour : ICreateMeldBehaviour
     {
-        public List<TileObject> CreateMeld(TileObject calledTile)
+        public List<Tile> CreateMeld(Tile calledTile)
         {
-            return new List<TileObject>
+            return new List<Tile>
             {
                 calledTile.Clone(), 
                 calledTile.Clone(), 

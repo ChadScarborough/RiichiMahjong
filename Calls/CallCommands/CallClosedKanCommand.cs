@@ -7,7 +7,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallClosedKanCommand : CallCommand
     {
-        public CallClosedKanCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallClosedKanCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
 
         }

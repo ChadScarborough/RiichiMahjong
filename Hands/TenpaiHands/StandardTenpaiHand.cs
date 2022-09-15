@@ -8,7 +8,7 @@ namespace RMU.Hands.TenpaiHands
     public abstract class StandardTenpaiHand : ITenpaiHand
     {
         private readonly List<ICompleteHandComponent> _components;
-        protected List<TileObject> _waits;
+        protected List<Tile> _waits;
 
         protected StandardTenpaiHand(List<ICompleteHandComponent> components)
         {
@@ -20,7 +20,7 @@ namespace RMU.Hands.TenpaiHands
             return _components;
         }
 
-        public List<TileObject> GetWaits()
+        public List<Tile> GetWaits()
         {
             return _waits;
         }

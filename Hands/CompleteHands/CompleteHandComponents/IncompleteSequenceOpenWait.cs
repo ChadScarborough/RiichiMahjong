@@ -8,12 +8,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public class IncompleteSequenceOpenWait : ICompleteHandIncompleteGroup
     {
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
 
-        public IncompleteSequenceOpenWait(List<TileObject> incompleteSequenceOpenWait)
+        public IncompleteSequenceOpenWait(List<Tile> incompleteSequenceOpenWait)
         {
-            _tiles = new List<TileObject>();
-            foreach (TileObject tile in incompleteSequenceOpenWait)
+            _tiles = new List<Tile>();
+            foreach (Tile tile in incompleteSequenceOpenWait)
             {
                 _tiles.Add(tile);
             }
@@ -61,12 +61,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             return Enums.TAATSU;
         }
 
-        public TileObject GetLeadTile()
+        public Tile GetLeadTile()
         {
             return _tiles[0];
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }

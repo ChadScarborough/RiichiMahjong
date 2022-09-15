@@ -5,22 +5,22 @@ namespace RMU.DiscardPile
 {
     public class StandardDiscardPile : IDiscardPile
     {
-        private readonly Globals.DataStructures.Stack<TileObject> _displayedDiscardedTiles;
-        private readonly List<TileObject> _allDiscardedTiles;
+        private readonly Globals.DataStructures.Stack<Tile> _displayedDiscardedTiles;
+        private readonly List<Tile> _allDiscardedTiles;
 
         public StandardDiscardPile()
         {
-            _displayedDiscardedTiles = new Globals.DataStructures.Stack<TileObject>();
-            _allDiscardedTiles = new List<TileObject>();
+            _displayedDiscardedTiles = new Globals.DataStructures.Stack<Tile>();
+            _allDiscardedTiles = new List<Tile>();
         }
 
-        public void DiscardTile(TileObject tile)
+        public void DiscardTile(Tile tile)
         {
             _displayedDiscardedTiles.Push(tile);
             _allDiscardedTiles.Add(tile);
         }
 
-        public TileObject CallTile()
+        public Tile CallTile()
         {
             return _displayedDiscardedTiles.Pop();
         }
@@ -35,10 +35,10 @@ namespace RMU.DiscardPile
             return _allDiscardedTiles.Count;
         }
 
-        public List<TileObject> GetDisplayedDiscardedTiles()
+        public List<Tile> GetDisplayedDiscardedTiles()
         {
-            List<TileObject> outputList = new List<TileObject>();
-            foreach(TileObject tile in _displayedDiscardedTiles)
+            List<Tile> outputList = new List<Tile>();
+            foreach(Tile tile in _displayedDiscardedTiles)
             {
                 outputList.Add(tile);
             }

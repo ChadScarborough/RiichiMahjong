@@ -31,10 +31,10 @@ namespace RMUTests.CallsTests
             _player.SetAvailablePotentialCalls();
         }
 
-        private int CountTileInstances(TileObject tile)
+        private int CountTileInstances(Tile tile)
         {
             int counter = 0;
-            foreach (TileObject t in _hand.GetClosedTiles())
+            foreach (Tile t in _hand.GetClosedTiles())
             {
                 if (AreTilesEquivalent(tile, t))
                 {

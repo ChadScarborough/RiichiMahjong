@@ -10,11 +10,11 @@ namespace RMUTests
     public class SortingTest
     {
         private readonly HandSorter _handSorter = new HandSorter();
-        private List<TileObject> _tiles = new List<TileObject>();
+        private List<Tile> _tiles = new List<Tile>();
         [TestMethod]
         public void HandSorter_CompilesProperly()
         {
-            Assert.IsNotNull(_handSorter.SortHand(new List<TileObject>()));
+            Assert.IsNotNull(_handSorter.SortHand(new List<Tile>()));
         }
 
         [TestMethod]

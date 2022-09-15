@@ -7,17 +7,17 @@ namespace RMU.Calls.CreateMeldBehaviours
     public class OpenMeld
     {
         private Enums.MeldType _meldType;
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
         private ICreateMeldBehaviour _createMeldBehaviour;
 
-        public OpenMeld(Enums.MeldType meldType, TileObject calledTile)
+        public OpenMeld(Enums.MeldType meldType, Tile calledTile)
         {
             _meldType = meldType;
             SetMeldType(meldType);
             _tiles = _createMeldBehaviour.CreateMeld(calledTile);
         }
 
-        public void AddTile(TileObject tile)
+        public void AddTile(Tile tile)
         {
             _tiles.Add(tile);
         }
@@ -56,7 +56,7 @@ namespace RMU.Calls.CreateMeldBehaviours
             return _meldType;
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }

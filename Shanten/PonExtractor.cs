@@ -9,7 +9,7 @@ namespace RMU.Shanten
     public static class PonExtractor
     {
         private static List<ICompleteHandComponent> _outputList;
-        private static List<TileObject> _tiles;
+        private static List<Tile> _tiles;
         private static TileCollection _collection;
 
         public static List<ICompleteHandComponent> ExtractPon(TileCollection collection)
@@ -46,26 +46,26 @@ namespace RMU.Shanten
 
         private static void ExtractTilesIntoNewCompleteHandComponentObject(int i)
         {
-            TileObject tile = _tiles[i];
+            Tile tile = _tiles[i];
             CreateClosedPonObjectAndAddItToOutputList(tile);
             RemoveThreeCopiesOfTileFromCollection(tile);
         }
 
-        private static void CreateClosedPonObjectAndAddItToOutputList(TileObject tile)
+        private static void CreateClosedPonObjectAndAddItToOutputList(Tile tile)
         {
-            List<TileObject> ponTiles = new List<TileObject> { tile.Clone(), tile.Clone(), tile.Clone() };
+            List<Tile> ponTiles = new List<Tile> { tile.Clone(), tile.Clone(), tile.Clone() };
             ICompleteHandComponent closedPon = CreateClosedPon(ponTiles);
             _outputList.Add(closedPon);
         }
 
-        private static ICompleteHandComponent CreateClosedPon(List<TileObject> ponTiles)
+        private static ICompleteHandComponent CreateClosedPon(List<Tile> ponTiles)
         {
             Enums.CompleteHandComponentType componentType = Enums.CLOSED_PON;
             ICompleteHandComponent closedPon = CompleteHandGroupFactory.CreateCompleteHandGroup(ponTiles, componentType);
             return closedPon;
         }
 
-        private static void RemoveThreeCopiesOfTileFromCollection(TileObject tile)
+        private static void RemoveThreeCopiesOfTileFromCollection(Tile tile)
         {
             _collection.RemoveTile(tile);
             _collection.RemoveTile(tile);

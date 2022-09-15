@@ -18,7 +18,7 @@ namespace RMU.Hands.TenpaiHands
             {
                 if (component.GetComponentType() == ISOLATED_TILE)
                 {
-                    _waits = new List<TileObject>
+                    _waits = new List<Tile>
                     {
                         component.GetLeadTile().Clone()
                     };

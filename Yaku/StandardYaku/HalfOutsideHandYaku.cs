@@ -32,7 +32,7 @@ public class HalfOutsideHandYaku : YakuBase
 
     private bool ComponentDoesNotContainTerminalOrHonor(ICompleteHandComponent component)
     {
-        foreach (TileObject tile in component.GetTiles())
+        foreach (Tile tile in component.GetTiles())
         {
             if (tile.IsTerminal() || tile.IsHonor())
             {

@@ -6,7 +6,7 @@ namespace RMU.Wall
 {
     public static class TileLists
     {
-        private static readonly List<TileObject> FourPlayerWallNoRedFivesList = new List<TileObject>
+        private static readonly List<Tile> FourPlayerWallNoRedFivesList = new List<Tile>
         {
             OneMan(), OneMan(), OneMan(), OneMan(),
             TwoMan(), TwoMan(), TwoMan(), TwoMan(),
@@ -48,7 +48,7 @@ namespace RMU.Wall
             WhiteDragon(), WhiteDragon(), WhiteDragon(), WhiteDragon()
         };
         
-        private static readonly List<TileObject> FourPlayerWallThreeRedFivesList = new List<TileObject>
+        private static readonly List<Tile> FourPlayerWallThreeRedFivesList = new List<Tile>
         {
             OneMan(), OneMan(), OneMan(), OneMan(),
             TwoMan(), TwoMan(), TwoMan(), TwoMan(),
@@ -90,7 +90,7 @@ namespace RMU.Wall
             WhiteDragon(), WhiteDragon(), WhiteDragon(), WhiteDragon()
         };
 
-        private static readonly List<TileObject> FourPlayerWallFourRedFivesList = new List<TileObject>
+        private static readonly List<Tile> FourPlayerWallFourRedFivesList = new List<Tile>
         {
             OneMan(), OneMan(), OneMan(), OneMan(),
             TwoMan(), TwoMan(), TwoMan(), TwoMan(),
@@ -132,7 +132,7 @@ namespace RMU.Wall
             WhiteDragon(), WhiteDragon(), WhiteDragon(), WhiteDragon()
         };
 
-        private static readonly List<TileObject> ThreePlayerWallNoRedFivesList = new List<TileObject>
+        private static readonly List<Tile> ThreePlayerWallNoRedFivesList = new List<Tile>
         {
             OneMan(), OneMan(), OneMan(), OneMan(),
 
@@ -168,7 +168,7 @@ namespace RMU.Wall
             WhiteDragon(), WhiteDragon(), WhiteDragon(), WhiteDragon()
         };
 
-        private static readonly List<TileObject> ThreePlayerWallTwoRedFivesList = new List<TileObject>
+        private static readonly List<Tile> ThreePlayerWallTwoRedFivesList = new List<Tile>
         {
             OneMan(), OneMan(), OneMan(), OneMan(),
 
@@ -204,27 +204,27 @@ namespace RMU.Wall
             WhiteDragon(), WhiteDragon(), WhiteDragon(), WhiteDragon()
         };
         
-        public static List<TileObject> FourPlayerWallNoRedFives()
+        public static List<Tile> FourPlayerWallNoRedFives()
         {
             return FourPlayerWallNoRedFivesList;
         }
 
-        public static List<TileObject> FourPlayerWallThreeRedFives()
+        public static List<Tile> FourPlayerWallThreeRedFives()
         {
             return FourPlayerWallThreeRedFivesList;
         }
 
-        public static List<TileObject> FourPlayerWallFourRedFives()
+        public static List<Tile> FourPlayerWallFourRedFives()
         {
             return FourPlayerWallFourRedFivesList;
         }
 
-        public static List<TileObject> ThreePlayerWallNoRedFives()
+        public static List<Tile> ThreePlayerWallNoRedFives()
         {
             return ThreePlayerWallNoRedFivesList;
         }
 
-        public static List<TileObject> ThreePlayerWallTwoRedFives()
+        public static List<Tile> ThreePlayerWallTwoRedFives()
         {
             return ThreePlayerWallTwoRedFivesList;
         }

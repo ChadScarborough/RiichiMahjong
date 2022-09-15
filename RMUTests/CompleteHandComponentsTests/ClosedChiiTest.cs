@@ -18,35 +18,35 @@ namespace RMUTests.CompleteHandComponentsTests
         [TestMethod]
         public void ComponentFactorySuccessfullyCreatesClosedChiiComponent()
         {
-            _closedChii = CreateCompleteHandComponent(new List<TileObject> { TwoMan(), ThreeMan(), FourMan() }, CLOSED_CHII);
+            _closedChii = CreateCompleteHandComponent(new List<Tile> { TwoMan(), ThreeMan(), FourMan() }, CLOSED_CHII);
             Assert.IsNotNull(_closedChii);
         }
 
         [TestMethod]
         public void GetComponentType_ReturnsClosedChii()
         {
-            _closedChii = CreateCompleteHandComponent(new List<TileObject> { ThreePin(), FourPin(), FivePin() }, CLOSED_CHII);
+            _closedChii = CreateCompleteHandComponent(new List<Tile> { ThreePin(), FourPin(), FivePin() }, CLOSED_CHII);
             Assert.AreEqual(CLOSED_CHII, _closedChii.GetComponentType());
         }
 
         [TestMethod]
         public void GetGeneralComponentType_ReturnsGroup()
         {
-            _closedChii = CreateCompleteHandComponent(new List<TileObject> { ThreePin(), FourPin(), FivePin() }, CLOSED_CHII);
+            _closedChii = CreateCompleteHandComponent(new List<Tile> { ThreePin(), FourPin(), FivePin() }, CLOSED_CHII);
             Assert.AreEqual(GROUP, _closedChii.GetGeneralComponentType());
         }
 
         [TestMethod]
         public void GetLeadTile_ReturnsLowestTileInSequence()
         {
-            _closedChii = CreateCompleteHandComponent(new List<TileObject> { ThreePin(), FourPin(), FivePin() }, CLOSED_CHII);
+            _closedChii = CreateCompleteHandComponent(new List<Tile> { ThreePin(), FourPin(), FivePin() }, CLOSED_CHII);
             Assert.IsTrue(AreTilesEquivalent(THREE_PIN, _closedChii.GetLeadTile()));
         }
 
         [TestMethod]
         public void GetTiles_ReturnsSameListOfTilesAsInput()
         {
-            List<TileObject> inputList = new List<TileObject> { FiveSou(), SixSou(), SevenSou() };
+            List<Tile> inputList = new List<Tile> { FiveSou(), SixSou(), SevenSou() };
             _closedChii = CreateCompleteHandComponent(inputList, CLOSED_CHII);
             for(int i = 0; i < 3; i++)
             {
@@ -58,7 +58,7 @@ namespace RMUTests.CompleteHandComponentsTests
         public void ThrowsException_WhenGivenAnIncorrectNumberOfTiles()
         {
             Exception ex = null;
-            List<TileObject> inputList = new List<TileObject> { FourMan(), FiveMan() };
+            List<Tile> inputList = new List<Tile> { FourMan(), FiveMan() };
             try
             {
                 _closedChii = CreateCompleteHandComponent(inputList, CLOSED_CHII);
@@ -74,7 +74,7 @@ namespace RMUTests.CompleteHandComponentsTests
         public void ThrowException_WhenGivenAnInvalidSequence()
         {
             Exception ex = null;
-            List<TileObject> inputList = new List<TileObject> { FourMan(), FiveMan(), SevenMan() };
+            List<Tile> inputList = new List<Tile> { FourMan(), FiveMan(), SevenMan() };
             try
             {
                 _closedChii = CreateCompleteHandComponent(inputList, CLOSED_CHII);

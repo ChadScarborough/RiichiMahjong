@@ -7,7 +7,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallPonCommand : CallCommand
     {
-        public CallPonCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallPonCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
             
         }

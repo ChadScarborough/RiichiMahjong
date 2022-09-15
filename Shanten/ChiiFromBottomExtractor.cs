@@ -11,7 +11,7 @@ namespace RMU.Shanten
     public static class ChiiFromBottomExtractor
     {
         private static List<ICompleteHandComponent> _outputList;
-        private static List<TileObject> _tiles;
+        private static List<Tile> _tiles;
         private static TileCollection _collection;
         private static bool _foundChii;
         
@@ -73,7 +73,7 @@ namespace RMU.Shanten
 
         private static void CreateComponentAndAddComponentToOutputList(int i, int j, int k)
         {
-            List<TileObject> tileList = new List<TileObject> {_tiles[i], _tiles[j], _tiles[k]};
+            List<Tile> tileList = new List<Tile> {_tiles[i], _tiles[j], _tiles[k]};
             ICompleteHandComponent closedChii =
                 CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, CLOSED_CHII);
             _outputList.Add(closedChii);
@@ -82,8 +82,8 @@ namespace RMU.Shanten
         private static bool TilesFormChii(int i, int j, int k)
         {
             
-            TileObject oneAbove = GetTileAbove(_tiles[i]);
-            TileObject twoAbove = GetTileTwoAbove(_tiles[i]);
+            Tile oneAbove = GetTileAbove(_tiles[i]);
+            Tile twoAbove = GetTileTwoAbove(_tiles[i]);
             return AreTilesEquivalent(_tiles[j], oneAbove) && AreTilesEquivalent(_tiles[k], twoAbove);
         }
 

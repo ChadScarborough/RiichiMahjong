@@ -7,8 +7,8 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
     public interface ICompleteHandComponent
     {
         Enums.CompleteHandComponentType GetComponentType();
-        List<TileObject> GetTiles();
-        TileObject GetLeadTile();
+        List<Tile> GetTiles();
+        Tile GetLeadTile();
 
         Enums.CompleteHandGeneralComponentType GetGeneralComponentType();
     }

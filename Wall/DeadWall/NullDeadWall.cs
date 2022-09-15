@@ -10,27 +10,27 @@ namespace RMU.Wall.DeadWall
 
         }
 
-        public TileObject DrawTile()
+        public Tile DrawTile()
         {
             return null;
         }
 
-        public List<TileObject> GetDoraIndicators()
+        public List<Tile> GetDoraIndicators()
         {
             return null;
         }
 
-        public List<TileObject> GetDrawableTiles()
+        public List<Tile> GetDrawableTiles()
         {
             return null;
         }
 
-        public List<TileObject> GetRevealedDoraIndicators()
+        public List<Tile> GetRevealedDoraIndicators()
         {
             return null;
         }
 
-        public List<TileObject> GetUraDoraIndicators()
+        public List<Tile> GetUraDoraIndicators()
         {
             return null;
         }

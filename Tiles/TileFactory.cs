@@ -5,7 +5,7 @@ namespace RMU.Tiles
 {
     public static class TileFactory
     {
-        public static TileObject CreateTile(int value, Enums.Suit suit)
+        public static Tile CreateTile(int value, Enums.Suit suit)
         {
             switch (suit)
             {

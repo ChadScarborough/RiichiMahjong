@@ -8,7 +8,7 @@ public class TwoSidedTripletWaitTestHand : TestHand
 {
     public TwoSidedTripletWaitTestHand()
     {
-        _closedTiles = new List<TileObject>
+        _closedTiles = new List<Tile>
         {
             TwoMan(), TwoMan(), TwoMan(),
             FivePin(), FivePin(), FivePin(),

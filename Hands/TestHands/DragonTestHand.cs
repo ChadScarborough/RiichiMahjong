@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public DragonTestHand()
         {
-            _closedTiles = new List<TileObject> 
+            _closedTiles = new List<Tile> 
             { 
                 StandardTileList.GREEN_DRAGON.Clone(), StandardTileList.GREEN_DRAGON.Clone(), StandardTileList.GREEN_DRAGON.Clone(),
                 StandardTileList.RED_DRAGON.Clone(), StandardTileList.RED_DRAGON.Clone(), StandardTileList.RED_DRAGON.Clone(),

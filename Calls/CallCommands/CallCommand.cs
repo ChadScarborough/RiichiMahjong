@@ -8,10 +8,10 @@ namespace RMU.Calls.CallCommands
     {
         private readonly Player _playerMakingCall;
         protected readonly Hand _handMakingCall;
-        protected readonly TileObject _calledTile;
+        protected readonly Tile _calledTile;
         protected IPriorityQueue _priorityQueue;
         
-        protected CallCommand(Player playerMakingCall, TileObject calledTile)
+        protected CallCommand(Player playerMakingCall, Tile calledTile)
         {
             _playerMakingCall = playerMakingCall;
             _handMakingCall = playerMakingCall.GetHand();

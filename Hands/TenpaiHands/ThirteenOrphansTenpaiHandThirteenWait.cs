@@ -17,9 +17,9 @@ public class ThirteenOrphansTenpaiHandThirteenWait : ThirteenOrphansTenpaiHand
         return Enums.THIRTEEN_WAIT;
     }
 
-    public override List<TileObject> GetWaits()
+    public override List<Tile> GetWaits()
     {
-        return new List<TileObject>
+        return new List<Tile>
         {
             ONE_MAN, NINE_MAN,
             ONE_PIN, NINE_PIN,

@@ -2,7 +2,7 @@
 
 namespace RMU.Tiles
 {
-    public class NumberTileObject : TileObject
+    public class NumberTileObject : Tile
     {
         public NumberTileObject(int value, Enums.Suit suit) : base(value, suit) { }
 
@@ -16,13 +16,13 @@ namespace RMU.Tiles
             return false;
         }
 
-        public override TileObject GetTileBelow()
+        public override Tile GetTileBelow()
         {
             if (_value == 1) return null;
             return TileFactory.CreateTile(_value - 1, _suit);
         }
 
-        public override TileObject GetTileAbove()
+        public override Tile GetTileAbove()
         {
             if (_value == 9) return null;
             return TileFactory.CreateTile(_value + 1, _suit);

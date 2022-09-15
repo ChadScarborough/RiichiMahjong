@@ -5,13 +5,13 @@ namespace RMU.Wall.DeadWall
 {
     public interface IDeadWall
     {
-        TileObject DrawTile();
+        Tile DrawTile();
         void PopulateDeadWall();
         void RevealDoraTile();
         void Clear();
-        List<TileObject> GetDoraIndicators();
-        List<TileObject> GetRevealedDoraIndicators();
-        List<TileObject> GetUraDoraIndicators();
-        List<TileObject> GetDrawableTiles();
+        List<Tile> GetDoraIndicators();
+        List<Tile> GetRevealedDoraIndicators();
+        List<Tile> GetUraDoraIndicators();
+        List<Tile> GetDrawableTiles();
     }
 }

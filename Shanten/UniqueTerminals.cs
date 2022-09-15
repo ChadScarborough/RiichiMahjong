@@ -24,7 +24,7 @@ namespace RMU.Shanten
             WHITE = 12,
             NUMBER_OF_DIFFERENT_TERMINALS = 13;
 
-        public static int NumberOfUniqueTerminals(List<TileObject> tiles)
+        public static int NumberOfUniqueTerminals(List<Tile> tiles)
         {
             ClearCounters();
             IncrementCountersForEachTerminal(tiles);
@@ -48,21 +48,21 @@ namespace RMU.Shanten
             }
         }
 
-        private static void IncrementCountersForEachTerminal(List<TileObject> tiles)
+        private static void IncrementCountersForEachTerminal(List<Tile> tiles)
         {
-            foreach (TileObject tile in tiles)
+            foreach (Tile tile in tiles)
             {
                 CheckIfTileIsTerminalOrHonorAndIncrementAppropriateCounter(tile);
             }
         }
 
-        private static void CheckIfTileIsTerminalOrHonorAndIncrementAppropriateCounter(TileObject tile)
+        private static void CheckIfTileIsTerminalOrHonorAndIncrementAppropriateCounter(Tile tile)
         {
             if (CheckIfTileIsTerminalAndIncrementAppropriateCounter(tile)) return;
             CheckIfTileIsHonorAndIncrementAppropriateCounter(tile);
         }
 
-        private static void CheckIfTileIsHonorAndIncrementAppropriateCounter(TileObject tile)
+        private static void CheckIfTileIsHonorAndIncrementAppropriateCounter(Tile tile)
         {
             if (tile.IsHonor())
             {
@@ -70,7 +70,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void FindHonorTileValueAndIncrementAppropriateCounter(TileObject tile)
+        private static void FindHonorTileValueAndIncrementAppropriateCounter(Tile tile)
         {
             switch (tile.GetValue())
             {
@@ -89,7 +89,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void FindExactHonorTileValueAndIncrementOneOfTwoCounters(TileObject tile, int counter1, int counter2)
+        private static void FindExactHonorTileValueAndIncrementOneOfTwoCounters(Tile tile, int counter1, int counter2)
         {
             if (tile.GetSuit() == Enums.Suit.Wind)
             {
@@ -99,7 +99,7 @@ namespace RMU.Shanten
             _terminals[counter2]++;
         }
 
-        private static bool CheckIfTileIsTerminalAndIncrementAppropriateCounter(TileObject tile)
+        private static bool CheckIfTileIsTerminalAndIncrementAppropriateCounter(Tile tile)
         {
             if (tile.IsTerminal())
             {
@@ -109,7 +109,7 @@ namespace RMU.Shanten
             return false;
         }
 
-        private static void FindTerminalTileValueAndIncrementAppropriateCounter(TileObject tile)
+        private static void FindTerminalTileValueAndIncrementAppropriateCounter(Tile tile)
         {
             switch (tile.GetSuit())
             {
@@ -125,7 +125,7 @@ namespace RMU.Shanten
             }
         }
 
-        private static void FindExactTerminalTileValueAndIncrementOneOfTwoCounters(TileObject tile, int counter1, int counter2)
+        private static void FindExactTerminalTileValueAndIncrementOneOfTwoCounters(Tile tile, int counter1, int counter2)
         {
             if (tile.GetValue() == 1)
             {

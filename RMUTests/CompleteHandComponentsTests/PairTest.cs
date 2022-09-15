@@ -16,7 +16,7 @@ namespace RMUTests.CompleteHandComponentsTests
 
         private void Setup()
         {
-            _pair = CreateCompleteHandComponent(new List<TileObject> { OneSou(), OneSou() }, PAIR_COMPONENT);
+            _pair = CreateCompleteHandComponent(new List<Tile> { OneSou(), OneSou() }, PAIR_COMPONENT);
         }
 
         [TestMethod]

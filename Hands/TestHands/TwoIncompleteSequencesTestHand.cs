@@ -8,7 +8,7 @@ public class TwoIncompleteSequencesTestHand : TestHand
 {
     public TwoIncompleteSequencesTestHand()
     {
-        _closedTiles = new List<TileObject>
+        _closedTiles = new List<Tile>
         {
             ThreeMan(), FourMan(),
             FivePin(), FivePin(), FivePin(),

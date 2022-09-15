@@ -8,7 +8,7 @@ public class ClosedWaitTestHand : TestHand
 {
     public ClosedWaitTestHand()
     {
-        _closedTiles = new List<TileObject>
+        _closedTiles = new List<Tile>
         {
             FourMan(), FourMan(), FourMan(),
             FiveSou(), SixSou(), SevenSou(),

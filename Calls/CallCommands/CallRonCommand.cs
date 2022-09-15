@@ -1,4 +1,5 @@
 using System;
+using RMU.Games;
 using RMU.Players;
 using RMU.Tiles;
 
@@ -6,14 +7,16 @@ namespace RMU.Calls.CallCommands
 {
     public class CallRonCommand : CallCommand
     {
-        public CallRonCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallRonCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
 
         }
         
         public override void Execute()
         {
-            Console.WriteLine("Ron!"); //Obviously not the final code
+            Player player = GetPlayerMakingCall();
+            AbstractGame game = player.GetGame();
+            game.CallRon(player, player.GetYaku());
         }
 
         public override int GetPriority()

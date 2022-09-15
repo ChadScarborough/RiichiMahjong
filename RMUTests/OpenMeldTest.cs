@@ -11,7 +11,7 @@ namespace RMUTests
         [TestMethod]
         public void SuccessfullyCreates_OpenMeld()
         {
-            TileObject tile = TileFactory.CreateTile(1, Enums.Suit.Man);
+            Tile tile = TileFactory.CreateTile(1, Enums.Suit.Man);
             OpenMeld openMeld = new OpenMeld(Enums.MeldType.Pon, tile);
             Assert.IsNotNull(openMeld);
         }
@@ -19,7 +19,7 @@ namespace RMUTests
         [TestMethod]
         public void CallingPon_CreatesListOfThreeIdenticalTiles()
         {
-            TileObject tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
+            Tile tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
             OpenMeld openMeld = new OpenMeld(Enums.MeldType.Pon, tile);
             Assert.AreEqual(6, openMeld.GetTiles()[0].GetValue());
             Assert.AreEqual(6, openMeld.GetTiles()[1].GetValue());
@@ -33,7 +33,7 @@ namespace RMUTests
         [TestMethod]
         public void CallingLowChii_CreatesListOfConsecutiveTiles_WhereCalledTileIsTheHighest()
         {
-            TileObject tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
+            Tile tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
             OpenMeld openMeld = new OpenMeld(Enums.MeldType.LowChii, tile);
             Assert.AreEqual(4, openMeld.GetTiles()[0].GetValue());
             Assert.AreEqual(5, openMeld.GetTiles()[1].GetValue());
@@ -47,7 +47,7 @@ namespace RMUTests
         [TestMethod]
         public void CallingMidChii_CreatesListOfConsecutiveTiles_WhereCalledTileIsTheMiddle()
         {
-            TileObject tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
+            Tile tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
             OpenMeld openMeld = new OpenMeld(Enums.MeldType.MidChii, tile);
             Assert.AreEqual(5, openMeld.GetTiles()[0].GetValue());
             Assert.AreEqual(6, openMeld.GetTiles()[1].GetValue());
@@ -61,7 +61,7 @@ namespace RMUTests
         [TestMethod]
         public void CallingHighChii_CreatesListOfConsecutiveTiles_WhereCalledTileIsTheLowest()
         {
-            TileObject tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
+            Tile tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
             OpenMeld openMeld = new OpenMeld(Enums.MeldType.HighChii, tile);
             Assert.AreEqual(6, openMeld.GetTiles()[0].GetValue());
             Assert.AreEqual(7, openMeld.GetTiles()[1].GetValue());
@@ -75,7 +75,7 @@ namespace RMUTests
         [TestMethod]
         public void CallingClosedKan_CreatesListOfFourIdenticalTiles()
         {
-            TileObject tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
+            Tile tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
             OpenMeld openMeld = new OpenMeld(Enums.MeldType.ClosedKan, tile);
             Assert.AreEqual(6, openMeld.GetTiles()[0].GetValue());
             Assert.AreEqual(6, openMeld.GetTiles()[1].GetValue());
@@ -91,7 +91,7 @@ namespace RMUTests
         [TestMethod]
         public void CallingOpenKan1_CreatesListOfFourIdenticalTiles()
         {
-            TileObject tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
+            Tile tile = TileFactory.CreateTile(6, Enums.Suit.Pin);
             OpenMeld openMeld = new OpenMeld(Enums.MeldType.OpenKan1, tile);
             Assert.AreEqual(6, openMeld.GetTiles()[0].GetValue());
             Assert.AreEqual(6, openMeld.GetTiles()[1].GetValue());

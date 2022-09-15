@@ -6,7 +6,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallTsumoCommand : CallCommand
     {
-        public CallTsumoCommand(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallTsumoCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
             
         }

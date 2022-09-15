@@ -10,7 +10,7 @@ namespace RMU.Shanten
     public static class ChiiFromTopExtractor
     {
         private static List<ICompleteHandComponent> _outputList;
-        private static List<TileObject> _tiles;
+        private static List<Tile> _tiles;
         private static TileCollection _collection;
 
         public static List<ICompleteHandComponent> ExtractChii(TileCollection collection)
@@ -65,12 +65,12 @@ namespace RMU.Shanten
 
         private static bool CheckForChiiContainingThreeGivenTiles(ref int i, ref int j, int k)
         {
-            TileObject oneBelow = Functions.GetTileBelow(_tiles[i]);
-            TileObject twoBelow = Functions.GetTileTwoBelow(_tiles[i]);
+            Tile oneBelow = Functions.GetTileBelow(_tiles[i]);
+            Tile twoBelow = Functions.GetTileTwoBelow(_tiles[i]);
             return CheckForChii(ref i, ref j, k, oneBelow, twoBelow);
         }
 
-        private static bool CheckForChii(ref int i, ref int j, int k, TileObject oneBelow, TileObject twoBelow)
+        private static bool CheckForChii(ref int i, ref int j, int k, Tile oneBelow, Tile twoBelow)
         {
             if (twoBelow == null) return true;
             if (TilesFormChii(j, k, oneBelow, twoBelow))
@@ -88,7 +88,7 @@ namespace RMU.Shanten
             j = i;
         }
 
-        private static bool TilesFormChii(int j, int k, TileObject oneBelow, TileObject twoBelow)
+        private static bool TilesFormChii(int j, int k, Tile oneBelow, Tile twoBelow)
         {
             return Functions.AreTilesEquivalent(oneBelow, _tiles[j]) && Functions.AreTilesEquivalent(twoBelow, _tiles[k]);
         }
@@ -109,7 +109,7 @@ namespace RMU.Shanten
 
         private static ICompleteHandComponent CreateClosedChii(int i, int j, int k)
         {
-            List<TileObject> tileList = new List<TileObject> { _tiles[k], _tiles[j], _tiles[i] };
+            List<Tile> tileList = new List<Tile> { _tiles[k], _tiles[j], _tiles[i] };
             return CompleteHandComponentFactory.CreateCompleteHandComponent(tileList, CLOSED_CHII);
         }
 

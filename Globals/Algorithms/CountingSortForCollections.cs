@@ -10,12 +10,12 @@ namespace RMU.Globals.Algorithms
     {
         public static TileCollection SortCollection(TileCollection collection)
         {
-            List<TileObject> tiles = collection.GetTiles();
+            List<Tile> tiles = collection.GetTiles();
             if (tiles.Count == 0) return collection;
-            List<TileObject> outputList = new List<TileObject>();
+            List<Tile> outputList = new List<Tile>();
             Suit suit = tiles[0].GetSuit();
             int[] quantities = new int[9];
-            foreach(TileObject tile in tiles)
+            foreach(Tile tile in tiles)
             {
                 int value = tile.GetValue();
                 quantities[value - 1]++;

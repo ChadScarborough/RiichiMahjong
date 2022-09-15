@@ -5,6 +5,6 @@ namespace RMU.Calls.CreateMeldBehaviours
 {
     public interface ICreateMeldBehaviour
     {
-        public List<TileObject> CreateMeld(TileObject calledTile);
+        public List<Tile> CreateMeld(Tile calledTile);
     }
 }

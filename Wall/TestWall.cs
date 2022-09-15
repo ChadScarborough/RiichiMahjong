@@ -5,7 +5,7 @@ namespace RMU.Wall
 {
     public class TestWall : Wall
     {
-        public TestWall(List<TileObject> tiles)
+        public TestWall(List<Tile> tiles)
         {
             PopulateWall(tiles);
         }

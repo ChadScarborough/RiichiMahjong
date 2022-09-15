@@ -39,7 +39,7 @@ namespace RMUTests.CallsTests
         public void CallChii_IsDelayed_WhenThereAreMultiplePotentialCallsInTheQueue()
         {
             Setup();
-            TileObject lastTile = THREE_MAN;
+            Tile lastTile = THREE_MAN;
             _player1.GeneratePotentialDiscardCalls(lastTile);
             _player2.GeneratePotentialDiscardCalls(lastTile);
             Assert.AreEqual(0, _hand1.GetOpenMelds().Count);
@@ -57,7 +57,7 @@ namespace RMUTests.CallsTests
         public void CallPon_ExecutesImmediately_IfThereAreCallChiiPotentialCallsInTheQueue()
         {
             Setup();
-            TileObject lastTile = THREE_MAN;
+            Tile lastTile = THREE_MAN;
             _player1.GeneratePotentialDiscardCalls(lastTile);
             _player2.GeneratePotentialDiscardCalls(lastTile);
             Assert.AreEqual(0, _hand2.GetOpenMelds().Count);
@@ -75,7 +75,7 @@ namespace RMUTests.CallsTests
         public void CallChii_IsSuperceded_WhenPonIsCalledAfterward()
         {
             Setup();
-            TileObject lastTile = THREE_MAN;
+            Tile lastTile = THREE_MAN;
             _player1.GeneratePotentialDiscardCalls(lastTile);
             _player2.GeneratePotentialDiscardCalls(lastTile);
             _player1.CallMidChii(lastTile);

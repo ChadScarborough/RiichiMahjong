@@ -9,7 +9,7 @@ namespace RMUTests
     [TestClass]
     public class DoraTest
     {
-        private TileObject _tile;
+        private Tile _tile;
 
         private void Setup()
         {

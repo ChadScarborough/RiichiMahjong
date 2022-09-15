@@ -8,7 +8,7 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public static class CompleteHandComponentFactory
     {
-        public static ICompleteHandComponent CreateCompleteHandComponent(List<TileObject> tiles, Enums.CompleteHandComponentType componentType)
+        public static ICompleteHandComponent CreateCompleteHandComponent(List<Tile> tiles, Enums.CompleteHandComponentType componentType)
         {
             switch (componentType)
             {
@@ -26,7 +26,7 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             }
         }
 
-        public static ICompleteHandComponent CreateCompleteHandComponent(TileObject tile, Enums.CompleteHandComponentType componentType)
+        public static ICompleteHandComponent CreateCompleteHandComponent(Tile tile, Enums.CompleteHandComponentType componentType)
         {
             switch (componentType)
             {

@@ -2,7 +2,7 @@
 
 namespace RMU.Tiles
 {
-    public class WindTileObject : TileObject
+    public class WindTileObject : Tile
     {
         public WindTileObject(int value, Enums.Suit suit) : base(value, suit) { }
 

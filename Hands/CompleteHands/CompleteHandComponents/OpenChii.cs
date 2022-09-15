@@ -9,12 +9,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public class OpenChii : ICompleteHandGroup
     {
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
 
         public OpenChii(OpenMeld openChii)
         { 
-            _tiles = new List<TileObject>();
-            foreach(TileObject tile in openChii.GetTiles())
+            _tiles = new List<Tile>();
+            foreach(Tile tile in openChii.GetTiles())
             {
                 _tiles.Add(tile);
             }
@@ -45,12 +45,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             return Enums.OPEN_CHII;
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }
 
-        public TileObject GetLeadTile()
+        public Tile GetLeadTile()
         {
             return _tiles[0];
         }

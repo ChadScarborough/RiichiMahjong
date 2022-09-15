@@ -8,7 +8,7 @@ namespace RMU.Hands.TenpaiHands
     public interface ITenpaiHand
     {
         List<ICompleteHandComponent> GetComponents();
-        List<TileObject> GetWaits();
+        List<Tile> GetWaits();
         Enums.CompleteHandWaitType GetWaitType();
         Enums.CompleteHandType GetHandType();
     }

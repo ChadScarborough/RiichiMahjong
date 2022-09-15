@@ -5,10 +5,10 @@ namespace RMU.DiscardPile
 {
     public interface IDiscardPile
     {
-        TileObject CallTile();
-        void DiscardTile(TileObject tile);
+        Tile CallTile();
+        void DiscardTile(Tile tile);
         int GetDisplayedTileCount();
         int GetTotalDiscardedCount();
-        List<TileObject> GetDisplayedDiscardedTiles();
+        List<Tile> GetDisplayedDiscardedTiles();
     }
 }

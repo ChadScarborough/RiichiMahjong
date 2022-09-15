@@ -15,7 +15,7 @@ namespace RMU.Hands.TenpaiHands
         private void GenerateWaits()
         {
             int p = 0;
-            List<TileObject> w = new List<TileObject>();
+            List<Tile> w = new List<Tile>();
 
             foreach (ICompleteHandComponent component in GetComponents())
             {

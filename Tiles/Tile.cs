@@ -2,12 +2,12 @@
 
 namespace RMU.Tiles
 {
-    public abstract class TileObject
+    public abstract class Tile
     {
         protected int _value;
         protected Enums.Suit _suit;
 
-        public TileObject(int value, Enums.Suit suit)
+        public Tile(int value, Enums.Suit suit)
         {
             this._value = value;
             this._suit = suit;
@@ -26,17 +26,17 @@ namespace RMU.Tiles
         public abstract bool IsTerminal();
         public abstract bool IsHonor();
 
-        public virtual TileObject GetTileBelow()
+        public virtual Tile GetTileBelow()
         {
             return null;
         }
 
-        public virtual TileObject GetTileAbove()
+        public virtual Tile GetTileAbove()
         {
             return null;
         }
         
-        public virtual TileObject Clone()
+        public virtual Tile Clone()
         {
             Enums.Suit suit = GetSuit();
             int value = GetValue();

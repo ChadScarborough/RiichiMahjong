@@ -7,12 +7,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
 {
     public class ClosedPon : ICompleteHandGroup
     {
-        private readonly List<TileObject> _tiles;
+        private readonly List<Tile> _tiles;
 
-        public ClosedPon(List<TileObject> closedPon)
+        public ClosedPon(List<Tile> closedPon)
         {
-            _tiles = new List<TileObject>();
-            foreach (TileObject tile in closedPon)
+            _tiles = new List<Tile>();
+            foreach (Tile tile in closedPon)
             {
                 _tiles.Add(tile);
             }
@@ -37,12 +37,12 @@ namespace RMU.Hands.CompleteHands.CompleteHandComponents
             return Enums.GROUP;
         }
 
-        public TileObject GetLeadTile()
+        public Tile GetLeadTile()
         {
             return _tiles[0];
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }

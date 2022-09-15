@@ -15,7 +15,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void PairExtractor_ExtractsPair_WhenGivenTwoIdenticalTiles()
         {
-            TileCollection man = new TileCollection(MAN, new List<TileObject> { OneMan(), OneMan() });
+            TileCollection man = new TileCollection(MAN, new List<Tile> { OneMan(), OneMan() });
             PairExtractor.ExtractPair(man);
             Assert.AreEqual(0, man.GetSize());
         }
@@ -23,7 +23,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void PairExtractor_ExtractsPair_ToNewPairComponent()
         {
-            TileCollection pin = new TileCollection(PIN, new List<TileObject> { ThreePin(), ThreePin() });
+            TileCollection pin = new TileCollection(PIN, new List<Tile> { ThreePin(), ThreePin() });
             List<ICompleteHandComponent> components = PairExtractor.ExtractPair(pin);
             Assert.AreEqual(1, components.Count);
             Assert.AreEqual(2, components[0].GetTiles().Count);
@@ -34,7 +34,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void PairExtractor_ExtractsPairAndLeavesOneTile_WhenGivenThreeIdenticalTiles()
         {
-            TileCollection sou = new TileCollection(SOU, new List<TileObject> { FiveSou(), FiveSou(), FiveSou() });
+            TileCollection sou = new TileCollection(SOU, new List<Tile> { FiveSou(), FiveSou(), FiveSou() });
             List<ICompleteHandComponent> components = PairExtractor.ExtractPair(sou);
             Assert.AreEqual(1, sou.GetSize());
             Assert.AreEqual(1, components.Count);
@@ -44,7 +44,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void PairExtractor_ExtractsTwoPairs_WhenGivenTwoUniquePairs()
         {
-            TileCollection wind = new TileCollection(WIND, new List<TileObject> { EastWind(), EastWind(), WestWind(), WestWind() });
+            TileCollection wind = new TileCollection(WIND, new List<Tile> { EastWind(), EastWind(), WestWind(), WestWind() });
             List<ICompleteHandComponent> components = PairExtractor.ExtractPair(wind);
             Assert.AreEqual(0, wind.GetSize());
             Assert.AreEqual(2, components.Count);
@@ -53,7 +53,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void PairExtractor_ExtractsThreePairs_WhenGivenThreeSetsOfTwoIdenticalTiles()
         {
-            TileCollection dragon = new TileCollection(DRAGON, new List<TileObject> { GreenDragon(), GreenDragon(), RedDragon(), RedDragon(), WhiteDragon(), WhiteDragon() });
+            TileCollection dragon = new TileCollection(DRAGON, new List<Tile> { GreenDragon(), GreenDragon(), RedDragon(), RedDragon(), WhiteDragon(), WhiteDragon() });
             List<ICompleteHandComponent> components = PairExtractor.ExtractPair(dragon);
             Assert.AreEqual(0, dragon.GetSize());
             Assert.AreEqual(3, components.Count);
@@ -62,7 +62,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void PairExtractor_ExtractsZeroPairs_WhenGivenNoIdenticalTiles()
         {
-            TileCollection wind = new TileCollection(WIND, new List<TileObject> { EastWind(), SouthWind(), WestWind(), NorthWind() });
+            TileCollection wind = new TileCollection(WIND, new List<Tile> { EastWind(), SouthWind(), WestWind(), NorthWind() });
             List<ICompleteHandComponent> components = PairExtractor.ExtractPair(wind);
             Assert.AreEqual(4, wind.GetSize());
             Assert.AreEqual(0, components.Count);

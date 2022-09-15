@@ -8,7 +8,7 @@ public class SevenPairsWithOneDuplicatePairTestHand : TestHand
 {
     public SevenPairsWithOneDuplicatePairTestHand()
     {
-        _closedTiles = new List<TileObject>
+        _closedTiles = new List<Tile>
         {
             TwoMan(), TwoMan(),
             ThreePin(), ThreePin(),

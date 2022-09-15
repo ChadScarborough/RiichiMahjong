@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public AllGreensTestHand()
         {
-            _closedTiles = new List<TileObject>
+            _closedTiles = new List<Tile>
             {
                 TwoSou(), TwoSou(), TwoSou(),
                 FourSou(), FourSou(), FourSou(),

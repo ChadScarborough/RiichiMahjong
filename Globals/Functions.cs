@@ -44,7 +44,7 @@ namespace RMU.Globals
             return min;
         }
 
-        public static bool AreTilesEquivalent(TileObject tile1, TileObject tile2)
+        public static bool AreTilesEquivalent(Tile tile1, Tile tile2)
         {
             if (tile1 is null || tile2 is null) return false;
             try
@@ -64,18 +64,18 @@ namespace RMU.Globals
         }
 
         public static bool AreTilesEquivalent
-            (TileObject tile1, TileObject tile2, TileObject tile3)
+            (Tile tile1, Tile tile2, Tile tile3)
         {
             return AreTilesEquivalent(tile1, tile2) && AreTilesEquivalent(tile2, tile3);
         }
 
         public static bool AreTilesEquivalent
-            (TileObject tile1, TileObject tile2, TileObject tile3, TileObject tile4)
+            (Tile tile1, Tile tile2, Tile tile3, Tile tile4)
         {
             return AreTilesEquivalent(tile1, tile2, tile3) && AreTilesEquivalent(tile3, tile4);
         }
 
-        public static bool AreWindsEquivalent(TileObject windTile, Wind wind)
+        public static bool AreWindsEquivalent(Tile windTile, Wind wind)
         {
             if (windTile.GetSuit() != WIND) return false;
             switch (windTile.GetValue())
@@ -93,7 +93,7 @@ namespace RMU.Globals
         }
 
         public static bool DoTilesFormValidSequence
-            (TileObject bottomTile, TileObject middleTile, TileObject topTile)
+            (Tile bottomTile, Tile middleTile, Tile topTile)
         {
             bool sameSuit = bottomTile.GetSuit() == middleTile.GetSuit() && middleTile.GetSuit() == topTile.GetSuit();
             bool bottomTwoTilesCorrect = AreTilesEquivalent(bottomTile, GetTileBelow(middleTile));
@@ -101,7 +101,7 @@ namespace RMU.Globals
             return sameSuit && bottomTwoTilesCorrect && topTwoTilesCorrect;
         }
 
-        public static bool AreDragonsEquivalent(TileObject dragonTile, Dragon dragon)
+        public static bool AreDragonsEquivalent(Tile dragonTile, Dragon dragon)
         {
             if (dragonTile == null) return false;
             if (dragonTile.GetSuit() != DRAGON) return false;
@@ -117,7 +117,7 @@ namespace RMU.Globals
             return false;
         }
 
-        public static TileObject GetTileAbove(TileObject tile)
+        public static Tile GetTileAbove(Tile tile)
         {
             try
             {
@@ -129,7 +129,7 @@ namespace RMU.Globals
             }
         }
 
-        public static TileObject GetTileTwoAbove(TileObject tile)
+        public static Tile GetTileTwoAbove(Tile tile)
         {
             try
             {
@@ -141,7 +141,7 @@ namespace RMU.Globals
             }
         }
 
-        public static TileObject GetTileBelow(TileObject tile)
+        public static Tile GetTileBelow(Tile tile)
         {
             try
             {
@@ -153,7 +153,7 @@ namespace RMU.Globals
             }
         }
 
-        public static TileObject GetTileTwoBelow(TileObject tile)
+        public static Tile GetTileTwoBelow(Tile tile)
         {
             try
             {
@@ -165,17 +165,17 @@ namespace RMU.Globals
             }
         }
 
-        public static void AddDoraValue(ref TileObject tile)
+        public static void AddDoraValue(ref Tile tile)
         {
             tile = new DoraDecorator(tile);
         }
 
-        public static void AddUraDoraValue(ref TileObject tile)
+        public static void AddUraDoraValue(ref Tile tile)
         {
             tile = new UraDoraDecorator(tile);
         }
 
-        public static void MakeRedFive(ref TileObject tile)
+        public static void MakeRedFive(ref Tile tile)
         {
             if (tile.GetValue() == 5)
             {
@@ -193,8 +193,8 @@ namespace RMU.Globals
 
         public static bool AreComponentsEquivalent(ICompleteHandComponent component1, ICompleteHandComponent component2)
         {
-            TileObject tile1 = component1.GetLeadTile();
-            TileObject tile2 = component2.GetLeadTile();
+            Tile tile1 = component1.GetLeadTile();
+            Tile tile2 = component2.GetLeadTile();
             CompleteHandComponentType componentType1 = component1.GetComponentType();
             CompleteHandComponentType componentType2 = component2.GetComponentType();
             bool sameTile = AreTilesEquivalent(tile1, tile2);

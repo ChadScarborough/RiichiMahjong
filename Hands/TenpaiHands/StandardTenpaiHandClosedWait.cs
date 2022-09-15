@@ -19,7 +19,7 @@ namespace RMU.Hands.TenpaiHands
             {
                 if (component.GetComponentType() == INCOMPLETE_SEQUENCE_CLOSED_WAIT)
                 {
-                    _waits = new List<TileObject>
+                    _waits = new List<Tile>
                     {
                         Functions.GetTileAbove(component.GetLeadTile())
                     };

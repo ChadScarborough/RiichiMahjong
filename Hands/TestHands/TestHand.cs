@@ -10,15 +10,15 @@ namespace RMU.Hands.TestHands
         {
         }
 
-        public override List<TileObject> GetClosedTiles()
+        public override List<Tile> GetClosedTiles()
         {
             return _closedTiles;
         }
 
-        public override List<TileObject> GetAllTiles(TileObject extraTile)
+        public override List<Tile> GetAllTiles(Tile extraTile)
         {
-            List<TileObject> outputList = new List<TileObject>();
-            foreach (TileObject tile in _closedTiles)
+            List<Tile> outputList = new List<Tile>();
+            foreach (Tile tile in _closedTiles)
             {
                 outputList.Add(tile);
             }

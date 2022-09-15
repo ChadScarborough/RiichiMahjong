@@ -5,12 +5,12 @@ namespace RMU.Wall
 {
     public class NullWall : Wall
     {
-        public override TileObject DrawTileFromWall()
+        public override Tile DrawTileFromWall()
         {
             return null;
         }
 
-        public override TileObject DrawTileFromEndOfWall()
+        public override Tile DrawTileFromEndOfWall()
         {
             return null;
         }
@@ -20,7 +20,7 @@ namespace RMU.Wall
             return 0;
         }
 
-        public override List<TileObject> GetWallTiles()
+        public override List<Tile> GetWallTiles()
         {
             return null;
         }

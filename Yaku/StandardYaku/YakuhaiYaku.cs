@@ -9,10 +9,10 @@ namespace RMU.Yaku.StandardYaku;
 
 public class YakuhaiYaku
 {
-    private readonly TileObject _yakuhaiTile;
+    private readonly Tile _yakuhaiTile;
     private readonly StandardCompleteHand _completeHand;
     
-    public YakuhaiYaku(ICompleteHand completeHand, TileObject yakuhaiTile)
+    public YakuhaiYaku(ICompleteHand completeHand, Tile yakuhaiTile)
     {
         _yakuhaiTile = yakuhaiTile;
         _completeHand = completeHand as StandardCompleteHand;

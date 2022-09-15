@@ -7,7 +7,7 @@ namespace RMU.Calls.CallCommands
 {
     public class CallOpenKan1Command : CallCommand
     {
-        public CallOpenKan1Command(Player playerMakingCall, TileObject calledTile) : base(playerMakingCall, calledTile)
+        public CallOpenKan1Command(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
         {
 
         }

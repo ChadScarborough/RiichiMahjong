@@ -15,12 +15,12 @@ namespace RMU.Hands.CompleteHands
     {
         private readonly List<ICompleteHandComponent> _completeHand;
         private readonly List<ICompleteHandComponent> _constructedHand;
-        private readonly TileObject _drawTile;
-        private readonly List<TileObject> _tiles;
+        private readonly Tile _drawTile;
+        private readonly List<Tile> _tiles;
         private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
         private readonly Player _player;
 
-        public SevenPairsCompleteHand(ITenpaiHand tenpaiHand, TileObject tile, Player player)
+        public SevenPairsCompleteHand(ITenpaiHand tenpaiHand, Tile tile, Player player)
         {
             _player = player;
             _completeHand = tenpaiHand.GetComponents();
@@ -28,14 +28,14 @@ namespace RMU.Hands.CompleteHands
             _completeHand.Add(drawTile);
             _completeHand = RadixSortForCompleteHandComponents.Sort(_completeHand);
             _drawTile = tile;
-            _tiles = new List<TileObject>();
+            _tiles = new List<Tile>();
 
             _constructedHand = new List<ICompleteHandComponent>();
             ConstructHand();
             _constructedHand = RadixSortForCompleteHandComponents.Sort(_constructedHand);
             foreach (ICompleteHandComponent component in _constructedHand)
             {
-                foreach (TileObject t in component.GetTiles())
+                foreach (Tile t in component.GetTiles())
                 {
                     _tiles.Add(t);
                 }
@@ -79,10 +79,10 @@ namespace RMU.Hands.CompleteHands
                 }
             }
 
-            List<TileObject> tileList;
+            List<Tile> tileList;
             try
             {
-                tileList = new List<TileObject> {_drawTile, isolatedTile.GetLeadTile()};
+                tileList = new List<Tile> {_drawTile, isolatedTile.GetLeadTile()};
             }
             catch
             {
@@ -118,7 +118,7 @@ namespace RMU.Hands.CompleteHands
             return new List<ICompleteHandComponent>();
         }
 
-        public List<TileObject> GetTiles()
+        public List<Tile> GetTiles()
         {
             return _tiles;
         }

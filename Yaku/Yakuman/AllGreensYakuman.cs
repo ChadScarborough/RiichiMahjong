@@ -7,7 +7,7 @@ namespace RMU.Yaku.Yakuman;
 
 public class AllGreensYakuman : Yakuman
 {
-    private readonly TileObject[] _greenTiles =
+    private readonly Tile[] _greenTiles =
     {
         TWO_SOU,
         THREE_SOU,
@@ -26,7 +26,7 @@ public class AllGreensYakuman : Yakuman
 
     public override bool Check()
     {
-        foreach (TileObject tile in _completeHand.GetTiles())
+        foreach (Tile tile in _completeHand.GetTiles())
         {
             if (IsGreenTile(tile) == false) return false;
         }
@@ -34,9 +34,9 @@ public class AllGreensYakuman : Yakuman
         return true;
     }
 
-    private bool IsGreenTile(TileObject tile)
+    private bool IsGreenTile(Tile tile)
     {
-        foreach (TileObject t in _greenTiles)
+        foreach (Tile t in _greenTiles)
         {
             if (AreTilesEquivalent(t, tile))
             {

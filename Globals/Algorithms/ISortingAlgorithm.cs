@@ -6,6 +6,6 @@ namespace RMU.Globals.Algorithms
 {
     public interface ISortingAlgorithm
     {
-        List<TileObject> SortHand(List<TileObject> tiles, List<Enums.Suit> suitPriority);
+        List<Tile> SortHand(List<Tile> tiles, List<Enums.Suit> suitPriority);
     }
 }

@@ -17,14 +17,14 @@ namespace RMU.Hands
     {
         private readonly Wall.Wall _wall;
         private readonly IDeadWall _deadWall;
-        protected List<TileObject> _closedTiles;
-        private TileObject _drawTile;
+        protected List<Tile> _closedTiles;
+        private Tile _drawTile;
         private readonly StandardDiscardPile _discardPile;
         private readonly HandSorter _handSorter;
         private readonly List<OpenMeld> _openMelds;
         private bool _isOpen;
         private readonly List<ITenpaiHand> _tenpaiHands;
-        private readonly List<TileObject> _waits;
+        private readonly List<Tile> _waits;
         private int _shanten;
 
         protected Hand(WallObject wallObject)
@@ -33,10 +33,10 @@ namespace RMU.Hands
             _deadWall = wallObject.GetDeadWall();
             _discardPile = new StandardDiscardPile();
             _handSorter = new HandSorter();
-            _closedTiles = new List<TileObject>();
+            _closedTiles = new List<Tile>();
             _openMelds = new List<OpenMeld>();
             _tenpaiHands = new List<ITenpaiHand>();
-            _waits = new List<TileObject>();
+            _waits = new List<Tile>();
         }
 
         public void OpenHand()
@@ -90,13 +90,13 @@ namespace RMU.Hands
             _closedTiles = _handSorter.SortHand(_closedTiles);
         }
         
-        public void CreateOpenMeld(TileObject calledTile, MeldType meldType)
+        public void CreateOpenMeld(Tile calledTile, MeldType meldType)
         {
             OpenMeld openMeld = new(meldType, calledTile);
             _openMelds.Add(openMeld);
         }
         
-        public void RemoveCopyOfTile(TileObject calledTile)
+        public void RemoveCopyOfTile(Tile calledTile)
         {
             for (int i = _closedTiles.Count - 1; i >= 0; i--)
             {
@@ -107,7 +107,7 @@ namespace RMU.Hands
             }
         }
         
-        private bool IsDuplicateTile(TileObject closedTile, TileObject calledTile, int index)
+        private bool IsDuplicateTile(Tile closedTile, Tile calledTile, int index)
         {
             if (AreTilesEquivalent(closedTile, calledTile))
             {
@@ -126,14 +126,14 @@ namespace RMU.Hands
             SortHand();
         }
         
-        public virtual List<TileObject> GetClosedTiles()
+        public virtual List<Tile> GetClosedTiles()
         {
             return _closedTiles;
         }
 
-        public List<TileObject> GetTilesInHand()
+        public List<Tile> GetTilesInHand()
         {
-            List<TileObject> t = _closedTiles.GetRange(0, _closedTiles.Count);
+            List<Tile> t = _closedTiles.GetRange(0, _closedTiles.Count);
             if (_drawTile != null)
                 t.Add(_drawTile);
             return t;
@@ -144,7 +144,7 @@ namespace RMU.Hands
             return _openMelds;
         }
         
-        public virtual TileObject GetDrawTile()
+        public virtual Tile GetDrawTile()
         {
             return _drawTile;
         }
@@ -154,17 +154,17 @@ namespace RMU.Hands
             return _isOpen;
         }
         
-        public virtual List<TileObject> GetAllTiles(TileObject extraTile)
+        public virtual List<Tile> GetAllTiles(Tile extraTile)
         {
-            List<TileObject> outputList = new();
+            List<Tile> outputList = new();
             CompileAllTiles(outputList);
             AddExtraTileToOutputList(extraTile, outputList);
             return _handSorter.SortHand(outputList);
         }
 
-        public virtual List<TileObject> GetAllTiles()
+        public virtual List<Tile> GetAllTiles()
         {
-            List <TileObject> outputList = new();
+            List <Tile> outputList = new();
             CompileAllTiles(outputList);
             if(_drawTile != null)
             {
@@ -173,18 +173,18 @@ namespace RMU.Hands
             return _handSorter.SortHand(outputList);
         }
 
-        private void CompileAllTiles(List<TileObject> tileList)
+        private void CompileAllTiles(List<Tile> tileList)
         {
             AddClosedTilesToOutputList(tileList);
             AddEachOpenMeldToOutputList(tileList);
         }
 
-        private static void AddExtraTileToOutputList(TileObject extraTile, List<TileObject> outputList)
+        private static void AddExtraTileToOutputList(Tile extraTile, List<Tile> outputList)
         {
             outputList.Add(extraTile);
         }
 
-        private void AddEachOpenMeldToOutputList(List<TileObject> outputList)
+        private void AddEachOpenMeldToOutputList(List<Tile> outputList)
         {
             foreach (OpenMeld openMeld in _openMelds)
             {
@@ -192,17 +192,17 @@ namespace RMU.Hands
             }
         }
 
-        private static void AddEachTileInOpenMeldToOutputList(List<TileObject> outputList, OpenMeld openMeld)
+        private static void AddEachTileInOpenMeldToOutputList(List<Tile> outputList, OpenMeld openMeld)
         {
-            foreach (TileObject tile in openMeld.GetTiles())
+            foreach (Tile tile in openMeld.GetTiles())
             {
                 outputList.Add(tile);
             }
         }
 
-        private void AddClosedTilesToOutputList(List<TileObject> outputList)
+        private void AddClosedTilesToOutputList(List<Tile> outputList)
         {
-            foreach (TileObject tile in _closedTiles)
+            foreach (Tile tile in _closedTiles)
             {
                 outputList.Add(tile);
             }
@@ -218,7 +218,7 @@ namespace RMU.Hands
             return _tenpaiHands;
         }
 
-        public List<TileObject> GetWaits()
+        public List<Tile> GetWaits()
         {
             return _waits;
         }
@@ -262,7 +262,7 @@ namespace RMU.Hands
             _waits.Clear();
         }
 
-        public void AddWait(TileObject tile)
+        public void AddWait(Tile tile)
         {
             _waits.Add(tile);
         }
@@ -272,7 +272,7 @@ namespace RMU.Hands
             return _discardPile;
         }
 
-        public void SetDrawTile(TileObject tile)
+        public void SetDrawTile(Tile tile)
         {
             _drawTile = tile;
         }

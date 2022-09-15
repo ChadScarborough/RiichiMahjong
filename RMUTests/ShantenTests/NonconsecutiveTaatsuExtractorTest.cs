@@ -19,7 +19,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void NonconsecutiveTaatsuExtract_ExtractsNonconsecutiveTaatsu()
         {
-            man = new TileCollection(MAN, new List<TileObject> { OneMan(), ThreeMan() });
+            man = new TileCollection(MAN, new List<Tile> { OneMan(), ThreeMan() });
             NonconsecutiveTaatsuExtractor.ExtractNonconsecutiveTaatsu(man);
             Assert.AreEqual(0, man.GetSize());
         }
@@ -27,7 +27,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void NonconsecutiveTaatsuExtractor_ExtractsTilesToNewNonconsecutiveTaatsuComponent()
         {
-            pin = new TileCollection(PIN, new List<TileObject> { TwoPin(), FourPin() });
+            pin = new TileCollection(PIN, new List<Tile> { TwoPin(), FourPin() });
             components = NonconsecutiveTaatsuExtractor.ExtractNonconsecutiveTaatsu(pin);
             Assert.AreEqual(1, components.Count);
             Assert.AreEqual(2, components[0].GetTiles().Count);
@@ -38,7 +38,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void NonconsecutiveTaatsuExtractor_ExtractsOneNonconsecutiveTaatsu_AndLeavesOneTile_WhenGivenThreeConsecutiveTiles()
         {
-            sou = new TileCollection(SOU, new List<TileObject> { FourSou(), FiveSou(), SixSou() });
+            sou = new TileCollection(SOU, new List<Tile> { FourSou(), FiveSou(), SixSou() });
             components = NonconsecutiveTaatsuExtractor.ExtractNonconsecutiveTaatsu(sou);
             Assert.AreEqual(1, sou.GetSize());
             Assert.AreEqual(1, components.Count);
@@ -47,7 +47,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void NonconsecutiveTaatsuExtractor_ExtractsTwoNonconsecutiveTaatsu_WhenGivenFourConsecutiveTiles()
         {
-            man = new TileCollection(MAN, new List<TileObject> { SixMan(), SevenMan(), EightMan(), NineMan() });
+            man = new TileCollection(MAN, new List<Tile> { SixMan(), SevenMan(), EightMan(), NineMan() });
             components = NonconsecutiveTaatsuExtractor.ExtractNonconsecutiveTaatsu(man);
             Assert.AreEqual(0, man.GetSize());
             Assert.AreEqual(2, components.Count);
@@ -56,7 +56,7 @@ namespace RMUTests.ShantenTests
         [TestMethod]
         public void NonconsecutiveTaatsuExtractor_ExtractsTwoNonconsecutiveTaatsu_WhenGivenTwoIdenticalNonconsecutiveTaatsu()
         {
-            pin = new TileCollection(PIN, new List<TileObject> { SevenPin(), SevenPin(), NinePin(), NinePin() });
+            pin = new TileCollection(PIN, new List<Tile> { SevenPin(), SevenPin(), NinePin(), NinePin() });
             components = NonconsecutiveTaatsuExtractor.ExtractNonconsecutiveTaatsu(pin);
             Assert.AreEqual(0, pin.GetSize());
             Assert.AreEqual(2, components.Count);

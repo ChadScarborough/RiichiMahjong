@@ -23,7 +23,7 @@ namespace RMU.Players
         private Player _playerAcross;
         private Player _playerOnRight;
         private int _score;
-        private AbstractGame _game;
+        private readonly AbstractGame _game;
         protected PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
         private PriorityQueueForCallCommands _priorityQueueForCallCommands;
         protected AvailablePotentialCalls _availablePotentialCalls;
@@ -42,6 +42,11 @@ namespace RMU.Players
             _game = game;
         }
 
+        public AbstractGame GetGame()
+        {
+            return _game;
+        }
+
         public virtual bool IsActivePlayer()
         {
             return _game.GetActivePlayer().Equals(this);
@@ -51,7 +56,9 @@ namespace RMU.Players
         {
             if (IsActivePlayer())
             {
+                Tile tile = _hand.GetClosedTiles()[index].Clone();
                 _hand.DiscardTile(index);
+                _game.SetLastTile(tile);
                 _game.NextPlayer();
             }
         }
@@ -60,7 +67,9 @@ namespace RMU.Players
         {
             if (IsActivePlayer())
             {
+                Tile tile = _hand.GetDrawTile().Clone();
                 _hand.DiscardDrawTile();
+                _game.SetLastTile(tile);
                 _game.NextPlayer();
             }
         }
@@ -210,7 +219,7 @@ namespace RMU.Players
             return _canTsumo;
         }
 
-        public void CallPon(TileObject calledTile)
+        public void CallPon(Tile calledTile)
         {
             UpdateAvailableCalls();
             if (_canPon)
@@ -221,14 +230,14 @@ namespace RMU.Players
             }
         }
 
-        public void CallClosedKan(TileObject calledTile)
+        public void CallClosedKan(Tile calledTile)
         {
             CallCommand callClosedKan = new CallClosedKanCommand(this, calledTile);
             callClosedKan.Execute();
             UpdateAvailableCalls();
         }
 
-        public void CallOpenKan1(TileObject calledTile)
+        public void CallOpenKan1(Tile calledTile)
         {
             UpdateAvailableCalls();
             if (_canOpenKan1)
@@ -239,14 +248,14 @@ namespace RMU.Players
             }
         }
 
-        public void CallOpenKan2(TileObject calledTile)
+        public void CallOpenKan2(Tile calledTile)
         {
             CallCommand callOpenKan2 = new CallOpenKan2Command(this, calledTile);
             callOpenKan2.Execute();
             UpdateAvailableCalls();
         }
 
-        public void CallRon(TileObject calledTile)
+        public void CallRon(Tile calledTile)
         {
             UpdateAvailableCalls();
             if (_canRon)
@@ -262,7 +271,7 @@ namespace RMU.Players
             _game.CallTsumo(this, _satisfiedYaku);
         }
 
-        public virtual void GeneratePotentialDiscardCalls(TileObject lastTile)
+        public virtual void GeneratePotentialDiscardCalls(Tile lastTile)
         {
             GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
             GeneratePotentialRonCall(this, _priorityQueueForPotentialCalls, lastTile);
@@ -334,7 +343,7 @@ namespace RMU.Players
             List<ICompleteHand> completeHands = new();
             foreach (ITenpaiHand tenpaiHand in _hand.GetTenpaiHands())
             {
-                foreach (TileObject waitTile in tenpaiHand.GetWaits())
+                foreach (Tile waitTile in tenpaiHand.GetWaits())
                 {
                     if (Functions.AreTilesEquivalent(waitTile, _hand.GetDrawTile()))
                     {
@@ -351,6 +360,16 @@ namespace RMU.Players
             _canTsumo = false;
             _completeHand = null;
             _satisfiedYaku = null;
+        }
+
+        public void SetSatisfiedYaku(List<YakuBase> yaku)
+        {
+            _satisfiedYaku = yaku;
+        }
+
+        public void SetCompleteHand(ICompleteHand completeHand)
+        {
+            _completeHand = completeHand;
         }
 
         public List<YakuBase> GetYaku()

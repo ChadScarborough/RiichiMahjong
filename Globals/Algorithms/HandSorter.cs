@@ -13,7 +13,7 @@ namespace RMU.Globals.Algorithms
             this._suitPriority = new List<Enums.Suit>() { Enums.MAN, Enums.PIN, Enums.SOU, Enums.WIND, Enums.DRAGON };
             this._sortingAlgorithm = new RadixSort();
         }
-        public List<TileObject> SortHand(List<TileObject> list)
+        public List<Tile> SortHand(List<Tile> list)
         {
             if(list.Count > 1)
             {

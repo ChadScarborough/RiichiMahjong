@@ -30,17 +30,17 @@ namespace RMUTests.ShantenTests
             TileCollection sou = collections[2];
             TileCollection wind = collections[3];
             TileCollection dragon = collections[4];
-            foreach(TileObject tile in man.GetTiles())
+            foreach(Tile tile in man.GetTiles())
             {
                 Assert.AreEqual(MAN, tile.GetSuit());
             }
             Assert.AreEqual(3, man.GetTiles().Count);
-            foreach(TileObject tile in pin.GetTiles())
+            foreach(Tile tile in pin.GetTiles())
             {
                 Assert.AreEqual(PIN, tile.GetSuit());
             }
             Assert.AreEqual(7, pin.GetTiles().Count);
-            foreach(TileObject tile in sou.GetTiles())
+            foreach(Tile tile in sou.GetTiles())
             {
                 Assert.AreEqual(SOU, tile.GetSuit());
             }

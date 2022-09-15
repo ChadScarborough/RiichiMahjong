@@ -3,7 +3,7 @@
     public class DoraDecorator : TileDecorator
     {
 
-        public DoraDecorator(TileObject tile) : base(tile) { }
+        public DoraDecorator(Tile tile) : base(tile) { }
 
         public override int GetDoraValue()
         {
@@ -15,9 +15,9 @@
             return true;
         }
 
-        public override TileObject Clone()
+        public override Tile Clone()
         {
-            TileObject clone = _decoratee.Clone();
+            Tile clone = _decoratee.Clone();
             return new DoraDecorator(clone);
         }
     }

@@ -8,51 +8,51 @@ namespace RMU.Wall
     {
         protected Wall()
         {
-            _wall = new DoublyLinkedList<TileObject>();
+            _wall = new DoublyLinkedList<Tile>();
         }
         
-        private readonly DoublyLinkedList<TileObject> _wall;
+        private readonly DoublyLinkedList<Tile> _wall;
         
-        public virtual TileObject DrawTileFromWall()
+        public virtual Tile DrawTileFromWall()
         {
             return DrawTile(_wall);
         }
 
-        private TileObject DrawTile(DoublyLinkedList<TileObject> wall)
+        private Tile DrawTile(DoublyLinkedList<Tile> wall)
         {
             return wall.RemoveHead();
         }
 
-        public virtual TileObject DrawTileFromEndOfWall()
+        public virtual Tile DrawTileFromEndOfWall()
         {
             return DrawTileFromEnd(_wall);
         }
 
-        private TileObject DrawTileFromEnd(DoublyLinkedList<TileObject> wall)
+        private Tile DrawTileFromEnd(DoublyLinkedList<Tile> wall)
         {
             return wall.RemoveTail();
         }
 
-        public void PopulateWall(List<TileObject> tiles)
+        public void PopulateWall(List<Tile> tiles)
         {
             Clear();
-            List<TileObject> tempList = GenerateTiles(tiles);
+            List<Tile> tempList = GenerateTiles(tiles);
             FillWall(tempList, _wall);
         }
         
-        private void FillWall(List<TileObject> source, DoublyLinkedList<TileObject> destination)
+        private void FillWall(List<Tile> source, DoublyLinkedList<Tile> destination)
         {
             destination.Clear();
-            foreach (TileObject tile in source)
+            foreach (Tile tile in source)
             {
                 destination.AddHead(tile);
             }
         }
         
-        private List<TileObject> GenerateTiles(List<TileObject> tiles)
+        private List<Tile> GenerateTiles(List<Tile> tiles)
         {
-            List<TileObject> tileList = new List<TileObject>();
-            foreach (TileObject tile in tiles)
+            List<Tile> tileList = new List<Tile>();
+            foreach (Tile tile in tiles)
             {
                 tileList.Add(tile.Clone());
             }
@@ -69,10 +69,10 @@ namespace RMU.Wall
             _wall.Clear();
         }
 
-        public virtual List<TileObject> GetWallTiles()
+        public virtual List<Tile> GetWallTiles()
         {
-            List<TileObject> outputList = new List<TileObject>();
-            DoublyLinkedList<TileObject>.Node node = _wall.GetHead();
+            List<Tile> outputList = new List<Tile>();
+            DoublyLinkedList<Tile>.Node node = _wall.GetHead();
             while (node != null)
             {
                 outputList.Add(node.GetValue());

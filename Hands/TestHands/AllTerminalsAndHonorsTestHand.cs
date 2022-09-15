@@ -8,7 +8,7 @@ namespace RMU.Hands.TestHands
     {
         public AllTerminalsAndHonorsTestHand()
         {
-            _closedTiles = new List<TileObject>
+            _closedTiles = new List<Tile>
             {
                 NineMan(), NineMan(), NineMan(),
                 OneSou(), OneSou(), OneSou(),

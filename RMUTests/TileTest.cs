@@ -12,7 +12,7 @@ namespace RMUTests
         [TestMethod]
         public void NumberTileReturnsValueAssignedToIt()
         {
-            TileObject tile = TileFactory.CreateTile(2, Enums.Suit.Man);
+            Tile tile = TileFactory.CreateTile(2, Enums.Suit.Man);
 
             Assert.AreEqual(2, tile.GetValue());
         }
@@ -20,7 +20,7 @@ namespace RMUTests
         [TestMethod]
         public void DragonTileReturnsValueAssignedToIt()
         {
-            TileObject tile = TileFactory.CreateTile(ConstValues.RED_DRAGON_C, Enums.Suit.Dragon);
+            Tile tile = TileFactory.CreateTile(ConstValues.RED_DRAGON_C, Enums.Suit.Dragon);
 
             Assert.AreEqual(ConstValues.RED_DRAGON_C, tile.GetValue());
         }
@@ -28,7 +28,7 @@ namespace RMUTests
         [TestMethod]
         public void WindTileReturnsValueAssignedToIt()
         {
-            TileObject tile = TileFactory.CreateTile(ConstValues.WEST_WIND_C, Enums.Suit.Wind);
+            Tile tile = TileFactory.CreateTile(ConstValues.WEST_WIND_C, Enums.Suit.Wind);
 
             Assert.AreEqual(ConstValues.WEST_WIND_C, tile.GetValue());
         }
@@ -36,11 +36,11 @@ namespace RMUTests
         [TestMethod]
         public void TilesReturnCorrectSuits()
         {
-            TileObject manTile = TileFactory.CreateTile(3, Enums.Suit.Man);
-            TileObject pinTile = TileFactory.CreateTile(5, Enums.Suit.Pin);
-            TileObject souTile = TileFactory.CreateTile(6, Enums.Suit.Sou);
-            TileObject windTile = TileFactory.CreateTile(ConstValues.NORTH_WIND_C, Enums.Suit.Wind);
-            TileObject dragonTile = TileFactory.CreateTile(ConstValues.WHITE_DRAGON_C, Enums.Suit.Dragon);
+            Tile manTile = TileFactory.CreateTile(3, Enums.Suit.Man);
+            Tile pinTile = TileFactory.CreateTile(5, Enums.Suit.Pin);
+            Tile souTile = TileFactory.CreateTile(6, Enums.Suit.Sou);
+            Tile windTile = TileFactory.CreateTile(ConstValues.NORTH_WIND_C, Enums.Suit.Wind);
+            Tile dragonTile = TileFactory.CreateTile(ConstValues.WHITE_DRAGON_C, Enums.Suit.Dragon);
 
             Assert.AreEqual(Enums.Suit.Man, manTile.GetSuit());
             Assert.AreEqual(Enums.Suit.Pin, pinTile.GetSuit());

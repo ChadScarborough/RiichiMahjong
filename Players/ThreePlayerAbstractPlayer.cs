@@ -15,7 +15,7 @@ namespace RMU.Players
             _hand = hand;
         }
 
-        public void CallKita(TileObject calledTile)
+        public void CallKita(Tile calledTile)
         {
             CallCommand callKita = new CallKitaCommand(this, calledTile);
             callKita.Execute();

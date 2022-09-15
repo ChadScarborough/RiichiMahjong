@@ -14,10 +14,10 @@ namespace RMU.Shanten.HandSplitter
             _windCollection,
             _dragonCollection;
 
-        public static List<TileCollection> SplitHandBySuit(List<TileObject> hand)
+        public static List<TileCollection> SplitHandBySuit(List<Tile> hand)
         {
             CreatNewTileCollections();
-            foreach(TileObject tile in hand)
+            foreach(Tile tile in hand)
             {
                 switch (tile.GetSuit())
                 {
