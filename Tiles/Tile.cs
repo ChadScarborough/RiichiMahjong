@@ -26,6 +26,11 @@ namespace RMU.Tiles
         public abstract bool IsTerminal();
         public abstract bool IsHonor();
 
+        public bool IsTerminalOrHonor()
+        {
+            return IsTerminal() || IsHonor();
+        }
+
         public virtual Tile GetTileBelow()
         {
             return null;

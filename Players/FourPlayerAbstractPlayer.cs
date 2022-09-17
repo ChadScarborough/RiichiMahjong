@@ -10,13 +10,13 @@ namespace RMU.Players
 {
     public class FourPlayerAbstractPlayer : Player
     {
-        private readonly AbstractFourPlayerHand _hand;
+        private readonly Hand _hand;
 
         private bool _canLowChii;
         private bool _canMidChii;
         private bool _canHighChii;
         
-        protected FourPlayerAbstractPlayer(Wind seatWind, AbstractFourPlayerHand hand, AbstractGame game) : base(seatWind, hand, game)
+        protected FourPlayerAbstractPlayer(Wind seatWind, Hand hand, AbstractGame game) : base(seatWind, hand, game)
         {
             //_hand = hand;
         }
@@ -57,9 +57,9 @@ namespace RMU.Players
         public override void GeneratePotentialDiscardCalls(Tile lastTile)
         {
             base.GeneratePotentialDiscardCalls(lastTile);
-            GeneratePotentialLowChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
-            GeneratePotentialMidChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
-            GeneratePotentialHighChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
+            //GeneratePotentialLowChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
+            //GeneratePotentialMidChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
+            //GeneratePotentialHighChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
         }
 
         public override void UpdateAvailableCalls()

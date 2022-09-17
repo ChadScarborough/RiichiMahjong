@@ -85,5 +85,11 @@
         public const PotentialCallType HIGH_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.HighChii;
         public const PotentialCallType OPEN_KAN_1_POTENTIAL_CALL_TYPE = PotentialCallType.OpenKan1;
         public const PotentialCallType RON_POTENTIAL_CALL_TYPE = PotentialCallType.Ron;
+
+        public enum WinningCallType { Ron, Tsumo, NoWin }
+
+        public const WinningCallType RON = WinningCallType.Ron;
+        public const WinningCallType TSUMO = WinningCallType.Tsumo;
+        public const WinningCallType NO_WIN = WinningCallType.NoWin;
     }
 }

@@ -6,7 +6,7 @@ namespace RMU.Players
 {
     public class FourPlayerTestPlayer : FourPlayerAbstractPlayer
     {
-        public FourPlayerTestPlayer(AbstractFourPlayerHand hand) : base(EAST, hand, new FourPlayerNoRedFivesGame())
+        public FourPlayerTestPlayer(Hand hand) : base(EAST, hand, new FourPlayerNoRedFivesGame())
         {
         }
     }

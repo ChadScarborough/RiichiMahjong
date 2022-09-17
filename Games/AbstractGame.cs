@@ -3,7 +3,6 @@ using RMU.Wall;
 using RMU.Wall.DeadWall;
 using RMU.Games.Scoring;
 using RMU.Tiles;
-using RMU.Calls;
 using RMU.Yaku.StandardYaku;
 using static RMU.Globals.Enums;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ namespace RMU.Games
         private Tile _lastTile;
         private PriorityQueueForPotentialCalls _potentialQueue;
         private PriorityQueueForCallCommands _commandQueue;
-
+        private WinningCallType _winningCall;
         private Player _activePlayer;
 
         private HandScore _scoreObject;
@@ -30,14 +29,16 @@ namespace RMU.Games
         {
             _scoreObject = null;
             _activePlayer = GetEastPlayer();
+            _winningCall = NO_WIN;
             _activePlayer.GetHand().DrawTileFromWall();
             _lastTile = null;
             _potentialQueue = new PriorityQueueForPotentialCalls();
-            _commandQueue = new PriorityQueueForCallCommands();
+            _commandQueue = new PriorityQueueForCallCommands(this);
             foreach(Player player in _players)
             {
                 player.SetPriorityQueueForPotentialCalls(_potentialQueue);
                 player.SetPriorityQueueForCallCommands(_commandQueue);
+                player.SetAvailablePotentialCalls();
             }
         }
 
@@ -57,7 +58,8 @@ namespace RMU.Games
             {
                 if(player.IsActivePlayer() == false)
                 {
-                    PotentialCallGenerator.GeneratePotentialRonCall(player, _potentialQueue, _lastTile);
+                    player.GeneratePotentialDiscardCalls(_lastTile);
+                    player.UpdateAvailableCalls();
                 }
             }
             if (_potentialQueue.IsEmpty())
@@ -150,24 +152,32 @@ namespace RMU.Games
 
         public void CallTsumo(Player player, List<YakuBase> satisfiedYaku)
         {
+            _winningCall = TSUMO;
             CallWin(player, satisfiedYaku);
         }
 
         public void CallRon(Player player, List<YakuBase> satisfiedYaku)
         {
+            _winningCall = RON;
             CallWin(player, satisfiedYaku);
         }
 
-        public void CallWin(Player player, List<YakuBase> satisfiedYaku)
+        private void CallWin(Player player, List<YakuBase> satisfiedYaku)
         {
             if (satisfiedYaku.Count == 0) throw new System.Exception("Hand completed with no satisfied yaku");
+            if (_winningCall == NO_WIN) throw new System.Exception("No winning call made");
             SetActivePlayer(null);
-            _scoreObject = new HandScore(player, satisfiedYaku);
+            _scoreObject = new HandScore(player, _winningCall);
         }
 
         public HandScore GetHandScore()
         {
             return _scoreObject;
+        }
+
+        public WinningCallType? GetWinningCall()
+        {
+            return _winningCall;
         }
     }
 }

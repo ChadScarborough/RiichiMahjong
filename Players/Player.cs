@@ -40,6 +40,7 @@ namespace RMU.Players
             _seatWind = seatWind;
             _hand = hand;
             _game = game;
+            SetAvailablePotentialCalls();
         }
 
         public AbstractGame GetGame()
@@ -59,7 +60,7 @@ namespace RMU.Players
                 Tile tile = _hand.GetClosedTiles()[index].Clone();
                 _hand.DiscardTile(index);
                 _game.SetLastTile(tile);
-                _game.NextPlayer();
+                _game.CheckCalls();
             }
         }
 
@@ -70,7 +71,7 @@ namespace RMU.Players
                 Tile tile = _hand.GetDrawTile().Clone();
                 _hand.DiscardDrawTile();
                 _game.SetLastTile(tile);
-                _game.NextPlayer();
+                _game.CheckCalls();
             }
         }
 
@@ -255,8 +256,9 @@ namespace RMU.Players
             UpdateAvailableCalls();
         }
 
-        public void CallRon(Tile calledTile)
+        public void CallRon()
         {
+            Tile calledTile = _game.GetLastTile();
             UpdateAvailableCalls();
             if (_canRon)
             {
@@ -273,7 +275,7 @@ namespace RMU.Players
 
         public virtual void GeneratePotentialDiscardCalls(Tile lastTile)
         {
-            GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
+            //GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
             GeneratePotentialRonCall(this, _priorityQueueForPotentialCalls, lastTile);
         }
 
@@ -398,6 +400,11 @@ namespace RMU.Players
                 waits[i] = _hand.GetTenpaiHands()[i].GetWaits().Count;
             }
             return waits;
+        }
+
+        internal ICompleteHand GetCompleteHand()
+        {
+            return _completeHand;
         }
     }
 }
