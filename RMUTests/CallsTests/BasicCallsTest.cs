@@ -9,23 +9,26 @@ using static RMU.Globals.Enums;
 using static RMU.Globals.StandardTileList;
 using static RMU.Globals.Functions;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
+using RMU.Games;
 
 namespace RMUTests.CallsTests
 {
     [TestClass]
     public class BasicCallsTest
     {
-        private AbstractFourPlayerHand _hand;
+        private TestHand _hand;
         private FourPlayerTestPlayer _player;
         private PriorityQueueForPotentialCalls _potentialCallQueue;
         private PriorityQueueForCallCommands _callCommandQueue;
+        private AbstractGame _game;
 
         private void Setup()
         {
             _hand = new CallsTestHand();
-            _player = new FourPlayerTestPlayer(_hand);
+            _game = new OnePlayerTestGame(_hand);
             _potentialCallQueue = new PriorityQueueForPotentialCalls();
-            _callCommandQueue = new PriorityQueueForCallCommands();
+            _callCommandQueue = new PriorityQueueForCallCommands(_game);
+            _player = _game.GetEastPlayer() as FourPlayerTestPlayer;
             _player.SetPriorityQueueForPotentialCalls(_potentialCallQueue);
             _player.SetPriorityQueueForCallCommands(_callCommandQueue);
             _player.SetAvailablePotentialCalls();

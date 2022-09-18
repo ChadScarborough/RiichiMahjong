@@ -1,6 +1,7 @@
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
+using RMU.Games;
 using RMU.Hands;
 using RMU.Hands.TestHands;
 using RMU.Players;
@@ -12,21 +13,23 @@ namespace RMUTests.CallsTests
     [TestClass]
     public class CallPriorityTest
     {
-        private AbstractFourPlayerHand _hand1;
+        private TestHand _hand1;
         private FourPlayerTestPlayer _player1;
-        private AbstractFourPlayerHand _hand2;
+        private TestHand _hand2;
         private FourPlayerTestPlayer _player2;
         private PriorityQueueForPotentialCalls _potentialCallQueue;
         private PriorityQueueForCallCommands _callCommandQueue;
+        private FourPlayerGame _game;
 
         private void Setup()
         {
+            _game = new FourPlayerNoRedFivesGame();
             _hand1 = new CallsTestHand();
             _player1 = new FourPlayerTestPlayer(_hand1);
             _hand2 = new CallsTestHand2();
             _player2 = new FourPlayerTestPlayer(_hand2);
             _potentialCallQueue = new PriorityQueueForPotentialCalls();
-            _callCommandQueue = new PriorityQueueForCallCommands();
+            _callCommandQueue = new PriorityQueueForCallCommands(_game);
             _player1.SetPriorityQueueForPotentialCalls(_potentialCallQueue);
             _player1.SetPriorityQueueForCallCommands(_callCommandQueue);
             _player1.SetAvailablePotentialCalls();
