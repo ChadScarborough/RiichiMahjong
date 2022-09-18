@@ -27,7 +27,7 @@ public class AllSimplesYaku : YakuBase
                 return false;
             }
 
-            if (component.GetLeadTile().IsHonor() || component.GetLeadTile().IsTerminal())
+            if (component.GetLeadTile().IsTerminalOrHonor())
             {
                 return false;
             }

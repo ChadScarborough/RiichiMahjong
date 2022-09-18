@@ -5,9 +5,9 @@ using static RMU.Globals.StandardTileList;
 
 namespace RMU.Hands.TestHands
 {
-    public class CallsTestHand2 : AbstractFourPlayerHand
+    public class CallsTestHand2 : TestHand
     {
-        public CallsTestHand2() : base(new NullWallObject())
+        public CallsTestHand2()
         {
             _closedTiles = new List<Tile>
             {

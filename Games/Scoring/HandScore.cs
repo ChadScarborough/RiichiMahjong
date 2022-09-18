@@ -59,7 +59,7 @@ namespace RMU.Games.Scoring
             {
                 _name += $"{yaku.GetName()}, ";
             }
-            _name += $"{_hanValue} han";
+            _name += $"{_hanValue} han {_fuValue} fu";
         }
 
         public Player GetPlayer() => _player;
@@ -71,6 +71,8 @@ namespace RMU.Games.Scoring
         public int GetFuValue() => _fuValue;
 
         public int GetTotalPointsReceived() => _totalPointsReceived;
+
+        public string GetWinningCallType() => _winningCallType.ToString();
 
         public override string ToString() => _name;
     }

@@ -3,6 +3,7 @@ using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using RMU.Players;
+using RMU.Hands.TenpaiHands;
 
 namespace RMU.Hands.CompleteHands
 {
@@ -12,6 +13,7 @@ namespace RMU.Hands.CompleteHands
         Enums.CompleteHandWaitType GetWaitType();
         Enums.CompleteHandType GetCompleteHandType();
         bool IsOpen();
+        ITenpaiHand GetTenpaiHand();
         List<ICompleteHandComponent> GetConstructedHandComponents();
         List<ICompleteHandComponent> GetTriplets();
         List<ICompleteHandComponent> GetSequences();

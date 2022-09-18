@@ -22,11 +22,13 @@ namespace RMU.Games
         private PriorityQueueForCallCommands _commandQueue;
         private WinningCallType _winningCall;
         private Player _activePlayer;
+        private Wind _roundWind;
 
         private HandScore _scoreObject;
 
         protected void Start()
         {
+            _roundWind = EAST;
             _scoreObject = null;
             _activePlayer = GetEastPlayer();
             _winningCall = NO_WIN;
@@ -175,9 +177,14 @@ namespace RMU.Games
             return _scoreObject;
         }
 
-        public WinningCallType? GetWinningCall()
+        public WinningCallType GetWinningCall()
         {
             return _winningCall;
+        }
+
+        public Wind GetRoundWind()
+        {
+            return _roundWind;
         }
     }
 }

@@ -14,6 +14,7 @@ namespace RMU.Hands.CompleteHands
     {
         private readonly List<ICompleteHandComponent> _completeHand;
         private readonly CompleteHandWaitType _waitType;
+        private readonly ITenpaiHand _tenpaiHand;
         private readonly List<ICompleteHandComponent> _constructedHand;
         private readonly Tile _drawTile;
         private readonly List<ICompleteHandComponent> _isolatedTiles;
@@ -28,6 +29,7 @@ namespace RMU.Hands.CompleteHands
             _completeHand = tenpaiHand.GetComponents();
             ICompleteHandComponent drawTile = CreateCompleteHandComponent(tile, DRAW_TILE);
             _completeHand.Add(drawTile);
+            _tenpaiHand = tenpaiHand;
             _waitType = tenpaiHand.GetWaitType();
             _drawTile = tile;
             _isolatedTiles = new List<ICompleteHandComponent>();
@@ -149,6 +151,11 @@ namespace RMU.Hands.CompleteHands
         public Player GetPlayer()
         {
             return _player;
+        }
+
+        public ITenpaiHand GetTenpaiHand()
+        {
+            return _tenpaiHand;
         }
     }
 }

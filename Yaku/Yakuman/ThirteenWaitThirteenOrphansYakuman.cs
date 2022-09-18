@@ -1,5 +1,4 @@
 using RMU.Hands.CompleteHands;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.Yakuman;
 
