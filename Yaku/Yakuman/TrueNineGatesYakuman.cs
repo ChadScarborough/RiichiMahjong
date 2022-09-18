@@ -3,7 +3,7 @@ using RMU.Hands.TenpaiHands;
 
 namespace RMU.Yaku.Yakuman
 {
-    public class TrueNineGatesYakuman : Yakuman
+    public sealed class TrueNineGatesYakuman : Yakuman
     {
         private readonly ITenpaiHand _tenpaiHand;
 

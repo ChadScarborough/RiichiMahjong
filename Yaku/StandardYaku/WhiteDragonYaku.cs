@@ -1,9 +1,8 @@
 using RMU.Hands.CompleteHands;
-using static RMU.Globals.StandardTileList;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class WhiteDragonYaku : YakuBase
+public sealed class WhiteDragonYaku : YakuBase
 {
     public WhiteDragonYaku(ICompleteHand completeHand) : base(completeHand)
     {

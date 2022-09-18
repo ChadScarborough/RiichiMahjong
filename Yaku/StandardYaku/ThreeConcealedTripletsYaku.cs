@@ -1,31 +1,36 @@
 ﻿using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 
-namespace RMU.Yaku.StandardYaku
+namespace RMU.Yaku.StandardYaku;
+
+public sealed class ThreeConcealedTripletsYaku : YakuBase
 {
-    public class ThreeConcealedTripletsYaku : YakuBase
+    private new readonly StandardCompleteHand _completeHand;
+
+    public ThreeConcealedTripletsYaku(ICompleteHand completeHand) : base(completeHand)
     {
-        private readonly new StandardCompleteHand _completeHand;
+        _name = "Three Concealed Triplets";
+        _value = 2;
+        _getValueBehaviour = new StandardGetValueBehaviour();
+        _completeHand = completeHand as StandardCompleteHand;
+    }
 
-        public ThreeConcealedTripletsYaku(ICompleteHand completeHand) : base(completeHand)
+    public override bool Check()
+    {
+        if (_completeHand is null)
         {
-            _name = "Three Concealed Triplets";
-            _value = 2;
-            _getValueBehaviour = new StandardGetValueBehaviour();
-            _completeHand = completeHand as StandardCompleteHand;
+            return false;
         }
 
-        public override bool Check()
+        int t = 0;
+        foreach (ICompleteHandComponent component in _completeHand.GetTriplets())
         {
-            if (_completeHand is null) return false;
-            int t = 0;
-            foreach(ICompleteHandComponent component in _completeHand.GetTriplets())
+            CompleteHandComponentType type = component.GetComponentType();
+            if (type is CLOSED_PON or CLOSED_KAN_COMPONENT)
             {
-                CompleteHandComponentType type = component.GetComponentType();
-                if (type is CLOSED_PON or CLOSED_KAN_COMPONENT)
-                    t++;
+                t++;
             }
-            return t >= 3;
         }
+        return t >= 3;
     }
 }

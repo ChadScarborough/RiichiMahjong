@@ -5,7 +5,7 @@ namespace RMU.Yaku.Yakuman
 {
     public sealed class FourConcealedTripletsYakuman : Yakuman
     {
-        private readonly new StandardCompleteHand _completeHand;
+        private new readonly StandardCompleteHand _completeHand;
 
         public FourConcealedTripletsYakuman(ICompleteHand completeHand) : base(completeHand)
         {
@@ -17,15 +17,31 @@ namespace RMU.Yaku.Yakuman
 
         public override bool Check()
         {
-            if (_completeHand is null) return false;
-            if (_completeHand.IsOpen()) return false;
-            if (_completeHand.GetSequences().Count > 0) return false;
-            WinningCallType winningCall = GetWinningCall();
-            foreach(ICompleteHandComponent component in _completeHand.GetTriplets())
-                if (component.GetComponentType() is OPEN_PON or OPEN_KAN) return false;
-            if (winningCall is RON && _completeHand.GetWaitType() is TWO_SIDED_TRIPLET_WAIT) // This might be redundant; if you successfully call Ron for Four Concealed Triplets, I think you necessarily satisfy the double yakuman
+            if (_completeHand is null)
+            {
                 return false;
-            return true;
+            }
+
+            if (_completeHand.IsOpen())
+            {
+                return false;
+            }
+
+            if (_completeHand.GetSequences().Count > 0)
+            {
+                return false;
+            }
+
+            WinningCallType winningCall = GetWinningCall();
+            foreach (ICompleteHandComponent component in _completeHand.GetTriplets())
+            {
+                if (component.GetComponentType() is OPEN_PON or OPEN_KAN)
+                {
+                    return false;
+                }
+            }
+
+            return winningCall is not RON || _completeHand.GetWaitType() is not TWO_SIDED_TRIPLET_WAIT;
         }
 
         private WinningCallType GetWinningCall()

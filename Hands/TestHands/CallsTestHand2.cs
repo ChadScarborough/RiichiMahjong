@@ -1,20 +1,17 @@
-using System.Collections.Generic;
 using RMU.Tiles;
-using RMU.Wall;
-using static RMU.Globals.StandardTileList;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class CallsTestHand2 : TestHand
 {
-    public class CallsTestHand2 : TestHand
+    public CallsTestHand2()
     {
-        public CallsTestHand2()
+        _closedTiles = new List<Tile>
         {
-            _closedTiles = new List<Tile>
-            {
-                ThreeMan(), ThreeMan(),
-                ThreeSou(), FourSou(), SixSou(), SevenSou(),
-                SevenPin(), SevenPin()
-            };
-        }
+            ThreeMan(), ThreeMan(),
+            ThreeSou(), FourSou(), SixSou(), SevenSou(),
+            SevenPin(), SevenPin()
+        };
     }
 }

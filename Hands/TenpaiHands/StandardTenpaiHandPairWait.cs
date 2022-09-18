@@ -1,35 +1,33 @@
-﻿using System.Collections.Generic;
-using RMU.Hands.CompleteHands.CompleteHandComponents;
+﻿using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.Enums;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TenpaiHands
+namespace RMU.Hands.TenpaiHands;
+
+public class StandardTenpaiHandPairWait : StandardTenpaiHand
 {
-    public class StandardTenpaiHandPairWait : StandardTenpaiHand
+    public StandardTenpaiHandPairWait(List<ICompleteHandComponent> components) : base(components)
     {
-        public StandardTenpaiHandPairWait(List<ICompleteHandComponent> components) : base(components)
+        GenerateWaits();
+    }
+
+    private void GenerateWaits()
+    {
+        foreach (ICompleteHandComponent component in GetComponents())
         {
-            GenerateWaits();
-        }
-        
-        private void GenerateWaits()
-        {
-            foreach (ICompleteHandComponent component in GetComponents())
+            if (component.GetComponentType() == ISOLATED_TILE)
             {
-                if (component.GetComponentType() == ISOLATED_TILE)
+                _waits = new List<Tile>
                 {
-                    _waits = new List<Tile>
-                    {
-                        component.GetLeadTile().Clone()
-                    };
-                    return;
-                }
+                    component.GetLeadTile().Clone()
+                };
+                return;
             }
         }
+    }
 
-        public override CompleteHandWaitType GetWaitType()
-        {
-            return PAIR_WAIT;
-        }
+    public override CompleteHandWaitType GetWaitType()
+    {
+        return PAIR_WAIT;
     }
 }

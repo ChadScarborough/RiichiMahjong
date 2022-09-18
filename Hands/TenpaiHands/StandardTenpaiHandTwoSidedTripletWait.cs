@@ -1,40 +1,38 @@
-using System.Collections.Generic;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.Enums;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TenpaiHands
+namespace RMU.Hands.TenpaiHands;
+
+public class StandardTenpaiHandTwoSidedTripletWait : StandardTenpaiHand
 {
-    public class StandardTenpaiHandTwoSidedTripletWait : StandardTenpaiHand
+    public StandardTenpaiHandTwoSidedTripletWait(List<ICompleteHandComponent> components) : base(components)
     {
-        public StandardTenpaiHandTwoSidedTripletWait(List<ICompleteHandComponent> components) : base(components)
-        {
-            GenerateWaits();
-        }
+        GenerateWaits();
+    }
 
-        private void GenerateWaits()
-        {
-            int p = 0;
-            List<Tile> w = new List<Tile>();
+    private void GenerateWaits()
+    {
+        int p = 0;
+        List<Tile> w = new();
 
-            foreach (ICompleteHandComponent component in GetComponents())
+        foreach (ICompleteHandComponent component in GetComponents())
+        {
+            if (component.GetComponentType() == PAIR_COMPONENT)
             {
-                if (component.GetComponentType() == PAIR_COMPONENT)
+                p++;
+                w.Add(component.GetLeadTile().Clone());
+                if (p == 2)
                 {
-                    p++;
-                    w.Add(component.GetLeadTile().Clone());
-                    if (p == 2)
-                    {
-                        _waits = w;
-                        return;
-                    }
+                    _waits = w;
+                    return;
                 }
             }
         }
+    }
 
-        public override CompleteHandWaitType GetWaitType()
-        {
-            return TWO_SIDED_TRIPLET_WAIT;
-        }
+    public override CompleteHandWaitType GetWaitType()
+    {
+        return TWO_SIDED_TRIPLET_WAIT;
     }
 }

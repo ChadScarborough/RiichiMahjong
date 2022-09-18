@@ -1,14 +1,13 @@
-using System.Collections.Generic;
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class MixedTripleSequenceYaku : YakuBase
+public sealed class MixedTripleSequenceYaku : YakuBase
 {
     private new readonly StandardCompleteHand _completeHand;
-    
+
     public MixedTripleSequenceYaku(ICompleteHand completeHand) : base(completeHand)
     {
         _name = "Mixed Triple Sequence";
@@ -19,10 +18,17 @@ public class MixedTripleSequenceYaku : YakuBase
 
     public override bool Check()
     {
-        if (_completeHand is null) return false;
+        if (_completeHand is null)
+        {
+            return false;
+        }
+
         List<ICompleteHandComponent> components = _completeHand.GetSequences();
-        if (components.Count < 3) return false;
-        
+        if (components.Count < 3)
+        {
+            return false;
+        }
+
         for (int i = 0; i < 2; i++)
         {
             if (components[i].GetLeadTile().GetSuit() is not MAN)
@@ -59,7 +65,7 @@ public class MixedTripleSequenceYaku : YakuBase
                LeadTileValue(components[j]) == LeadTileValue(components[k]);
     }
 
-    private int LeadTileValue(ICompleteHandComponent component)
+    private static int LeadTileValue(ICompleteHandComponent component)
     {
         return component.GetLeadTile().GetValue();
     }

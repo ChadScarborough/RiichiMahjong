@@ -3,77 +3,99 @@ using RMU.Players;
 using RMU.Yaku.StandardYaku;
 using System.Collections.Generic;
 using static RMU.Games.Scoring.ScoreCalculator;
-using static RMU.Globals.Enums;
 
-namespace RMU.Games.Scoring
+namespace RMU.Games.Scoring;
+
+public sealed class HandScore
 {
-    public class HandScore
+    private readonly Player _player;
+    private readonly List<YakuBase> _satisfiedYaku;
+    private readonly WinningCallType _winningCallType;
+    private readonly int _hanValue;
+    private readonly int _fuValue;
+    private readonly int _totalPointsReceived;
+    private string _name;
+
+
+    public HandScore(Player player, WinningCallType winningCallType)
     {
-        private readonly Player _player;
-        private readonly List<YakuBase> _satisfiedYaku;
-        private readonly WinningCallType _winningCallType;
-        private readonly int _hanValue;
-        private readonly int _fuValue;
-        private readonly int _totalPointsReceived;
-        private string _name;
+        _player = player;
+        _satisfiedYaku = player.GetYaku();
+        _winningCallType = winningCallType;
+        ICompleteHand completeHand = player.GetCompleteHand();
+        _hanValue = HanCalculator.CalculateHanValue(player, _satisfiedYaku);
+        _fuValue = FuCalculator.CalculateFuValue(completeHand, winningCallType);
+        _totalPointsReceived = CalculateTotalScore();
+        SetName();
+    }
 
+    private int CalculateTotalScore()
+    {
+        return _winningCallType == RON ? 
+            CalculateTotalRonScore() : 
+            CalculateTotalTsumoScore();
+    }
 
-        public HandScore(Player player, WinningCallType winningCallType)
+    private int CalculateTotalRonScore()
+    {
+        return _player.GetSeatWind() == EAST ? 
+            CalculateDealerRonScore(_hanValue, _fuValue) : 
+            CalculateNonDealerRonScore(_hanValue, _fuValue);
+    }
+
+    private int CalculateTotalTsumoScore()
+    {
+        if (_player.GetSeatWind() == EAST)
         {
-            _player = player;
-            _satisfiedYaku = player.GetYaku();
-            _winningCallType = winningCallType;
-            ICompleteHand completeHand = player.GetCompleteHand();
-            _hanValue = HanCalculator.CalculateHanValue(player, _satisfiedYaku);
-            _fuValue = FuCalculator.CalculateFuValue(completeHand, winningCallType);
-            _totalPointsReceived = CalculateTotalScore();
-            SetName();
+            return 3 * CalculateDealerTsumoScore(_hanValue, _fuValue);
         }
 
-        private int CalculateTotalScore()
+        (int, int) scores = CalculateNonDealerTsumoScore(_hanValue, _fuValue);
+        return (2 * scores.Item1) + scores.Item2;
+    }
+
+    private void SetName()
+    {
+        _name = "";
+        foreach (YakuBase yaku in _satisfiedYaku)
         {
-            if (_winningCallType == RON)
-                return CalculateTotalRonScore();
-            return CalculateTotalTsumoScore();
+            _name += $"{yaku.GetName()}, ";
         }
+        _name += $"{_hanValue} han {_fuValue} fu";
+    }
 
-        private int CalculateTotalRonScore()
-        {
-            if (_player.GetSeatWind() == EAST)
-                return CalculateDealerRonScore(_hanValue, _fuValue);
-            return CalculateNonDealerRonScore(_hanValue, _fuValue);
-        }
+    public Player GetPlayer()
+    {
+        return _player;
+    }
 
-        private int CalculateTotalTsumoScore()
-        {
-            if (_player.GetSeatWind() == EAST)
-                return 3 * CalculateDealerTsumoScore(_hanValue, _fuValue);
-            (int, int) scores = CalculateNonDealerTsumoScore(_hanValue, _fuValue);
-            return (2 * scores.Item1) + scores.Item2;
-        }
+    public List<YakuBase> GetYaku()
+    {
+        return _satisfiedYaku;
+    }
 
-        private void SetName()
-        {
-            _name = "";
-            foreach (YakuBase yaku in _satisfiedYaku)
-            {
-                _name += $"{yaku.GetName()}, ";
-            }
-            _name += $"{_hanValue} han {_fuValue} fu";
-        }
+    public int GetHanValue()
+    {
+        return _hanValue;
+    }
 
-        public Player GetPlayer() => _player;
+    public int GetFuValue()
+    {
+        return _fuValue;
+    }
 
-        public List<YakuBase> GetYaku() => _satisfiedYaku;
+    public int GetTotalPointsReceived()
+    {
+        return _totalPointsReceived;
+    }
 
-        public int GetHanValue() => _hanValue;
+    public string GetWinningCallType()
+    {
+        return _winningCallType.ToString();
+    }
 
-        public int GetFuValue() => _fuValue;
-
-        public int GetTotalPointsReceived() => _totalPointsReceived;
-
-        public string GetWinningCallType() => _winningCallType.ToString();
-
-        public override string ToString() => _name;
+    public override string ToString()
+    {
+        return _name;
     }
 }

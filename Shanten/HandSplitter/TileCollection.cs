@@ -1,85 +1,83 @@
-﻿using System.Collections.Generic;
-using RMU.Tiles;
-using RMU.Globals;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Shanten.HandSplitter
+namespace RMU.Shanten.HandSplitter;
+
+public sealed class TileCollection
 {
-    public class TileCollection
+    private readonly List<Tile> _tiles;
+    private Suit _suit;
+
+    public TileCollection(Suit suit)
     {
-        private List<Tile> _tiles;
-        private Enums.Suit _suit;
+        _tiles = new List<Tile>();
+        SetSuit(suit);
+    }
 
-        public TileCollection(Enums.Suit suit)
+    public TileCollection(Suit suit, List<Tile> tiles)
+    {
+        SetSuit(suit);
+        _tiles = new List<Tile>();
+        foreach (Tile tile in tiles)
         {
-            _tiles = new List<Tile>();
-            SetSuit(suit);
+            AddTile(tile);
         }
+    }
 
-        public TileCollection(Enums.Suit suit, List<Tile> tiles)
+    public List<Tile> GetTiles()
+    {
+        return _tiles;
+    }
+
+    public void AddTile(Tile tile)
+    {
+        if (tile.GetSuit() == GetSuit())
         {
-            SetSuit(suit);
-            _tiles = new List<Tile>();
-            foreach(Tile tile in tiles)
+            _tiles.Add(tile.Clone());
+            return;
+        }
+        throw new System.ArgumentException("Invalid suit");
+    }
+
+    public void Clear()
+    {
+        _tiles.Clear();
+    }
+
+    public int GetSize()
+    {
+        return _tiles.Count;
+    }
+
+    public void RemoveTile(Tile tile)
+    {
+        foreach (Tile t in _tiles)
+        {
+            if (AreTilesEquivalent(t, tile))
             {
-                AddTile(tile);
-            }
-        }
-
-        public virtual List<Tile> GetTiles()
-        {
-            return _tiles;
-        }
-
-        public void AddTile(Tile tile)
-        {
-            if(tile.GetSuit() == this.GetSuit())
-            {
-                _tiles.Add(tile.Clone());
+                _ = _tiles.Remove(t);
                 return;
             }
-            throw new System.ArgumentException();
         }
+    }
 
-        public void Clear()
+    public TileCollection Clone()
+    {
+        TileCollection tc = new(_suit);
+        foreach (Tile tile in GetTiles())
         {
-            _tiles.Clear();
+            tc.AddTile(tile);
         }
+        return tc;
+    }
 
-        public int GetSize()
-        {
-            return _tiles.Count;
-        }
+    private void SetSuit(Suit suit)
+    {
+        _suit = suit;
+    }
 
-        public void RemoveTile(Tile tile)
-        {
-            foreach(Tile t in _tiles)
-            {
-                if(Functions.AreTilesEquivalent(t, tile))
-                {
-                    _tiles.Remove(t);
-                    return;
-                }
-            }
-        }
-
-        public TileCollection Clone()
-        {
-            TileCollection tc = new TileCollection(_suit);
-            foreach(Tile tile in GetTiles())
-            {
-                tc.AddTile(tile);
-            }
-            return tc;
-        }
-
-        private void SetSuit(Enums.Suit suit)
-        {
-            _suit = suit;
-        }
-
-        public Enums.Suit GetSuit()
-        {
-            return _suit;
-        }
+    public Suit GetSuit()
+    {
+        return _suit;
     }
 }

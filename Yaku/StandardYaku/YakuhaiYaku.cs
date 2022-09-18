@@ -1,17 +1,15 @@
-using System.Collections.Generic;
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.Enums;
-using static RMU.Globals.Functions;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class YakuhaiYaku
+internal sealed class YakuhaiYaku
 {
     private readonly Tile _yakuhaiTile;
     private readonly StandardCompleteHand _completeHand;
-    
+
     public YakuhaiYaku(ICompleteHand completeHand, Tile yakuhaiTile)
     {
         _yakuhaiTile = yakuhaiTile;
@@ -20,15 +18,18 @@ public class YakuhaiYaku
 
     public bool Check()
     {
-        if (_completeHand is null) return false;
-        if (_completeHand.GetCompleteHandType() is not STANDARD) return false;
-        List<ICompleteHandComponent> components = _completeHand.GetTriplets();
-        if (HandContainsTripletOfYakuhaiTileExcludingDrawTile(components))
+        if (_completeHand is null)
         {
-            return true;
+            return false;
         }
 
-        return false;
+        if (_completeHand.GetCompleteHandType() is not STANDARD)
+        {
+            return false;
+        }
+
+        List<ICompleteHandComponent> components = _completeHand.GetTriplets();
+        return HandContainsTripletOfYakuhaiTileExcludingDrawTile(components);
     }
 
     private bool HandContainsTripletOfYakuhaiTileExcludingDrawTile(List<ICompleteHandComponent> components)

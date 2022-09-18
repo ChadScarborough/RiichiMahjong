@@ -1,13 +1,12 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class LittleThreeDragonsYaku : YakuBase
+public sealed class LittleThreeDragonsYaku : YakuBase
 {
     private new readonly StandardCompleteHand _completeHand;
-    
+
     public LittleThreeDragonsYaku(ICompleteHand completeHand) : base(completeHand)
     {
         _name = "Little Three Dragons";
@@ -18,7 +17,11 @@ public class LittleThreeDragonsYaku : YakuBase
 
     public override bool Check()
     {
-        if (_completeHand is null) return false;
+        if (_completeHand is null)
+        {
+            return false;
+        }
+
         int tripletCounter = 0;
         int pairCounter = 0;
         foreach (ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())

@@ -1,21 +1,19 @@
-using System.Collections.Generic;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class FourLittleWindsTwoWestsTestHand : TestHand
 {
-    public class FourLittleWindsTwoWestsTestHand : TestHand
+    public FourLittleWindsTwoWestsTestHand()
     {
-        public FourLittleWindsTwoWestsTestHand()
+        _closedTiles = new List<Tile>
         {
-            _closedTiles = new List<Tile>
-            {
-                EastWind(), EastWind(), EastWind(),
-                SouthWind(), SouthWind(), SouthWind(),
-                WestWind(), WestWind(),
-                NorthWind(), NorthWind(), NorthWind(),
-                GreenDragon(), GreenDragon()
-            };
-        }
+            EastWind(), EastWind(), EastWind(),
+            SouthWind(), SouthWind(), SouthWind(),
+            WestWind(), WestWind(),
+            NorthWind(), NorthWind(), NorthWind(),
+            GreenDragon(), GreenDragon()
+        };
     }
 }

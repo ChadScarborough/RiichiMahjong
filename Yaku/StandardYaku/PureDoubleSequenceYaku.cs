@@ -1,15 +1,13 @@
-using System.Collections.Generic;
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Functions;
-using static RMU.Globals.Enums;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class PureDoubleSequenceYaku : YakuBase
+public sealed class PureDoubleSequenceYaku : YakuBase
 {
     private new readonly StandardCompleteHand _completeHand;
-    
+
     public PureDoubleSequenceYaku(ICompleteHand completeHand) : base(completeHand)
     {
         _name = "Pure Double Sequence";
@@ -20,10 +18,21 @@ public class PureDoubleSequenceYaku : YakuBase
 
     public override bool Check()
     {
-        if (_completeHand is null) return false;
-        if (_completeHand.GetCompleteHandType() is not STANDARD) return false;
-        if (_completeHand.IsOpen()) return false;
-        
+        if (_completeHand is null)
+        {
+            return false;
+        }
+
+        if (_completeHand.GetCompleteHandType() is not STANDARD)
+        {
+            return false;
+        }
+
+        if (_completeHand.IsOpen())
+        {
+            return false;
+        }
+
         List<ICompleteHandComponent> components = _completeHand.GetSequences();
 
         for (int i = 0; i < components.Count - 1; i++)

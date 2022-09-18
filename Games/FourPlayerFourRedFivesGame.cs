@@ -1,13 +1,12 @@
 ﻿using RMU.Wall;
 
-namespace RMU.Games
+namespace RMU.Games;
+
+public sealed class FourPlayerFourRedFivesGame : FourPlayerGame
 {
-    public class FourPlayerFourRedFivesGame : FourPlayerGame
+    public FourPlayerFourRedFivesGame()
     {
-        public FourPlayerFourRedFivesGame()
-        {
-            _wallObject = new FourPlayerWallObjectFourRedFives();
-            base.Init();
-        }
+        _wallObject = new FourPlayerWallObjectFourRedFives();
+        Init();
     }
 }

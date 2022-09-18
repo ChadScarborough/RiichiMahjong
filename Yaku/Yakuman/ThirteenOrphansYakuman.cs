@@ -1,9 +1,8 @@
 using RMU.Hands.CompleteHands;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.Yakuman;
 
-public class ThirteenOrphansYakuman : Yakuman
+public sealed class ThirteenOrphansYakuman : Yakuman
 {
     public ThirteenOrphansYakuman(ICompleteHand completeHand) : base(completeHand)
     {

@@ -2,7 +2,7 @@ using RMU.Hands.CompleteHands;
 
 namespace RMU.Yaku.Yakuman;
 
-public class ThirteenWaitThirteenOrphansYakuman : Yakuman
+public sealed class ThirteenWaitThirteenOrphansYakuman : Yakuman
 {
     public ThirteenWaitThirteenOrphansYakuman(ICompleteHand completeHand) : base(completeHand)
     {

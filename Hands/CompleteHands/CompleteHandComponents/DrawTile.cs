@@ -1,36 +1,34 @@
-﻿using System.Collections.Generic;
-using RMU.Globals;
-using RMU.Tiles;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Hands.CompleteHands.CompleteHandComponents
+namespace RMU.Hands.CompleteHands.CompleteHandComponents;
+
+public sealed class DrawTile : ICompleteHandComponent
 {
-    public class DrawTile : ICompleteHandComponent
+    private readonly Tile _tile;
+
+    public DrawTile(Tile drawTile)
     {
-        private readonly Tile _tile;
+        _tile = drawTile;
+    }
 
-        public DrawTile(Tile drawTile)
-        {
-            _tile = drawTile;
-        }
+    public CompleteHandComponentType GetComponentType()
+    {
+        return DRAW_TILE;
+    }
 
-        public Enums.CompleteHandComponentType GetComponentType()
-        {
-            return Enums.DRAW_TILE;
-        }
+    public CompleteHandGeneralComponentType GetGeneralComponentType()
+    {
+        return TILE;
+    }
 
-        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
-        {
-            return Enums.TILE;
-        }
+    public Tile GetLeadTile()
+    {
+        return _tile;
+    }
 
-        public Tile GetLeadTile()
-        {
-            return _tile;
-        }
-
-        public List<Tile> GetTiles()
-        {
-            return new List<Tile> { _tile };
-        }
+    public List<Tile> GetTiles()
+    {
+        return new List<Tile> { _tile };
     }
 }

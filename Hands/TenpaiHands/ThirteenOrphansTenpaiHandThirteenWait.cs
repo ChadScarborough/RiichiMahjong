@@ -1,20 +1,18 @@
-using System.Collections.Generic;
-using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+using System.Collections.Generic;
 
 namespace RMU.Hands.TenpaiHands;
 
-public class ThirteenOrphansTenpaiHandThirteenWait : ThirteenOrphansTenpaiHand
+public sealed class ThirteenOrphansTenpaiHandThirteenWait : ThirteenOrphansTenpaiHand
 {
     public ThirteenOrphansTenpaiHandThirteenWait(List<ICompleteHandComponent> components) : base(components)
     {
     }
 
-    public override Enums.CompleteHandWaitType GetWaitType()
+    public override CompleteHandWaitType GetWaitType()
     {
-        return Enums.THIRTEEN_WAIT;
+        return THIRTEEN_WAIT;
     }
 
     public override List<Tile> GetWaits()

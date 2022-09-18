@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+using System.Collections.Generic;
 
 namespace RMU.Hands.TestHands;
 
-public class EdgeWaitTestHand : TestHand
+public sealed class EdgeWaitTestHand : TestHand
 {
     public EdgeWaitTestHand()
     {

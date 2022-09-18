@@ -1,13 +1,12 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class ThreeQuadsYaku : YakuBase
+public sealed class ThreeQuadsYaku : YakuBase
 {
     private new readonly StandardCompleteHand _completeHand;
-    
+
     public ThreeQuadsYaku(ICompleteHand completeHand) : base(completeHand)
     {
         _name = "Three Quads";
@@ -18,7 +17,11 @@ public class ThreeQuadsYaku : YakuBase
 
     public override bool Check()
     {
-        if (_completeHand is null) return false;
+        if (_completeHand is null)
+        {
+            return false;
+        }
+
         if (_completeHand.GetCompleteHandType() is not STANDARD)
         {
             return false;

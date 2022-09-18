@@ -1,74 +1,71 @@
-﻿using System;
+﻿using RMU.Tiles;
+using System;
 using System.Collections.Generic;
-using RMU.Globals;
-using RMU.Tiles;
-using static RMU.Globals.Functions;
 
-namespace RMU.Hands.CompleteHands.CompleteHandComponents
+namespace RMU.Hands.CompleteHands.CompleteHandComponents;
+
+public sealed class IncompleteSequenceOpenWait : ICompleteHandIncompleteGroup
 {
-    public class IncompleteSequenceOpenWait : ICompleteHandIncompleteGroup
+    private readonly List<Tile> _tiles;
+
+    public IncompleteSequenceOpenWait(List<Tile> incompleteSequenceOpenWait)
     {
-        private readonly List<Tile> _tiles;
-
-        public IncompleteSequenceOpenWait(List<Tile> incompleteSequenceOpenWait)
+        _tiles = new List<Tile>();
+        foreach (Tile tile in incompleteSequenceOpenWait)
         {
-            _tiles = new List<Tile>();
-            foreach (Tile tile in incompleteSequenceOpenWait)
-            {
-                _tiles.Add(tile);
-            }
-            CheckForValidIncompleteSequenceOpenWait();
+            _tiles.Add(tile);
         }
+        CheckForValidIncompleteSequenceOpenWait();
+    }
 
-        private void CheckForValidIncompleteSequenceOpenWait()
-        {
-            CheckForCorrectNumber();
-            CheckForConsecutiveIncompleteSequence();
-            CheckThatIncompleteSequenceIsNotEdgeWait();
-        }
+    private void CheckForValidIncompleteSequenceOpenWait()
+    {
+        CheckForCorrectNumber();
+        CheckForConsecutiveIncompleteSequence();
+        CheckThatIncompleteSequenceIsNotEdgeWait();
+    }
 
-        private void CheckForCorrectNumber()
+    private void CheckForCorrectNumber()
+    {
+        if (_tiles.Count != 2)
         {
-            if(_tiles.Count != 2)
-            {
-                throw new ArgumentException("Incorrect number of tiles");
-            }
+            throw new ArgumentException("Incorrect number of tiles");
         }
+    }
 
-        private void CheckForConsecutiveIncompleteSequence()
+    private void CheckForConsecutiveIncompleteSequence()
+    {
+        if (AreTilesEquivalent(_tiles[0], GetTileBelow(_tiles[1])) == false)
         {
-            if(AreTilesEquivalent(_tiles[0], GetTileBelow(_tiles[1])) == false)
-            {
-                throw new ArgumentException("Tiles do not form consecutive incomplete sequence");
-            }
+            throw new ArgumentException("Tiles do not form consecutive incomplete sequence");
         }
+    }
 
-        private void CheckThatIncompleteSequenceIsNotEdgeWait()
+    private void CheckThatIncompleteSequenceIsNotEdgeWait()
+    {
+        if (_tiles[0].GetValue() == 1 || _tiles[1].GetValue() == 9)
         {
-            if(_tiles[0].GetValue() == 1 || _tiles[1].GetValue() == 9)
-            {
-                throw new ArgumentException("Tiles do not have open wait");
-            }
+            throw new ArgumentException("Tiles do not have open wait");
         }
+    }
 
-        public Enums.CompleteHandComponentType GetComponentType()
-        {
-            return Enums.INCOMPLETE_SEQUENCE_OPEN_WAIT;
-        }
+    public CompleteHandComponentType GetComponentType()
+    {
+        return INCOMPLETE_SEQUENCE_OPEN_WAIT;
+    }
 
-        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
-        {
-            return Enums.TAATSU;
-        }
+    public CompleteHandGeneralComponentType GetGeneralComponentType()
+    {
+        return TAATSU;
+    }
 
-        public Tile GetLeadTile()
-        {
-            return _tiles[0];
-        }
+    public Tile GetLeadTile()
+    {
+        return _tiles[0];
+    }
 
-        public List<Tile> GetTiles()
-        {
-            return _tiles;
-        }
+    public List<Tile> GetTiles()
+    {
+        return _tiles;
     }
 }

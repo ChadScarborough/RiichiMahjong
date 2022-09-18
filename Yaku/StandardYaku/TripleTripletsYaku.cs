@@ -1,11 +1,10 @@
-using System.Collections.Generic;
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
+using System.Collections.Generic;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class TripleTripletsYaku : YakuBase
+public sealed class TripleTripletsYaku : YakuBase
 {
     public TripleTripletsYaku(ICompleteHand completeHand) : base(completeHand)
     {
@@ -16,16 +15,27 @@ public class TripleTripletsYaku : YakuBase
 
     public override bool Check()
     {
-        if (_completeHand.GetCompleteHandType() is not STANDARD) return false;
+        if (_completeHand.GetCompleteHandType() is not STANDARD)
+        {
+            return false;
+        }
+
         int numberOfTriplets = _completeHand.GetTriplets().Count;
-        if (numberOfTriplets < 3) return false;
+        if (numberOfTriplets < 3)
+        {
+            return false;
+        }
+
         for (int i = 0; i < numberOfTriplets - 2; i++)
         {
             for (int j = i + 1; j < numberOfTriplets - 1; j++)
             {
                 for (int k = j + 1; k < numberOfTriplets; k++)
                 {
-                    if (TripletsFormTripleTriplets(i, j, k)) return true;
+                    if (TripletsFormTripleTriplets(i, j, k))
+                    {
+                        return true;
+                    }
                 }
             }
         }

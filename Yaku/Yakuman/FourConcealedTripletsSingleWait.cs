@@ -1,26 +1,36 @@
 ﻿using RMU.Hands.CompleteHands;
 
-namespace RMU.Yaku.Yakuman
+namespace RMU.Yaku.Yakuman;
+
+public sealed class FourConcealedTripletsSingleWait : Yakuman
 {
-    public class FourConcealedTripletsSingleWait : Yakuman
+    private new readonly StandardCompleteHand _completeHand;
+
+    public FourConcealedTripletsSingleWait(ICompleteHand completeHand) : base(completeHand)
     {
-        private readonly new StandardCompleteHand _completeHand;
+        _name = "Four Concealed Triplets Single Wait";
+        _value = 26;
+        _getValueBehaviour = new StandardGetValueBehaviour();
+        _completeHand = completeHand as StandardCompleteHand;
+    }
 
-        public FourConcealedTripletsSingleWait(ICompleteHand completeHand) : base(completeHand)
+    public override bool Check()
+    {
+        if (_completeHand is null)
         {
-            _name = "Four Concealed Triplets Single Wait";
-            _value = 26;
-            _getValueBehaviour = new StandardGetValueBehaviour();
-            _completeHand = completeHand as StandardCompleteHand;
+            return false;
         }
 
-        public override bool Check()
+        if (_completeHand.IsOpen())
         {
-            if (_completeHand is null) return false;
-            if (_completeHand.IsOpen()) return false;
-            if (_completeHand.GetTriplets().Count < 4) return false;
-            if (_completeHand.GetWaitType() is not PAIR_WAIT) return false;
-            return true;
+            return false;
         }
+
+        if (_completeHand.GetTriplets().Count < 4)
+        {
+            return false;
+        }
+
+        return _completeHand.GetWaitType() is PAIR_WAIT;
     }
 }

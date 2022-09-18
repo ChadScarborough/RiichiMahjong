@@ -1,61 +1,59 @@
-﻿using System;
-using System.Collections.Generic;
-using RMU.Calls.CreateMeldBehaviours;
-using RMU.Globals;
+﻿using RMU.Calls.CreateMeldBehaviours;
 using RMU.Tiles;
+using System;
+using System.Collections.Generic;
 
-namespace RMU.Hands.CompleteHands.CompleteHandComponents
+namespace RMU.Hands.CompleteHands.CompleteHandComponents;
+
+public sealed class ClosedKan : ICompleteHandGroup
 {
-    public class ClosedKan : ICompleteHandGroup
+    private readonly List<Tile> _tiles;
+
+    public ClosedKan(OpenMeld closedKan)
     {
-        private readonly List<Tile> _tiles;
+        _tiles = new List<Tile>();
+        PopulateTilesList(closedKan);
+        CheckForValidQuad();
+    }
 
-        public ClosedKan(OpenMeld closedKan)
+    private void CheckForValidQuad()
+    {
+        if (_tiles.Count != 4)
         {
-            _tiles = new List<Tile>();
-            PopulateTilesList(closedKan);
-            CheckForValidQuad();
+            throw new ArgumentException("Incorrect number of tiles");
         }
-
-        private void CheckForValidQuad()
+        if (AreTilesEquivalent(_tiles[0], _tiles[1], _tiles[2], _tiles[3]) == false)
         {
-            if(_tiles.Count != 4)
-            {
-                throw new ArgumentException("Incorrect number of tiles");
-            }
-            if(Functions.AreTilesEquivalent(_tiles[0], _tiles[1], _tiles[2], _tiles[3]) == false)
-            {
-                throw new ArgumentException("Tiles do not form quad");
-            }
+            throw new ArgumentException("Tiles do not form quad");
         }
+    }
 
-        private void PopulateTilesList(OpenMeld closedKan)
+    private void PopulateTilesList(OpenMeld closedKan)
+    {
+        foreach (Tile tile in closedKan.GetTiles())
         {
-            foreach (Tile tile in closedKan.GetTiles())
-            {
-                _tiles.Add(tile);
-            }
+            _tiles.Add(tile);
         }
+    }
 
 
-        public Enums.CompleteHandComponentType GetComponentType()
-        {
-            return Enums.CLOSED_KAN_COMPONENT;
-        }
+    public CompleteHandComponentType GetComponentType()
+    {
+        return CLOSED_KAN_COMPONENT;
+    }
 
-        public List<Tile> GetTiles()
-        {
-            return _tiles;
-        }
+    public List<Tile> GetTiles()
+    {
+        return _tiles;
+    }
 
-        public Tile GetLeadTile()
-        {
-            return _tiles[0];
-        }
+    public Tile GetLeadTile()
+    {
+        return _tiles[0];
+    }
 
-        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
-        {
-            return Enums.GROUP;
-        }
+    public CompleteHandGeneralComponentType GetGeneralComponentType()
+    {
+        return GROUP;
     }
 }

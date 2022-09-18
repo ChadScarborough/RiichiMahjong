@@ -1,11 +1,9 @@
 using RMU.Hands.CompleteHands;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
-using static RMU.Globals.Functions;
 
 namespace RMU.Yaku.Yakuman;
 
-public class AllGreensYakuman : Yakuman
+public sealed class AllGreensYakuman : Yakuman
 {
     private readonly Tile[] _greenTiles =
     {
@@ -16,7 +14,7 @@ public class AllGreensYakuman : Yakuman
         EIGHT_SOU,
         GREEN_DRAGON
     };
-    
+
     public AllGreensYakuman(ICompleteHand completeHand) : base(completeHand)
     {
         _name = "All Greens";
@@ -28,7 +26,10 @@ public class AllGreensYakuman : Yakuman
     {
         foreach (Tile tile in _completeHand.GetTiles())
         {
-            if (IsGreenTile(tile) == false) return false;
+            if (IsGreenTile(tile) == false)
+            {
+                return false;
+            }
         }
 
         return true;

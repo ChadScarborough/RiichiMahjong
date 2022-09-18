@@ -1,11 +1,10 @@
 using RMU.Wall;
 
-namespace RMU.Hands
+namespace RMU.Hands;
+
+public abstract class AbstractThreePlayerHand : Hand
 {
-    public class AbstractThreePlayerHand : Hand
+    protected AbstractThreePlayerHand(WallObject wallObject) : base(wallObject)
     {
-        protected AbstractThreePlayerHand(WallObject wallObject) : base(wallObject)
-        {
-        }
     }
 }

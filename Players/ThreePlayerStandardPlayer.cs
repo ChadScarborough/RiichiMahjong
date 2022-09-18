@@ -1,14 +1,12 @@
 using RMU.Games;
 using RMU.Hands;
-using static RMU.Globals.Enums;
 
-namespace RMU.Players
+namespace RMU.Players;
+
+public sealed class ThreePlayerStandardPlayer : ThreePlayerAbstractPlayer
 {
-    public class ThreePlayerStandardPlayer : ThreePlayerAbstractPlayer
+    public ThreePlayerStandardPlayer(Wind seatWind, AbstractThreePlayerHand hand, AbstractGame game) : base(seatWind, hand, game)
     {
-        public ThreePlayerStandardPlayer(Wind seatWind, AbstractThreePlayerHand hand, AbstractGame game) : base(seatWind, hand, game)
-        {
-            
-        }
+
     }
 }

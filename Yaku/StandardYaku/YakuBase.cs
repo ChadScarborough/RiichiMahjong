@@ -13,7 +13,7 @@ public abstract class YakuBase
     {
         _completeHand = completeHand;
     }
-    
+
     public abstract bool Check();
 
     public int GetValue()

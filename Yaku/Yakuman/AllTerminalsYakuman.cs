@@ -1,10 +1,9 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.Yakuman;
 
-public class AllTerminalsYakuman : Yakuman
+public sealed class AllTerminalsYakuman : Yakuman
 {
     public AllTerminalsYakuman(ICompleteHand completeHand) : base(completeHand)
     {

@@ -1,6 +1,5 @@
-﻿namespace RMU.Hands.CompleteHands.CompleteHandComponents
+﻿namespace RMU.Hands.CompleteHands.CompleteHandComponents;
+
+public interface ICompleteHandIncompleteGroup : ICompleteHandComponent
 {
-    public interface ICompleteHandIncompleteGroup : ICompleteHandComponent
-    {
-    }
 }

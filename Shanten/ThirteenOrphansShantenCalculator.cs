@@ -1,12 +1,9 @@
-using System.Collections.Generic;
 using RMU.Hands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten.HandSplitter;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
-using static RMU.Globals.Functions;
-using static RMU.Globals.ConstValues;
+using System.Collections.Generic;
 
 namespace RMU.Shanten;
 
@@ -23,6 +20,7 @@ public static class ThirteenOrphansShantenCalculator
         RED_DRAGON,
         WHITE_DRAGON
     };
+
     private static readonly int[] Counters = new int[13];
     private static int _uniqueTerminals;
     private static bool _isDuplicateTerminal;
@@ -109,10 +107,17 @@ public static class ThirteenOrphansShantenCalculator
 
     private static void CheckIfTileIsTerminalOrHonorAndIncrementAppropriateCounter(Tile tile)
     {
-        if (TileIsNotTerminalOrHonor(tile)) return;
+        if (TileIsNotTerminalOrHonor(tile))
+        {
+            return;
+        }
+
         for (int i = 0; i < NUMBER_OF_UNIQUE_TERMINALS_AND_HONORS; i++)
         {
-            if (IncrementAppropriateCounterIfTileIsTerminalOrHonor(tile, i)) return;
+            if (IncrementAppropriateCounterIfTileIsTerminalOrHonor(tile, i))
+            {
+                return;
+            }
         }
     }
 

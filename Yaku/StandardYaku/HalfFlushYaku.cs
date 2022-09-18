@@ -1,10 +1,9 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class HalfFlushYaku : YakuBase
+public sealed class HalfFlushYaku : YakuBase
 {
     public HalfFlushYaku(ICompleteHand completeHand) : base(completeHand)
     {
@@ -15,11 +14,17 @@ public class HalfFlushYaku : YakuBase
 
     public override bool Check()
     {
-        if (_completeHand.GetCompleteHandType() is THIRTEEN_ORPHANS) return false;
+        if (_completeHand.GetCompleteHandType() is THIRTEEN_ORPHANS)
+        {
+            return false;
+        }
 
         Suit suit = _completeHand.GetConstructedHandComponents()[0].GetLeadTile().GetSuit();
-        if (suit != MAN && suit != PIN && suit != SOU) return false;
-        
+        if (suit is not MAN and not PIN and not SOU)
+        {
+            return false;
+        }
+
         foreach (ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())
         {
             if (component.GetLeadTile().GetSuit() != suit && component.GetLeadTile().IsHonor() == false)
@@ -28,10 +33,12 @@ public class HalfFlushYaku : YakuBase
             }
         }
 
-        foreach(ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())
+        foreach (ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())
         {
             if (component.GetLeadTile().IsHonor())
+            {
                 return true;
+            }
         }
 
         return false;

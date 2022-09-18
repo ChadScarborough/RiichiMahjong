@@ -1,11 +1,10 @@
 using RMU.Players;
 
-namespace RMU.Calls
+namespace RMU.Calls;
+
+public interface ICallObject
 {
-    public interface ICallObject
-    {
-        public int GetPriority();
-        public Player GetPlayerMakingCall();
-        public void SetQueue(IPriorityQueue priorityQueue);
-    }
+    public int GetPriority();
+    public Player GetPlayerMakingCall();
+    public void SetQueue(IPriorityQueue priorityQueue);
 }

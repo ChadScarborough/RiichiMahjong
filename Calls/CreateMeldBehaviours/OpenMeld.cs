@@ -1,64 +1,62 @@
-﻿using System.Collections.Generic;
-using RMU.Globals;
-using RMU.Tiles;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Calls.CreateMeldBehaviours
+namespace RMU.Calls.CreateMeldBehaviours;
+
+public sealed class OpenMeld
 {
-    public class OpenMeld
+    private MeldType _meldType;
+    private readonly List<Tile> _tiles;
+    private ICreateMeldBehaviour _createMeldBehaviour;
+
+    public OpenMeld(MeldType meldType, Tile calledTile)
     {
-        private Enums.MeldType _meldType;
-        private readonly List<Tile> _tiles;
-        private ICreateMeldBehaviour _createMeldBehaviour;
+        _meldType = meldType;
+        SetMeldType(meldType);
+        _tiles = _createMeldBehaviour.CreateMeld(calledTile);
+    }
 
-        public OpenMeld(Enums.MeldType meldType, Tile calledTile)
-        {
-            _meldType = meldType;
-            SetMeldType(meldType);
-            _tiles = _createMeldBehaviour.CreateMeld(calledTile);
-        }
+    public void AddTile(Tile tile)
+    {
+        _tiles.Add(tile);
+    }
 
-        public void AddTile(Tile tile)
+    public void SetMeldType(MeldType meldType)
+    {
+        switch (meldType)
         {
-            _tiles.Add(tile);
+            case LOW_CHII:
+                _createMeldBehaviour = new CreateLowChiiBehaviour();
+                break;
+            case MID_CHII:
+                _createMeldBehaviour = new CreateMidChiiBehaviour();
+                break;
+            case HIGH_CHII:
+                _createMeldBehaviour = new CreateHighChiiBehaviour();
+                break;
+            case PON:
+                _createMeldBehaviour = new CreatePonBehaviour();
+                break;
+            case OPEN_KAN_1:
+            case CLOSED_KAN_MELD:
+                _createMeldBehaviour = new CreateKanBehaviour();
+                break;
+            case OPEN_KAN_2:
+                _meldType = OPEN_KAN_2;
+                break;
+            case KITA:
+                _createMeldBehaviour = new CreateKitaBehaviour();
+                break;
         }
+    }
 
-        public void SetMeldType(Enums.MeldType meldType)
-        {
-            switch (meldType)
-            {
-                case Enums.LOW_CHII:
-                    _createMeldBehaviour = new CreateLowChiiBehaviour();
-                    break;
-                case Enums.MID_CHII:
-                    _createMeldBehaviour = new CreateMidChiiBehaviour();
-                    break;
-                case Enums.HIGH_CHII:
-                    _createMeldBehaviour = new CreateHighChiiBehaviour();
-                    break;
-                case Enums.PON:
-                    _createMeldBehaviour = new CreatePonBehaviour();
-                    break;
-                case Enums.OPEN_KAN_1:
-                case Enums.CLOSED_KAN_MELD:
-                    _createMeldBehaviour = new CreateKanBehaviour();
-                    break;
-                case Enums.OPEN_KAN_2:
-                    _meldType = Enums.MeldType.OpenKan2;
-                    break;
-                case Enums.KITA:
-                    _createMeldBehaviour = new CreateKitaBehaviour();
-                    break;
-            }
-        }
+    public MeldType GetMeldType()
+    {
+        return _meldType;
+    }
 
-        public Enums.MeldType GetMeldType()
-        {
-            return _meldType;
-        }
-
-        public List<Tile> GetTiles()
-        {
-            return _tiles;
-        }
+    public List<Tile> GetTiles()
+    {
+        return _tiles;
     }
 }

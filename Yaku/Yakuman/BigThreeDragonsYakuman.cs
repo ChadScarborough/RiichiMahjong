@@ -1,10 +1,9 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.Yakuman;
 
-public class BigThreeDragonsYakuman : Yakuman
+public sealed class BigThreeDragonsYakuman : Yakuman
 {
     public BigThreeDragonsYakuman(ICompleteHand completeHand) : base(completeHand)
     {
@@ -52,6 +51,6 @@ public class BigThreeDragonsYakuman : Yakuman
             }
         }
 
-        return (tripletCounter is 3 && pairCounter is 0);
+        return tripletCounter is 3 && pairCounter is 0;
     }
 }

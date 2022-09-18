@@ -1,64 +1,62 @@
-﻿using System;
+﻿using RMU.Tiles;
+using System;
 using System.Collections.Generic;
-using RMU.Globals;
-using RMU.Tiles;
 
-namespace RMU.Hands.CompleteHands.CompleteHandComponents
+namespace RMU.Hands.CompleteHands.CompleteHandComponents;
+
+public sealed class PairComponent : ICompleteHandComponent
 {
-    public class PairComponent : ICompleteHandComponent
+    private readonly List<Tile> _tiles;
+
+    public PairComponent(List<Tile> pair)
     {
-        private readonly List<Tile> _tiles;
-
-        public PairComponent(List<Tile> pair)
+        _tiles = new List<Tile>();
+        foreach (Tile tile in pair)
         {
-            _tiles = new List<Tile>();
-            foreach(Tile tile in pair)
-            {
-                _tiles.Add(tile);
-            }
-            CheckForValidPair();
+            _tiles.Add(tile);
         }
+        CheckForValidPair();
+    }
 
-        private void CheckForValidPair()
-        {
-            CheckForCorrectNumber();
-            CheckThatTilesFormPair();
-        }
+    private void CheckForValidPair()
+    {
+        CheckForCorrectNumber();
+        CheckThatTilesFormPair();
+    }
 
-        private void CheckForCorrectNumber()
+    private void CheckForCorrectNumber()
+    {
+        if (_tiles.Count != 2)
         {
-            if(_tiles.Count != 2)
-            {
-                throw new ArgumentException("Incorrect number of tiles");
-            }
+            throw new ArgumentException("Incorrect number of tiles");
         }
+    }
 
-        private void CheckThatTilesFormPair()
+    private void CheckThatTilesFormPair()
+    {
+        if (AreTilesEquivalent(_tiles[0], _tiles[1]) == false)
         {
-            if(Functions.AreTilesEquivalent(_tiles[0], _tiles[1]) == false)
-            {
-                throw new ArgumentException("Tiles do not form pair");
-            }
+            throw new ArgumentException("Tiles do not form pair");
         }
+    }
 
-        public Enums.CompleteHandComponentType GetComponentType()
-        {
-            return Enums.PAIR_COMPONENT;
-        }
+    public CompleteHandComponentType GetComponentType()
+    {
+        return PAIR_COMPONENT;
+    }
 
-        public Enums.CompleteHandGeneralComponentType GetGeneralComponentType()
-        {
-            return Enums.PAIR;
-        }
+    public CompleteHandGeneralComponentType GetGeneralComponentType()
+    {
+        return PAIR;
+    }
 
-        public Tile GetLeadTile()
-        {
-            return _tiles[0];
-        }
+    public Tile GetLeadTile()
+    {
+        return _tiles[0];
+    }
 
-        public List<Tile> GetTiles()
-        {
-            return _tiles;
-        }
+    public List<Tile> GetTiles()
+    {
+        return _tiles;
     }
 }

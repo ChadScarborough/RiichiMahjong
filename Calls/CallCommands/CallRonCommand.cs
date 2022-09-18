@@ -1,27 +1,25 @@
-using System;
 using RMU.Games;
 using RMU.Players;
 using RMU.Tiles;
 
-namespace RMU.Calls.CallCommands
+namespace RMU.Calls.CallCommands;
+
+public sealed class CallRonCommand : CallCommand
 {
-    public class CallRonCommand : CallCommand
+    public CallRonCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
     {
-        public CallRonCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
-        {
 
-        }
-        
-        public override void Execute()
-        {
-            Player player = GetPlayerMakingCall();
-            AbstractGame game = player.GetGame();
-            game.CallRon(player, player.GetYaku());
-        }
+    }
 
-        public override int GetPriority()
-        {
-            return 3;
-        }
+    public override void Execute()
+    {
+        Player player = GetPlayerMakingCall();
+        AbstractGame game = player.GetGame();
+        game.CallRon(player, player.GetYaku());
+    }
+
+    public override int GetPriority()
+    {
+        return 3;
     }
 }

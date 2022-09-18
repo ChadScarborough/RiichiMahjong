@@ -1,30 +1,22 @@
-using System;
-using RMU.Globals;
 using RMU.Players;
+using System;
 
 namespace RMU.Calls.PotentialCalls
 {
     public static class PotentialCallFactory
     {
-        public static PotentialCall CreatePotentialCall(Player playerMakingCall, Enums.PotentialCallType callType)
+        public static PotentialCall CreatePotentialCall(Player playerMakingCall, PotentialCallType callType)
         {
-            switch (callType)
+            return callType switch
             {
-                case Enums.PotentialCallType.Pon:
-                    return new PotentialPon(playerMakingCall);
-                case Enums.PotentialCallType.LowChii:
-                    return new PotentialLowChii(playerMakingCall);
-                case Enums.PotentialCallType.MidChii:
-                    return new PotentialMidChii(playerMakingCall);
-                case Enums.PotentialCallType.HighChii:
-                    return new PotentialHighChii(playerMakingCall);
-                case Enums.PotentialCallType.OpenKan1:
-                    return new PotentialOpenKan1(playerMakingCall);
-                case Enums.PotentialCallType.Ron:
-                    return new PotentialRon(playerMakingCall);
-            }
-
-            throw new ArgumentException("Invalid call type");
+                PotentialCallType.Pon => new PotentialPon(playerMakingCall),
+                PotentialCallType.LowChii => new PotentialLowChii(playerMakingCall),
+                PotentialCallType.MidChii => new PotentialMidChii(playerMakingCall),
+                PotentialCallType.HighChii => new PotentialHighChii(playerMakingCall),
+                PotentialCallType.OpenKan1 => new PotentialOpenKan1(playerMakingCall),
+                PotentialCallType.Ron => new PotentialRon(playerMakingCall),
+                _ => throw new ArgumentException("Invalid call type"),
+            };
         }
     }
 }

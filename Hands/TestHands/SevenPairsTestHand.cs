@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+using System.Collections.Generic;
 
 namespace RMU.Hands.TestHands;
 
-public class SevenPairsTestHand : TestHand
+public sealed class SevenPairsTestHand : TestHand
 {
     public SevenPairsTestHand()
     {

@@ -1,24 +1,23 @@
-﻿namespace RMU.Tiles.TileDecorators
+﻿namespace RMU.Tiles.TileDecorators;
+
+public sealed class DoraDecorator : TileDecorator
 {
-    public class DoraDecorator : TileDecorator
+
+    public DoraDecorator(Tile tile) : base(tile) { }
+
+    public override int GetDoraValue()
     {
+        return _decoratee.GetDoraValue() + 1;
+    }
 
-        public DoraDecorator(Tile tile) : base(tile) { }
+    public override bool IsDoraTile()
+    {
+        return true;
+    }
 
-        public override int GetDoraValue()
-        {
-            return _decoratee.GetDoraValue() + 1;
-        }
-
-        public override bool IsDoraTile()
-        {
-            return true;
-        }
-
-        public override Tile Clone()
-        {
-            Tile clone = _decoratee.Clone();
-            return new DoraDecorator(clone);
-        }
+    public override Tile Clone()
+    {
+        Tile clone = _decoratee.Clone();
+        return new DoraDecorator(clone);
     }
 }

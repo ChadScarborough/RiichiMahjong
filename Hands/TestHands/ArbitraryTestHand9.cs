@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class ArbitraryTestHand9 : TestHand
 {
-    public class ArbitraryTestHand9 : TestHand
+    public ArbitraryTestHand9() //Should have shanten value three
     {
-        public ArbitraryTestHand9() //Should have shanten value three
+        _closedTiles = new List<Tile>
         {
-            _closedTiles = new List<Tile>
-            {
-                SouthWind(), FiveMan(), ThreeSou(), FourMan(), SevenMan(), EightPin(), FivePin(),
-                TwoSou(), TwoSou(), TwoPin(), ThreePin(), TwoSou(), SixMan()
-            };
-        }
+            SouthWind(), FiveMan(), ThreeSou(), FourMan(), SevenMan(), EightPin(), FivePin(),
+            TwoSou(), TwoSou(), TwoPin(), ThreePin(), TwoSou(), SixMan()
+        };
     }
 }

@@ -1,21 +1,19 @@
-using System.Collections.Generic;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class AllGreensTestHand : TestHand
 {
-    public class AllGreensTestHand : TestHand
+    public AllGreensTestHand()
     {
-        public AllGreensTestHand()
+        _closedTiles = new List<Tile>
         {
-            _closedTiles = new List<Tile>
-            {
-                TwoSou(), TwoSou(), TwoSou(),
-                FourSou(), FourSou(), FourSou(),
-                SixSou(), SixSou(), SixSou(),
-                EightSou(), EightSou(),
-                GreenDragon(), GreenDragon()
-            };
-        }
+            TwoSou(), TwoSou(), TwoSou(),
+            FourSou(), FourSou(), FourSou(),
+            SixSou(), SixSou(), SixSou(),
+            EightSou(), EightSou(),
+            GreenDragon(), GreenDragon()
+        };
     }
 }

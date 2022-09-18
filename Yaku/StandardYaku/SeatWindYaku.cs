@@ -2,38 +2,44 @@
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 
-namespace RMU.Yaku.StandardYaku
+namespace RMU.Yaku.StandardYaku;
+
+public sealed class SeatWindYaku : YakuBase
 {
-    public class SeatWindYaku : YakuBase
+    private new readonly StandardCompleteHand _completeHand;
+
+    public SeatWindYaku(ICompleteHand completeHand) : base(completeHand)
     {
-        private readonly new StandardCompleteHand _completeHand;
+        _name = "Seat Wind";
+        _value = 1;
+        _getValueBehaviour = new StandardGetValueBehaviour();
+        _completeHand = completeHand as StandardCompleteHand;
+    }
 
-        public SeatWindYaku(ICompleteHand completeHand) : base(completeHand)
+    public override bool Check()
+    {
+        if (_completeHand is null)
         {
-            _name = "Seat Wind";
-            _value = 1;
-            _getValueBehaviour = new StandardGetValueBehaviour();
-            _completeHand = completeHand as StandardCompleteHand;
-        }
-
-        public override bool Check()
-        {
-            if (_completeHand is null) return false;
-            Wind seatWind = _completeHand.GetPlayer().GetSeatWind();
-            return HandContainsSeatWindTriplet(seatWind);
-        }
-
-        private bool HandContainsSeatWindTriplet(Wind seatWind)
-        {
-            foreach (ICompleteHandComponent component in _completeHand.GetTriplets())
-            {
-                Tile tile = component.GetLeadTile();
-                if (tile.GetSuit() is WIND)
-                {
-                    if (AreWindsEquivalent(tile, seatWind)) return true;
-                }
-            }
             return false;
         }
+
+        Wind seatWind = _completeHand.GetPlayer().GetSeatWind();
+        return HandContainsSeatWindTriplet(seatWind);
+    }
+
+    private bool HandContainsSeatWindTriplet(Wind seatWind)
+    {
+        foreach (ICompleteHandComponent component in _completeHand.GetTriplets())
+        {
+            Tile tile = component.GetLeadTile();
+            if (tile.GetSuit() is WIND)
+            {
+                if (AreWindsEquivalent(tile, seatWind))
+                {
+                    return true;
+                }
+            }
+        }
+        return false;
     }
 }

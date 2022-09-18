@@ -1,38 +1,35 @@
-using System.Collections.Generic;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.Enums;
-using static RMU.Globals.Functions;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TenpaiHands
+namespace RMU.Hands.TenpaiHands;
+
+public sealed class StandardTenpaiHandOpenWait : StandardTenpaiHand
 {
-    public class StandardTenpaiHandOpenWait : StandardTenpaiHand
+    public StandardTenpaiHandOpenWait(List<ICompleteHandComponent> components) : base(components)
     {
-        public StandardTenpaiHandOpenWait(List<ICompleteHandComponent> components) : base(components)
-        {
-            GenerateWaits();
-        }
+        GenerateWaits();
+    }
 
-        private void GenerateWaits()
+    private void GenerateWaits()
+    {
+        foreach (ICompleteHandComponent component in GetComponents())
         {
-            foreach (ICompleteHandComponent component in GetComponents())
+            if (component.GetComponentType() == INCOMPLETE_SEQUENCE_OPEN_WAIT)
             {
-                if (component.GetComponentType() == INCOMPLETE_SEQUENCE_OPEN_WAIT)
+                Tile tile = component.GetLeadTile();
+                _waits = new List<Tile>
                 {
-                    Tile tile = component.GetLeadTile();
-                    _waits = new List<Tile>
-                    {
-                        GetTileBelow(tile),
-                        GetTileTwoAbove(tile)
-                    };
-                    return;
-                }
+                    GetTileBelow(tile),
+                    GetTileTwoAbove(tile)
+                };
+                return;
             }
         }
+    }
 
-        public override CompleteHandWaitType GetWaitType()
-        {
-            return OPEN_WAIT;
-        }
+    public override CompleteHandWaitType GetWaitType()
+    {
+        return OPEN_WAIT;
     }
 }

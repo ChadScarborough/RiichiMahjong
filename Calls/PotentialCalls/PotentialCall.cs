@@ -1,29 +1,27 @@
 using RMU.Players;
-using static RMU.Globals.Enums;
 
-namespace RMU.Calls.PotentialCalls
+namespace RMU.Calls.PotentialCalls;
+
+public abstract class PotentialCall : ICallObject
 {
-    public abstract class PotentialCall : ICallObject
+    private readonly Player _playerMakingCall;
+
+    protected PotentialCall(Player playerMakingCall)
     {
-        private readonly Player _playerMakingCall;
-
-        protected PotentialCall(Player playerMakingCall)
-        {
-            _playerMakingCall = playerMakingCall;
-        }
-
-        public abstract PotentialCallType GetCallType();
-
-        public Player GetPlayerMakingCall()
-        {
-            return _playerMakingCall;
-        }
-
-        public void SetQueue(IPriorityQueue priorityQueue)
-        {
-            
-        }
-
-        public abstract int GetPriority();
+        _playerMakingCall = playerMakingCall;
     }
+
+    public abstract PotentialCallType GetCallType();
+
+    public Player GetPlayerMakingCall()
+    {
+        return _playerMakingCall;
+    }
+
+    public void SetQueue(IPriorityQueue priorityQueue)
+    {
+
+    }
+
+    public abstract int GetPriority();
 }

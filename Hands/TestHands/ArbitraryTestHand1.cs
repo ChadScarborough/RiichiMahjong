@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class ArbitraryTestHand1 : TestHand
 {
-    public class ArbitraryTestHand1 : TestHand
+    public ArbitraryTestHand1()
     {
-        public ArbitraryTestHand1()
+        _closedTiles = new List<Tile> //Should be three from tenpai (five as standard hand, three as seven pairs)
         {
-            _closedTiles = new List<Tile> //Should be three from tenpai (five as standard hand, three as seven pairs)
-            {
-                SouthWind(), OneMan(), OneMan(), EightSou(), GreenDragon(), RedDragon(),
-                FourSou(), NorthWind(), FourPin(), WestWind(), NinePin(), GreenDragon(), NorthWind()
-            };
-        }
+            SouthWind(), OneMan(), OneMan(), EightSou(), GreenDragon(), RedDragon(),
+            FourSou(), NorthWind(), FourPin(), WestWind(), NinePin(), GreenDragon(), NorthWind()
+        };
     }
 }

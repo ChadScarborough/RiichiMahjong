@@ -1,23 +1,23 @@
-﻿
+﻿using RMU.Hands.CompleteHands;
 
-using RMU.Hands.CompleteHands;
+namespace RMU.Yaku.StandardYaku;
 
-namespace RMU.Yaku.StandardYaku
+public sealed class FullyConcealedHandYaku : YakuBase
 {
-    public class FullyConcealedHandYaku : YakuBase
+    public FullyConcealedHandYaku(ICompleteHand completeHand) : base(completeHand)
     {
-        public FullyConcealedHandYaku(ICompleteHand completeHand) : base(completeHand)
+        _name = "Fully Concealed Hand";
+        _value = 1;
+        _getValueBehaviour = new StandardGetValueBehaviour();
+    }
+
+    public override bool Check()
+    {
+        if (_completeHand.GetPlayer().IsActivePlayer() == false)
         {
-            _name = "Fully Concealed Hand";
-            _value = 1;
-            _getValueBehaviour = new StandardGetValueBehaviour();
+            return false;
         }
 
-        public override bool Check()
-        {
-            if (_completeHand.GetPlayer().IsActivePlayer() == false) return false;
-            if (_completeHand.IsOpen() == true) return false;
-            return true;
-        }
+        return _completeHand.IsOpen() != true;
     }
 }

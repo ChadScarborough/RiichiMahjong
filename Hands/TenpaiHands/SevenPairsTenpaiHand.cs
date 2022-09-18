@@ -1,52 +1,49 @@
-using System.Collections.Generic;
-using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.Enums;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TenpaiHands
+namespace RMU.Hands.TenpaiHands;
+
+public sealed class SevenPairsTenpaiHand : ITenpaiHand
 {
-    public class SevenPairsTenpaiHand : ITenpaiHand
+    private readonly List<ICompleteHandComponent> _components;
+    private readonly List<Tile> _waits;
+
+    public SevenPairsTenpaiHand(List<ICompleteHandComponent> components)
     {
-        private readonly List<ICompleteHandComponent> _components;
-        private List<Tile> _waits;
-        
-        public SevenPairsTenpaiHand(List<ICompleteHandComponent> components)
-        {
-            _components = components;
-            _waits = new();
-            GenerateWaits();
-        }
-        
-        public List<ICompleteHandComponent> GetComponents()
-        {
-            return _components;
-        }
+        _components = components;
+        _waits = new();
+        GenerateWaits();
+    }
 
-        public List<Tile> GetWaits()
-        {
-            return _waits;
-        }
+    public List<ICompleteHandComponent> GetComponents()
+    {
+        return _components;
+    }
 
-        public CompleteHandWaitType GetWaitType()
-        {
-            return PAIR_WAIT;
-        }
+    public List<Tile> GetWaits()
+    {
+        return _waits;
+    }
 
-        public CompleteHandType GetHandType()
-        {
-            return SEVEN_PAIRS;
-        }
+    public CompleteHandWaitType GetWaitType()
+    {
+        return PAIR_WAIT;
+    }
 
-        private void GenerateWaits()
+    public CompleteHandType GetHandType()
+    {
+        return SEVEN_PAIRS;
+    }
+
+    private void GenerateWaits()
+    {
+        foreach (ICompleteHandComponent component in _components)
         {
-            foreach (ICompleteHandComponent component in _components)
+            if (component.GetComponentType() != PAIR_COMPONENT)
             {
-                if (component.GetComponentType() != PAIR_COMPONENT)
-                {
-                    _waits.Add(component.GetLeadTile().Clone());
-                    return;
-                }
+                _waits.Add(component.GetLeadTile().Clone());
+                return;
             }
         }
     }

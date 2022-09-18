@@ -1,15 +1,12 @@
-﻿using System.Collections.Generic;
-using RMU.Globals;
-using RMU.Tiles;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Hands.CompleteHands.CompleteHandComponents
+namespace RMU.Hands.CompleteHands.CompleteHandComponents;
+
+public interface ICompleteHandComponent
 {
-    public interface ICompleteHandComponent
-    {
-        Enums.CompleteHandComponentType GetComponentType();
-        List<Tile> GetTiles();
-        Tile GetLeadTile();
-
-        Enums.CompleteHandGeneralComponentType GetGeneralComponentType();
-    }
+    CompleteHandComponentType GetComponentType();
+    List<Tile> GetTiles();
+    Tile GetLeadTile();
+    CompleteHandGeneralComponentType GetGeneralComponentType();
 }

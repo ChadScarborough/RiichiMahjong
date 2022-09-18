@@ -1,11 +1,10 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.Enums;
 
 namespace RMU.Yaku.StandardYaku;
 
-public class FullyOutsideHandYaku : YakuBase
+public sealed class FullyOutsideHandYaku : YakuBase
 {
     public FullyOutsideHandYaku(ICompleteHand completeHand) : base(completeHand)
     {
@@ -23,17 +22,23 @@ public class FullyOutsideHandYaku : YakuBase
 
         foreach (ICompleteHandComponent component in _completeHand.GetConstructedHandComponents())
         {
-            if (ComponentDoesNotContainTerminal(component)) return false;
+            if (ComponentDoesNotContainTerminal(component))
+            {
+                return false;
+            }
         }
 
         return true;
     }
 
-    private bool ComponentDoesNotContainTerminal(ICompleteHandComponent component)
+    private static bool ComponentDoesNotContainTerminal(ICompleteHandComponent component)
     {
         foreach (Tile tile in component.GetTiles())
         {
-            if (tile.IsTerminal()) return false;
+            if (tile.IsTerminal())
+            {
+                return false;
+            }
         }
 
         return true;

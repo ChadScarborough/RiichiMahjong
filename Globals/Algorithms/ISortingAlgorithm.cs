@@ -1,11 +1,9 @@
-﻿using System.Collections.Generic;
-using RMU.Tiles;
-using RMU.Globals;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Globals.Algorithms
+namespace RMU.Globals.Algorithms;
+
+public interface ISortingAlgorithm
 {
-    public interface ISortingAlgorithm
-    {
-        List<Tile> SortHand(List<Tile> tiles, List<Enums.Suit> suitPriority);
-    }
+    List<Tile> SortHand(List<Tile> tiles, List<Enums.Suit> suitPriority);
 }

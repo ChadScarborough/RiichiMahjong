@@ -1,17 +1,13 @@
 ﻿using System;
-using RMU.Globals;
 
-namespace RMU.Tiles
+namespace RMU.Tiles;
+
+public static class DragonTileFactory
 {
-    public static class DragonTileFactory
+    public static DragonTile CreateTile(int value, Suit suit)
     {
-        public static DragonTileObject CreateTile(int value, Enums.Suit suit)
-        {
-            if (value >= ConstValues.GREEN_DRAGON_C && value <= ConstValues.WHITE_DRAGON_C)
-            {
-                return new DragonTileObject(value, suit);
-            }
-            throw new ArgumentException();
-        }
+        return value is >= GREEN_DRAGON_C and <= WHITE_DRAGON_C
+            ? new DragonTile(value, suit)
+            : throw new ArgumentException("Invalid value for Dragon tile");
     }
 }

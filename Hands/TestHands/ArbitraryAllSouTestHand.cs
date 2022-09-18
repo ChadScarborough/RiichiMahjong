@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class ArbitraryAllSouTestHand : TestHand
 {
-    public class ArbitraryAllSouTestHand : TestHand
+    public ArbitraryAllSouTestHand()
     {
-        public ArbitraryAllSouTestHand()
+        _closedTiles = new List<Tile> //Should be tenpai
         {
-            _closedTiles = new List<Tile> //Should be tenpai
-            {
-                SixSou(), TwoSou(), OneSou(), ThreeSou(), TwoSou(), TwoSou(), SixSou(),
-                SevenSou(), SixSou(), FiveSou(), TwoSou(), SevenSou(), NineSou()
-            };
-        }
+            SixSou(), TwoSou(), OneSou(), ThreeSou(), TwoSou(), TwoSou(), SixSou(),
+            SevenSou(), SixSou(), FiveSou(), TwoSou(), SevenSou(), NineSou()
+        };
     }
 }

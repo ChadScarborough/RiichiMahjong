@@ -1,7 +1,5 @@
-using System;
-using System.Collections.Generic;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using static RMU.Globals.Enums;
+using System.Collections.Generic;
 
 namespace RMU.Globals.Algorithms;
 
@@ -72,7 +70,7 @@ public static class RadixSortForCompleteHandComponents
 
     private static void FillSuitBuckets()
     {
-        List<Suit> suitPriority = new List<Suit> {MAN, PIN, SOU, WIND, DRAGON}; 
+        List<Suit> suitPriority = new() { MAN, PIN, SOU, WIND, DRAGON };
         foreach (ICompleteHandComponent component in _components)
         {
             Suit suit = component.GetLeadTile().GetSuit();
@@ -83,7 +81,7 @@ public static class RadixSortForCompleteHandComponents
 
     private static void FillComponentBuckets()
     {
-        List<CompleteHandGeneralComponentType> componentPriority = new List<CompleteHandGeneralComponentType>
+        List<CompleteHandGeneralComponentType> componentPriority = new()
         {
             GROUP,
             PAIR,
@@ -97,16 +95,16 @@ public static class RadixSortForCompleteHandComponents
             _componentBuckets[index].Enqueue(component);
         }
     }
-    
+
     private static void CreateBuckets(List<DataStructures.Queue<ICompleteHandComponent>> buckets, int quantity)
     {
         for (int i = 0; i < quantity; i++)
         {
-            DataStructures.Queue<ICompleteHandComponent> queue = new DataStructures.Queue<ICompleteHandComponent>();
+            DataStructures.Queue<ICompleteHandComponent> queue = new();
             buckets.Add(queue);
         }
     }
-    
+
     private static void EmptyQueues(DataStructures.Queue<ICompleteHandComponent> queue)
     {
         while (!queue.IsEmpty())
@@ -115,7 +113,7 @@ public static class RadixSortForCompleteHandComponents
             _components.Add(component);
         }
     }
-    
+
     private static void EmptyBuckets(List<DataStructures.Queue<ICompleteHandComponent>> buckets)
     {
         foreach (DataStructures.Queue<ICompleteHandComponent> queue in buckets)

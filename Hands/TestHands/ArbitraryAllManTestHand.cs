@@ -1,18 +1,16 @@
-﻿using System.Collections.Generic;
-using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class ArbitraryAllManTestHand : TestHand
 {
-    public class ArbitraryAllManTestHand : TestHand
+    public ArbitraryAllManTestHand()
     {
-        public ArbitraryAllManTestHand()
+        _closedTiles = new List<Tile> //Should be in tenpai
         {
-            _closedTiles = new List<Tile> //Should be in tenpai
-            {
-                NineMan(), FourMan(), SevenMan(), SixMan(), ThreeMan(), FiveMan(),
-                OneMan(), SevenMan(), TwoMan(), FourMan(), EightMan(), FourMan(), SevenMan()
-            };
-        }
+            NineMan(), FourMan(), SevenMan(), SixMan(), ThreeMan(), FiveMan(),
+            OneMan(), SevenMan(), TwoMan(), FourMan(), EightMan(), FourMan(), SevenMan()
+        };
     }
 }

@@ -4,10 +4,9 @@ using RMU.Tiles;
 
 namespace RMU.Yaku.StandardYaku
 {
-    public class PinfuYaku : YakuBase
-
+    public sealed class PinfuYaku : YakuBase
     {
-        private readonly new ICompleteHand _completeHand;
+        private new readonly ICompleteHand _completeHand;
 
         public PinfuYaku(ICompleteHand completeHand) : base(completeHand)
         {
@@ -19,20 +18,34 @@ namespace RMU.Yaku.StandardYaku
 
         public override bool Check()
         {
-            if (_completeHand is null) return false;
-            if (_completeHand.IsOpen()) return false;
-            if (_completeHand.GetTriplets().Count > 0) return false;
-            if (HasYakuhaiPair(_completeHand)) return false;
-            return true;
+            if (_completeHand is null)
+            {
+                return false;
+            }
+
+            if (_completeHand.IsOpen())
+            {
+                return false;
+            }
+
+            if (_completeHand.GetTriplets().Count > 0)
+            {
+                return false;
+            }
+
+            return !HasYakuhaiPair(_completeHand);
         }
 
         private static bool HasYakuhaiPair(ICompleteHand completeHand)
         {
             ICompleteHandComponent pair = completeHand.GetPairs()[0];
             Tile tile = pair.GetLeadTile();
-            if (HasDragonPair(tile)) return true;
-            if (HasSeatWindPair(completeHand, tile)) return true;
-            return (HasRoundWindPair(completeHand, tile));
+            if (HasDragonPair(tile))
+            {
+                return true;
+            }
+
+            return HasSeatWindPair(completeHand, tile) || HasRoundWindPair(completeHand, tile);
         }
 
         private static bool HasDragonPair(Tile tile)

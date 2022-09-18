@@ -2,7 +2,7 @@ using RMU.Hands.CompleteHands;
 
 namespace RMU.Yaku;
 
-public class StandardGetValueBehaviour : IGetValueBehaviour
+public sealed class StandardGetValueBehaviour : IGetValueBehaviour
 {
     public int GetValue(ICompleteHand completeHand, int value)
     {

@@ -1,22 +1,20 @@
-using static RMU.Globals.Enums;
 using RMU.Players;
 
-namespace RMU.Calls.PotentialCalls
+namespace RMU.Calls.PotentialCalls;
+
+public sealed class PotentialHighChii : PotentialCall
 {
-    public class PotentialHighChii : PotentialCall
+    public PotentialHighChii(Player playerMakingCall) : base(playerMakingCall)
     {
-        public PotentialHighChii(Player playerMakingCall) : base(playerMakingCall)
-        {
-        }
+    }
 
-        public override PotentialCallType GetCallType()
-        {
-            return HIGH_CHII_POTENTIAL_CALL_TYPE;
-        }
+    public override PotentialCallType GetCallType()
+    {
+        return HIGH_CHII_POTENTIAL_CALL_TYPE;
+    }
 
-        public override int GetPriority()
-        {
-            return 1;
-        }
+    public override int GetPriority()
+    {
+        return 1;
     }
 }

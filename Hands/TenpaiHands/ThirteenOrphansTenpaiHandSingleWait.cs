@@ -1,25 +1,19 @@
-using System.Collections.Generic;
-using RMU.Globals;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
-using static RMU.Globals.Functions;
-using static RMU.Globals.ConstValues;
+using System.Collections.Generic;
 
 namespace RMU.Hands.TenpaiHands;
 
-public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
+public sealed class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
 {
-    private readonly Tile[] _terminals = 
+    private readonly Tile[] _terminals =
     {
         ONE_MAN, NINE_MAN,
         ONE_PIN, NINE_PIN,
         ONE_SOU, NINE_SOU,
         EAST_WIND, SOUTH_WIND,
         WEST_WIND, NORTH_WIND,
-        GREEN_DRAGON,
-        RED_DRAGON,
-        WHITE_DRAGON
+        GREEN_DRAGON, RED_DRAGON, WHITE_DRAGON
     };
 
     public ThirteenOrphansTenpaiHandSingleWait(List<ICompleteHandComponent> components) : base(components)
@@ -27,9 +21,9 @@ public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
         SetWaits();
     }
 
-    public override Enums.CompleteHandWaitType GetWaitType()
+    public override CompleteHandWaitType GetWaitType()
     {
-        return Enums.SINGLE_WAIT;
+        return SINGLE_WAIT;
     }
 
     private void SetWaits()
@@ -50,7 +44,7 @@ public class ThirteenOrphansTenpaiHandSingleWait : ThirteenOrphansTenpaiHand
 
     private void GetTileFromComponentAndIncrementAppropriateCounter(int[] counters, ICompleteHandComponent component)
     {
-        var tile = GetTileFromComponent(component);
+        Tile tile = GetTileFromComponent(component);
         IncrementAppropriateCounter(counters, tile);
     }
 

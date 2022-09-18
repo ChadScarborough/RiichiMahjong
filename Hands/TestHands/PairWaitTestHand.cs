@@ -1,10 +1,9 @@
-using System.Collections.Generic;
 using RMU.Tiles;
-using static RMU.Globals.StandardTileList;
+using System.Collections.Generic;
 
 namespace RMU.Hands.TestHands;
 
-public class PairWaitTestHand : TestHand
+public sealed class PairWaitTestHand : TestHand
 {
     public PairWaitTestHand()
     {
@@ -17,5 +16,5 @@ public class PairWaitTestHand : TestHand
             RedDragon()
         };
         //Waiting on another red dragon
-    }   
+    }
 }

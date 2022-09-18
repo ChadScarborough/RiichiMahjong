@@ -1,161 +1,158 @@
-﻿using System.Collections.Generic;
-using RMU.Globals.Algorithms;
+﻿using RMU.Globals.Algorithms;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
-using RMU.Tiles;
 using RMU.Players;
-using static RMU.Globals.Enums;
+using RMU.Tiles;
+using System.Collections.Generic;
 using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
-using static RMU.Globals.Functions;
 
-namespace RMU.Hands.CompleteHands
+namespace RMU.Hands.CompleteHands;
+
+public sealed class ThirteenOrphansCompleteHand : ICompleteHand
 {
-    public class ThirteenOrphansCompleteHand : ICompleteHand
+    private readonly List<ICompleteHandComponent> _completeHand;
+    private readonly CompleteHandWaitType _waitType;
+    private readonly ITenpaiHand _tenpaiHand;
+    private readonly List<ICompleteHandComponent> _constructedHand;
+    private readonly Tile _drawTile;
+    private readonly List<ICompleteHandComponent> _isolatedTiles;
+    private readonly List<ICompleteHandComponent> _pairs;
+    private readonly List<Tile> _tiles;
+    private readonly Player _player;
+    private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
+
+    public ThirteenOrphansCompleteHand(ITenpaiHand tenpaiHand, Tile tile, Player player)
     {
-        private readonly List<ICompleteHandComponent> _completeHand;
-        private readonly CompleteHandWaitType _waitType;
-        private readonly ITenpaiHand _tenpaiHand;
-        private readonly List<ICompleteHandComponent> _constructedHand;
-        private readonly Tile _drawTile;
-        private readonly List<ICompleteHandComponent> _isolatedTiles;
-        private readonly List<ICompleteHandComponent> _pairs;
-        private readonly List<Tile> _tiles;
-        private readonly Player _player;
-        private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
+        _player = player;
+        _completeHand = tenpaiHand.GetComponents();
+        ICompleteHandComponent drawTile = CreateCompleteHandComponent(tile, DRAW_TILE);
+        _completeHand.Add(drawTile);
+        _tenpaiHand = tenpaiHand;
+        _waitType = tenpaiHand.GetWaitType();
+        _drawTile = tile;
+        _isolatedTiles = new List<ICompleteHandComponent>();
+        _pairs = new List<ICompleteHandComponent>();
+        _constructedHand = new List<ICompleteHandComponent>();
+        _tiles = new List<Tile>();
 
-        public ThirteenOrphansCompleteHand(ITenpaiHand tenpaiHand, Tile tile, Player player)
+        if (_waitType is SINGLE_WAIT)
         {
-            _player = player;
-            _completeHand = tenpaiHand.GetComponents();
-            ICompleteHandComponent drawTile = CreateCompleteHandComponent(tile, DRAW_TILE);
-            _completeHand.Add(drawTile);
-            _tenpaiHand = tenpaiHand;
-            _waitType = tenpaiHand.GetWaitType();
-            _drawTile = tile;
-            _isolatedTiles = new List<ICompleteHandComponent>();
-            _pairs = new List<ICompleteHandComponent>();
-            _constructedHand = new List<ICompleteHandComponent>();
-            _tiles = new List<Tile>();
-
-            if (_waitType is SINGLE_WAIT)
+            foreach (ICompleteHandComponent component in _completeHand)
             {
-                foreach (ICompleteHandComponent component in _completeHand)
+                if (component.GetComponentType() is DRAW_TILE)
                 {
-                    if (component.GetComponentType() is DRAW_TILE)
-                    {
-                        ICompleteHandComponent isolatedTile =
-                            CreateCompleteHandComponent(component.GetLeadTile(), ISOLATED_TILE);
-                        _constructedHand.Add(isolatedTile);
-                        continue;
-                    }
-
-                    if (component.GetComponentType() is ISOLATED_TILE)
-                    {
-                        _isolatedTiles.Add(component);
-                    }
-                    else if (component.GetComponentType() is PAIR_COMPONENT)
-                    {
-                        _pairs.Add(component);
-                    }
-                    _constructedHand.Add(component);
+                    ICompleteHandComponent isolatedTile =
+                        CreateCompleteHandComponent(component.GetLeadTile(), ISOLATED_TILE);
+                    _constructedHand.Add(isolatedTile);
+                    continue;
                 }
-            }
-            else
-            {
-                foreach (ICompleteHandComponent component in _completeHand)
+
+                if (component.GetComponentType() is ISOLATED_TILE)
                 {
-                    if (AreTilesEquivalent(component.GetLeadTile(), _drawTile))
-                    {
-                        List<Tile> tileList = new List<Tile> {_drawTile, component.GetLeadTile()};
-                        ICompleteHandComponent pair = CreateCompleteHandComponent(tileList, PAIR_COMPONENT);
-                        _constructedHand.Add(pair);
-                        _pairs.Add(pair);
-                        continue;
-                    }
-                    _constructedHand.Add(component);
                     _isolatedTiles.Add(component);
                 }
-            }
-
-            foreach (ICompleteHandComponent component in _constructedHand)
-            {
-                foreach (Tile t in component.GetTiles())
+                else if (component.GetComponentType() is PAIR_COMPONENT)
                 {
-                    _tiles.Add(t);
+                    _pairs.Add(component);
                 }
+                _constructedHand.Add(component);
             }
-
-            _constructedHand = RadixSortForCompleteHandComponents.Sort(_constructedHand);
         }
-
-        public List<ICompleteHandComponent> GetComponents()
+        else
         {
-            return _completeHand;
+            foreach (ICompleteHandComponent component in _completeHand)
+            {
+                if (AreTilesEquivalent(component.GetLeadTile(), _drawTile))
+                {
+                    List<Tile> tileList = new() { _drawTile, component.GetLeadTile() };
+                    ICompleteHandComponent pair = CreateCompleteHandComponent(tileList, PAIR_COMPONENT);
+                    _constructedHand.Add(pair);
+                    _pairs.Add(pair);
+                    continue;
+                }
+                _constructedHand.Add(component);
+                _isolatedTiles.Add(component);
+            }
         }
 
-        public CompleteHandType GetCompleteHandType()
+        foreach (ICompleteHandComponent component in _constructedHand)
         {
-            return THIRTEEN_ORPHANS;
+            foreach (Tile t in component.GetTiles())
+            {
+                _tiles.Add(t);
+            }
         }
 
-        public CompleteHandWaitType GetWaitType()
-        {
-            return _waitType;
-        }
+        _constructedHand = RadixSortForCompleteHandComponents.Sort(_constructedHand);
+    }
 
-        public bool IsOpen()
-        {
-            return false;
-        }
+    public List<ICompleteHandComponent> GetComponents()
+    {
+        return _completeHand;
+    }
 
-        public List<ICompleteHandComponent> GetConstructedHandComponents()
-        {
-            return _constructedHand;
-        }
+    public CompleteHandType GetCompleteHandType()
+    {
+        return THIRTEEN_ORPHANS;
+    }
 
-        public List<ICompleteHandComponent> GetTriplets()
-        {
-            return new List<ICompleteHandComponent>();
-        }
+    public CompleteHandWaitType GetWaitType()
+    {
+        return _waitType;
+    }
 
-        public List<ICompleteHandComponent> GetSequences()
-        {
-            return new List<ICompleteHandComponent>();
-        }
+    public bool IsOpen()
+    {
+        return false;
+    }
 
-        public List<ICompleteHandComponent> GetPairs()
-        {
-            return _pairs;
-        }
+    public List<ICompleteHandComponent> GetConstructedHandComponents()
+    {
+        return _constructedHand;
+    }
 
-        public List<ICompleteHandComponent> GetIsolatedTiles()
-        {
-            return _isolatedTiles;
-        }
+    public List<ICompleteHandComponent> GetTriplets()
+    {
+        return new List<ICompleteHandComponent>();
+    }
 
-        public List<Tile> GetTiles()
-        {
-            return _tiles;
-        }
+    public List<ICompleteHandComponent> GetSequences()
+    {
+        return new List<ICompleteHandComponent>();
+    }
 
-        public void SetYaku(List<Yaku.StandardYaku.YakuBase> satisfiedYaku)
-        {
-            _satisfiedYaku = satisfiedYaku;
-        }
+    public List<ICompleteHandComponent> GetPairs()
+    {
+        return _pairs;
+    }
 
-        public List<Yaku.StandardYaku.YakuBase> GetYaku()
-        {
-            return _satisfiedYaku;
-        }
+    public List<ICompleteHandComponent> GetIsolatedTiles()
+    {
+        return _isolatedTiles;
+    }
 
-        public Player GetPlayer()
-        {
-            return _player;
-        }
+    public List<Tile> GetTiles()
+    {
+        return _tiles;
+    }
 
-        public ITenpaiHand GetTenpaiHand()
-        {
-            return _tenpaiHand;
-        }
+    public void SetYaku(List<Yaku.StandardYaku.YakuBase> satisfiedYaku)
+    {
+        _satisfiedYaku = satisfiedYaku;
+    }
+
+    public List<Yaku.StandardYaku.YakuBase> GetYaku()
+    {
+        return _satisfiedYaku;
+    }
+
+    public Player GetPlayer()
+    {
+        return _player;
+    }
+
+    public ITenpaiHand GetTenpaiHand()
+    {
+        return _tenpaiHand;
     }
 }

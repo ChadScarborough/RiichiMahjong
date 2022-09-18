@@ -1,25 +1,23 @@
-using System;
 using RMU.Players;
-using RMU.Hands;
 using RMU.Tiles;
+using System;
 
-namespace RMU.Calls.CallCommands
+namespace RMU.Calls.CallCommands;
+
+public sealed class CallRiichiCommand : CallCommand
 {
-    public class CallRiichiCommand : CallCommand
+    public CallRiichiCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
     {
-        public CallRiichiCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
-        {
 
-        }
-        
-        public override void Execute()
-        {
-            Console.WriteLine("Riichi!"); //Obviously not the final code
-        }
+    }
 
-        public override int GetPriority()
-        {
-            return 0;
-        }
+    public override void Execute()
+    {
+        Console.WriteLine("Riichi!"); //Obviously not the final code
+    }
+
+    public override int GetPriority()
+    {
+        return 0;
     }
 }

@@ -1,44 +1,31 @@
-﻿using System;
-using System.Collections.Generic;
-using RMU.Calls.CreateMeldBehaviours;
-using RMU.Globals;
+﻿using RMU.Calls.CreateMeldBehaviours;
 using RMU.Tiles;
+using System;
+using System.Collections.Generic;
 
-namespace RMU.Hands.CompleteHands.CompleteHandComponents
+namespace RMU.Hands.CompleteHands.CompleteHandComponents;
+
+public static class CompleteHandGroupFactory
 {
-    public static class CompleteHandGroupFactory
+    public static ICompleteHandGroup CreateCompleteHandGroup(List<Tile> tiles, CompleteHandComponentType componentType)
     {
-        public static ICompleteHandGroup CreateCompleteHandGroup(List<Tile> tiles, Enums.CompleteHandComponentType componentType)
+        return componentType switch
         {
-            switch (componentType)
-            {
-                case Enums.CLOSED_PON:
-                    return new ClosedPon(tiles);
-                case Enums.CLOSED_CHII:
-                    return new ClosedChii(tiles);
-                default:
-                    throw new ArgumentException("This error should be impossible");
-            }
-        }
+            CLOSED_PON => new ClosedPon(tiles),
+            CLOSED_CHII => new ClosedChii(tiles),
+            _ => throw new ArgumentException("This error should be impossible"),
+        };
+    }
 
-        public static ICompleteHandGroup CreateCompleteHandGroup(OpenMeld meld)
+    public static ICompleteHandGroup CreateCompleteHandGroup(OpenMeld meld)
+    {
+        return meld.GetMeldType() switch
         {
-            switch (meld.GetMeldType())
-            {
-                case Enums.LOW_CHII:
-                case Enums.MID_CHII:
-                case Enums.HIGH_CHII:
-                    return new OpenChii(meld);
-                case Enums.PON:
-                    return new OpenPon(meld);
-                case Enums.OPEN_KAN_1:
-                case Enums.OPEN_KAN_2:
-                    return new OpenKan(meld);
-                case Enums.CLOSED_KAN_MELD:
-                    return new ClosedKan(meld);
-                default:
-                    throw new ArgumentException("This error should be impossible");
-            }
-        }
+            LOW_CHII or MID_CHII or HIGH_CHII => new OpenChii(meld),
+            PON => new OpenPon(meld),
+            OPEN_KAN_1 or OPEN_KAN_2 => new OpenKan(meld),
+            CLOSED_KAN_MELD => new ClosedKan(meld),
+            _ => throw new ArgumentException("This error should be impossible"),
+        };
     }
 }

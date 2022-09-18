@@ -2,15 +2,10 @@ using RMU.Hands.CompleteHands;
 
 namespace RMU.Yaku;
 
-public class OpenDependentGetValueBehaviour : IGetValueBehaviour
+public sealed class OpenDependentGetValueBehaviour : IGetValueBehaviour
 {
     public int GetValue(ICompleteHand completeHand, int value)
     {
-        if (completeHand.IsOpen())
-        {
-            return value - 1;
-        }
-
-        return value;
+        return completeHand.IsOpen() ? value - 1 : value;
     }
 }

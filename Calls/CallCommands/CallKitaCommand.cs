@@ -1,40 +1,36 @@
 using RMU.Players;
 using RMU.Tiles;
-using static RMU.Globals.Enums;
-using static RMU.Globals.Functions;
-using static RMU.Globals.StandardTileList;
 
-namespace RMU.Calls.CallCommands
+namespace RMU.Calls.CallCommands;
+
+public sealed class CallKitaCommand : CallCommand
 {
-    public class CallKitaCommand : CallCommand
+    public CallKitaCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
     {
-        public CallKitaCommand(Player playerMakingCall, Tile calledTile) : base(playerMakingCall, calledTile)
-        {
 
-        }
-        
-        public override void Execute()
+    }
+
+    public override void Execute()
+    {
+        _handMakingCall.CreateOpenMeld(_calledTile, KITA);
+        if (AreTilesEquivalent(_handMakingCall.GetDrawTile(), NORTH_WIND))
         {
-            _handMakingCall.CreateOpenMeld(_calledTile, KITA);
-            if (AreTilesEquivalent(_handMakingCall.GetDrawTile(), NORTH_WIND))
+            _handMakingCall.RemoveDrawTile();
+            return;
+        }
+
+        foreach (Tile tile in _handMakingCall.GetClosedTiles())
+        {
+            if (AreTilesEquivalent(tile, NORTH_WIND))
             {
-                _handMakingCall.RemoveDrawTile();
+                _handMakingCall.RemoveCopyOfTile(tile);
                 return;
             }
-
-            foreach (Tile tile in _handMakingCall.GetClosedTiles())
-            {
-                if (AreTilesEquivalent(tile, NORTH_WIND))
-                {
-                    _handMakingCall.RemoveCopyOfTile(tile);
-                    return;
-                }
-            }
         }
+    }
 
-        public override int GetPriority()
-        {
-            return 0;
-        }
+    public override int GetPriority()
+    {
+        return 0;
     }
 }

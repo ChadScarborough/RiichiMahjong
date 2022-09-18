@@ -1,21 +1,19 @@
-﻿using System.Collections.Generic;
-using RMU.Globals;
-using RMU.Tiles;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Hands.TestHands
+namespace RMU.Hands.TestHands;
+
+public sealed class AllSimplesTestHand : TestHand
 {
-    public class AllSimplesTestHand : TestHand
+    public AllSimplesTestHand()
     {
-        public AllSimplesTestHand()
+        _closedTiles = new List<Tile>
         {
-            _closedTiles = new List<Tile> 
-            { 
-                StandardTileList.TWO_MAN.Clone(), StandardTileList.THREE_MAN.Clone(), StandardTileList.FOUR_MAN.Clone(),
-                StandardTileList.FIVE_PIN.Clone(), StandardTileList.FIVE_PIN.Clone(), StandardTileList.FIVE_PIN.Clone(),
-                StandardTileList.SIX_SOU.Clone(), StandardTileList.SEVEN_SOU.Clone(), StandardTileList.EIGHT_SOU.Clone(),
-                StandardTileList.TWO_PIN.Clone(), StandardTileList.TWO_PIN.Clone(), StandardTileList.TWO_PIN.Clone(),
-                StandardTileList.EIGHT_MAN.Clone()
-            };
-        }
+            TwoMan(), ThreeMan(), FourMan(),
+            FivePin(), FivePin(), FivePin(),
+            SixSou(), SevenSou(), EightSou(),
+            TwoPin(), TwoPin(), TwoPin(),
+            EightMan()
+        };
     }
 }

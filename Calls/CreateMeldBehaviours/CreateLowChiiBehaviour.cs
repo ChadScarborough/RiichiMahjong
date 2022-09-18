@@ -1,16 +1,14 @@
 ﻿using RMU.Tiles;
 using System.Collections.Generic;
-using RMU.Globals;
 
-namespace RMU.Calls.CreateMeldBehaviours
+namespace RMU.Calls.CreateMeldBehaviours;
+
+public sealed class CreateLowChiiBehaviour : ICreateMeldBehaviour
 {
-    public class CreateLowChiiBehaviour : ICreateMeldBehaviour
+    public List<Tile> CreateMeld(Tile calledTile)
     {
-        public List<Tile> CreateMeld(Tile calledTile)
-        {
-            Tile twoBelow = Functions.GetTileTwoBelow(calledTile);
-            Tile oneBelow = Functions.GetTileBelow(calledTile);
-            return new List<Tile> { twoBelow, oneBelow, calledTile };
-        }
+        Tile twoBelow = GetTileTwoBelow(calledTile);
+        Tile oneBelow = GetTileBelow(calledTile);
+        return new List<Tile> { twoBelow, oneBelow, calledTile };
     }
 }

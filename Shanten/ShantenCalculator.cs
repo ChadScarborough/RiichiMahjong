@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using RMU.Globals;
 using RMU.Hands;
 using RMU.Shanten.HandSplitter;
+using System.Collections.Generic;
 
 namespace RMU.Shanten;
 
@@ -21,6 +20,6 @@ public static class ShantenCalculator
             thirteenOrphansShanten = ThirteenOrphansShantenCalculator.CalculateShanten(hand, collections);
         }
 
-        return Functions.MinOfThree(standardShanten, sevenPairsShanten, thirteenOrphansShanten);
+        return MinOfThree(standardShanten, sevenPairsShanten, thirteenOrphansShanten);
     }
 }

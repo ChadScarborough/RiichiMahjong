@@ -1,10 +1,9 @@
-﻿using System.Collections.Generic;
-using RMU.Tiles;
+﻿using RMU.Tiles;
+using System.Collections.Generic;
 
-namespace RMU.Calls.CreateMeldBehaviours
+namespace RMU.Calls.CreateMeldBehaviours;
+
+public interface ICreateMeldBehaviour
 {
-    public interface ICreateMeldBehaviour
-    {
-        public List<Tile> CreateMeld(Tile calledTile);
-    }
+    public List<Tile> CreateMeld(Tile calledTile);
 }
