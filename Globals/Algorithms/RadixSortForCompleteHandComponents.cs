@@ -13,7 +13,16 @@ public static class RadixSortForCompleteHandComponents
     private static List<DataStructures.Queue<ICompleteHandComponent>> _componentBuckets;
     private static List<ICompleteHandComponent> _components;
 
+    private static readonly object sortLock = new();
     public static List<ICompleteHandComponent> Sort(List<ICompleteHandComponent> components)
+    {
+        lock (sortLock)
+        {
+            return LockedSort(components);
+        }
+    }
+
+    private static List<ICompleteHandComponent> LockedSort(List<ICompleteHandComponent> components)
     {
         _components = components;
         InitializeBuckets();

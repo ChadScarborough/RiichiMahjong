@@ -15,13 +15,18 @@ public static class StandardShantenCalculator
     private static int _numberOfOpenMelds;
     private static Hand _hand;
 
+    private static readonly object shantenLock = new();
+
     public static int CalculateShanten(Hand hand, List<TileCollection> collections, int numberOfOpenMelds)
     {
-        _hand = hand;
-        _numberOfOpenMelds = numberOfOpenMelds;
-        ClearShantenValues();
-        SetShantenValues(collections);
-        return MinOfArray(ShantenValues);
+        lock (shantenLock)
+        {
+            _hand = hand;
+            _numberOfOpenMelds = numberOfOpenMelds;
+            ClearShantenValues();
+            SetShantenValues(collections);
+            return MinOfArray(ShantenValues);
+        }
     }
 
     private static void ClearShantenValues()

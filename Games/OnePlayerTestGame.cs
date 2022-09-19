@@ -1,6 +1,6 @@
 ﻿using RMU.Hands.TestHands;
 using RMU.Players;
-using RMU.Wall;
+using RMU.Walls;
 
 namespace RMU.Games;
 

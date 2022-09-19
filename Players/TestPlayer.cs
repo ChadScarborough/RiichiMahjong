@@ -3,7 +3,7 @@ using RMU.Hands.TestHands;
 
 namespace RMU.Players;
 
-public abstract class TestPlayer : Player
+public sealed class TestPlayer : Player
 {
     public TestPlayer(Wind wind, TestHand hand, OnePlayerTestGame game) : base(wind, hand, game)
     {

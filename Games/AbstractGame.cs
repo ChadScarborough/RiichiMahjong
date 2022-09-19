@@ -3,8 +3,8 @@ using RMU.Calls.PotentialCalls;
 using RMU.Games.Scoring;
 using RMU.Players;
 using RMU.Tiles;
-using RMU.Wall;
-using RMU.Wall.DeadWall;
+using RMU.Walls;
+using RMU.Walls.DeadWall;
 using RMU.Yaku.StandardYaku;
 using System.Collections.Generic;
 
@@ -14,7 +14,7 @@ public abstract class AbstractGame
 {
     protected Player[] _players;
     protected WallObject _wallObject;
-    protected Wall.Wall _wall;
+    protected Wall _wall;
     protected IDeadWall _deadWall;
     private Tile _lastTile;
     private PriorityQueueForPotentialCalls _potentialQueue;
@@ -117,7 +117,7 @@ public abstract class AbstractGame
         return GetPlayerByWind(NORTH);
     }
 
-    public Wall.Wall GetWall()
+    public Wall GetWall()
     {
         return _wall;
     }

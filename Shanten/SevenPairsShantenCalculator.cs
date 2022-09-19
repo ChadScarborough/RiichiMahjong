@@ -12,25 +12,30 @@ public static class SevenPairsShantenCalculator
     private static List<ICompleteHandComponent> _components;
     private static int _triplets, _pairs;
 
+    private static readonly object shantenLock = new();
+
     public static int CalculateShanten(Hand hand, List<TileCollection> collections)
     {
-        InitializeValues(collections);
-        ExtractTripletsAndPairsAndIncrementCounters();
-        int shanten = ShantenFormulas.CalculateSevenPairsShanten(_triplets, _pairs);
-        if (shanten == 0)
+        lock (shantenLock)
         {
-            foreach (TileCollection collection in _newCollections)
+            InitializeValues(collections);
+            ExtractTripletsAndPairsAndIncrementCounters();
+            int shanten = ShantenFormulas.CalculateSevenPairsShanten(_triplets, _pairs);
+            if (shanten == 0)
             {
-                List<ICompleteHandComponent> isolatedTiles = IsolatedTileExtractor.ExtractIsolatedTiles(collection);
-                foreach (ICompleteHandComponent component in isolatedTiles)
+                foreach (TileCollection collection in _newCollections)
                 {
-                    _components.Add(component);
+                    List<ICompleteHandComponent> isolatedTiles = IsolatedTileExtractor.ExtractIsolatedTiles(collection);
+                    foreach (ICompleteHandComponent component in isolatedTiles)
+                    {
+                        _components.Add(component);
+                    }
                 }
+                hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));
             }
-            hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));
-        }
 
-        return shanten;
+            return shanten;
+        }
     }
 
     private static void ExtractTripletsAndPairsAndIncrementCounters()

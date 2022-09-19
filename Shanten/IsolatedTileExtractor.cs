@@ -7,15 +7,20 @@ namespace RMU.Shanten;
 
 public static class IsolatedTileExtractor
 {
+    private static readonly object tileLock = new();
+
     public static List<ICompleteHandComponent> ExtractIsolatedTiles(TileCollection collection)
     {
-        List<ICompleteHandComponent> outputList = new();
-        foreach (Tile tile in collection.GetTiles())
+        lock (tileLock)
         {
-            ICompleteHandComponent component = CompleteHandComponentFactory.CreateCompleteHandComponent(tile, ISOLATED_TILE);
-            outputList.Add(component);
-        }
+            List<ICompleteHandComponent> outputList = new();
+            foreach (Tile tile in collection.GetTiles())
+            {
+                ICompleteHandComponent component = CompleteHandComponentFactory.CreateCompleteHandComponent(tile, ISOLATED_TILE);
+                outputList.Add(component);
+            }
 
-        return outputList;
+            return outputList;
+        }
     }
 }

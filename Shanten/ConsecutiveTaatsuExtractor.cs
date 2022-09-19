@@ -11,16 +11,21 @@ public static class ConsecutiveTaatsuExtractor
     private static List<ICompleteHandComponent> _outputList;
     private static TileCollection _collection;
 
+    private static readonly object taatsuLock = new();
+
     public static List<ICompleteHandComponent> ExtractConsecutiveTaatsu(TileCollection collection)
     {
-        InitializeLists(collection);
-        if (CollectionIsInvalid())
+        lock (taatsuLock)
         {
+            InitializeLists(collection);
+            if (CollectionIsInvalid())
+            {
+                return _outputList;
+            }
+
+            CheckCollectionForConsecutiveTaatus();
             return _outputList;
         }
-
-        CheckCollectionForConsecutiveTaatus();
-        return _outputList;
     }
 
     private static void CheckCollectionForConsecutiveTaatus()

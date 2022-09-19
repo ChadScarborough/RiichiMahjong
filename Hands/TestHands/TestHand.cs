@@ -1,5 +1,5 @@
 ﻿using RMU.Tiles;
-using RMU.Wall;
+using RMU.Walls;
 using System.Collections.Generic;
 
 namespace RMU.Hands.TestHands;

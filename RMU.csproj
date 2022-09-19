@@ -13,54 +13,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="RMUTests\TileTest.cs" />
-    <Compile Remove="RMUTests\OpenMeldTest.cs" />
-    <Compile Remove="RMUTests\DeadWallTest.cs" />
-    <Compile Remove="RMUTests\RedFiveTest.cs" />
-    <Compile Remove="RMUTests\QueueTest.cs" />
-    <Compile Remove="RMUTests\FunctionsTest.cs" />
-    <Compile Remove="RMUTests\PlayerTest.cs" />
-    <Compile Remove="RMUTests\DoraTest.cs" />
-    <Compile Remove="RMUTests\ShantenFormulaTest.cs" />
-    <Compile Remove="RMUTests\DoublyLinkedListTest.cs" />
-    <Compile Remove="RMUTests\HandTest.cs" />
-    <Compile Remove="RMUTests\SortingTest.cs" />
-    <Compile Remove="RMUTests\StackTest.cs" />
-    <Compile Remove="RMUTests\DiscardPileTest.cs" />
-    <Compile Remove="RMUTests\WallTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\IncompleteSequenceOpenWaitTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\IncompleteSequenceEdgeWaitTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\OpenKanTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\IsolatedTileTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\ClosedChiiTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\IncompleteSequenceClosedWaitTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\CompleteHandComponentFactoryTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\OpenChiiTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\PairTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\ClosedPonTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\DrawTileTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\OpenPonTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandComponentsTests\ClosedKanTest.cs" />
-    <Compile Remove="RMUTests\ShantenTests\StandardShantenCalculatorTest.cs" />
-    <Compile Remove="RMUTests\ShantenTests\HandSplitterTest.cs" />
-    <Compile Remove="RMUTests\ShantenTests\PonExtractorTest.cs" />
-    <Compile Remove="RMUTests\ShantenTests\ConsecutiveTaatsuExtractorTest.cs" />
-    <Compile Remove="RMUTests\ShantenTests\NonconsecutiveTaatsuExtractorTest.cs" />
-    <Compile Remove="RMUTests\ShantenTests\ChiiExtractorTest.cs" />
-    <Compile Remove="RMUTests\ShantenTests\PairExtractorTest.cs" />
-    <Compile Remove="RMUTests\CompleteHandTests\SevenPairsCompleteHandTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\WhiteDragonTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\RedDragonTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\HalfFlushTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\GreenDragonTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\FullFlushTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\AllSimplesTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\YakumanTests\BigThreeDragonsTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\YakumanTests\AllHonorsTest.cs" />
-    <Compile Remove="RMUTests\YakuTests\YakumanTests\AllTerminalsTest.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Reference Include="GodotSharp">
       <HintPath>..\..\..\..\Documents\Godot Projects\ProjectTransCrab\.mono\assemblies\Debug\GodotSharp.dll</HintPath>
     </Reference>

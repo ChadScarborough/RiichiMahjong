@@ -23,23 +23,23 @@ public sealed class HandScore
         _satisfiedYaku = player.GetYaku();
         _winningCallType = winningCallType;
         ICompleteHand completeHand = player.GetCompleteHand();
-        _hanValue = HanCalculator.CalculateHanValue(player, _satisfiedYaku);
-        _fuValue = FuCalculator.CalculateFuValue(completeHand, winningCallType);
+        _hanValue = HanCalculator.Calculate(player, _satisfiedYaku);
+        _fuValue = FuCalculator.Calculate(completeHand, winningCallType);
         _totalPointsReceived = CalculateTotalScore();
         SetName();
     }
 
     private int CalculateTotalScore()
     {
-        return _winningCallType == RON ? 
-            CalculateTotalRonScore() : 
+        return _winningCallType == RON ?
+            CalculateTotalRonScore() :
             CalculateTotalTsumoScore();
     }
 
     private int CalculateTotalRonScore()
     {
-        return _player.GetSeatWind() == EAST ? 
-            CalculateDealerRonScore(_hanValue, _fuValue) : 
+        return _player.GetSeatWind() == EAST ?
+            CalculateDealerRonScore(_hanValue, _fuValue) :
             CalculateNonDealerRonScore(_hanValue, _fuValue);
     }
 

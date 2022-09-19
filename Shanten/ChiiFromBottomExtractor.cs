@@ -12,17 +12,22 @@ public static class ChiiFromBottomExtractor
     private static TileCollection _collection;
     private static bool _foundChii;
 
+    private static readonly object chiiLock = new();
+
     public static List<ICompleteHandComponent> ExtractChii(TileCollection collection)
     {
-        InitializeLists(collection);
-        if (CollectionIsInvalid())
+        lock (chiiLock)
         {
+            InitializeLists(collection);
+            if (CollectionIsInvalid())
+            {
+                return _outputList;
+            }
+
+            FindChiisAndExtractThemToNewComponent();
+
             return _outputList;
         }
-
-        FindChiisAndExtractThemToNewComponent();
-
-        return _outputList;
     }
 
     private static void FindChiisAndExtractThemToNewComponent()

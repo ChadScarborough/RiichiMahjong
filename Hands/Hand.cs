@@ -4,8 +4,8 @@ using RMU.Globals.Algorithms;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten;
 using RMU.Tiles;
-using RMU.Wall;
-using RMU.Wall.DeadWall;
+using RMU.Walls;
+using RMU.Walls.DeadWall;
 using System;
 using System.Collections.Generic;
 
@@ -13,7 +13,7 @@ namespace RMU.Hands;
 
 public abstract class Hand
 {
-    private readonly Wall.Wall _wall;
+    private readonly Wall _wall;
     private readonly IDeadWall _deadWall;
     protected List<Tile> _closedTiles;
     private Tile _drawTile;

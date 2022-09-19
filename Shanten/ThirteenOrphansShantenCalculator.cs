@@ -27,21 +27,26 @@ public static class ThirteenOrphansShantenCalculator
     private static List<ICompleteHandComponent> _components;
     private static List<TileCollection> _collections;
 
+    private static readonly object shantenLock = new();
+
     public static int CalculateShanten(Hand hand, List<TileCollection> collections)
     {
-        _collections = collections;
-        _components = new List<ICompleteHandComponent>();
-        ResetCounters();
-        CountTerminalsAndHonors(collections);
-        CalculateUniqueTerminalsAndWhetherThereAreDuplicates();
-        int shanten = ShantenFormulas.CalculateThirteenOrphansShanten(_uniqueTerminals, _isDuplicateTerminal);
-        if (shanten == 0)
+        lock (shantenLock)
         {
-            ExtractComponentsFromHand();
-            hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));
-        }
+            _collections = collections;
+            _components = new List<ICompleteHandComponent>();
+            ResetCounters();
+            CountTerminalsAndHonors(collections);
+            CalculateUniqueTerminalsAndWhetherThereAreDuplicates();
+            int shanten = ShantenFormulas.CalculateThirteenOrphansShanten(_uniqueTerminals, _isDuplicateTerminal);
+            if (shanten == 0)
+            {
+                ExtractComponentsFromHand();
+                hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));
+            }
 
-        return shanten;
+            return shanten;
+        }
     }
 
     private static void ExtractComponentsFromHand()

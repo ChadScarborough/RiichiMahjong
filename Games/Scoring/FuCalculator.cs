@@ -7,7 +7,17 @@ namespace RMU.Games.Scoring;
 
 internal static class FuCalculator
 {
-    public static int CalculateFuValue(ICompleteHand completeHand, WinningCallType winningCallType)
+    private static readonly object fuLock = new();
+
+    public static int Calculate(ICompleteHand completeHand, WinningCallType winningCallType)
+    {
+        lock (fuLock)
+        {
+            return CalculateFuValue(completeHand, winningCallType);
+        }
+    }
+
+    private static int CalculateFuValue(ICompleteHand completeHand, WinningCallType winningCallType)
     {
         if (completeHand.GetCompleteHandType() == SEVEN_PAIRS)
         {

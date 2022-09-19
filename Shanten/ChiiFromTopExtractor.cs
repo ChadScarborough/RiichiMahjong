@@ -11,16 +11,21 @@ public static class ChiiFromTopExtractor
     private static List<Tile> _tiles;
     private static TileCollection _collection;
 
+    private static readonly object chiiLock = new();
+
     public static List<ICompleteHandComponent> ExtractChii(TileCollection collection)
     {
-        InitializeLists(collection);
-        if (CollectionIsInvalid())
+        lock (chiiLock)
         {
+            InitializeLists(collection);
+            if (CollectionIsInvalid())
+            {
+                return _outputList;
+            }
+
+            FindChiisAndExtractThemToNewComponent();
             return _outputList;
         }
-
-        FindChiisAndExtractThemToNewComponent();
-        return _outputList;
     }
 
     private static bool CollectionIsInvalid()

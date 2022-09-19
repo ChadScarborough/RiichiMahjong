@@ -1,4 +1,4 @@
-using RMU.Wall;
+using RMU.Walls;
 
 namespace RMU.Hands;
 

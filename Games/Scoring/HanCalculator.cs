@@ -7,7 +7,17 @@ namespace RMU.Games.Scoring;
 
 internal static class HanCalculator
 {
-    public static int CalculateHanValue(Player winningPlayer, List<YakuBase> satisfiedYaku)
+    private static readonly object hanLock = new();
+
+    public static int Calculate(Player winningPlayer, List<YakuBase> satisfiedYaku)
+    {
+        lock (hanLock)
+        {
+            return CalculateHanValue(winningPlayer, satisfiedYaku);
+        }
+    }
+
+    private static int CalculateHanValue(Player winningPlayer, List<YakuBase> satisfiedYaku)
     {
         int hanValue = 0;
         foreach (YakuBase yaku in satisfiedYaku)

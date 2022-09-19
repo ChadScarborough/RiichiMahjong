@@ -7,7 +7,17 @@ namespace RMU.Hands.TenpaiHands;
 
 public static class TenpaiHandFactory
 {
+    private static readonly object tenpaiLock = new();
+
     public static ITenpaiHand CreateTenpaiHand(Hand hand, List<ICompleteHandComponent> components)
+    {
+        lock (tenpaiLock)
+        {
+            return LockedCreateTenpaiHand(hand, components);
+        }
+    }
+
+    private static ITenpaiHand LockedCreateTenpaiHand(Hand hand, List<ICompleteHandComponent> components)
     {
         hand.ClearWaits();
         return CreateThirteenOrphansHand(hand, components);

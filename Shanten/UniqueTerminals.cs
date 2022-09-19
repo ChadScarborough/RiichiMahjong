@@ -23,12 +23,17 @@ public static class UniqueTerminals
         WHITE = 12,
         NUMBER_OF_DIFFERENT_TERMINALS = 13;
 
+    private static readonly object terminalLock = new();
+
     public static int NumberOfUniqueTerminals(List<Tile> tiles)
     {
-        ClearCounters();
-        IncrementCountersForEachTerminal(tiles);
-        CountUniqueTerminals();
-        return _counter;
+        lock (terminalLock)
+        {
+            ClearCounters();
+            IncrementCountersForEachTerminal(tiles);
+            CountUniqueTerminals();
+            return _counter;
+        }
     }
 
     private static void CountUniqueTerminals()

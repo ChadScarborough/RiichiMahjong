@@ -13,9 +13,19 @@ public static class HandSplitter
         _windCollection,
         _dragonCollection;
 
+    private static readonly object splitLock = new();
+
     public static List<TileCollection> SplitHandBySuit(List<Tile> hand)
     {
-        CreatNewTileCollections();
+        lock (splitLock)
+        {
+            return LockedSplitHandBySuit(hand);
+        }
+    }
+
+    private static List<TileCollection> LockedSplitHandBySuit(List<Tile> hand)
+    {
+        CreateNewTileCollections();
         foreach (Tile tile in hand)
         {
             switch (tile.GetSuit())
@@ -47,7 +57,7 @@ public static class HandSplitter
         };
     }
 
-    private static void CreatNewTileCollections()
+    private static void CreateNewTileCollections()
     {
         _manCollection = new TileCollection(MAN);
         _pinCollection = new TileCollection(PIN);

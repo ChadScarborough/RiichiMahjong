@@ -12,16 +12,21 @@ public static class PairExtractor
     private static List<ICompleteHandComponent> _outputList;
     private static TileCollection _collection;
 
+    private static readonly object pairLock = new();
+
     public static List<ICompleteHandComponent> ExtractPair(TileCollection collection)
     {
-        InitializeLists(collection);
-        if (_tiles.Count == 0)
+        lock (pairLock)
         {
+            InitializeLists(collection);
+            if (_tiles.Count == 0)
+            {
+                return _outputList;
+            }
+
+            FindPairsAndExtractThemToNewComponent();
             return _outputList;
         }
-
-        FindPairsAndExtractThemToNewComponent();
-        return _outputList;
     }
 
     private static void InitializeLists(TileCollection collection)

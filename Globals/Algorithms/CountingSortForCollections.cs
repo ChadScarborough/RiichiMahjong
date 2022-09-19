@@ -7,7 +7,17 @@ namespace RMU.Globals.Algorithms;
 
 public static class CountingSortForCollections
 {
+    private static readonly object sortLock = new();
+
     public static TileCollection SortCollection(TileCollection collection)
+    {
+        lock (sortLock)
+        {
+            return LockedSortCollection(collection);
+        }
+    }
+
+    public static TileCollection LockedSortCollection(TileCollection collection)
     {
         List<Tile> tiles = collection.GetTiles();
         if (tiles.Count == 0)

@@ -1,3 +1,5 @@
+using RMU.Walls.DeadWall;
+
 namespace RMU.Walls;
 
 public sealed class FourPlayerWallObjectFourRedFives : WallObject

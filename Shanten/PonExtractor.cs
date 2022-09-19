@@ -11,16 +11,21 @@ public static class PonExtractor
     private static List<Tile> _tiles;
     private static TileCollection _collection;
 
+    private static readonly object ponLock = new();
+
     public static List<ICompleteHandComponent> ExtractPon(TileCollection collection)
     {
-        InitializeLists(collection);
-        if (_tiles.Count == 0)
+        lock (ponLock)
         {
+            InitializeLists(collection);
+            if (_tiles.Count == 0)
+            {
+                return _outputList;
+            }
+
+            FindPonsAndExtractThemToNewComponent();
             return _outputList;
         }
-
-        FindPonsAndExtractThemToNewComponent();
-        return _outputList;
     }
 
     private static void InitializeLists(TileCollection collection)
