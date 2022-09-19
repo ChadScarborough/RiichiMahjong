@@ -9,8 +9,11 @@ public abstract class ThreePlayerGame : AbstractGame
     {
         _players = new ThreePlayerAbstractPlayer[3];
         _players[0] = new ThreePlayerStandardPlayer(EAST, new StandardThreePlayerHand(_wallObject), this);
+        _players[0].SetPlayerID(1);
         _players[1] = new ThreePlayerStandardPlayer(SOUTH, new StandardThreePlayerHand(_wallObject), this);
+        _players[1].SetPlayerID(2);
         _players[2] = new ThreePlayerStandardPlayer(WEST, new StandardThreePlayerHand(_wallObject), this);
+        _players[2].SetPlayerID(3);
         _wall = _wallObject.GetWall();
         _deadWall = _wallObject.GetDeadWall();
         ArrangePlayers();

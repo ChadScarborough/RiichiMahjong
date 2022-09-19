@@ -34,12 +34,24 @@ public abstract class Player
     private bool _canRon;
     private bool _canTsumo;
 
+    private int _playerID;
+
     protected Player(Wind seatWind, Hand hand, AbstractGame game)
     {
         _seatWind = seatWind;
         _hand = hand;
         _game = game;
         SetAvailablePotentialCalls();
+    }
+
+    public int GetPlayerID()
+    {
+        return _playerID;
+    }
+
+    public void SetPlayerID(int id)
+    {
+        _playerID = id;
     }
 
     public AbstractGame GetGame()
@@ -424,5 +436,10 @@ public abstract class Player
     internal ICompleteHand GetCompleteHand()
     {
         return _completeHand;
+    }
+
+    public override string ToString()
+    {
+        return $"Player { _playerID }";
     }
 }

@@ -9,9 +9,13 @@ public abstract class FourPlayerGame : AbstractGame
     {
         _players = new FourPlayerAbstractPlayer[4];
         _players[0] = new FourPlayerStandardPlayer(EAST, new StandardFourPlayerHand(_wallObject), this);
+        _players[0].SetPlayerID(1);
         _players[1] = new FourPlayerStandardPlayer(SOUTH, new StandardFourPlayerHand(_wallObject), this);
+        _players[1].SetPlayerID(2);
         _players[2] = new FourPlayerStandardPlayer(WEST, new StandardFourPlayerHand(_wallObject), this);
+        _players[2].SetPlayerID(3);
         _players[3] = new FourPlayerStandardPlayer(NORTH, new StandardFourPlayerHand(_wallObject), this);
+        _players[3].SetPlayerID(4);
         _wall = _wallObject.GetWall();
         _deadWall = _wallObject.GetDeadWall();
         ArrangePlayers();
