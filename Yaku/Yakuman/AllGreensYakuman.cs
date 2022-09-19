@@ -3,7 +3,7 @@ using RMU.Tiles;
 
 namespace RMU.Yaku.Yakuman;
 
-public sealed class AllGreensYakuman : Yakuman
+public sealed class AllGreensYakuman : YakumanBase
 {
     private readonly Tile[] _greenTiles =
     {

@@ -1,6 +1,6 @@
 ﻿using RMU.Players;
 using RMU.Tiles;
-using RMU.Yaku.StandardYaku;
+using RMU.Yaku;
 using System.Collections.Generic;
 
 namespace RMU.Games.Scoring;

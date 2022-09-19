@@ -3,6 +3,7 @@ using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Players;
 using RMU.Tiles;
+using RMU.Yaku;
 using System.Collections.Generic;
 
 namespace RMU.Hands.CompleteHands;
@@ -20,7 +21,7 @@ public interface ICompleteHand
     List<ICompleteHandComponent> GetPairs();
     List<ICompleteHandComponent> GetIsolatedTiles();
     List<Tile> GetTiles();
-    void SetYaku(List<Yaku.StandardYaku.YakuBase> satisfiedYaku);
-    List<Yaku.StandardYaku.YakuBase> GetYaku();
+    void SetYaku(List<YakuBase> satisfiedYaku);
+    List<YakuBase> GetYaku();
     Player GetPlayer();
 }

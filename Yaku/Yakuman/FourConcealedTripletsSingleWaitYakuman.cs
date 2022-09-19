@@ -2,11 +2,11 @@
 
 namespace RMU.Yaku.Yakuman;
 
-public sealed class FourConcealedTripletsSingleWait : Yakuman
+public sealed class FourConcealedTripletsSingleWaitYakuman : YakumanBase
 {
     private new readonly StandardCompleteHand _completeHand;
 
-    public FourConcealedTripletsSingleWait(ICompleteHand completeHand) : base(completeHand)
+    public FourConcealedTripletsSingleWaitYakuman(ICompleteHand completeHand) : base(completeHand)
     {
         _name = "Four Concealed Triplets Single Wait";
         _value = 26;

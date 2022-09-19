@@ -1,12 +1,13 @@
 ﻿using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
 using RMU.Games;
-using RMU.Globals;
 using RMU.Hands;
 using RMU.Hands.CompleteHands;
 using RMU.Hands.TenpaiHands;
 using RMU.Tiles;
+using RMU.Yaku;
 using RMU.Yaku.StandardYaku;
+using RMU.Yaku.Yakuman;
 using System;
 using System.Collections.Generic;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
@@ -342,8 +343,15 @@ public abstract class Player
         bool yakuSatisfied = false;
         foreach (ICompleteHand completeHand in completeHands)
         {
+            YakumanList yakumanList = new(completeHand);
             StandardYakuList yakuList = new(completeHand);
-            List<YakuBase> satisfiedYaku = yakuList.CheckYaku();
+            List<YakuBase> satisfiedYaku = new();
+            satisfiedYaku.AddRange(yakumanList.CheckYakuman());
+            if (satisfiedYaku.Count == 0)
+            {
+                satisfiedYaku.AddRange(yakuList.CheckYaku());
+            }
+
             completeHand.SetYaku(satisfiedYaku);
             if (satisfiedYaku.Count > 0)
             {
@@ -360,7 +368,7 @@ public abstract class Player
         {
             foreach (Tile waitTile in tenpaiHand.GetWaits())
             {
-                if (Functions.AreTilesEquivalent(waitTile, _hand.GetDrawTile()))
+                if (AreTilesEquivalent(waitTile, _hand.GetDrawTile()))
                 {
                     completeHands.Add(CompleteHandFactory.CreateCompleteHand(tenpaiHand, _hand.GetDrawTile(), this));
                 }

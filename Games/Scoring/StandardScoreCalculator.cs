@@ -2,7 +2,7 @@
 
 namespace RMU.Games.Scoring;
 
-internal static class ScoreCalculator
+internal static class StandardScoreCalculator
 {
     public static int CalculateDealerRonScore(int han, int fu)
     {
@@ -265,7 +265,7 @@ internal static class ScoreCalculator
         };
     }
 
-    // Returns a tuple representing the number of points taken from the dealer ([0]) and each non-dealer ([1])
+    // Returns a tuple representing the number of points taken from each non-dealer (Item1) and from the dealer (Item2)
     public static (int, int) CalculateNonDealerTsumoScore(int han, int fu)
     {
         return han switch

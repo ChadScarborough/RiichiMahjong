@@ -1,5 +1,4 @@
 ﻿namespace RMU.Tiles;
-
 public abstract class Tile
 {
     protected int _value;
@@ -71,3 +70,4 @@ public abstract class Tile
         return _value.ToString() + " " + _suit.ToString();
     }
 }
+

@@ -3,7 +3,7 @@ using RMU.Hands.CompleteHands.CompleteHandComponents;
 
 namespace RMU.Yaku.Yakuman;
 
-public sealed class AllHonorsYakuman : Yakuman
+public sealed class AllHonorsYakuman : YakumanBase
 {
     public AllHonorsYakuman(ICompleteHand completeHand) : base(completeHand)
     {

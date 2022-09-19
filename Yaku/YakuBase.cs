@@ -1,6 +1,6 @@
 using RMU.Hands.CompleteHands;
 
-namespace RMU.Yaku.StandardYaku;
+namespace RMU.Yaku;
 
 public abstract class YakuBase
 {

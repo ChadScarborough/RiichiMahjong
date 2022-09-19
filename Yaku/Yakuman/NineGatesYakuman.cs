@@ -3,7 +3,7 @@ using RMU.Tiles;
 
 namespace RMU.Yaku.Yakuman;
 
-public sealed class NineGatesYakuman : Yakuman
+public sealed class NineGatesYakuman : YakumanBase
 {
     private new readonly StandardCompleteHand _completeHand;
     private readonly int[] _tileRequirements = { 3, 1, 1, 1, 1, 1, 1, 1, 3 };

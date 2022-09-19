@@ -5,7 +5,8 @@ using RMU.Players;
 using RMU.Tiles;
 using RMU.Walls;
 using RMU.Walls.DeadWall;
-using RMU.Yaku.StandardYaku;
+using RMU.Yaku;
+using RMU.Yaku.Yakuman;
 using System.Collections.Generic;
 
 namespace RMU.Games;
@@ -22,8 +23,7 @@ public abstract class AbstractGame
     private WinningCallType _winningCall;
     private Player _activePlayer;
     private Wind _roundWind;
-
-    private HandScore _scoreObject;
+    private HandScoreBase _scoreObject;
 
     protected void Start()
     {
@@ -184,10 +184,10 @@ public abstract class AbstractGame
         }
 
         SetActivePlayer(null);
-        _scoreObject = new HandScore(player, _winningCall);
+        _scoreObject = satisfiedYaku[0] is YakumanBase ? new YakumanHandScore(player, _winningCall) : new StandardHandScore(player, _winningCall);
     }
 
-    public HandScore GetHandScore()
+    public HandScoreBase GetHandScore()
     {
         return _scoreObject;
     }

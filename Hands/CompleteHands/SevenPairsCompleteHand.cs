@@ -3,6 +3,7 @@ using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Players;
 using RMU.Tiles;
+using RMU.Yaku;
 using System;
 using System.Collections.Generic;
 using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
@@ -16,7 +17,7 @@ public sealed class SevenPairsCompleteHand : ICompleteHand
     private readonly ITenpaiHand _tenpaiHand;
     private readonly Tile _drawTile;
     private readonly List<Tile> _tiles;
-    private List<Yaku.StandardYaku.YakuBase> _satisfiedYaku;
+    private List<YakuBase> _satisfiedYaku;
     private readonly Player _player;
 
     public SevenPairsCompleteHand(ITenpaiHand tenpaiHand, Tile tile, Player player)
@@ -123,12 +124,12 @@ public sealed class SevenPairsCompleteHand : ICompleteHand
         return _tiles;
     }
 
-    public void SetYaku(List<Yaku.StandardYaku.YakuBase> satisfiedYaku)
+    public void SetYaku(List<YakuBase> satisfiedYaku)
     {
         _satisfiedYaku = satisfiedYaku;
     }
 
-    public List<Yaku.StandardYaku.YakuBase> GetYaku()
+    public List<YakuBase> GetYaku()
     {
         return _satisfiedYaku;
     }

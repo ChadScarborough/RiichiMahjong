@@ -3,6 +3,7 @@ using RMU.Hands.CompleteHands;
 using RMU.Hands.TenpaiHands;
 using RMU.Players;
 using RMU.Tiles;
+using RMU.Yaku;
 using RMU.Yaku.StandardYaku;
 using System.Collections.Generic;
 using static RMU.Calls.PotentialCalls.PotentialCallFactory;
