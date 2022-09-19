@@ -38,31 +38,29 @@ namespace RMU.Yaku.StandardYaku
 
         private static bool HasYakuhaiPair(ICompleteHand completeHand)
         {
-            ICompleteHandComponent pair = completeHand.GetPairs()[0];
-            Tile tile = pair.GetLeadTile();
-            if (HasDragonPair(tile))
-            {
-                return true;
-            }
-
-            return HasSeatWindPair(completeHand, tile) || HasRoundWindPair(completeHand, tile);
-        }
-
-        private static bool HasDragonPair(Tile tile)
-        {
-            return tile.GetSuit() == DRAGON;
-        }
-
-        private static bool HasSeatWindPair(ICompleteHand completeHand, Tile tile)
-        {
             Wind seatWind = completeHand.GetPlayer().GetSeatWind();
-            return AreWindsEquivalent(tile, seatWind);
+            Wind roundWind = completeHand.GetPlayer().GetGame().GetRoundWind();
+            return HasDragons(completeHand) || HasWinds(completeHand, seatWind) || HasWinds(completeHand, roundWind);
         }
 
-        private static bool HasRoundWindPair(ICompleteHand completeHand, Tile tile)
+        private static bool HasDragons(ICompleteHand completeHand)
         {
-            Wind roundWind = completeHand.GetPlayer().GetGame().GetRoundWind();
-            return AreWindsEquivalent(tile, roundWind);
+            foreach(Tile tile in completeHand.GetTiles())
+            {
+                if (tile.GetSuit() is DRAGON)
+                    return true;
+            }
+            return false;
+        }
+
+        private static bool HasWinds(ICompleteHand completeHand, Wind wind)
+        {
+            foreach(Tile tile in completeHand.GetTiles())
+            {
+                if (AreWindsEquivalent(tile, wind))
+                    return true;
+            }
+            return false;
         }
     }
 }
