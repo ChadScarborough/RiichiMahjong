@@ -84,7 +84,8 @@ public abstract class AbstractGame
     private void SetActivePlayer(Player player)
     {
         _activePlayer = player;
-        _activePlayer.DrawTile();
+        if (_activePlayer is not null)
+            _activePlayer.DrawTile();
     }
 
     public Player GetActivePlayer()

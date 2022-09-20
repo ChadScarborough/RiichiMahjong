@@ -69,9 +69,13 @@ namespace RMU.Games.Scoring
             _name = "";
             foreach (YakuBase yaku in _satisfiedYaku)
             {
-                _name += $"{yaku.GetName()}, ";
+                _name += yaku.GetName();
+                _name += ", ";
             }
-            _name += $"{_hanValue} han {_fuValue} fu";
+            _name += _hanValue.ToString();
+            _name += " han ";
+            _name += _fuValue.ToString();
+            _name += " fu";
         }
 
         public abstract string GetScoreLimitName();

@@ -1,5 +1,6 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
+using System;
 using System.Collections.Generic;
 
 namespace RMU.Yaku.StandardYaku;
@@ -29,37 +30,44 @@ public sealed class MixedTripleSequenceYaku : YakuBase
             return false;
         }
 
-        for (int i = 0; i < 2; i++)
+        try
         {
-            if (components[i].GetLeadTile().GetSuit() is not MAN)
+            for (int i = 0; i < 2; i++)
             {
-                break;
-            }
-            for (int j = i + 1; j < 3; j++)
-            {
-                if (components[j].GetLeadTile().GetSuit() is not PIN)
+                if (components[i].GetLeadTile().GetSuit() is not MAN)
                 {
                     break;
                 }
-                for (int k = j + 1; k < 4; k++)
+                for (int j = i + 1; j < 3; j++)
                 {
-                    if (components[k].GetLeadTile().GetSuit() is not SOU)
+                    if (components[j].GetLeadTile().GetSuit() is not PIN)
                     {
                         break;
                     }
-
-                    if (ComponentsFormMixedTripleSequence(components, i, j, k))
+                    for (int k = j + 1; k < 4; k++)
                     {
-                        return true;
+                        if (components[k].GetLeadTile().GetSuit() is not SOU)
+                        {
+                            break;
+                        }
+
+                        if (ComponentsFormMixedTripleSequence(components, i, j, k))
+                        {
+                            return true;
+                        }
                     }
                 }
             }
+        }
+        catch (IndexOutOfRangeException)
+        {
+            return false;
         }
 
         return false;
     }
 
-    private bool ComponentsFormMixedTripleSequence(List<ICompleteHandComponent> components, int i, int j, int k)
+    private static bool ComponentsFormMixedTripleSequence(List<ICompleteHandComponent> components, int i, int j, int k)
     {
         return LeadTileValue(components[i]) == LeadTileValue(components[j]) &&
                LeadTileValue(components[j]) == LeadTileValue(components[k]);
