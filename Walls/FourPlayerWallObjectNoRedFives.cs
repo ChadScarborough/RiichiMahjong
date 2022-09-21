@@ -7,6 +7,7 @@ public sealed class FourPlayerWallObjectNoRedFives : WallObject
     public FourPlayerWallObjectNoRedFives()
     {
         _wall = new FourPlayerWallNoRedFives();
+        GenerateDeadWall();
     }
 
     public override void GenerateDeadWall()
