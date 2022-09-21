@@ -12,12 +12,12 @@ public static class CompleteHandFactory
     {
         return ContainsTile(hand.GetWaits(), extraTile) == false
             ? throw new Exception("Cannot create complete hand because the extra tile is not one of the hand's waits")
-            : hand.GetType().IsSubclassOf(typeof(StandardTenpaiHand))
+            : hand is StandardTenpaiHand
             ? new StandardCompleteHand(hand, extraTile, player)
-            : hand.GetType() == typeof(SevenPairsTenpaiHand)
+            : hand is SevenPairsTenpaiHand
             ? new SevenPairsCompleteHand(hand, extraTile, player)
-            : hand.GetType().IsSubclassOf(typeof(ThirteenOrphansTenpaiHand))
-            ? (ICompleteHand)new ThirteenOrphansCompleteHand(hand, extraTile, player)
+            : hand is ThirteenOrphansTenpaiHand
+            ? new ThirteenOrphansCompleteHand(hand, extraTile, player)
             : throw new Exception("I don't know how, but something went wrong");
     }
 
