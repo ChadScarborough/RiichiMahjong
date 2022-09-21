@@ -7,7 +7,6 @@ using RMU.Tiles;
 using RMU.Walls;
 using RMU.Walls.DeadWall;
 using System;
-using System.Collections.Generic;
 
 namespace RMU.Hands;
 
@@ -269,6 +268,10 @@ public abstract class Hand
             {
                 _tenpaiHands.Add(tenpaiHand);
             }
+        }
+        else if (_shanten > 0)
+        {
+            ClearWaits();
         }
     }
 
