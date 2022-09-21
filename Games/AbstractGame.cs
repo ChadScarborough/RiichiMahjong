@@ -7,7 +7,6 @@ using RMU.Walls;
 using RMU.Walls.DeadWall;
 using RMU.Yaku;
 using RMU.Yaku.Yakuman;
-using System.Collections.Generic;
 
 namespace RMU.Games;
 
