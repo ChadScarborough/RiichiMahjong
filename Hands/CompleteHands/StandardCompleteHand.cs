@@ -77,11 +77,9 @@ public sealed class StandardCompleteHand : ICompleteHand
                 case CLOSED_CHII:
                     _sequences.Add(component);
                     break;
-                case PAIR_COMPONENT:
+                default:
                     _pairs.Add(component);
                     break;
-                default:
-                    throw new Exception("I don't know what the heck happened, honestly");
             }
 
             foreach (Tile tile in component.GetTiles())
@@ -174,7 +172,7 @@ public sealed class StandardCompleteHand : ICompleteHand
 
         tileList.Add(isolatedTile.GetLeadTile());
         tileList.Add(_drawTile);
-        ICompleteHandComponent pair = CreateCompleteHandComponent(tileList, CompleteHandComponentType.Pair);
+        ICompleteHandComponent pair = CreateCompleteHandComponent(tileList, PAIR_COMPONENT);
         _constructedHand.Add(pair);
     }
 
@@ -212,7 +210,7 @@ public sealed class StandardCompleteHand : ICompleteHand
         tileList.Add(_drawTile);
         tileList.Add(completePair.GetLeadTile());
         tileList.Add(completePair.GetLeadTile().Clone());
-        ICompleteHandComponent triplet = CreateCompleteHandComponent(tileList, CompleteHandComponentType.ClosedPon);
+        ICompleteHandComponent triplet = CreateCompleteHandComponent(tileList, CLOSED_PON);
         _constructedHand.Add(triplet);
         _constructedHand.Add(incompletePair);
     }
@@ -323,7 +321,12 @@ public sealed class StandardCompleteHand : ICompleteHand
 
     public void SetYaku(List<YakuBase> satisfiedYaku)
     {
-        _satisfiedYaku = satisfiedYaku;
+        _satisfiedYaku.AddRange(satisfiedYaku);
+    }
+
+    public void ClearYaku()
+    {
+        _satisfiedYaku.Clear();
     }
 
     public List<YakuBase> GetYaku()

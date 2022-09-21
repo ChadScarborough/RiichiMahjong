@@ -348,6 +348,8 @@ public abstract class Player
             }
         }
         _completeHand = strongestHand;
+        if (_completeHand.GetYaku().Count == 0)
+            throw new Exception("No yaku");
         _satisfiedYaku = _completeHand.GetYaku();
     }
 
@@ -356,6 +358,7 @@ public abstract class Player
         bool yakuSatisfied = false;
         foreach (ICompleteHand completeHand in completeHands)
         {
+            completeHand.ClearYaku();
             YakumanList yakumanList = new(completeHand);
             StandardYakuList yakuList = new(completeHand);
             List<YakuBase> satisfiedYaku = new();

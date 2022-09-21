@@ -85,8 +85,8 @@ public static class PotentialCallGenerator
             return;
         }
 
-        queue.AddCall(CreatePotentialCall(player, RON_POTENTIAL_CALL_TYPE));
         DetermineStrongestCompleteHand(completeHands, player);
+        queue.AddCall(CreatePotentialCall(player, RON_POTENTIAL_CALL_TYPE));
     }
 
     private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
@@ -94,10 +94,11 @@ public static class PotentialCallGenerator
         bool yakuSatisfied = false;
         foreach (ICompleteHand completeHand in completeHands)
         {
+            completeHand.ClearYaku();
             StandardYakuList yakuList = new(completeHand);
             List<YakuBase> satisfiedYaku = yakuList.CheckYaku();
             completeHand.SetYaku(satisfiedYaku);
-            if (satisfiedYaku.Count > 0)
+            if (completeHand.GetYaku().Count > 0)
             {
                 yakuSatisfied = true;
             }
@@ -116,6 +117,7 @@ public static class PotentialCallGenerator
                 if (AreTilesEquivalent(waitTile, lastTile))
                 {
                     completeHands.Add(CompleteHandFactory.CreateCompleteHand(tenpaiHand, lastTile, player));
+                    break;
                 }
             }
         }

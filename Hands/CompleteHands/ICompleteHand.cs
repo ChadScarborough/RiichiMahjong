@@ -21,6 +21,7 @@ public interface ICompleteHand
     List<ICompleteHandComponent> GetPairs();
     List<ICompleteHandComponent> GetIsolatedTiles();
     List<Tile> GetTiles();
+    void ClearYaku();
     void SetYaku(List<YakuBase> satisfiedYaku);
     List<YakuBase> GetYaku();
     Player GetPlayer();
