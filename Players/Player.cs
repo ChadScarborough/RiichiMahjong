@@ -193,6 +193,7 @@ public abstract class Player
     public void CancelCalls()
     {
         _priorityQueueForPotentialCalls.RemoveByPlayer(this);
+        UpdateAvailableCalls();
         if (_priorityQueueForPotentialCalls.IsEmpty())
         {
             _priorityQueueForCallCommands.Execute();
