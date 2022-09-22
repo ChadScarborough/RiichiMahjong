@@ -32,7 +32,7 @@ public class YakumanHandScore : HandScoreBase
             CalculateNonDealerRonScore(_hanValue);
     }
 
-    public override int CalculateTotalScore()
+    protected override int CalculateTotalScore()
     {
         return _winningCallType == RON ?
             CalculateTotalRonScore() :
