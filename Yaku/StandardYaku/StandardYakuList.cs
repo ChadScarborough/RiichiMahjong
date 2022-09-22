@@ -1,5 +1,5 @@
 ﻿using RMU.Hands.CompleteHands;
-using System.Collections.Generic;
+using System.Linq;
 
 namespace RMU.Yaku.StandardYaku;
 
@@ -50,14 +50,6 @@ internal sealed class StandardYakuList
 
     public List<YakuBase> CheckYaku()
     {
-        List<YakuBase> achievedYaku = new();
-        foreach (YakuBase yaku in _yakuList)
-        {
-            if (yaku.Check())
-            {
-                achievedYaku.Add(yaku);
-            }
-        }
-        return achievedYaku;
+        return _yakuList.Where(yaku => yaku.Check()).ToList();
     }
 }

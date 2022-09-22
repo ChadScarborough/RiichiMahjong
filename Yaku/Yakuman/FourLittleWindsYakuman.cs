@@ -51,24 +51,18 @@ public sealed class FourLittleWindsYakuman : YakumanBase
                 }
             }
 
-            if (component.GetComponentType() is DRAW_TILE)
+            if (component.GetComponentType() is not DRAW_TILE) continue;
+            if (component.GetLeadTile().GetSuit() is not WIND) continue;
+            if (isolatedTileCounter > 0)
             {
-                if (component.GetLeadTile().GetSuit() is WIND)
-                {
-                    if (isolatedTileCounter > 0)
-                    {
-                        isolatedTileCounter--;
-                        pairCounter++;
-                        continue;
-                    }
-
-                    if (pairCounter > 0)
-                    {
-                        pairCounter--;
-                        tripletCounter++;
-                    }
-                }
+                isolatedTileCounter--;
+                pairCounter++;
+                continue;
             }
+
+            if (pairCounter <= 0) continue;
+            pairCounter--;
+            tripletCounter++;
         }
 
         return tripletCounter is 3 && pairCounter is 1;

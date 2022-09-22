@@ -1,5 +1,5 @@
+using System.Linq;
 using RMU.Hands.CompleteHands;
-using RMU.Hands.CompleteHands.CompleteHandComponents;
 
 namespace RMU.Yaku.Yakuman;
 
@@ -14,14 +14,6 @@ public sealed class AllHonorsYakuman : YakumanBase
 
     public override bool Check()
     {
-        foreach (ICompleteHandComponent component in _completeHand.GetComponents())
-        {
-            if (component.GetLeadTile().IsHonor() is false)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return _completeHand.GetComponents().All(component => component.GetLeadTile().IsHonor());
     }
 }

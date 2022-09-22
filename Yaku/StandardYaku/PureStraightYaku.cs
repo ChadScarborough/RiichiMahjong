@@ -1,6 +1,5 @@
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
-using System.Collections.Generic;
 
 namespace RMU.Yaku.StandardYaku;
 
@@ -28,19 +27,19 @@ public sealed class PureStraightYaku : YakuBase
             return false;
         }
 
-        List<ICompleteHandComponent> components = _completeHand.GetSequences();
-        if (components.Count < 3)
+        List<ICompleteHandComponent> sequences = _completeHand.GetSequences();
+        if (sequences.Count < 3)
         {
             return false;
         }
 
-        for (int i = 0; i < 2; i++)
+        for (int i = 0; i < sequences.Count - 2; i++)
         {
-            for (int j = i + 1; j < 3; j++)
+            for (int j = i + 1; j < sequences.Count - 1; j++)
             {
-                for (int k = j + 1; k < 4; k++)
+                for (int k = j + 1; k < sequences.Count; k++)
                 {
-                    if (ComponentsFormPureStraight(components, i, j, k))
+                    if (ComponentsFormPureStraight(sequences, i, j, k))
                     {
                         return true;
                     }
@@ -51,21 +50,21 @@ public sealed class PureStraightYaku : YakuBase
         return false;
     }
 
-    private bool ComponentsFormPureStraight(List<ICompleteHandComponent> components, int i, int j, int k)
+    private bool ComponentsFormPureStraight(List<ICompleteHandComponent> sequences, int i, int j, int k)
     {
-        return ComponentsHaveCorrectValues(components, i, j, k) && ComponentsAreOfSameSuit(components, i, j, k);
+        return ComponentsHaveCorrectValues(sequences, i, j, k) && ComponentsAreOfSameSuit(sequences, i, j, k);
     }
 
-    private bool ComponentsAreOfSameSuit(List<ICompleteHandComponent> components, int i, int j, int k)
+    private bool ComponentsAreOfSameSuit(List<ICompleteHandComponent> sequences, int i, int j, int k)
     {
-        return components[i].GetLeadTile().GetSuit() == components[j].GetLeadTile().GetSuit() &&
-               components[j].GetLeadTile().GetSuit() == components[k].GetLeadTile().GetSuit();
+        return sequences[i].GetLeadTile().GetSuit() == sequences[j].GetLeadTile().GetSuit() &&
+               sequences[j].GetLeadTile().GetSuit() == sequences[k].GetLeadTile().GetSuit();
     }
 
-    private bool ComponentsHaveCorrectValues(List<ICompleteHandComponent> components, int i, int j, int k)
+    private bool ComponentsHaveCorrectValues(List<ICompleteHandComponent> sequences, int i, int j, int k)
     {
-        return components[i].GetLeadTile().GetValue() is 1 &&
-               components[j].GetLeadTile().GetValue() is 4 &&
-               components[k].GetLeadTile().GetValue() is 7;
+        return sequences[i].GetLeadTile().GetValue() is 1 &&
+               sequences[j].GetLeadTile().GetValue() is 4 &&
+               sequences[k].GetLeadTile().GetValue() is 7;
     }
 }

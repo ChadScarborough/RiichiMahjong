@@ -1,6 +1,5 @@
-﻿using RMU.Hands.CompleteHands;
-using RMU.Hands.CompleteHands.CompleteHandComponents;
-using RMU.Tiles;
+﻿using System.Linq;
+using RMU.Hands.CompleteHands;
 
 namespace RMU.Yaku.StandardYaku
 {
@@ -33,10 +32,10 @@ namespace RMU.Yaku.StandardYaku
                 return false;
             }
 
-            return !HasYakuhaiPair(_completeHand);
+            return !HasYakuhai(_completeHand);
         }
 
-        private static bool HasYakuhaiPair(ICompleteHand completeHand)
+        private static bool HasYakuhai(ICompleteHand completeHand)
         {
             Wind seatWind = completeHand.GetPlayer().GetSeatWind();
             Wind roundWind = completeHand.GetPlayer().GetGame().GetRoundWind();
@@ -45,22 +44,12 @@ namespace RMU.Yaku.StandardYaku
 
         private static bool HasDragons(ICompleteHand completeHand)
         {
-            foreach(Tile tile in completeHand.GetTiles())
-            {
-                if (tile.GetSuit() is DRAGON)
-                    return true;
-            }
-            return false;
+            return completeHand.GetTiles().Any(tile => tile.GetSuit() is DRAGON);
         }
 
         private static bool HasWinds(ICompleteHand completeHand, Wind wind)
         {
-            foreach(Tile tile in completeHand.GetTiles())
-            {
-                if (AreWindsEquivalent(tile, wind))
-                    return true;
-            }
-            return false;
+            return completeHand.GetTiles().Any(tile => AreWindsEquivalent(tile, wind));
         }
     }
 }

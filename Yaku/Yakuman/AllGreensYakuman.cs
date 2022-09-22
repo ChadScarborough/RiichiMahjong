@@ -1,3 +1,4 @@
+using System.Linq;
 using RMU.Hands.CompleteHands;
 using RMU.Tiles;
 
@@ -24,27 +25,11 @@ public sealed class AllGreensYakuman : YakumanBase
 
     public override bool Check()
     {
-        foreach (Tile tile in _completeHand.GetTiles())
-        {
-            if (IsGreenTile(tile) == false)
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return _completeHand.GetTiles().All(IsGreenTile);
     }
 
     private bool IsGreenTile(Tile tile)
     {
-        foreach (Tile t in _greenTiles)
-        {
-            if (AreTilesEquivalent(t, tile))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return _greenTiles.Any(t => AreTilesEquivalent(t, tile));
     }
 }

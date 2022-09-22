@@ -41,14 +41,10 @@ public sealed class FourBigWindsYakuman : YakumanBase
                 }
             }
 
-            if (component.GetComponentType() is DRAW_TILE)
-            {
-                if (component.GetLeadTile().GetSuit() is WIND)
-                {
-                    pairCounter--;
-                    tripletCounter++;
-                }
-            }
+            if (component.GetComponentType() is not DRAW_TILE) continue;
+            if (component.GetLeadTile().GetSuit() is not WIND) continue;
+            pairCounter--;
+            tripletCounter++;
         }
 
         return tripletCounter is 4 && pairCounter is 0;

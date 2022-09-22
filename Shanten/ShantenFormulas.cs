@@ -5,8 +5,9 @@ public static class ShantenFormulas
     public static int CalculateStandardShanten(int groups, int pairs, int taatsu)
     {
         int standardShanten = 8 - ((2 * groups) + pairs + taatsu);
-        //standardShanten = standardShanten <= 0 && pairs == 0 && taatsu >= 1 ? standardShanten + 1 : standardShanten;
-        if (taatsu >= 2 && pairs == 0) standardShanten++;
+        int totalComponents = groups + pairs + taatsu;
+        if (totalComponents >= 6)
+            standardShanten += totalComponents - 5;
 
         return standardShanten <= 1
             ? (groups, pairs, taatsu) switch

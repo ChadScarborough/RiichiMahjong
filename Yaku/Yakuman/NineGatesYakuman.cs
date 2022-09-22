@@ -1,4 +1,5 @@
-﻿using RMU.Hands.CompleteHands;
+﻿using System.Linq;
+using RMU.Hands.CompleteHands;
 using RMU.Tiles;
 
 namespace RMU.Yaku.Yakuman;
@@ -35,13 +36,7 @@ public sealed class NineGatesYakuman : YakumanBase
             int index = tile.GetValue() - 1;
             _tileCounts[index]++;
         }
-        for (int i = 0; i < _tileRequirements.Length; i++)
-        {
-            if (_tileCounts[i] < _tileRequirements[i])
-            {
-                return false;
-            }
-        }
-        return true;
+
+        return !_tileRequirements.Where((t, i) => _tileCounts[i] < t).Any();
     }
 }

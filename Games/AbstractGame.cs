@@ -23,6 +23,7 @@ public abstract class AbstractGame
     private Player _activePlayer;
     private Wind _roundWind;
     private HandScoreBase _scoreObject;
+    private Dictionary<(int, Suit), int> _visibleTiles;
 
     protected void Start()
     {
@@ -34,6 +35,7 @@ public abstract class AbstractGame
         _lastTile = null;
         _potentialQueue = new PriorityQueueForPotentialCalls();
         _commandQueue = new PriorityQueueForCallCommands(this);
+        _visibleTiles = new Dictionary<(int, Suit), int>();
         foreach (Player player in _players)
         {
             player.SetPriorityQueueForPotentialCalls(_potentialQueue);
@@ -200,5 +202,26 @@ public abstract class AbstractGame
     public Wind GetRoundWind()
     {
         return _roundWind;
+    }
+
+    public void AddNewVisibleTile(Tile tile)
+    {
+        int value = tile.GetValue();
+        Suit suit = tile.GetSuit();
+        if (_visibleTiles.ContainsKey((value, suit)))
+        {
+            _visibleTiles[(value, suit)]++;
+            return;
+        }
+        _visibleTiles.Add((value, suit), 1);
+    }
+
+    public int NumberOfCopiesVisible(Tile tile)
+    {
+        int value = tile.GetValue();
+        Suit suit = tile.GetSuit();
+        if (_visibleTiles.ContainsKey((value, suit)))
+            return _visibleTiles[(value, suit)];
+        return 0;
     }
 }

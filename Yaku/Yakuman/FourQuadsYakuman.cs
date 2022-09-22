@@ -1,3 +1,4 @@
+using System.Linq;
 using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 
@@ -19,15 +20,8 @@ public sealed class FourQuadsYakuman : YakumanBase
             return false;
         }
 
-        int quadCounter = 0;
-
-        foreach (ICompleteHandComponent component in _completeHand.GetComponents())
-        {
-            if (component.GetComponentType() is OPEN_KAN or CLOSED_KAN_COMPONENT)
-            {
-                quadCounter++;
-            }
-        }
+        int quadCounter = _completeHand.GetComponents().Count(
+            component => component.GetComponentType() is OPEN_KAN or CLOSED_KAN_COMPONENT);
 
         return quadCounter == 4;
     }

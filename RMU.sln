@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMU", "RMU.csproj", "{AC900
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMU.Test", "..\RMU.Test\RMU.Test.csproj", "{6C633482-A6EF-4B56-A9D6-9B4E0B6B19F0}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMU.TestObjects", "..\RMU.TestObjects\RMU.TestObjects.csproj", "{B18ADC6A-3953-4D07-B6DB-8898F40C085D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{6C633482-A6EF-4B56-A9D6-9B4E0B6B19F0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6C633482-A6EF-4B56-A9D6-9B4E0B6B19F0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6C633482-A6EF-4B56-A9D6-9B4E0B6B19F0}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B18ADC6A-3953-4D07-B6DB-8898F40C085D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B18ADC6A-3953-4D07-B6DB-8898F40C085D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B18ADC6A-3953-4D07-B6DB-8898F40C085D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B18ADC6A-3953-4D07-B6DB-8898F40C085D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
