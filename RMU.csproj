@@ -12,4 +12,8 @@
       <HintPath>..\..\..\..\Documents\Godot Projects\ProjectTransCrab\.mono\assemblies\Debug\GodotSharp.dll</HintPath>
     </Reference>
   </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="GodotSharp" Version="4.0.0-beta1" />
+  </ItemGroup>
 </Project>

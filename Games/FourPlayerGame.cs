@@ -5,6 +5,8 @@ namespace RMU.Games;
 
 public abstract class FourPlayerGame : AbstractGame
 {
+    
+    
     protected void Init()
     {
         _players = new FourPlayerAbstractPlayer[4];
@@ -19,6 +21,7 @@ public abstract class FourPlayerGame : AbstractGame
         _wall = _wallObject.GetWall();
         _deadWall = _wallObject.GetDeadWall();
         ArrangePlayers();
+        _firstGoAroundCounter = 4;
         Start();
     }
 

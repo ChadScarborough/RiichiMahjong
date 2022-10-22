@@ -72,7 +72,9 @@ public sealed class PriorityQueueForCallCommands : IPriorityQueue
     {
         if (_priorityQueue.Count == 0)
         {
-            _game.NextPlayer();
+            Player p = _game.GetActivePlayer();
+            if (p.GetHand().GetDrawTile() is null)
+                _game.NextPlayer();
             return;
         }
         if (_priorityQueue[0].GetPriority() == 3)

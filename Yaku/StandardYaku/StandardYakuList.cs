@@ -28,6 +28,8 @@ internal sealed class StandardYakuList
             new WhiteDragonYaku(_completeHand),
             new SeatWindYaku(_completeHand),
             new RoundWindYaku(_completeHand),
+            new UnderTheSeaYaku(_completeHand),
+            new UnderTheRiverYaku(_completeHand),
             // 2 han
             new HalfOutsideHandYaku(_completeHand),
             new MixedTripleSequenceYaku(_completeHand),

@@ -17,6 +17,7 @@ public abstract class ThreePlayerGame : AbstractGame
         _wall = _wallObject.GetWall();
         _deadWall = _wallObject.GetDeadWall();
         ArrangePlayers();
+        _firstGoAroundCounter = 3;
         Start();
     }
 

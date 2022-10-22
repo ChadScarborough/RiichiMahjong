@@ -1,6 +1,5 @@
 ﻿using RMU.Tiles;
 using System;
-using System.Collections.Generic;
 
 namespace RMU.Walls.DeadWall;
 
@@ -104,5 +103,15 @@ public sealed class FourPlayerDeadWall : IDeadWall
     public List<Tile> GetDrawableTiles()
     {
         return _drawableTiles;
+    }
+
+    public int GetSize()
+    {
+        int size = 0;
+        size += _doraIndicators.Count;
+        size += _uraDoraIndicators.Count;
+        size += _drawableTiles.Count;
+        size += _extraTiles.Count;
+        return size;
     }
 }

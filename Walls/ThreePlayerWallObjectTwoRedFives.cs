@@ -7,7 +7,6 @@ public sealed class ThreePlayerWallObjectTwoRedFives : WallObject
     public ThreePlayerWallObjectTwoRedFives()
     {
         _wall = new ThreePlayerWallTwoRedFives();
-        GenerateDeadWall();
     }
 
     public override void GenerateDeadWall()

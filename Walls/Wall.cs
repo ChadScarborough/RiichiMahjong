@@ -1,6 +1,5 @@
 ﻿using RMU.Globals.DataStructures;
 using RMU.Tiles;
-using System.Collections.Generic;
 using System.Linq;
 
 namespace RMU.Walls;
@@ -34,7 +33,7 @@ public abstract class Wall
         return wall.RemoveTail();
     }
 
-    protected void PopulateWall(IEnumerable<Tile> tiles)
+    public void PopulateWall(IEnumerable<Tile> tiles)
     {
         Clear();
         List<Tile> tempList = GenerateTiles(tiles);
@@ -46,7 +45,7 @@ public abstract class Wall
         destination.Clear();
         foreach (Tile tile in source)
         {
-            destination.AddHead(tile);
+            destination.AddTail(tile);
         }
     }
 
@@ -76,5 +75,15 @@ public abstract class Wall
         }
 
         return outputList;
+    }
+
+    public void AddTile(Tile tile)
+    {
+        _wall.AddHead(tile);
+    }
+
+    public Tile Peek()
+    {
+        return _wall.GetHead().GetValue();
     }
 }

@@ -107,6 +107,7 @@ public sealed class DoublyLinkedList<T>
             }
             Node tempNode = _head;
             _head = tempNode.GetNext();
+            _head.SetPrev(null);
             tempNode.SetNext(null);
             _size--;
             return tempNode.GetValue();
@@ -123,6 +124,7 @@ public sealed class DoublyLinkedList<T>
                 Node temp = _tail;
                 _tail = temp.GetPrev();
                 temp.SetPrev(null);
+                _tail.SetNext(null);
                 _size--;
                 return temp.GetValue();
             }

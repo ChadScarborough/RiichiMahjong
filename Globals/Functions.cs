@@ -193,4 +193,42 @@ public static class Functions
         bool sameComponentType = componentType1 == componentType2;
         return sameTile && sameComponentType;
     }
+
+    public static Tile GetIndicatedDoraTile(Tile doraIndicator)
+    {
+        return doraIndicator.GetSuit() switch
+        {
+            MAN or PIN or SOU => GetIndicatedNumberDoraTile(doraIndicator),
+            WIND => GetIndicatedWindDoraTile(doraIndicator),
+            DRAGON => GetIndictedDragonDoraTile(doraIndicator),
+            _ => throw new ArgumentException("Invalid suit")
+        };
+    }
+
+    private static Tile GetIndicatedNumberDoraTile(Tile doraIndicator)
+    {
+        return doraIndicator.GetValue() switch
+        {
+            9 => TileFactory.CreateTile(1, doraIndicator.GetSuit()),
+            _ => TileFactory.CreateTile(doraIndicator.GetValue() + 1, doraIndicator.GetSuit())
+        };
+    }
+
+    private static Tile GetIndicatedWindDoraTile(Tile doraIndicator)
+    {
+        return doraIndicator.GetValue() switch
+        {
+            NORTH_WIND_C => TileFactory.CreateTile(EAST_WIND_C, doraIndicator.GetSuit()),
+            _ => TileFactory.CreateTile(doraIndicator.GetValue() + 1, doraIndicator.GetSuit())
+        };
+    }
+
+    private static Tile GetIndictedDragonDoraTile(Tile doraIndicator)
+    {
+        return doraIndicator.GetValue() switch
+        {
+            WHITE_DRAGON_C => TileFactory.CreateTile(GREEN_DRAGON_C, doraIndicator.GetSuit()),
+            _ => TileFactory.CreateTile(doraIndicator.GetValue() + 1, doraIndicator.GetSuit())
+        };
+    }
 }

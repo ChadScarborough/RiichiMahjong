@@ -4,6 +4,7 @@ using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten.HandSplitter;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RMU.Shanten;
 
@@ -15,25 +16,16 @@ public static class StandardShantenCalculator
     private static int _numberOfOpenMelds;
     private static Hand _hand;
 
-    private static readonly object shantenLock = new();
+    private static readonly object ShantenLock = new();
 
     public static int CalculateShanten(Hand hand, List<TileCollection> collections, int numberOfOpenMelds)
     {
-        lock (shantenLock)
+        lock (ShantenLock)
         {
             _hand = hand;
             _numberOfOpenMelds = numberOfOpenMelds;
-            ClearShantenValues();
             SetShantenValues(collections);
             return MinOfArray(ShantenValues);
-        }
-    }
-
-    private static void ClearShantenValues()
-    {
-        for (int i = 0; i < 8; i++)
-        {
-            ShantenValues[i] = 0;
         }
     }
 
@@ -327,7 +319,9 @@ public static class StandardShantenCalculator
         {
             IncrementCounters(ref groups, ref pairs, ref taatsu, component);
         }
-        return ShantenFormulas.CalculateStandardShanten(groups, pairs, taatsu);
+        if (_hand.GetDrawTile() is null)
+            return ShantenFormulas.CalculateStandardShantenNoDrawTile(groups, pairs, taatsu);
+        return ShantenFormulas.CalculateStandardShantenWithDrawTile(groups, pairs, taatsu);
     }
 
     private static void IncrementCounters(ref int groups, ref int pairs, ref int taatsu, ICompleteHandComponent component)

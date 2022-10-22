@@ -21,10 +21,14 @@ public sealed class CallClosedKanCommand : CallCommand
         {
             _handMakingCall.RemoveDrawTile();
         }
+        
+        _handMakingCall.AddDrawTileToHand();
+        _playerMakingCall.DrawTileFromDeadWall();
+        _game.GetDeadWall().RevealDoraTile();
     }
 
     public override int GetPriority()
     {
-        return 2;
+        return 0;
     }
 }

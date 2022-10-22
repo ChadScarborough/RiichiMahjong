@@ -50,6 +50,11 @@ namespace RMU.Walls.DeadWall
             return _drawableTiles;
         }
 
+        public int GetSize()
+        {
+            throw new NotImplementedException();
+        }
+
         public List<Tile> GetRevealedDoraIndicators()
         {
             return _revealedDoraIndicators;

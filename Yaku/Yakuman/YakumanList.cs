@@ -19,6 +19,8 @@ namespace RMU.Yaku.Yakuman
         {
             _yakumanList = new List<YakumanBase>
             {
+                new BlessingsOfHeavenYakuman(_completeHand),
+                new BlessingsOfEarthYakuman(_completeHand),
                 new ThirteenOrphansYakuman(_completeHand),
                 new ThirteenWaitThirteenOrphansYakuman(_completeHand),
                 new FourConcealedTripletsYakuman(_completeHand),
@@ -37,7 +39,7 @@ namespace RMU.Yaku.Yakuman
 
         public List<YakumanBase> CheckYakuman()
         {
-            return _yakumanList.Where(yakuman => yakuman.Check()).ToList();
+            return _yakumanList.Where(y => y.Check()).ToList();
         }
     }
 }

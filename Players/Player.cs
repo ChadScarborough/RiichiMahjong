@@ -1,4 +1,5 @@
-﻿using RMU.Calls.CallCommands;
+﻿#nullable enable
+using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
 using RMU.Games;
 using RMU.Hands;
@@ -9,7 +10,7 @@ using RMU.Yaku;
 using RMU.Yaku.StandardYaku;
 using RMU.Yaku.Yakuman;
 using System;
-using System.Collections.Generic;
+using System.Linq;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
 
 namespace RMU.Players;
@@ -29,10 +30,13 @@ public abstract class Player
     private ICompleteHand _completeHand;
     private List<YakuBase> _satisfiedYaku;
 
+    private Tile? _closedKanTile;
+
     private bool _canPon;
     private bool _canOpenKan1;
     private bool _canRon;
     private bool _canTsumo;
+    private bool _canClosedKan;
 
     private int _playerID;
 
@@ -41,7 +45,8 @@ public abstract class Player
         _seatWind = seatWind;
         _hand = hand;
         _game = game;
-        _satisfiedYaku = new();
+        _satisfiedYaku = new List<YakuBase>();
+        _closedKanTile = null;
         SetAvailablePotentialCalls();
     }
 
@@ -67,36 +72,52 @@ public abstract class Player
 
     public void Discard(int index)
     {
-        if (IsActivePlayer())
-        {
-            Tile tile = _hand.GetClosedTiles()[index].Clone();
-            _hand.DiscardTile(index);
-            _game.SetLastTile(tile);
-            _game.CheckCalls();
-        }
+        if (!IsActivePlayer()) return;
+        NegateCalls();
+        Tile tile = _hand.GetClosedTiles()[index].Clone();
+        _hand.DiscardTile(index);
+        _game.SetLastTile(tile);
+        _game.CheckCalls();
+        _game.DecrementFirstGoAroundCounter();
     }
 
     public void DiscardDrawTile()
     {
-        if (IsActivePlayer())
-        {
-            Tile tile = _hand.GetDrawTile().Clone();
-            _hand.DiscardDrawTile();
-            _game.SetLastTile(tile);
-            _game.CheckCalls();
-        }
+        if (!IsActivePlayer()) return;
+        NegateCalls();
+        Tile tile = _hand.GetDrawTile().Clone();
+        _hand.DiscardDrawTile();
+        _game.SetLastTile(tile);
+        _game.CheckCalls();
+        _game.DecrementFirstGoAroundCounter();
     }
 
+    private void NegateCalls()
+    {
+        _canPon = false;
+        _canRon = false;
+        _canTsumo = false;
+        _canClosedKan = false;
+        _canOpenKan1 = false;
+    }
+    
     public void DrawTile()
     {
+        // if (_game.GetWall().GetSize() == 0)
+        // {
+        //     _game.ExhaustiveDraw();
+        //     return;
+        // }
         _hand.DrawTileFromWall();
         CheckForTsumo();
+        CheckForClosedKan();
     }
 
     public void DrawTileFromDeadWall()
     {
         _hand.DrawTileFromDeadWall();
         CheckForTsumo();
+        CheckForClosedKan();
     }
 
     public void SetAvailablePotentialCalls()
@@ -194,6 +215,7 @@ public abstract class Player
     public void CancelCalls()
     {
         _priorityQueueForPotentialCalls.RemoveByPlayer(this);
+        NegateCalls();
         UpdateAvailableCalls();
         if (_priorityQueueForPotentialCalls.IsEmpty())
         {
@@ -210,11 +232,18 @@ public abstract class Player
         {
             _priorityQueueForCallCommands.Execute();
         }
+
+        NegateCalls();
     }
 
     public bool CanPon()
     {
         return _canPon;
+    }
+
+    public bool CanClosedKan()
+    {
+        return _canClosedKan;
     }
 
     public bool CanOpenKan1()
@@ -231,7 +260,6 @@ public abstract class Player
     {
         if (IsActivePlayer() == false)
             return false;
-        CheckForTsumo();
         return _canTsumo;
     }
 
@@ -246,10 +274,14 @@ public abstract class Player
         }
     }
 
-    public void CallClosedKan(Tile calledTile)
+    public void CallClosedKan()
     {
-        CallCommand callClosedKan = new CallClosedKanCommand(this, calledTile);
+        if (_canClosedKan == false) return;
+        if (IsActivePlayer() == false) return;
+        CallCommand callClosedKan = new CallClosedKanCommand(this, _closedKanTile);
         callClosedKan.Execute();
+        _game.MakeDoraTiles();
+        _canClosedKan = false;
         UpdateAvailableCalls();
     }
 
@@ -275,11 +307,9 @@ public abstract class Player
     {
         Tile calledTile = _game.GetLastTile();
         UpdateAvailableCalls();
-        if (_canRon)
-        {
-            CallCommand callRon = new CallRonCommand(this, calledTile);
-            MakeCall(callRon);
-        }
+        if (!_canRon) return;
+        CallCommand callRon = new CallRonCommand(this, calledTile);
+        MakeCall(callRon);
     }
 
     public void CallTsumo()
@@ -294,7 +324,7 @@ public abstract class Player
 
     public virtual void GeneratePotentialDiscardCalls(Tile lastTile)
     {
-        //GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
+        // GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
         GeneratePotentialRonCall(this, _priorityQueueForPotentialCalls, lastTile);
     }
 
@@ -339,16 +369,10 @@ public abstract class Player
         int highestValue = 0;
         foreach (ICompleteHand completeHand in completeHands)
         {
-            int han = 0;
-            foreach (YakuBase yaku in completeHand.GetYaku())
-            {
-                han += yaku.GetValue();
-            }
-            if (han > highestValue)
-            {
-                highestValue = han;
-                strongestHand = completeHand;
-            }
+            int han = completeHand.GetYaku().Sum(yaku => yaku.GetValue());
+            if (han <= highestValue) continue;
+            highestValue = han;
+            strongestHand = completeHand;
         }
         _completeHand = strongestHand;
         if (_completeHand.GetYaku().Count == 0)
@@ -404,6 +428,36 @@ public abstract class Player
         _completeHand = null;
         ClearYaku();
     }
+    
+    private void CheckForClosedKan()
+    {
+        int count = 0;
+        Tile? tile = null;
+        foreach (Tile t in _hand.GetTilesInHand())
+        {
+            tile = CountCopiesOfTile(tile, t, ref count);
+
+            if (count != 4) continue;
+            _canClosedKan = true;
+            _closedKanTile = tile;
+            return;
+        }
+
+        _canClosedKan = false;
+        _closedKanTile = null;
+    }
+
+    private static Tile? CountCopiesOfTile(Tile? tile, Tile t, ref int count)
+    {
+        if (AreTilesEquivalent(tile, t))
+        {
+            count++;
+            return tile;
+        }
+        tile = t; 
+        count = 1;
+        return tile;
+    }
 
     public void SetSatisfiedYaku(List<YakuBase> yaku)
     {
@@ -428,7 +482,7 @@ public abstract class Player
 
     public string GetCompleteHandType()
     {
-        return _completeHand == null ? "None" : _completeHand.GetCompleteHandType().ToString();
+        return _completeHand.GetCompleteHandType().ToString();
     }
 
     public int NumberOfTenpaiHands()
@@ -454,5 +508,19 @@ public abstract class Player
     public override string ToString()
     {
         return $"Player { _playerID }";
+    }
+
+    public int NumberOfCopiesVisible(Tile tile)
+    {
+        int total = _game.NumberOfCopiesVisible(tile);
+        foreach (Tile t in _hand.GetTilesInHand())
+        {
+            if (AreTilesEquivalent(tile, t))
+            {
+                total++;
+            }
+        }
+
+        return total;
     }
 }

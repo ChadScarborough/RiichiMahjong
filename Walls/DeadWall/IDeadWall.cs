@@ -12,4 +12,5 @@ public interface IDeadWall
     List<Tile> GetRevealedDoraIndicators();
     List<Tile> GetUraDoraIndicators();
     List<Tile> GetDrawableTiles();
+    int GetSize();
 }

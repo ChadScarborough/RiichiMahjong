@@ -2,7 +2,7 @@
 
 public static class ShantenFormulas
 {
-    public static int CalculateStandardShanten(int groups, int pairs, int taatsu)
+    public static int CalculateStandardShantenNoDrawTile(int groups, int pairs, int taatsu)
     {
         int standardShanten = 8 - ((2 * groups) + pairs + taatsu);
         int totalComponents = groups + pairs + taatsu;
@@ -17,6 +17,16 @@ public static class ShantenFormulas
                 _ => 1
             }
             : standardShanten;
+    }
+
+    public static int CalculateStandardShantenWithDrawTile(int groups, int pairs, int taatsu)
+    {
+        int blocks = 0;
+        if (pairs >= 1) blocks++;
+        blocks += groups * 2;
+        int partial = pairs + taatsu;
+        if (partial > 4) partial = 4;
+        return blocks + partial;
     }
 
     public static int CalculateSevenPairsShanten(int triplets, int pairs)

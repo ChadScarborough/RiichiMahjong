@@ -13,7 +13,7 @@ namespace RMU.Hands;
 public abstract class Hand
 {
     private readonly Wall _wall;
-    private readonly IDeadWall _deadWall;
+    private IDeadWall _deadWall;
     protected List<Tile> _closedTiles;
     private Tile _drawTile;
     private readonly StandardDiscardPile _discardPile;
@@ -27,7 +27,6 @@ public abstract class Hand
     protected Hand(WallObject wallObject)
     {
         _wall = wallObject.GetWall();
-        _deadWall = wallObject.GetDeadWall();
         _discardPile = new StandardDiscardPile();
         _handSorter = new HandSorter();
         _closedTiles = new List<Tile>();
@@ -39,6 +38,11 @@ public abstract class Hand
     public void OpenHand()
     {
         _isOpen = true;
+    }
+
+    internal void SetDeadWall(IDeadWall deadWall)
+    {
+        _deadWall = deadWall;
     }
 
     public virtual void DiscardTile(int index)
@@ -64,7 +68,7 @@ public abstract class Hand
         _drawTile = null;
     }
 
-    public virtual void DrawTileFromWall()
+    public void DrawTileFromWall()
     {
         if (_wall.GetSize() <= 0)
         {
@@ -83,7 +87,7 @@ public abstract class Hand
         _drawTile = _wall.DrawTileFromWall();
     }
 
-    public virtual void DrawTileFromDeadWall()
+    public void DrawTileFromDeadWall()
     {
         SortHand();
         if (_closedTiles.Count >= 13 && _drawTile != null)
