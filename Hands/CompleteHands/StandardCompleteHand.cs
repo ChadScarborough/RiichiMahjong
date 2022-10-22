@@ -39,7 +39,7 @@ public sealed class StandardCompleteHand : ICompleteHand
         _pairs = new List<ICompleteHandComponent>();
         _tiles = new List<Tile>();
         _isOpen = player.GetHand().IsOpen();
-        _satisfiedYaku = new List<YakuBase>();
+        _satisfiedYaku = new();
 
         switch (_waitType)
         {
