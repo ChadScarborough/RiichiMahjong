@@ -35,6 +35,7 @@ public sealed class ThirteenOrphansCompleteHand : ICompleteHand
         _pairs = new List<ICompleteHandComponent>();
         _constructedHand = new List<ICompleteHandComponent>();
         _tiles = new List<Tile>();
+        _satisfiedYaku = new();
 
         if (_waitType is SINGLE_WAIT)
         {
@@ -139,7 +140,7 @@ public sealed class ThirteenOrphansCompleteHand : ICompleteHand
 
     public void SetYaku(List<YakuBase> satisfiedYaku)
     {
-        _satisfiedYaku = satisfiedYaku;
+        _satisfiedYaku.AddRange(satisfiedYaku);
     }
 
     public List<YakuBase> GetYaku()
@@ -155,5 +156,10 @@ public sealed class ThirteenOrphansCompleteHand : ICompleteHand
     public ITenpaiHand GetTenpaiHand()
     {
         return _tenpaiHand;
+    }
+
+    public void ClearYaku()
+    {
+        _satisfiedYaku.Clear();
     }
 }

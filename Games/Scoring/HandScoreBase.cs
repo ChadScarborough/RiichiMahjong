@@ -1,7 +1,6 @@
 ﻿using RMU.Hands.CompleteHands;
 using RMU.Players;
 using RMU.Yaku;
-using System.Collections.Generic;
 
 namespace RMU.Games.Scoring
 {
@@ -22,7 +21,8 @@ namespace RMU.Games.Scoring
             _winningCallType = winningCallType;
             ICompleteHand completeHand = player.GetCompleteHand();
             _hanValue = HanCalculator.Calculate(player, _satisfiedYaku);
-            _fuValue = FuCalculator.Calculate(completeHand, winningCallType);
+            //_fuValue = FuCalculator.Calculate(completeHand, winningCallType);
+            _fuValue = 20;
             _totalPointsReceived = CalculateTotalScore();
             SetName();
         }

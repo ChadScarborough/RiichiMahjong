@@ -291,7 +291,7 @@ public abstract class Player
 
     public virtual void GeneratePotentialDiscardCalls(Tile lastTile)
     {
-        //GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
+        GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
         GeneratePotentialRonCall(this, _priorityQueueForPotentialCalls, lastTile);
     }
 

@@ -18,6 +18,7 @@ public sealed class CallOpenKan1Command : CallCommand
         {
             _handMakingCall.RemoveCopyOfTile(_calledTile);
         }
+        _playerMakingCall.GetGame().GetDeadWall().RevealDoraTile();
     }
 
     public override int GetPriority()

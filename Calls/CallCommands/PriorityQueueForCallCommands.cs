@@ -72,6 +72,7 @@ public sealed class PriorityQueueForCallCommands : IPriorityQueue
     {
         if (_priorityQueue.Count == 0)
         {
+            _game.NextPlayer();
             return;
         }
         if (_priorityQueue[0].GetPriority() == 3)

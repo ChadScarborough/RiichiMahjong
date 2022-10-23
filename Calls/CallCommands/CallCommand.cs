@@ -6,7 +6,7 @@ namespace RMU.Calls.CallCommands;
 
 public abstract class CallCommand : ICallObject
 {
-    private readonly Player _playerMakingCall;
+    protected readonly Player _playerMakingCall;
     protected readonly Hand _handMakingCall;
     protected readonly Tile _calledTile;
     protected IPriorityQueue _priorityQueue;

@@ -30,6 +30,7 @@ public sealed class SevenPairsCompleteHand : ICompleteHand
         _completeHand = RadixSortForCompleteHandComponents.Sort(_completeHand);
         _drawTile = tile;
         _tiles = new List<Tile>();
+        _satisfiedYaku = new();
 
         _constructedHand = new List<ICompleteHandComponent>();
         ConstructHand();
@@ -126,7 +127,7 @@ public sealed class SevenPairsCompleteHand : ICompleteHand
 
     public void SetYaku(List<YakuBase> satisfiedYaku)
     {
-        _satisfiedYaku = satisfiedYaku;
+        _satisfiedYaku.AddRange(satisfiedYaku);
     }
 
     public List<YakuBase> GetYaku()
@@ -142,5 +143,10 @@ public sealed class SevenPairsCompleteHand : ICompleteHand
     public ITenpaiHand GetTenpaiHand()
     {
         return _tenpaiHand;
+    }
+
+    public void ClearYaku()
+    {
+        _satisfiedYaku.Clear();
     }
 }
