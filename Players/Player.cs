@@ -23,16 +23,17 @@ public abstract class Player
     private Player _playerOnRight;
     private int _score;
     private readonly AbstractGame _game;
-    private PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
+    protected PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
     private PriorityQueueForCallCommands _priorityQueueForCallCommands;
     protected AvailablePotentialCalls _availablePotentialCalls;
     private ICompleteHand _completeHand;
-    private List<YakuBase> _satisfiedYaku;
+    protected List<YakuBase> _satisfiedYaku;
 
     private bool _canPon;
     private bool _canOpenKan1;
     private bool _canRon;
     private bool _canTsumo;
+    private bool _canClosedKan;
 
     private int _playerID;
 
@@ -41,7 +42,6 @@ public abstract class Player
         _seatWind = seatWind;
         _hand = hand;
         _game = game;
-        _satisfiedYaku = new();
         SetAvailablePotentialCalls();
     }
 
@@ -217,6 +217,11 @@ public abstract class Player
         return _canPon;
     }
 
+    public bool CanClosedKan()
+    {
+        return _canClosedKan;
+    }
+
     public bool CanOpenKan1()
     {
         return _canOpenKan1;
@@ -229,8 +234,6 @@ public abstract class Player
 
     public bool CanTsumo()
     {
-        if (IsActivePlayer() == false)
-            return false;
         CheckForTsumo();
         return _canTsumo;
     }
@@ -250,7 +253,7 @@ public abstract class Player
     {
         CallCommand callClosedKan = new CallClosedKanCommand(this, calledTile);
         callClosedKan.Execute();
-        UpdateAvailableCalls();
+        UpdateAvailableClosedCalls();
     }
 
     public void CallOpenKan1(Tile calledTile)
@@ -306,6 +309,29 @@ public abstract class Player
         _canRon = _availablePotentialCalls.CanCallRon();
     }
 
+    public virtual void UpdateAvailableClosedCalls()
+    {
+        CheckForClosedKan();
+    }
+
+    private void CheckForClosedKan()
+    {
+        if (IsActivePlayer() is false) return;
+        Dictionary<(int, Suit), int> tileCounts = new();
+        foreach(Tile tile in _hand.GetTilesInHand())
+        {
+            if(tileCounts.ContainsKey((tile.GetValue(), tile.GetSuit())))
+            {
+                tileCounts[(tile.GetValue(), tile.GetSuit())]++;
+            }
+            else
+            {
+                tileCounts.Add((tile.GetValue(), tile.GetSuit()), 0);
+            }
+        }
+        _canClosedKan = tileCounts.ContainsValue(4);
+    }
+
     private void CheckForTsumo()
     {
         InitializeValuesForTsumoCheck();
@@ -353,8 +379,7 @@ public abstract class Player
         _completeHand = strongestHand;
         if (_completeHand.GetYaku().Count == 0)
             throw new Exception("No yaku");
-        ClearYaku();
-        SetSatisfiedYaku(_completeHand.GetYaku());
+        _satisfiedYaku = _completeHand.GetYaku();
     }
 
     private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
@@ -371,7 +396,7 @@ public abstract class Player
             {
                 satisfiedYaku.AddRange(yakuList.CheckYaku());
             }
-            
+
             completeHand.SetYaku(satisfiedYaku);
             if (satisfiedYaku.Count > 0)
             {
@@ -402,7 +427,7 @@ public abstract class Player
     {
         _canTsumo = false;
         _completeHand = null;
-        ClearYaku();
+        _satisfiedYaku = null;
     }
 
     public void SetSatisfiedYaku(List<YakuBase> yaku)
@@ -410,11 +435,6 @@ public abstract class Player
         _satisfiedYaku = yaku;
     }
 
-    public void ClearYaku()
-    {
-        _satisfiedYaku.Clear();
-    }
-    
     public void SetCompleteHand(ICompleteHand completeHand)
     {
         _completeHand = completeHand;
