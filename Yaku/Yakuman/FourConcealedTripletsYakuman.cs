@@ -1,5 +1,5 @@
-﻿using RMU.Hands.CompleteHands;
-using RMU.Hands.CompleteHands.CompleteHandComponents;
+﻿using System.Linq;
+using RMU.Hands.CompleteHands;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -33,12 +33,9 @@ namespace RMU.Yaku.Yakuman
             }
 
             WinningCallType winningCall = GetWinningCall();
-            foreach (ICompleteHandComponent component in _completeHand.GetTriplets())
+            if (_completeHand.GetTriplets().Any(component => component.GetComponentType() is OPEN_PON or OPEN_KAN))
             {
-                if (component.GetComponentType() is OPEN_PON or OPEN_KAN)
-                {
-                    return false;
-                }
+                return false;
             }
 
             return winningCall is not RON || _completeHand.GetWaitType() is not TWO_SIDED_TRIPLET_WAIT;

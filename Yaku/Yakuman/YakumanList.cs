@@ -1,5 +1,6 @@
 ﻿using RMU.Hands.CompleteHands;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RMU.Yaku.Yakuman
 {
@@ -36,15 +37,7 @@ namespace RMU.Yaku.Yakuman
 
         public List<YakumanBase> CheckYakuman()
         {
-            List<YakumanBase> achievedYakuman = new();
-            foreach(YakumanBase yakuman in _yakumanList)
-            {
-                if (yakuman.Check())
-                {
-                    achievedYakuman.Add(yakuman);
-                }
-            }
-            return achievedYakuman;
+            return _yakumanList.Where(yakuman => yakuman.Check()).ToList();
         }
     }
 }

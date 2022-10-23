@@ -2,6 +2,7 @@ using RMU.Hands.CompleteHands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RMU.Yaku.StandardYaku;
 
@@ -18,12 +19,7 @@ internal sealed class YakuhaiYaku
 
     public bool Check()
     {
-        if (_completeHand is null)
-        {
-            return false;
-        }
-
-        if (_completeHand.GetCompleteHandType() is not STANDARD)
+        if (_completeHand?.GetCompleteHandType() is not STANDARD)
         {
             return false;
         }
@@ -34,15 +30,7 @@ internal sealed class YakuhaiYaku
 
     private bool HandContainsTripletOfYakuhaiTileExcludingDrawTile(List<ICompleteHandComponent> components)
     {
-        foreach (ICompleteHandComponent component in components)
-        {
-            if (ComponentContainsYakuhaiTile(component))
-            {
-                return true;
-            }
-        }
-
-        return false;
+        return components.Any(ComponentContainsYakuhaiTile);
     }
 
     private bool ComponentContainsYakuhaiTile(ICompleteHandComponent component)

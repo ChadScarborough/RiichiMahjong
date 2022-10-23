@@ -6,15 +6,15 @@ namespace RMU.Games.Scoring
 {
     public abstract class HandScoreBase
     {
-        protected Player _player;
-        protected List<YakuBase> _satisfiedYaku;
-        protected WinningCallType _winningCallType;
-        protected int _hanValue;
-        protected int _fuValue;
-        protected int _totalPointsReceived;
-        protected string _name;
+        protected readonly Player _player;
+        private readonly List<YakuBase> _satisfiedYaku;
+        protected readonly WinningCallType _winningCallType;
+        protected readonly int _hanValue;
+        protected readonly int _fuValue;
+        private readonly int _totalPointsReceived;
+        private string _name;
 
-        public HandScoreBase(Player player, WinningCallType winningCallType)
+        protected HandScoreBase(Player player, WinningCallType winningCallType)
         {
             _player = player;
             _satisfiedYaku = player.GetYaku();
@@ -22,7 +22,7 @@ namespace RMU.Games.Scoring
             ICompleteHand completeHand = player.GetCompleteHand();
             _hanValue = HanCalculator.Calculate(player, _satisfiedYaku);
             //_fuValue = FuCalculator.Calculate(completeHand, winningCallType);
-            _fuValue = 20;
+            _fuValue = 30;
             _totalPointsReceived = CalculateTotalScore();
             SetName();
         }
@@ -62,9 +62,9 @@ namespace RMU.Games.Scoring
             return _name;
         }
 
-        public abstract int CalculateTotalScore();
+        protected abstract int CalculateTotalScore();
 
-        protected void SetName()
+        private void SetName()
         {
             _name = "";
             foreach (YakuBase yaku in _satisfiedYaku)

@@ -7,11 +7,11 @@ namespace RMU.Games.Scoring;
 
 internal static class FuCalculator
 {
-    private static readonly object fuLock = new();
+    private static readonly object FuLock = new();
 
     public static int Calculate(ICompleteHand completeHand, WinningCallType winningCallType)
     {
-        lock (fuLock)
+        lock (FuLock)
         {
             return CalculateFuValue(completeHand, winningCallType);
         }
@@ -79,8 +79,11 @@ internal static class FuCalculator
 
     private static int FuFromWinningCall(ICompleteHand completeHand, WinningCallType winningCallType)
     {
-        return winningCallType == TSUMO ? 2 :
-            winningCallType == RON && (completeHand.IsOpen() == false) ? 10 : 0;
+        return winningCallType == TSUMO 
+            ? 2 
+            : winningCallType == RON && (completeHand.IsOpen() == false) 
+                ? 10 
+                : 0;
     }
 
     private static int FuFromYakuhaiPair(ICompleteHand completeHand)

@@ -32,19 +32,19 @@ public sealed class MixedTripleSequenceYaku : YakuBase
 
         try
         {
-            for (int i = 0; i < 2; i++)
+            for (int i = 0; i < components.Count -2; i++)
             {
                 if (components[i].GetLeadTile().GetSuit() is not MAN)
                 {
                     break;
                 }
-                for (int j = i + 1; j < 3; j++)
+                for (int j = i + 1; j < components.Count - 1; j++)
                 {
                     if (components[j].GetLeadTile().GetSuit() is not PIN)
                     {
                         break;
                     }
-                    for (int k = j + 1; k < 4; k++)
+                    for (int k = j + 1; k < components.Count; k++)
                     {
                         if (components[k].GetLeadTile().GetSuit() is not SOU)
                         {
@@ -59,7 +59,7 @@ public sealed class MixedTripleSequenceYaku : YakuBase
                 }
             }
         }
-        catch (IndexOutOfRangeException)
+        catch
         {
             return false;
         }

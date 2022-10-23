@@ -23,11 +23,11 @@ public abstract class Player
     private Player _playerOnRight;
     private int _score;
     private readonly AbstractGame _game;
-    protected PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
+    private PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
     private PriorityQueueForCallCommands _priorityQueueForCallCommands;
     protected AvailablePotentialCalls _availablePotentialCalls;
     private ICompleteHand _completeHand;
-    protected List<YakuBase> _satisfiedYaku;
+    private List<YakuBase> _satisfiedYaku;
 
     private bool _canPon;
     private bool _canOpenKan1;
@@ -41,6 +41,7 @@ public abstract class Player
         _seatWind = seatWind;
         _hand = hand;
         _game = game;
+        _satisfiedYaku = new();
         SetAvailablePotentialCalls();
     }
 
@@ -228,6 +229,8 @@ public abstract class Player
 
     public bool CanTsumo()
     {
+        if (IsActivePlayer() == false)
+            return false;
         CheckForTsumo();
         return _canTsumo;
     }
@@ -350,7 +353,8 @@ public abstract class Player
         _completeHand = strongestHand;
         if (_completeHand.GetYaku().Count == 0)
             throw new Exception("No yaku");
-        _satisfiedYaku = _completeHand.GetYaku();
+        ClearYaku();
+        SetSatisfiedYaku(_completeHand.GetYaku());
     }
 
     private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
@@ -367,7 +371,7 @@ public abstract class Player
             {
                 satisfiedYaku.AddRange(yakuList.CheckYaku());
             }
-
+            
             completeHand.SetYaku(satisfiedYaku);
             if (satisfiedYaku.Count > 0)
             {
@@ -398,7 +402,7 @@ public abstract class Player
     {
         _canTsumo = false;
         _completeHand = null;
-        _satisfiedYaku = null;
+        ClearYaku();
     }
 
     public void SetSatisfiedYaku(List<YakuBase> yaku)
@@ -406,6 +410,11 @@ public abstract class Player
         _satisfiedYaku = yaku;
     }
 
+    public void ClearYaku()
+    {
+        _satisfiedYaku.Clear();
+    }
+    
     public void SetCompleteHand(ICompleteHand completeHand)
     {
         _completeHand = completeHand;

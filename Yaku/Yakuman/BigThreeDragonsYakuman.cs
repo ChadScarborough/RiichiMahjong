@@ -41,14 +41,10 @@ public sealed class BigThreeDragonsYakuman : YakumanBase
                 }
             }
 
-            if (component.GetComponentType() is DRAW_TILE)
-            {
-                if (component.GetLeadTile().GetSuit() is DRAGON)
-                {
-                    pairCounter--;
-                    tripletCounter++;
-                }
-            }
+            if (component.GetComponentType() is not DRAW_TILE) continue;
+            if (component.GetLeadTile().GetSuit() is not DRAGON) continue;
+            pairCounter--;
+            tripletCounter++;
         }
 
         return tripletCounter is 3 && pairCounter is 0;

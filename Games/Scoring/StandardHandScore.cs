@@ -30,7 +30,7 @@ public sealed class StandardHandScore : HandScoreBase
             CalculateNonDealerRonScore(_hanValue, _fuValue);
     }
 
-    public override int CalculateTotalScore()
+    protected override int CalculateTotalScore()
     {
         return _winningCallType == RON ?
             CalculateTotalRonScore() :
