@@ -1,5 +1,4 @@
-﻿#nullable enable
-using RMU.Calls.CallCommands;
+﻿using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
 using RMU.Games;
 using RMU.Hands;
@@ -50,6 +49,7 @@ public abstract class Player
         SetAvailablePotentialCalls();
     }
 
+#region GettersAndSetters
     public int GetPlayerID()
     {
         return _playerID;
@@ -68,61 +68,6 @@ public abstract class Player
     public virtual bool IsActivePlayer()
     {
         return _game.GetActivePlayer().Equals(this);
-    }
-
-    public void Discard(int index)
-    {
-        if (!IsActivePlayer()) return;
-        NegateCalls();
-        Tile tile = _hand.GetClosedTiles()[index].Clone();
-        _hand.DiscardTile(index);
-        _game.SetLastTile(tile);
-        _game.CheckCalls();
-        _game.DecrementFirstGoAroundCounter();
-    }
-
-    public void DiscardDrawTile()
-    {
-        if (!IsActivePlayer()) return;
-        NegateCalls();
-        Tile tile = _hand.GetDrawTile().Clone();
-        _hand.DiscardDrawTile();
-        _game.SetLastTile(tile);
-        _game.CheckCalls();
-        _game.DecrementFirstGoAroundCounter();
-    }
-
-    private void NegateCalls()
-    {
-        _canPon = false;
-        _canRon = false;
-        _canTsumo = false;
-        _canClosedKan = false;
-        _canOpenKan1 = false;
-    }
-    
-    public void DrawTile()
-    {
-        // if (_game.GetWall().GetSize() == 0)
-        // {
-        //     _game.ExhaustiveDraw();
-        //     return;
-        // }
-        _hand.DrawTileFromWall();
-        CheckForTsumo();
-        CheckForClosedKan();
-    }
-
-    public void DrawTileFromDeadWall()
-    {
-        _hand.DrawTileFromDeadWall();
-        CheckForTsumo();
-        CheckForClosedKan();
-    }
-
-    public void SetAvailablePotentialCalls()
-    {
-        _availablePotentialCalls = new AvailablePotentialCalls(this, _priorityQueueForPotentialCalls);
     }
 
     public Hand GetHand()
@@ -186,23 +131,73 @@ public abstract class Player
         return _playerOnRight;
     }
 
-    private void CheckForDuplicatePlayers(Player player, Player existingPlayer1, Player existingPlayer2)
+    public override string ToString()
     {
-        if (player == existingPlayer1 || player == existingPlayer2)
-        {
-            throw new ArgumentException("Attempted to set the same player in two locations");
-        }
+        return $"Player { _playerID }";
+    }
+#endregion
+
+#region DrawAndDiscard
+    public void Discard(int index)
+    {
+        if (!IsActivePlayer()) return;
+        NegateCalls();
+        Tile tile = _hand.GetClosedTiles()[index].Clone();
+        _hand.DiscardTile(index);
+        _game.SetLastTile(tile);
+        _game.CheckCalls();
+        _game.DecrementFirstGoAroundCounter();
     }
 
-    private void CheckThatThisPlayerIsNotDuplicated(Player player)
+    public void DiscardDrawTile()
     {
-        if (player == this)
-        {
-            throw new ArgumentException("Attempted to set this player to multiple locations");
-        }
+        if (!IsActivePlayer()) return;
+        NegateCalls();
+        Tile tile = _hand.GetDrawTile().Clone();
+        _hand.DiscardDrawTile();
+        _game.SetLastTile(tile);
+        _game.CheckCalls();
+        _game.DecrementFirstGoAroundCounter();
     }
 
-    public void SetPriorityQueueForPotentialCalls(PriorityQueueForPotentialCalls queue)
+    public void DrawTile()
+    {
+        // if (_game.GetWall().GetSize() == 0)
+        // {
+        //     _game.ExhaustiveDraw();
+        //     return;
+        // }
+        _hand.DrawTileFromWall();
+        CheckForTsumo();
+        CheckForClosedKan();
+    }
+
+    public void DrawTileFromDeadWall()
+    {
+        _hand.DrawTileFromDeadWall();
+        CheckForTsumo();
+        CheckForClosedKan();
+    }
+
+#endregion
+
+#region Calls
+    private void NegateCalls()
+    {
+        _canPon = false;
+        _canRon = false;
+        _canTsumo = false;
+        _canClosedKan = false;
+        _canOpenKan1 = false;
+    }
+    
+
+    public void SetAvailablePotentialCalls()
+    {
+        _availablePotentialCalls = new AvailablePotentialCalls(this, _priorityQueueForPotentialCalls);
+    }
+
+        public void SetPriorityQueueForPotentialCalls(PriorityQueueForPotentialCalls queue)
     {
         _priorityQueueForPotentialCalls = queue;
     }
@@ -336,6 +331,26 @@ public abstract class Player
         _canRon = _availablePotentialCalls.CanCallRon();
     }
 
+    private void CheckForClosedKan()
+    {
+        int count = 0;
+        Tile? tile = null;
+        foreach (Tile t in _hand.GetTilesInHand())
+        {
+            tile = CountCopiesOfTile(tile, t, ref count);
+
+            if (count != 4) continue;
+            _canClosedKan = true;
+            _closedKanTile = tile;
+            return;
+        }
+
+        _canClosedKan = false;
+        _closedKanTile = null;
+    }
+#endregion
+
+#region HandCompletion
     private void CheckForTsumo()
     {
         InitializeValuesForTsumoCheck();
@@ -428,36 +443,6 @@ public abstract class Player
         _completeHand = null;
         ClearYaku();
     }
-    
-    private void CheckForClosedKan()
-    {
-        int count = 0;
-        Tile? tile = null;
-        foreach (Tile t in _hand.GetTilesInHand())
-        {
-            tile = CountCopiesOfTile(tile, t, ref count);
-
-            if (count != 4) continue;
-            _canClosedKan = true;
-            _closedKanTile = tile;
-            return;
-        }
-
-        _canClosedKan = false;
-        _closedKanTile = null;
-    }
-
-    private static Tile? CountCopiesOfTile(Tile? tile, Tile t, ref int count)
-    {
-        if (AreTilesEquivalent(tile, t))
-        {
-            count++;
-            return tile;
-        }
-        tile = t; 
-        count = 1;
-        return tile;
-    }
 
     public void SetSatisfiedYaku(List<YakuBase> yaku)
     {
@@ -504,10 +489,34 @@ public abstract class Player
     {
         return _completeHand;
     }
+#endregion
 
-    public override string ToString()
+    private void CheckForDuplicatePlayers(Player player, Player existingPlayer1, Player existingPlayer2)
     {
-        return $"Player { _playerID }";
+        if (player == existingPlayer1 || player == existingPlayer2)
+        {
+            throw new ArgumentException("Attempted to set the same player in two locations");
+        }
+    }
+
+    private void CheckThatThisPlayerIsNotDuplicated(Player player)
+    {
+        if (player == this)
+        {
+            throw new ArgumentException("Attempted to set this player to multiple locations");
+        }
+    }
+
+    private static Tile? CountCopiesOfTile(Tile? tile, Tile t, ref int count)
+    {
+        if (AreTilesEquivalent(tile, t))
+        {
+            count++;
+            return tile;
+        }
+        tile = t; 
+        count = 1;
+        return tile;
     }
 
     public int NumberOfCopiesVisible(Tile tile)

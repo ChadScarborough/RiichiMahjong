@@ -24,6 +24,7 @@ public abstract class Hand
     private readonly List<Tile> _waits;
     private int _shanten;
 
+#region Constructor
     protected Hand(WallObject wallObject)
     {
         _wall = wallObject.GetWall();
@@ -35,16 +36,14 @@ public abstract class Hand
         _waits = new List<Tile>();
     }
 
-    public void OpenHand()
-    {
-        _isOpen = true;
-    }
-
     internal void SetDeadWall(IDeadWall deadWall)
     {
         _deadWall = deadWall;
     }
+#endregion
 
+#region DrawAndDiscard
+#region Discard
     public virtual void DiscardTile(int index)
     {
         if (index >= _closedTiles.Count)
@@ -68,6 +67,12 @@ public abstract class Hand
         _drawTile = null;
     }
 
+    public void RemoveDrawTile()
+    {
+        _drawTile = null;
+    }
+#endregion
+#region Draw
     public void DrawTileFromWall()
     {
         if (_wall.GetSize() <= 0)
@@ -102,38 +107,6 @@ public abstract class Hand
         _drawTile = _deadWall.DrawTile();
     }
 
-    private void SortHand()
-    {
-        _closedTiles = _handSorter.SortHand(_closedTiles);
-    }
-
-    public void CreateOpenMeld(Tile calledTile, MeldType meldType)
-    {
-        OpenMeld openMeld = new(meldType, calledTile);
-        _openMelds.Add(openMeld);
-    }
-
-    public void RemoveCopyOfTile(Tile calledTile)
-    {
-        for (int i = _closedTiles.Count - 1; i >= 0; i--)
-        {
-            if (IsDuplicateTile(_closedTiles[i], calledTile, i))
-            {
-                return;
-            }
-        }
-    }
-
-    private bool IsDuplicateTile(Tile closedTile, Tile calledTile, int index)
-    {
-        if (AreTilesEquivalent(closedTile, calledTile))
-        {
-            _closedTiles.RemoveAt(index);
-            return true;
-        }
-        return false;
-    }
-
     public virtual void AddDrawTileToHand()
     {
         if (_drawTile == null)
@@ -151,6 +124,40 @@ public abstract class Hand
         SortHand();
     }
 
+        public void SetDrawTile(Tile tile)
+    {
+        _drawTile = tile;
+    }
+
+    public virtual Tile GetDrawTile()
+    {
+        return _drawTile;
+    }
+#endregion
+#endregion
+
+#region Melds
+    public void CreateOpenMeld(Tile calledTile, MeldType meldType)
+    {
+        OpenMeld openMeld = new(meldType, calledTile);
+        _openMelds.Add(openMeld);
+    }
+
+    public virtual List<OpenMeld> GetOpenMelds()
+    {
+        return _openMelds;
+    }
+#endregion
+
+#region GetTiles
+    public virtual List<Tile> GetAllTiles(Tile extraTile)
+    {
+        List<Tile> outputList = new();
+        CompileAllTiles(outputList);
+        AddExtraTileToOutputList(extraTile, outputList);
+        return _handSorter.SortHand(outputList);
+    }
+
     public virtual List<Tile> GetClosedTiles()
     {
         return _closedTiles;
@@ -165,29 +172,6 @@ public abstract class Hand
         }
 
         return t;
-    }
-
-    public virtual List<OpenMeld> GetOpenMelds()
-    {
-        return _openMelds;
-    }
-
-    public virtual Tile GetDrawTile()
-    {
-        return _drawTile;
-    }
-
-    public virtual bool IsOpen()
-    {
-        return _isOpen;
-    }
-
-    public virtual List<Tile> GetAllTiles(Tile extraTile)
-    {
-        List<Tile> outputList = new();
-        CompileAllTiles(outputList);
-        AddExtraTileToOutputList(extraTile, outputList);
-        return _handSorter.SortHand(outputList);
     }
 
     public virtual List<Tile> GetAllTiles()
@@ -235,21 +219,9 @@ public abstract class Hand
             outputList.Add(tile);
         }
     }
+#endregion
 
-    public void RemoveDrawTile()
-    {
-        _drawTile = null;
-    }
-
-    public List<ITenpaiHand> GetTenpaiHands()
-    {
-        return _tenpaiHands;
-    }
-
-    public List<Tile> GetWaits()
-    {
-        return _waits;
-    }
+#region Shanten
 
     public int GetShanten()
     {
@@ -279,6 +251,16 @@ public abstract class Hand
         }
     }
 
+#region Tenpai
+    public List<ITenpaiHand> GetTenpaiHands()
+    {
+        return _tenpaiHands;
+    }
+        public List<Tile> GetWaits()
+    {
+        return _waits;
+    }
+
     private void ClearTenpaiHands()
     {
         _tenpaiHands.Clear();
@@ -298,14 +280,46 @@ public abstract class Hand
     {
         _waits.Add(tile);
     }
+#endregion
+#endregion
 
     public StandardDiscardPile GetDiscardPile()
     {
         return _discardPile;
     }
 
-    public void SetDrawTile(Tile tile)
+    public void OpenHand()
     {
-        _drawTile = tile;
+        _isOpen = true;
     }
-}
+
+    private void SortHand()
+    {
+        _closedTiles = _handSorter.SortHand(_closedTiles);
+    }
+
+    public void RemoveCopyOfTile(Tile calledTile)
+    {
+        for (int i = _closedTiles.Count - 1; i >= 0; i--)
+        {
+            if (IsDuplicateTile(_closedTiles[i], calledTile, i))
+            {
+                return;
+            }
+        }
+    }
+
+    private bool IsDuplicateTile(Tile closedTile, Tile calledTile, int index)
+    {
+        if (AreTilesEquivalent(closedTile, calledTile))
+        {
+            _closedTiles.RemoveAt(index);
+            return true;
+        }
+        return false;
+    }
+
+        public virtual bool IsOpen()
+    {
+        return _isOpen;
+    }

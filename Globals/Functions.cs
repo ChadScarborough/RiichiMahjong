@@ -78,14 +78,14 @@ public static class Functions
     public static bool AreWindsEquivalent(Tile windTile, Wind wind)
     {
         return windTile.GetSuit() == WIND
-&& windTile.GetValue() switch
-{
-    EAST_WIND_C => wind == EAST,
-    SOUTH_WIND_C => wind == SOUTH,
-    WEST_WIND_C => wind == WEST,
-    NORTH_WIND_C => wind == NORTH,
-    _ => false,
-};
+        && windTile.GetValue() switch
+        {
+            EAST_WIND_C => wind == EAST,
+            SOUTH_WIND_C => wind == SOUTH,
+            WEST_WIND_C => wind == WEST,
+            NORTH_WIND_C => wind == NORTH,
+            _ => false,
+        };
     }
 
     public static bool DoTilesFormValidSequence
@@ -100,14 +100,14 @@ public static class Functions
     public static bool AreDragonsEquivalent(Tile dragonTile, Dragon dragon)
     {
         return dragonTile != null
-&& dragonTile.GetSuit() == DRAGON
-&& dragonTile.GetValue() switch
-{
-    GREEN_DRAGON_C => dragon == GREEN,
-    RED_DRAGON_C => dragon == RED,
-    WHITE_DRAGON_C => dragon == WHITE,
-    _ => false,
-};
+        && dragonTile.GetSuit() == DRAGON
+        && dragonTile.GetValue() switch
+        {
+            GREEN_DRAGON_C => dragon == GREEN,
+            RED_DRAGON_C => dragon == RED,
+            WHITE_DRAGON_C => dragon == WHITE,
+            _ => false,
+        };
     }
 
     public static Tile GetTileAbove(Tile tile)
