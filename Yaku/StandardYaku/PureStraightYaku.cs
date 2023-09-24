@@ -33,21 +33,15 @@ public sealed class PureStraightYaku : YakuBase
             return false;
         }
 
-        for (int i = 0; i < sequences.Count - 2; i++)
+        return sequences.Count switch
         {
-            for (int j = i + 1; j < sequences.Count - 1; j++)
-            {
-                for (int k = j + 1; k < sequences.Count; k++)
-                {
-                    if (ComponentsFormPureStraight(sequences, i, j, k))
-                    {
-                        return true;
-                    }
-                }
-            }
-        }
-
-        return false;
+            3 => ComponentsFormPureStraight(sequences, 0, 1, 2),
+            4 => ComponentsFormPureStraight(sequences, 0, 1, 2) ||
+                ComponentsFormPureStraight(sequences, 0, 1, 3) ||
+                ComponentsFormPureStraight(sequences, 0, 2, 3) ||
+                ComponentsFormPureStraight(sequences, 1, 2, 3),
+            _ => false
+        };
     }
 
     private bool ComponentsFormPureStraight(List<ICompleteHandComponent> sequences, int i, int j, int k)
