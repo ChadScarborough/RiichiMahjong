@@ -73,6 +73,8 @@ public sealed class PriorityQueueForPotentialCalls : IPriorityQueue
     public List<PotentialCall> GetCallsByPlayer(Player player)
     {
         List<PotentialCall> outputList = new();
+        if (player.IsActivePlayer())
+            return outputList;
         foreach (PotentialCall call in _priorityQueue)
         {
             if (call.GetPlayerMakingCall() == player)

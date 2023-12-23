@@ -2,7 +2,6 @@ using RMU.Hands.TenpaiHands;
 using RMU.Players;
 using RMU.Tiles;
 using System;
-using System.Collections.Generic;
 
 namespace RMU.Hands.CompleteHands;
 

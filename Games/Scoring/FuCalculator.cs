@@ -88,15 +88,22 @@ internal static class FuCalculator
 
     private static int FuFromYakuhaiPair(ICompleteHand completeHand)
     {
-        ICompleteHandComponent pair = completeHand.GetPairs()[0];
-        Tile tile = pair.GetLeadTile();
-        Wind wind = completeHand.GetPlayer().GetSeatWind();
-        return tile.GetSuit() switch
+        try
         {
-            DRAGON => 2,
-            WIND => FuFromWind(wind, tile),
-            _ => 0
-        };
+            ICompleteHandComponent pair = completeHand.GetPairs()[0];
+            Tile tile = pair.GetLeadTile();
+            Wind wind = completeHand.GetPlayer().GetSeatWind();
+            return tile.GetSuit() switch
+            {
+                DRAGON => 2,
+                WIND => FuFromWind(wind, tile),
+                _ => 0
+            };
+        }
+        catch
+        {
+            return 0;
+        }
     }
 
     private static int FuFromWind(Wind seatWind, Tile windTile)

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
 using RMU.DiscardPile;
@@ -21,18 +22,22 @@ public abstract class AbstractGame
     protected WallObject _wallObject;
     protected Wall _wall;
     protected IDeadWall _deadWall;
-    private Tile _lastTile;
-    private PriorityQueueForPotentialCalls _potentialQueue;
-    private PriorityQueueForCallCommands _commandQueue;
-    private WinningCallType _winningCall;
-    private Player _activePlayer;
-    private Wind _roundWind;
-    private HandScoreBase _scoreObject;
-    private Dictionary<(int, Suit), int> _visibleTiles;
+    protected Tile _lastTile;
+    protected PriorityQueueForPotentialCalls _potentialQueue;
+    protected PriorityQueueForCallCommands _commandQueue;
+    protected WinningCallType _winningCall;
+    protected Player _activePlayer;
+    protected Wind _roundWind;
+    protected HandScoreBase _scoreObject;
+    protected Dictionary<(int, Suit), int> _visibleTiles;
 
     protected int _firstGoAroundCounter;
 
-    protected void Start()
+    public event EventHandler onNewActivePlayer;
+    public event EventHandler<HandScoreBase> onPlayerCalledRon;
+    public event EventHandler<HandScoreBase> onPlayerCalledTsumo;
+
+    protected virtual void Start()
     {
         _roundWind = EAST;
         _scoreObject = null;
@@ -47,6 +52,37 @@ public abstract class AbstractGame
             player.SetPriorityQueueForPotentialCalls(_potentialQueue);
             player.SetPriorityQueueForCallCommands(_commandQueue);
             player.SetAvailablePotentialCalls();
+        }
+        FillPlayerHands();
+    }
+
+    private void FillPlayerHands()
+    {
+        // Draw three sets of four each
+        for(int j = 0; j < 3; j++)
+        {
+            foreach (Player p in _players)
+            {
+                for (int i = 0; i < 4; i++)
+                {
+                    p.DrawTile();
+                }
+            }
+        }
+        // Draw one more tile each
+        foreach (Player p in _players)
+        {
+            p.DrawTile();
+        }
+        // Finish up
+        foreach (Player p in _players)
+        {
+            if (p.GetSeatWind() is EAST)
+            {
+                p.DrawTile();
+                continue;
+            }
+            p.GetHand().AddDrawTileToHand();
         }
     }
 
@@ -106,10 +142,17 @@ public abstract class AbstractGame
         SetActivePlayer(_activePlayer.GetPlayerOnRight() ?? _activePlayer.GetPlayerAcross());
     }
 
-    private void SetActivePlayer(Player player)
+    internal void SetActivePlayer(Player player)
     {
         _activePlayer = player;
         _activePlayer?.DrawTile();
+        onNewActivePlayer?.Invoke(this, EventArgs.Empty);
+    }
+
+    internal void SetActivePlayerAfterCall(Player player)
+    {
+        _activePlayer = player;
+        onNewActivePlayer?.Invoke(this, EventArgs.Empty);
     }
 
     public Player GetActivePlayer()
@@ -181,28 +224,30 @@ public abstract class AbstractGame
     {
         _winningCall = TSUMO;
         CallWin(player, satisfiedYaku);
+        onPlayerCalledTsumo?.Invoke(this, _scoreObject);
     }
 
     public void CallRon(Player player, List<YakuBase> satisfiedYaku)
     {
         _winningCall = RON;
         CallWin(player, satisfiedYaku);
+        onPlayerCalledRon?.Invoke(this, _scoreObject);
     }
 
     private void CallWin(Player player, List<YakuBase> satisfiedYaku)
     {
         if (satisfiedYaku.Count == 0)
         {
-            throw new System.Exception("Hand completed with no satisfied yaku");
+            throw new Exception("Hand completed with no satisfied yaku");
         }
 
         if (_winningCall == NO_WIN)
         {
-            throw new System.Exception("No winning call made");
+            throw new Exception("No winning call made");
         }
-
-        SetActivePlayer(null);
-        _scoreObject = satisfiedYaku[0] is YakumanBase ? new YakumanHandScore(player, _winningCall) : new StandardHandScore(player, _winningCall);
+        _scoreObject = satisfiedYaku[0].GetType().IsAssignableTo(typeof(YakumanBase)) ? 
+            new YakumanHandScore(player, _winningCall) : 
+            new StandardHandScore(player, _winningCall);
     }
 
     public HandScoreBase GetHandScore()

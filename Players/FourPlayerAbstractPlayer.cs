@@ -2,6 +2,7 @@ using RMU.Calls.CallCommands;
 using RMU.Games;
 using RMU.Hands;
 using RMU.Tiles;
+using System;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
 
 namespace RMU.Players;
@@ -63,5 +64,11 @@ public abstract class FourPlayerAbstractPlayer : Player
         _canLowChii = _availablePotentialCalls.CanCallLowChii();
         _canMidChii = _availablePotentialCalls.CanCallMidChii();
         _canHighChii = _availablePotentialCalls.CanCallHighChii();
+        if (_canLowChii)
+            InvokeOnCanLowChii();
+        if (_canMidChii)
+            InvokeOnCanMidChii();
+        if (_canHighChii)
+            InvokeOnCanHighChii();
     }
 }

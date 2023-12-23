@@ -19,4 +19,9 @@ public sealed class RedFiveDecorator : TileDecorator
         Tile clone = _decoratee.Clone();
         return new RedFiveDecorator(clone);
     }
+
+    public override string ToString()
+    {
+        return _decoratee.ToString() + "_Red";
+    }
 }

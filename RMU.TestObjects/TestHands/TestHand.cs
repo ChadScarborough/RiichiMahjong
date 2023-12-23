@@ -11,6 +11,11 @@ public abstract class TestHand : Hand
     {
     }
 
+    internal void SetWallObject(WallObject wallObject)
+    {
+        _wall = wallObject.GetWall();
+    }
+
     public override List<Tile> GetClosedTiles()
     {
         return _closedTiles;

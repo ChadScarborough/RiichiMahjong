@@ -319,8 +319,8 @@ public static class StandardShantenCalculator
         {
             IncrementCounters(ref groups, ref pairs, ref taatsu, component);
         }
-        if (_hand.GetDrawTile() is null)
-            return ShantenFormulas.CalculateStandardShantenNoDrawTile(groups, pairs, taatsu);
+        //if (_hand.GetDrawTile() is null)
+        //    return ShantenFormulas.CalculateStandardShantenNoDrawTile(groups, pairs, taatsu);
         return ShantenFormulas.CalculateStandardShantenWithDrawTile(groups, pairs, taatsu);
     }
 

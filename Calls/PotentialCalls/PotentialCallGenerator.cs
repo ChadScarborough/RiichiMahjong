@@ -4,8 +4,6 @@ using RMU.Hands.TenpaiHands;
 using RMU.Players;
 using RMU.Tiles;
 using RMU.Yaku;
-using RMU.Yaku.StandardYaku;
-using System.Collections.Generic;
 using static RMU.Calls.PotentialCalls.PotentialCallFactory;
 
 namespace RMU.Calls.PotentialCalls;
@@ -87,23 +85,6 @@ public static class PotentialCallGenerator
 
         DetermineStrongestCompleteHand(completeHands, player);
         queue.AddCall(CreatePotentialCall(player, RON_POTENTIAL_CALL_TYPE));
-    }
-
-    private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
-    {
-        bool yakuSatisfied = false;
-        foreach (ICompleteHand completeHand in completeHands)
-        {
-            completeHand.ClearYaku();
-            StandardYakuList yakuList = new(completeHand);
-            List<YakuBase> satisfiedYaku = yakuList.CheckYaku();
-            completeHand.SetYaku(satisfiedYaku);
-            if (completeHand.GetYaku().Count > 0)
-            {
-                yakuSatisfied = true;
-            }
-        }
-        return yakuSatisfied;
     }
 
     private static List<ICompleteHand> GetAllCompleteHandsForRonCheck(Player player, Tile lastTile)

@@ -7,17 +7,18 @@ public abstract class FourPlayerGame : AbstractGame
 {
     
     
-    protected void Init()
+    protected virtual void Init()
     {
         _players = new FourPlayerAbstractPlayer[4];
         _players[0] = new FourPlayerStandardPlayer(EAST, new StandardFourPlayerHand(_wallObject), this);
-        _players[0].SetPlayerID(1);
+        _players[0].SetPlayerID(0);
         _players[1] = new FourPlayerStandardPlayer(SOUTH, new StandardFourPlayerHand(_wallObject), this);
-        _players[1].SetPlayerID(2);
+        _players[1].SetPlayerID(1);
         _players[2] = new FourPlayerStandardPlayer(WEST, new StandardFourPlayerHand(_wallObject), this);
-        _players[2].SetPlayerID(3);
+        _players[2].SetPlayerID(2);
         _players[3] = new FourPlayerStandardPlayer(NORTH, new StandardFourPlayerHand(_wallObject), this);
-        _players[3].SetPlayerID(4);
+        _players[3].SetPlayerID(3);
+        _wallObject.GenerateDeadWall();
         _wall = _wallObject.GetWall();
         _deadWall = _wallObject.GetDeadWall();
         ArrangePlayers();
@@ -25,7 +26,7 @@ public abstract class FourPlayerGame : AbstractGame
         Start();
     }
 
-    private void ArrangePlayers()
+    protected void ArrangePlayers()
     {
         _players[0].SetPlayerOnLeft(_players[3]);
         _players[0].SetPlayerAcross(_players[2]);

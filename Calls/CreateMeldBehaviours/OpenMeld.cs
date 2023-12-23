@@ -1,5 +1,4 @@
 ﻿using RMU.Tiles;
-using System.Collections.Generic;
 
 namespace RMU.Calls.CreateMeldBehaviours;
 
@@ -8,11 +7,13 @@ public sealed class OpenMeld
     private MeldType _meldType;
     private readonly List<Tile> _tiles;
     private ICreateMeldBehaviour _createMeldBehaviour;
+    private Tile _calledTile;
 
     public OpenMeld(MeldType meldType, Tile calledTile)
     {
         _meldType = meldType;
         SetMeldType(meldType);
+        _calledTile = calledTile;
         _tiles = _createMeldBehaviour.CreateMeld(calledTile);
     }
 
@@ -58,5 +59,10 @@ public sealed class OpenMeld
     public List<Tile> GetTiles()
     {
         return _tiles;
+    }
+
+    public Tile GetCalledTile()
+    {
+        return _calledTile;
     }
 }

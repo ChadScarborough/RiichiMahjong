@@ -12,8 +12,8 @@ namespace RMU.Hands;
 
 public abstract class Hand
 {
-    private readonly Wall _wall;
-    private IDeadWall _deadWall;
+    protected Wall _wall;
+    protected IDeadWall _deadWall;
     protected List<Tile> _closedTiles;
     private Tile _drawTile;
     private readonly StandardDiscardPile _discardPile;
@@ -24,7 +24,7 @@ public abstract class Hand
     private readonly List<Tile> _waits;
     private int _shanten;
 
-#region Constructor
+    #region Constructor
     protected Hand(WallObject wallObject)
     {
         _wall = wallObject.GetWall();
@@ -40,10 +40,10 @@ public abstract class Hand
     {
         _deadWall = deadWall;
     }
-#endregion
+    #endregion
 
-#region DrawAndDiscard
-#region Discard
+    #region DrawAndDiscard
+    #region Discard
     public virtual void DiscardTile(int index)
     {
         if (index >= _closedTiles.Count)
@@ -71,8 +71,8 @@ public abstract class Hand
     {
         _drawTile = null;
     }
-#endregion
-#region Draw
+    #endregion
+    #region Draw
     public void DrawTileFromWall()
     {
         if (_wall.GetSize() <= 0)
@@ -124,7 +124,7 @@ public abstract class Hand
         SortHand();
     }
 
-        public void SetDrawTile(Tile tile)
+    public void SetDrawTile(Tile tile)
     {
         _drawTile = tile;
     }
@@ -133,10 +133,10 @@ public abstract class Hand
     {
         return _drawTile;
     }
-#endregion
-#endregion
+    #endregion
+    #endregion
 
-#region Melds
+    #region Melds
     public void CreateOpenMeld(Tile calledTile, MeldType meldType)
     {
         OpenMeld openMeld = new(meldType, calledTile);
@@ -147,9 +147,9 @@ public abstract class Hand
     {
         return _openMelds;
     }
-#endregion
+    #endregion
 
-#region GetTiles
+    #region GetTiles
     public virtual List<Tile> GetAllTiles(Tile extraTile)
     {
         List<Tile> outputList = new();
@@ -219,9 +219,9 @@ public abstract class Hand
             outputList.Add(tile);
         }
     }
-#endregion
+    #endregion
 
-#region Shanten
+    #region Shanten
 
     public int GetShanten()
     {
@@ -251,12 +251,12 @@ public abstract class Hand
         }
     }
 
-#region Tenpai
+    #region Tenpai
     public List<ITenpaiHand> GetTenpaiHands()
     {
         return _tenpaiHands;
     }
-        public List<Tile> GetWaits()
+    public List<Tile> GetWaits()
     {
         return _waits;
     }
@@ -280,8 +280,8 @@ public abstract class Hand
     {
         _waits.Add(tile);
     }
-#endregion
-#endregion
+    #endregion
+    #endregion
 
     public StandardDiscardPile GetDiscardPile()
     {
@@ -319,7 +319,8 @@ public abstract class Hand
         return false;
     }
 
-        public virtual bool IsOpen()
+    public virtual bool IsOpen()
     {
         return _isOpen;
     }
+}

@@ -1,3 +1,4 @@
+using Godot;
 using RMU.Hands.CompleteHands;
 
 namespace RMU.Yaku.Yakuman;

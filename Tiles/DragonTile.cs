@@ -13,4 +13,14 @@ public sealed class DragonTile : Tile
     {
         return true;
     }
+
+    public override string ToString()
+    {
+        return this._value switch
+        {
+            GREEN_DRAGON_C => "Dragon_Green",
+            RED_DRAGON_C   => "Dragon_Red",
+            _              => "Dragon_White"
+        };
+    }
 }

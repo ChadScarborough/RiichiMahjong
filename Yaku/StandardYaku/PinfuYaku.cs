@@ -31,6 +31,11 @@ namespace RMU.Yaku.StandardYaku
             {
                 return false;
             }
+            
+            if (_completeHand.GetWaitType() is not CompleteHandWaitType.OpenWait)
+            {
+                return false;
+            }
 
             return !HasYakuhai(_completeHand);
         }

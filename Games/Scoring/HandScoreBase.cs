@@ -1,10 +1,11 @@
 ﻿using RMU.Hands.CompleteHands;
 using RMU.Players;
 using RMU.Yaku;
+using System;
 
 namespace RMU.Games.Scoring
 {
-    public abstract class HandScoreBase
+    public abstract class HandScoreBase : EventArgs
     {
         protected readonly Player _player;
         private readonly List<YakuBase> _satisfiedYaku;
@@ -21,8 +22,8 @@ namespace RMU.Games.Scoring
             _winningCallType = winningCallType;
             ICompleteHand completeHand = player.GetCompleteHand();
             _hanValue = HanCalculator.Calculate(player, _satisfiedYaku);
-            //_fuValue = FuCalculator.Calculate(completeHand, winningCallType);
-            _fuValue = 30;
+            if (_hanValue < 5)
+                _fuValue = FuCalculator.Calculate(completeHand, winningCallType);
             _totalPointsReceived = CalculateTotalScore();
             SetName();
         }
@@ -74,8 +75,16 @@ namespace RMU.Games.Scoring
             }
             _name += _hanValue.ToString();
             _name += " han ";
-            _name += _fuValue.ToString();
-            _name += " fu";
+            if (_fuValue > 0)
+            {
+                _name += _fuValue.ToString();
+                _name += " fu";
+            }
+            string scoreLimitName = this.GetScoreLimitName();
+            if (scoreLimitName is not "")
+            {
+                _name += $" -- {scoreLimitName}";
+            }
         }
 
         public abstract string GetScoreLimitName();

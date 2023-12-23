@@ -1,6 +1,10 @@
-﻿using RMU.Hands.CompleteHands.CompleteHandComponents;
+﻿using RMU.Hands.CompleteHands;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Tiles;
 using RMU.Tiles.TileDecorators;
+using RMU.Yaku.StandardYaku;
+using RMU.Yaku.Yakuman;
+using RMU.Yaku;
 using System;
 namespace RMU.Globals
 {
@@ -225,6 +229,31 @@ namespace RMU.Globals
                 WHITE_DRAGON_C => TileFactory.CreateTile(GREEN_DRAGON_C, doraIndicator.GetSuit()),
                 _ => TileFactory.CreateTile(doraIndicator.GetValue() + 1, doraIndicator.GetSuit())
             };
+        }
+
+        // Determines whether a completed hand satisfies at least one yaku and can therefore call Ron or Tsumo
+        public static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
+        {
+            bool yakuSatisfied = false;
+            foreach (ICompleteHand completeHand in completeHands)
+            {
+                completeHand.ClearYaku();
+                YakumanList yakumanList = new(completeHand);
+                StandardYakuList yakuList = new(completeHand);
+                List<YakuBase> satisfiedYaku = new();
+                satisfiedYaku.AddRange(yakumanList.CheckYakuman());
+                if (satisfiedYaku.Count == 0)
+                {
+                    satisfiedYaku.AddRange(yakuList.CheckYaku());
+                }
+
+                completeHand.SetYaku(satisfiedYaku);
+                if (satisfiedYaku.Count > 0)
+                {
+                    yakuSatisfied = true;
+                }
+            }
+            return yakuSatisfied;
         }
     }
 }

@@ -1,12 +1,13 @@
 using RMU.Games;
 using RMU.Hands;
 using RMU.Players;
+using RMU.TestObjects.TestGames;
 
 namespace RMU.TestObjects.TestPlayers;
 
 public sealed class FourPlayerTestPlayer : FourPlayerAbstractPlayer
 {
-    public FourPlayerTestPlayer(Hand hand) : base(EAST, hand, new FourPlayerNoRedFivesGame())
+    public FourPlayerTestPlayer(Wind wind, Hand hand, FourPlayerTestGame game) : base(wind, hand, game)
     {
     }
 }

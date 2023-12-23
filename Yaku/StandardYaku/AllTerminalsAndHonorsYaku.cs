@@ -14,6 +14,11 @@ public sealed class AllTerminalsAndHonorsYaku : YakuBase
 
     public override bool Check()
     {
+        if (_completeHand.GetCompleteHandType() is THIRTEEN_ORPHANS)
+        {
+            return false;
+        }
+
         foreach (ICompleteHandComponent component in _completeHand.GetComponents())
         {
             if (component.GetComponentType() is OPEN_CHII or CLOSED_CHII)

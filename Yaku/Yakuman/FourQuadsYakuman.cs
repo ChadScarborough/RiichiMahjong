@@ -1,6 +1,5 @@
 using System.Linq;
 using RMU.Hands.CompleteHands;
-using RMU.Hands.CompleteHands.CompleteHandComponents;
 
 namespace RMU.Yaku.Yakuman;
 

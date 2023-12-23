@@ -67,7 +67,7 @@ public abstract class Tile
 
     public override string ToString()
     {
-        return _value.ToString() + " " + _suit.ToString();
+        return $"{_suit}_{_value}";
     }
 }
 
