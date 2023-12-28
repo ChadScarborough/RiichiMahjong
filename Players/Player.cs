@@ -263,6 +263,8 @@ public abstract class Player
 
     public bool CanPon()
     {
+        if (IsActivePlayer())
+            return false;
         return _canPon;
     }
 
@@ -290,7 +292,7 @@ public abstract class Player
 
     public void CallPon(Tile calledTile)
     {
-        UpdateAvailableCalls();
+        //UpdateAvailableCalls();
         if (_canPon)
         {
             CallCommand callPon = new CallPonCommand(this, calledTile);
@@ -313,7 +315,7 @@ public abstract class Player
 
     public void CallOpenKan1(Tile calledTile)
     {
-        UpdateAvailableCalls();
+        //UpdateAvailableCalls();
         if (_canOpenKan1)
         {
             CallCommand callOpenKan1 = new CallOpenKan1Command(this, calledTile);
@@ -332,7 +334,7 @@ public abstract class Player
     public void CallRon()
     {
         Tile calledTile = _game.GetLastTile();
-        UpdateAvailableCalls();
+        //UpdateAvailableCalls();
         if (!_canRon) return;
         CallCommand callRon = new CallRonCommand(this, calledTile);
         MakeCall(callRon);
@@ -360,11 +362,11 @@ public abstract class Player
     {
         _availablePotentialCalls.UpdateAvailableCalls();
         _canPon = _availablePotentialCalls.CanCallPon();
-        if (_canPon)
+        if (CanPon())
             OnCanPon?.Invoke(this, EventArgs.Empty);
         _canOpenKan1 = _availablePotentialCalls.CanCallOpenKan1();
         _canRon = _availablePotentialCalls.CanCallRon();
-        if (_canRon)
+        if (CanRon())
             OnCanRon?.Invoke(this, EventArgs.Empty);
     }
 

@@ -22,6 +22,7 @@ public abstract class CallCommand : ICallObject
     }
 
     public abstract void Execute();
+
     public abstract int GetPriority();
 
     public Player GetPlayerMakingCall()

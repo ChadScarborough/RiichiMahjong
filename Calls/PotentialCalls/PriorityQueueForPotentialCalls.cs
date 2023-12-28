@@ -1,6 +1,5 @@
 using RMU.Players;
 using System;
-using System.Collections.Generic;
 
 namespace RMU.Calls.PotentialCalls;
 
@@ -20,6 +19,8 @@ public sealed class PriorityQueueForPotentialCalls : IPriorityQueue
 
     private void AddPotentialCall(PotentialCall potentialCall)
     {
+        if (_priorityQueue.Contains(potentialCall))
+            return;
         for (int i = 0; i < _priorityQueue.Count; i++)
         {
             if (potentialCall.GetPriority() >= _priorityQueue[i].GetPriority())
@@ -63,7 +64,7 @@ public sealed class PriorityQueueForPotentialCalls : IPriorityQueue
     {
         for (int i = _priorityQueue.Count - 1; i >= 0; i--)
         {
-            if (_priorityQueue[i].GetPriority() < priority)
+            if (_priorityQueue[i].GetPriority() <= priority && _priorityQueue[i].GetPriority() != 3)
             {
                 _priorityQueue.RemoveAt(i);
             }
