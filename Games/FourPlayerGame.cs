@@ -1,4 +1,5 @@
-﻿using RMU.Hands;
+﻿using Godot;
+using RMU.Hands;
 using RMU.Players;
 
 namespace RMU.Games;
@@ -20,7 +21,7 @@ public abstract class FourPlayerGame : AbstractGame
         _players[3].SetPlayerID(3);
         _wallObject.GenerateDeadWall();
         _wall = _wallObject.GetWall();
-        _deadWall = _wallObject.GetDeadWall();
+        SetDeadWall(_wallObject.GetDeadWall());
         ArrangePlayers();
         _firstGoAroundCounter = 4;
         Start();

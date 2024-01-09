@@ -1,3 +1,4 @@
+using Godot;
 using RMU.Calls.CallCommands;
 using RMU.Calls.PotentialCalls;
 using RMU.Games;
@@ -14,7 +15,7 @@ public sealed class FourPlayerTestGame : FourPlayerGame
     public FourPlayerTestGame(Hand hand1, Hand hand2, Hand hand3, Hand hand4, WallObject wallObject)
     {
         _players = new FourPlayerAbstractPlayer[4];
-        _wallObject = wallObject;
+        _wallObject ??= wallObject;
         _players[0] = new FourPlayerTestPlayer(EAST,  hand1, this);
         _players[1] = new FourPlayerTestPlayer(SOUTH, hand2, this);
         _players[2] = new FourPlayerTestPlayer(WEST,  hand3, this);
@@ -35,7 +36,7 @@ public sealed class FourPlayerTestGame : FourPlayerGame
         _players[3].SetPlayerID(3);
         _wallObject.GenerateDeadWall();
         _wall = _wallObject.GetWall();
-        _deadWall = _wallObject.GetDeadWall();
+        SetDeadWall(_wallObject.GetDeadWall());
         ArrangePlayers();
         _firstGoAroundCounter = 4;
         Start();

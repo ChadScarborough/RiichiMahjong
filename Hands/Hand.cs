@@ -1,4 +1,5 @@
-﻿using RMU.Calls.CreateMeldBehaviours;
+﻿using Godot;
+using RMU.Calls.CreateMeldBehaviours;
 using RMU.DiscardPile;
 using RMU.Globals.Algorithms;
 using RMU.Hands.TenpaiHands;
@@ -84,7 +85,6 @@ public abstract class Hand
         {
             return;
         }
-
         if (_drawTile != null)
         {
             AddDrawTileToHand();
@@ -99,7 +99,6 @@ public abstract class Hand
         {
             return;
         }
-
         if (_drawTile != null)
         {
             AddDrawTileToHand();
@@ -183,6 +182,16 @@ public abstract class Hand
             AddExtraTileToOutputList(_drawTile, outputList);
         }
         return _handSorter.SortHand(outputList);
+    }
+
+    public bool ContainsTile(Tile tile)
+    {
+        foreach(Tile t in GetClosedTiles())
+        {
+            if (AreTilesEquivalent(tile, t))
+                return true;
+        }
+        return false;
     }
 
     private void CompileAllTiles(List<Tile> tileList)

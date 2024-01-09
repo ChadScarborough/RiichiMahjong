@@ -2,7 +2,6 @@ using RMU.Calls.CallCommands;
 using RMU.Games;
 using RMU.Hands;
 using RMU.Tiles;
-using System;
 using static RMU.Calls.PotentialCalls.PotentialCallGenerator;
 
 namespace RMU.Players;
@@ -17,10 +16,30 @@ public abstract class FourPlayerAbstractPlayer : Player
     {
     }
 
+    private bool CanLowChii()
+    {
+        if (IsActivePlayer())
+            return false;
+        return _canLowChii;
+    }
+
+    private bool CanMidChii()
+    {
+        if (IsActivePlayer())
+            return false;
+        return _canMidChii;
+    }
+
+    private bool CanHighChii()
+    {if (IsActivePlayer())
+            return false;
+        return _canHighChii;
+    }
+
     public void CallLowChii(Tile calledTile)
     {
-        UpdateAvailableCalls();
-        if (_canLowChii)
+        //UpdateAvailableCalls();
+        if (CanLowChii())
         {
             CallCommand callLowChii = new CallLowChiiCommand(this, calledTile);
             MakeCall(callLowChii);
@@ -30,8 +49,8 @@ public abstract class FourPlayerAbstractPlayer : Player
 
     public void CallMidChii(Tile calledTile)
     {
-        UpdateAvailableCalls();
-        if (_canMidChii)
+        //UpdateAvailableCalls();
+        if (CanMidChii())
         {
             CallCommand callMidChii = new CallMidChiiCommand(this, calledTile);
             MakeCall(callMidChii);
@@ -41,8 +60,8 @@ public abstract class FourPlayerAbstractPlayer : Player
 
     public void CallHighChii(Tile calledTile)
     {
-        UpdateAvailableCalls();
-        if (_canHighChii)
+        //UpdateAvailableCalls();
+        if (CanHighChii())
         {
             CallCommand callHighChii = new CallHighChiiCommand(this, calledTile);
             MakeCall(callHighChii);
@@ -53,9 +72,11 @@ public abstract class FourPlayerAbstractPlayer : Player
     public override void GeneratePotentialDiscardCalls(Tile lastTile)
     {
         base.GeneratePotentialDiscardCalls(lastTile);
-        //GeneratePotentialLowChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
-        //GeneratePotentialMidChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
-        //GeneratePotentialHighChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
+        if (_game.GetActivePlayer() != this.GetPlayerOnLeft())
+            return;
+        GeneratePotentialLowChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
+        GeneratePotentialMidChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
+        GeneratePotentialHighChiiCall(this, _priorityQueueForPotentialCalls, lastTile);
     }
 
     public override void UpdateAvailableCalls()
@@ -64,11 +85,11 @@ public abstract class FourPlayerAbstractPlayer : Player
         _canLowChii = _availablePotentialCalls.CanCallLowChii();
         _canMidChii = _availablePotentialCalls.CanCallMidChii();
         _canHighChii = _availablePotentialCalls.CanCallHighChii();
-        if (_canLowChii)
+        if (CanLowChii())
             InvokeOnCanLowChii();
-        if (_canMidChii)
+        if (CanMidChii())
             InvokeOnCanMidChii();
-        if (_canHighChii)
+        if (CanHighChii())
             InvokeOnCanHighChii();
     }
 }

@@ -6,7 +6,7 @@ public sealed class FourPlayerFourRedFivesGame : FourPlayerGame
 {
     public FourPlayerFourRedFivesGame()
     {
-        _wallObject = new FourPlayerWallObjectFourRedFives();
+        _wallObject ??= new FourPlayerWallObjectFourRedFives();
         Init();
     }
 }

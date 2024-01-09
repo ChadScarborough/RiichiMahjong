@@ -1,3 +1,4 @@
+using Godot;
 using RMU.Calls.CreateMeldBehaviours;
 using RMU.Players;
 using RMU.Tiles;
@@ -13,10 +14,15 @@ public sealed class CallOpenKan2Command : CallCommand
 
     public override void Execute()
     {
+        GD.Print("Called execute function");
         foreach (OpenMeld openMeld in _handMakingCall.GetOpenMelds())
         {
+            GD.Print($"{openMeld.GetCalledTile()} - {openMeld.GetMeldType()}");
             if (SuccessfullyTurnedPonIntoOpenKan2(_calledTile, openMeld))
             {
+                GD.Print("Successfully called open kan 2");
+                _playerMakingCall.DrawTileFromDeadWall();
+                _playerMakingCall.GetGame().GetDeadWall().RevealDoraTile();
                 return;
             }
         }
@@ -24,7 +30,7 @@ public sealed class CallOpenKan2Command : CallCommand
 
     private bool SuccessfullyTurnedPonIntoOpenKan2(Tile calledTile, OpenMeld openMeld)
     {
-        Tile openMeldTile = openMeld.GetTiles()[0];
+        Tile openMeldTile = openMeld.GetCalledTile();
         return openMeld.GetMeldType() ==
             PON
             && AreTilesEquivalent(openMeldTile, calledTile)
@@ -52,7 +58,7 @@ public sealed class CallOpenKan2Command : CallCommand
 
     private bool RemovedTileFromHand(Tile tile)
     {
-        if (AreTilesEquivalent(_handMakingCall.GetDrawTile(), tile))
+        if (AreTilesEquivalent(_calledTile, tile))
         {
             _ = _handMakingCall.GetClosedTiles().Remove(tile);
             return true;

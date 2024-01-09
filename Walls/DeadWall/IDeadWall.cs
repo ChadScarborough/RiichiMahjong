@@ -1,9 +1,11 @@
 ﻿using RMU.Tiles;
+using System;
 
 namespace RMU.Walls.DeadWall;
 
 public interface IDeadWall
 {
+    public event EventHandler OnDoraTileRevealed;
     Tile DrawTile();
     void PopulateDeadWall();
     void RevealDoraTile();

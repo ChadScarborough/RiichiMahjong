@@ -66,6 +66,18 @@ public sealed class PriorityQueueForPotentialCalls : IPriorityQueue
         {
             if (_priorityQueue[i].GetPriority() <= priority && _priorityQueue[i].GetPriority() != 3)
             {
+                PotentialCall call = _priorityQueue[i];
+                switch (call.GetCallType())
+                {
+                    case PotentialCallType.Pon:
+                        call.GetPlayerMakingCall().InvokeOnCanNoLongerPon();
+                        break;
+                    case PotentialCallType.HighChii:
+                    case PotentialCallType.MidChii:
+                    case PotentialCallType.LowChii:
+                        call.GetPlayerMakingCall().InvokeOnCanNoLongerChii();
+                        break;
+                }
                 _priorityQueue.RemoveAt(i);
             }
         }

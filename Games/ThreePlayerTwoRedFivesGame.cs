@@ -6,7 +6,7 @@ public sealed class ThreePlayerTwoRedFivesGame : ThreePlayerGame
 {
     public ThreePlayerTwoRedFivesGame()
     {
-        _wallObject = new ThreePlayerWallObjectTwoRedFives();
+        _wallObject ??= new ThreePlayerWallObjectTwoRedFives();
         Init();
     }
 }

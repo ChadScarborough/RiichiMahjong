@@ -1,4 +1,6 @@
-﻿using RMU.Calls.CallCommands;
+﻿using Godot;
+using RMU.Calls.CallCommands;
+using RMU.Calls.CreateMeldBehaviours;
 using RMU.Calls.PotentialCalls;
 using RMU.Games;
 using RMU.Hands;
@@ -20,17 +22,18 @@ public abstract class Player
     private Player _playerAcross;
     private Player _playerOnRight;
     private int _score;
-    private readonly AbstractGame _game;
+    protected readonly AbstractGame _game;
     protected PriorityQueueForPotentialCalls _priorityQueueForPotentialCalls;
     private PriorityQueueForCallCommands _priorityQueueForCallCommands;
     protected AvailablePotentialCalls _availablePotentialCalls;
     private ICompleteHand _completeHand;
     private List<YakuBase> _satisfiedYaku;
 
-    private Tile? _closedKanTile;
+    private Tile[] _closedKanTiles;
 
     private bool _canPon;
     private bool _canOpenKan1;
+    private bool _canOpenKan2;
     private bool _canRon;
     private bool _canTsumo;
     private bool _canClosedKan;
@@ -43,8 +46,13 @@ public abstract class Player
     public event EventHandler OnCanHighChii;
     public event EventHandler OnCanMidChii;
     public event EventHandler OnCanLowChii;
+    public event EventHandler OnCanOpenKan1;
+    public event EventHandler OnCanOpenKan2;
+    public event EventHandler OnCanClosedKan;
     public event EventHandler OnCanRon;
     public event EventHandler OnCanTsumo;
+    public event EventHandler OnCanNoLongerPon;
+    public event EventHandler OnCanNoLongerChii;
 
     protected Player(Wind seatWind, Hand hand, AbstractGame game)
     {
@@ -52,7 +60,7 @@ public abstract class Player
         _hand = hand;
         _game = game;
         _satisfiedYaku = new List<YakuBase>();
-        _closedKanTile = null;
+        _closedKanTiles = null;
         SetAvailablePotentialCalls();
     }
 
@@ -179,19 +187,24 @@ public abstract class Player
         //     return;
         // }
         _hand.DrawTileFromWall();
-        CheckForTsumo();
-        CheckForClosedKan();
-        OnHandChanged?.Invoke(this, EventArgs.Empty);
-        OnShantenUpdated?.Invoke(this, EventArgs.Empty);
+        HandleAfterDrawingTile();
     }
 
     public void DrawTileFromDeadWall()
-    {
+    { 
         _hand.DrawTileFromDeadWall();
+        HandleAfterDrawingTile();
+    }
+
+    private void HandleAfterDrawingTile()
+    {
         CheckForTsumo();
         CheckForClosedKan();
+        CheckForOpenKan2();
         OnHandChanged?.Invoke(this, EventArgs.Empty);
         OnShantenUpdated?.Invoke(this, EventArgs.Empty);
+        if (!IsActivePlayer())
+            _game.SetActivePlayerAfterCall(this);
     }
 
 #endregion
@@ -208,17 +221,30 @@ public abstract class Player
     
     protected void InvokeOnCanHighChii()
     {
-        OnCanHighChii?.Invoke(this, EventArgs.Empty);
+        EventArgTile tile = new(_game.GetLastTile());
+        OnCanHighChii?.Invoke(this, tile);
     }
 
     protected void InvokeOnCanMidChii()
     {
-        OnCanMidChii?.Invoke(this, EventArgs.Empty);
+        EventArgTile tile = new(_game.GetLastTile());
+        OnCanMidChii?.Invoke(this, tile);
     }
 
     protected void InvokeOnCanLowChii()
     {
-        OnCanLowChii?.Invoke(this, EventArgs.Empty);
+        EventArgTile tile = new(_game.GetLastTile());
+        OnCanLowChii?.Invoke(this, tile);
+    }
+
+    internal void InvokeOnCanNoLongerPon()
+    {
+        OnCanNoLongerPon?.Invoke(this, EventArgs.Empty);
+    }
+
+    internal void InvokeOnCanNoLongerChii()
+    {
+        OnCanNoLongerChii?.Invoke(this, EventArgs.Empty);
     }
 
     public void SetAvailablePotentialCalls()
@@ -275,25 +301,36 @@ public abstract class Player
 
     public bool CanOpenKan1()
     {
+        if (IsActivePlayer())
+            return false;
         return _canOpenKan1;
+    }
+
+    public bool CanOpenKan2()
+    {
+        GD.Print($"IsActivePlayer = {IsActivePlayer()} -- _canOpenKan2 = {_canOpenKan2}");
+        if (!IsActivePlayer())
+            return false;
+        return _canOpenKan2;
     }
 
     public bool CanRon()
     {
+        if (IsActivePlayer())
+            return false;
         return _canRon;
     }
 
     public bool CanTsumo()
     {
-        if (IsActivePlayer() == false)
+        if (!IsActivePlayer())
             return false;
         return _canTsumo;
     }
 
     public void CallPon(Tile calledTile)
     {
-        //UpdateAvailableCalls();
-        if (_canPon)
+        if (CanPon())
         {
             CallCommand callPon = new CallPonCommand(this, calledTile);
             MakeCall(callPon);
@@ -301,11 +338,11 @@ public abstract class Player
         }
     }
 
-    public void CallClosedKan()
+    public void CallClosedKan(Tile calledTile)
     {
         if (_canClosedKan == false) return;
         if (IsActivePlayer() == false) return;
-        CallCommand callClosedKan = new CallClosedKanCommand(this, _closedKanTile);
+        CallCommand callClosedKan = new CallClosedKanCommand(this, calledTile);
         callClosedKan.Execute();
         _game.MakeDoraTiles();
         _canClosedKan = false;
@@ -315,8 +352,7 @@ public abstract class Player
 
     public void CallOpenKan1(Tile calledTile)
     {
-        //UpdateAvailableCalls();
-        if (_canOpenKan1)
+        if (CanOpenKan1())
         {
             CallCommand callOpenKan1 = new CallOpenKan1Command(this, calledTile);
             MakeCall(callOpenKan1);
@@ -326,15 +362,19 @@ public abstract class Player
 
     public void CallOpenKan2(Tile calledTile)
     {
-        CallCommand callOpenKan2 = new CallOpenKan2Command(this, calledTile);
-        callOpenKan2.Execute();
-        UpdateAvailableCalls();
+        if (CanOpenKan2())
+        {
+            CallCommand callOpenKan2 = new CallOpenKan2Command(this, calledTile);
+            callOpenKan2.Execute();
+            OnHandChanged?.Invoke(this, EventArgs.Empty);
+            UpdateAvailableCalls();
+            CheckForOpenKan2();
+        }
     }
 
     public void CallRon()
     {
         Tile calledTile = _game.GetLastTile();
-        //UpdateAvailableCalls();
         if (!_canRon) return;
         CallCommand callRon = new CallRonCommand(this, calledTile);
         MakeCall(callRon);
@@ -361,31 +401,75 @@ public abstract class Player
     public virtual void UpdateAvailableCalls()
     {
         _availablePotentialCalls.UpdateAvailableCalls();
-        _canPon = _availablePotentialCalls.CanCallPon();
-        if (CanPon())
-            OnCanPon?.Invoke(this, EventArgs.Empty);
-        _canOpenKan1 = _availablePotentialCalls.CanCallOpenKan1();
+        UpdateAvailablePonCall();
+        UpdateAvailableOpenKan1Call();
+        UpdateAvailableRonCall();
+    }
+
+    private void UpdateAvailableRonCall()
+    {
         _canRon = _availablePotentialCalls.CanCallRon();
         if (CanRon())
             OnCanRon?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void UpdateAvailableOpenKan1Call()
+    {
+        _canOpenKan1 = _availablePotentialCalls.CanCallOpenKan1();
+        if (CanOpenKan1())
+            OnCanOpenKan1?.Invoke(this, EventArgs.Empty);
+    }
+
+    private void UpdateAvailablePonCall()
+    {
+        _canPon = _availablePotentialCalls.CanCallPon();
+        if (CanPon())
+            OnCanPon?.Invoke(this, EventArgs.Empty); //This will eventually need to pass the tile, but we'll get there when we get there
     }
 
     private void CheckForClosedKan()
     {
         int count = 0;
         Tile? tile = null;
+        List<Tile> tiles = new();
         foreach (Tile t in _hand.GetTilesInHand())
         {
             tile = CountCopiesOfTile(tile, t, ref count);
-
             if (count != 4) continue;
             _canClosedKan = true;
-            _closedKanTile = tile;
+            tiles.Add(tile);
+        }
+        _canClosedKan = tiles.Count > 0;
+        _closedKanTiles = tiles.ToArray();
+        if (_canClosedKan)
+        {
+            List<string> tileNames = new();
+            foreach (Tile t in _closedKanTiles)
+                tileNames.Add(t.ToString());
+            OnCanClosedKan?.Invoke(this, new EventArgTileArray(tileNames.ToArray()));
+            GD.Print(tileNames.ToArray());
+        }
+    }
+
+    private void CheckForOpenKan2()
+    {
+        List<OpenMeld> openMelds = _hand.GetOpenMelds();
+        List<string> callable_tiles = new();
+        foreach(OpenMeld om in openMelds)
+        {
+            if (om.GetMeldType() is not PON)
+                continue;
+            Tile t = om.GetCalledTile();
+            if (_hand.ContainsTile(t))
+                callable_tiles.Add(t.ToString());
+        }
+        if (callable_tiles.Count > 0)
+        {
+            _canOpenKan2 = true;
+            OnCanOpenKan2?.Invoke(this, new EventArgTileArray(callable_tiles.ToArray()));
             return;
         }
-        // Modify to make multiple kan calls possible
-        _canClosedKan = false;
-        _closedKanTile = null;
+        _canOpenKan2 = false;
     }
 #endregion
 
@@ -511,17 +595,13 @@ public abstract class Player
     private void CheckForDuplicatePlayers(Player player, Player existingPlayer1, Player existingPlayer2)
     {
         if (player == existingPlayer1 || player == existingPlayer2)
-        {
             throw new ArgumentException("Attempted to set the same player in two locations");
-        }
     }
 
     private void CheckThatThisPlayerIsNotDuplicated(Player player)
     {
         if (player == this)
-        {
             throw new ArgumentException("Attempted to set this player to multiple locations");
-        }
     }
 
     private static Tile? CountCopiesOfTile(Tile? tile, Tile t, ref int count)
@@ -542,9 +622,7 @@ public abstract class Player
         foreach (Tile t in _hand.GetTilesInHand())
         {
             if (AreTilesEquivalent(tile, t))
-            {
                 total++;
-            }
         }
         return total;
     }

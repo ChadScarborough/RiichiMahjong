@@ -1,4 +1,5 @@
-﻿using RMU.Tiles;
+﻿using Godot;
+using RMU.Tiles;
 using System;
 
 namespace RMU.Walls.DeadWall;
@@ -13,6 +14,8 @@ public sealed class FourPlayerDeadWall : IDeadWall
     private readonly List<Tile> _drawableTiles;
     private readonly List<Tile> _extraTiles;
     private readonly Wall _wall;
+
+    public event EventHandler OnDoraTileRevealed;
 
     public FourPlayerDeadWall(Wall wall)
     {
@@ -58,14 +61,8 @@ public sealed class FourPlayerDeadWall : IDeadWall
 
     public void RevealDoraTile()
     {
-        try
-        {
-            _revealedDoraIndicators.Add(_doraIndicators[_revealedDoraIndicators.Count]);
-        }
-        catch
-        {
-            throw new IndexOutOfRangeException("Revealed non-existent Dora tile");
-        }
+        _revealedDoraIndicators.Add(_doraIndicators[_revealedDoraIndicators.Count]);
+        OnDoraTileRevealed?.Invoke(this, EventArgs.Empty);
     }
 
     public Tile DrawTile()

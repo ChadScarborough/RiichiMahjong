@@ -1,5 +1,6 @@
 using RMU.Players;
 using RMU.Tiles;
+using Godot;
 
 namespace RMU.Calls.CallCommands;
 
@@ -18,6 +19,7 @@ public sealed class CallOpenKan1Command : CallCommand
         {
             _handMakingCall.RemoveCopyOfTile(_calledTile);
         }
+        _playerMakingCall.DrawTileFromDeadWall();
         _playerMakingCall.GetGame().GetDeadWall().RevealDoraTile();
     }
 
