@@ -5,6 +5,8 @@ VisualStudioVersion = 17.3.32825.248
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RMU", "RMU.csproj", "{AC90071E-8C1E-4AE2-A56F-F38AC167BB66}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RMUApp", "..\RMUApp\RMUApp.csproj", "{92CC7E8F-8725-484F-AAC9-F4BE3FFCA42D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +17,10 @@ Global
 		{AC90071E-8C1E-4AE2-A56F-F38AC167BB66}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AC90071E-8C1E-4AE2-A56F-F38AC167BB66}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AC90071E-8C1E-4AE2-A56F-F38AC167BB66}.Release|Any CPU.Build.0 = Release|Any CPU
+		{92CC7E8F-8725-484F-AAC9-F4BE3FFCA42D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{92CC7E8F-8725-484F-AAC9-F4BE3FFCA42D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{92CC7E8F-8725-484F-AAC9-F4BE3FFCA42D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{92CC7E8F-8725-484F-AAC9-F4BE3FFCA42D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

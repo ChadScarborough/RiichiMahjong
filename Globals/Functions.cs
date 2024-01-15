@@ -135,6 +135,8 @@ namespace RMU.Globals
          // Returns the tile below the current tile
         public static Tile GetTileBelow(Tile tile)
         {
+            if (tile is null)
+                return null;
             try
             {
                 return tile.GetTileBelow();
@@ -147,14 +149,16 @@ namespace RMU.Globals
          // Returns the tile two below the current tile
         public static Tile GetTileTwoBelow(Tile tile)
         {
+            Tile t;
             try
             {
-                return tile.GetTileBelow().GetTileBelow();
+                t = GetTileBelow(GetTileBelow(tile));
             }
             catch
             {
                 return null;
             }
+            return t;
         }
          // Adds Dora value to a tile
         public static void AddDoraValue(ref Tile tile)

@@ -2,6 +2,7 @@
 using RMU.Calls.CreateMeldBehaviours;
 using RMU.DiscardPile;
 using RMU.Globals.Algorithms;
+using RMU.Hands.RiichiCheckHands;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten;
 using RMU.Tiles;
@@ -288,6 +289,13 @@ public abstract class Hand
     public void AddWait(Tile tile)
     {
         _waits.Add(tile);
+    }
+
+    public void CheckRiichi()
+    {
+        List<Tile> canDiscard = RiichiChecker.CheckRiichi(this);
+        foreach (Tile t in canDiscard)
+            Console.WriteLine(t);
     }
     #endregion
     #endregion

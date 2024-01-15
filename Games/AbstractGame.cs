@@ -87,6 +87,11 @@ public abstract class AbstractGame
         }
     }
 
+    public void FirstTurn()
+    {
+        GetEastPlayer().FirstTurn();
+    }
+
     internal bool IsFirstGoAround()
     {
         return _firstGoAroundCounter != 0;

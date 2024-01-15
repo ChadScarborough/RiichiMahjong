@@ -64,6 +64,14 @@ public abstract class Player
         SetAvailablePotentialCalls();
     }
 
+    public void FirstTurn()
+    {
+        NegateCalls();
+        CheckForOpenKan2();
+        CheckForClosedKan();
+        CheckForTsumo();
+    }
+
 #region GettersAndSetters
     public int GetPlayerID()
     {
@@ -217,6 +225,7 @@ public abstract class Player
         _canTsumo = false;
         _canClosedKan = false;
         _canOpenKan1 = false;
+        _canOpenKan2 = false;
     }
     
     protected void InvokeOnCanHighChii()
@@ -296,6 +305,8 @@ public abstract class Player
 
     public bool CanClosedKan()
     {
+        if (!IsActivePlayer())
+            return false;
         return _canClosedKan;
     }
 
@@ -345,7 +356,7 @@ public abstract class Player
         CallCommand callClosedKan = new CallClosedKanCommand(this, calledTile);
         callClosedKan.Execute();
         _game.MakeDoraTiles();
-        _canClosedKan = false;
+        CheckForClosedKan();
         UpdateAvailableCalls();
         OnHandChanged?.Invoke(this, EventArgs.Empty);
     }
@@ -441,13 +452,12 @@ public abstract class Player
         }
         _canClosedKan = tiles.Count > 0;
         _closedKanTiles = tiles.ToArray();
-        if (_canClosedKan)
+        if (CanClosedKan())
         {
             List<string> tileNames = new();
             foreach (Tile t in _closedKanTiles)
                 tileNames.Add(t.ToString());
             OnCanClosedKan?.Invoke(this, new EventArgTileArray(tileNames.ToArray()));
-            GD.Print(tileNames.ToArray());
         }
     }
 

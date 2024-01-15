@@ -1,6 +1,7 @@
 ﻿using RMU.Calls.CreateMeldBehaviours;
 using RMU.Hands;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
+using RMU.Hands.RiichiCheckHands;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten.HandSplitter;
 using System.Collections.Generic;
@@ -15,6 +16,7 @@ public static class StandardShantenCalculator
     private static List<ICompleteHandComponent> _components;
     private static int _numberOfOpenMelds;
     private static Hand _hand;
+    private static RiichiCheckHand _riichiCheckHand;
 
     private static readonly object ShantenLock = new();
 
@@ -23,6 +25,19 @@ public static class StandardShantenCalculator
         lock (ShantenLock)
         {
             _hand = hand;
+            _riichiCheckHand = null;
+            _numberOfOpenMelds = numberOfOpenMelds;
+            SetShantenValues(collections);
+            return MinOfArray(ShantenValues);
+        }
+    }
+
+    internal static int CalculateShanten(RiichiCheckHand hand, List<TileCollection> collections, int numberOfOpenMelds)
+    {
+        lock (ShantenLock)
+        {
+            _hand = null;
+            _riichiCheckHand = hand;
             _numberOfOpenMelds = numberOfOpenMelds;
             SetShantenValues(collections);
             return MinOfArray(ShantenValues);
@@ -67,7 +82,7 @@ public static class StandardShantenCalculator
     {
         int shanten = CalculateStandardShanten(_components);
 
-        if (shanten == 0)
+        if (shanten == 0 && _hand is not null)
         {
             ExtractIsolatedTiles();
             foreach (OpenMeld openMeld in _hand.GetOpenMelds())

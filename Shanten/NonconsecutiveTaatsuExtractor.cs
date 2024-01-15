@@ -1,6 +1,7 @@
 ﻿using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Shanten.HandSplitter;
 using RMU.Tiles;
+using System;
 using System.Collections.Generic;
 using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 
@@ -39,7 +40,15 @@ public static class NonconsecutiveTaatsuExtractor
 
     private static void CheckForNonconsecutiveTaatsuFromGivenTile(ref int i)
     {
-        Tile tileTwoBelow = GetTileTwoBelow(_tiles[i]);
+        Tile tileTwoBelow;
+        try
+        {
+            tileTwoBelow = GetTileTwoBelow(_tiles[i]);
+        }
+        catch (NullReferenceException e)
+        {
+            return;
+        }
         for (int j = i - 1; j >= 0; j--)
         {
             if (FoundNonconsecutiveTaatsuFromGivenTile(ref i, tileTwoBelow, j))
