@@ -10,5 +10,5 @@ Actions handled by this library include but are not limited to:
 - Calculating _shanten_ (distance from _tenpai_)
 - Scoring winning hands based on which _yaku_ are satisfied
 
-This library was built specifically for use with our ongoing Godot project, it is available for use to anyone who wishes to use it--no permission needed! 
+While this library was built specifically for use with our ongoing Godot project, it is available for use to anyone who wishes to use it--no permission needed! 
 (Note: If you plan to use this library outside of Godot, remove the GodotSharp project reference. This will require you to use a different random number generator in the Walls.WallShuffler.cs file.)
