@@ -26,6 +26,7 @@ public sealed class FourPlayerDeadWall : IDeadWall
         _drawableTiles = new List<Tile>();
         _extraTiles = new List<Tile>();
         PopulateDeadWall();
+        OnDoraTileRevealed?.Invoke(this, new EventArgTileArray(_revealedDoraIndicators));
     }
 
     public void PopulateDeadWall()
@@ -62,7 +63,7 @@ public sealed class FourPlayerDeadWall : IDeadWall
     public void RevealDoraTile()
     {
         _revealedDoraIndicators.Add(_doraIndicators[_revealedDoraIndicators.Count]);
-        OnDoraTileRevealed?.Invoke(this, EventArgs.Empty);
+        OnDoraTileRevealed?.Invoke(this, new EventArgTileArray(_revealedDoraIndicators));
     }
 
     public Tile DrawTile()

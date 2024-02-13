@@ -5,6 +5,7 @@ using RMU.Calls.PotentialCalls;
 using RMU.Games;
 using RMU.Hands;
 using RMU.Hands.CompleteHands;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Tiles;
 using RMU.Yaku;
@@ -34,9 +35,14 @@ public abstract class Player
     private bool _canPon;
     private bool _canOpenKan1;
     private bool _canOpenKan2;
+    private bool _canRiichi;
     private bool _canRon;
     private bool _canTsumo;
     private bool _canClosedKan;
+
+    private Tile[] _riichiTiles;
+    private bool _isPreRiichi;
+    private bool _isInRiichi;
 
     private int _playerID;
 
@@ -44,11 +50,15 @@ public abstract class Player
     public event EventHandler OnShantenUpdated;
     public event EventHandler OnCanPon;
     public event EventHandler OnCanHighChii;
+    public event EventHandler OnCanHighChiiRed;
     public event EventHandler OnCanMidChii;
+    public event EventHandler OnCanMidChiiRed;
     public event EventHandler OnCanLowChii;
+    public event EventHandler OnCanLowChiiRed;
     public event EventHandler OnCanOpenKan1;
     public event EventHandler OnCanOpenKan2;
     public event EventHandler OnCanClosedKan;
+    public event EventHandler OnCanRiichi;
     public event EventHandler OnCanRon;
     public event EventHandler OnCanTsumo;
     public event EventHandler OnCanNoLongerPon;
@@ -163,13 +173,33 @@ public abstract class Player
 #region DrawAndDiscard
     public void Discard(int index)
     {
+        if (_isInRiichi)
+            return;
         if (!IsActivePlayer()) return;
+        if (_isPreRiichi)
+        {
+            bool isValidRiichiTile = false;
+            foreach (Tile t in _riichiTiles)
+            {
+                if (AreTilesEquivalent(t, _hand.GetClosedTiles()[index]))
+                {
+                    isValidRiichiTile = true;
+                    break;
+                }
+            }
+            if (isValidRiichiTile == false)
+                return;
+            _isPreRiichi = false;
+            _isInRiichi = true;
+            GD.Print("Riichi value set properly");
+        }
         NegateCalls();
         Tile tile = _hand.GetClosedTiles()[index].Clone();
         _hand.DiscardTile(index);
         _game.SetLastTile(tile);
         _game.CheckCalls();
         _game.DecrementFirstGoAroundCounter();
+
         OnHandChanged?.Invoke(this, EventArgs.Empty);
         OnShantenUpdated?.Invoke(this, EventArgs.Empty);
     }
@@ -177,6 +207,23 @@ public abstract class Player
     public void DiscardDrawTile()
     {
         if (!IsActivePlayer()) return;
+        if (_isPreRiichi)
+        {
+            bool isValidRiichiTile = false;
+            foreach (Tile t in _riichiTiles)
+            {
+                if (AreTilesEquivalent(t, _hand.GetDrawTile()))
+                {
+                    isValidRiichiTile = true;
+                    break;
+                }
+            }
+            if (isValidRiichiTile == false)
+                return;
+            _isPreRiichi = false;
+            _isInRiichi = true;
+            GD.Print("Riichi value set properly");
+        }
         NegateCalls();
         Tile tile = _hand.GetDrawTile().Clone();
         _hand.DiscardDrawTile();
@@ -209,6 +256,7 @@ public abstract class Player
         CheckForTsumo();
         CheckForClosedKan();
         CheckForOpenKan2();
+        CheckForRiichi();
         OnHandChanged?.Invoke(this, EventArgs.Empty);
         OnShantenUpdated?.Invoke(this, EventArgs.Empty);
         if (!IsActivePlayer())
@@ -222,6 +270,7 @@ public abstract class Player
     {
         _canPon = false;
         _canRon = false;
+        _canRiichi = false;
         _canTsumo = false;
         _canClosedKan = false;
         _canOpenKan1 = false;
@@ -234,16 +283,34 @@ public abstract class Player
         OnCanHighChii?.Invoke(this, tile);
     }
 
+    protected void InvokeOnCanHighChiiRed()
+    {
+        EventArgTile tile = new(_game.GetLastTile());
+        OnCanHighChiiRed?.Invoke(this, tile);
+    }
+
     protected void InvokeOnCanMidChii()
     {
         EventArgTile tile = new(_game.GetLastTile());
         OnCanMidChii?.Invoke(this, tile);
     }
 
+    protected void InvokeOnCanMidChiiRed()
+    {
+        EventArgTile tile = new(_game.GetLastTile());
+        OnCanMidChiiRed?.Invoke(this, tile);
+    }
+
     protected void InvokeOnCanLowChii()
     {
         EventArgTile tile = new(_game.GetLastTile());
         OnCanLowChii?.Invoke(this, tile);
+    }
+
+    protected void InvokeOnCanLowChiiRed()
+    {
+        EventArgTile tile = new(_game.GetLastTile());
+        OnCanLowChiiRed?.Invoke(this, tile);
     }
 
     internal void InvokeOnCanNoLongerPon()
@@ -300,6 +367,8 @@ public abstract class Player
     {
         if (IsActivePlayer())
             return false;
+        if (_isInRiichi)
+            return false;
         return _canPon;
     }
 
@@ -307,6 +376,8 @@ public abstract class Player
     {
         if (!IsActivePlayer())
             return false;
+        if (_isInRiichi)
+            return false; // Not accurate; fix later
         return _canClosedKan;
     }
 
@@ -314,13 +385,16 @@ public abstract class Player
     {
         if (IsActivePlayer())
             return false;
+        if (_isInRiichi)
+            return false;
         return _canOpenKan1;
     }
 
     public bool CanOpenKan2()
     {
-        GD.Print($"IsActivePlayer = {IsActivePlayer()} -- _canOpenKan2 = {_canOpenKan2}");
         if (!IsActivePlayer())
+            return false;
+        if (_isInRiichi)
             return false;
         return _canOpenKan2;
     }
@@ -383,6 +457,14 @@ public abstract class Player
         }
     }
 
+    public void CallRiichi()
+    {
+        if (_isInRiichi)
+            return;
+        _isPreRiichi = true;
+        GD.Print("The .dll changed from last time");
+    }
+
     public void CallRon()
     {
         Tile calledTile = _game.GetLastTile();
@@ -405,7 +487,10 @@ public abstract class Player
     {
         if (IsActivePlayer())
             return;
-        GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
+        if (!_isInRiichi)
+        {
+            GeneratePotentialPonAndKanCalls(this, _priorityQueueForPotentialCalls, lastTile);
+        }
         GeneratePotentialRonCall(this, _priorityQueueForPotentialCalls, lastTile);
     }
 
@@ -438,8 +523,54 @@ public abstract class Player
             OnCanPon?.Invoke(this, EventArgs.Empty); //This will eventually need to pass the tile, but we'll get there when we get there
     }
 
+    private void CheckForRiichi()
+    {
+        if (!this.IsActivePlayer())
+            return;
+        if (this.GetHand().IsOpen())
+            return;
+        if (this.GetHand().GetDrawTile() is null)
+            return;
+        if (this.GetHand().GetShanten() > 0)
+            return;
+        if (_isInRiichi)
+            return;
+        List<Tile> discardTiles = GetHand().GetRiichiDiscardTiles();
+        List<string> tileNames = new();
+        foreach(Tile t in discardTiles)
+        {
+            string s = t.ToString();
+            tileNames.Add(s);
+        }
+        _riichiTiles = discardTiles.ToArray();
+        _canRiichi = true;
+        OnCanRiichi?.Invoke(this, new EventArgTileArray(tileNames.ToArray()));
+    }
+
     private void CheckForClosedKan()
     {
+        if (_isInRiichi)
+        {
+            Tile drawTile = _hand.GetDrawTile();
+            foreach (ITenpaiHand tenpaiHand in _hand.GetTenpaiHands())
+            {
+                bool containsClosedPon = false;
+                foreach(ICompleteHandComponent component in tenpaiHand.GetComponents())
+                {
+                    if (component.GetComponentType() is CLOSED_PON && AreTilesEquivalent(component.GetLeadTile(), drawTile))
+                    {
+                        containsClosedPon = true;
+                        continue;
+                    }
+                }
+                if (containsClosedPon == false) 
+                    return;
+            }
+            _canClosedKan = true;
+            string[] tileName = new string[] { drawTile.ToString() };
+            OnCanClosedKan?.Invoke(this, new EventArgTileArray(tileName));
+            return;
+        }
         int count = 0;
         Tile? tile = null;
         List<Tile> tiles = new();
@@ -463,6 +594,8 @@ public abstract class Player
 
     private void CheckForOpenKan2()
     {
+        if (_isInRiichi)
+            return;
         List<OpenMeld> openMelds = _hand.GetOpenMelds();
         List<string> callable_tiles = new();
         foreach(OpenMeld om in openMelds)
@@ -484,6 +617,7 @@ public abstract class Player
 #endregion
 
 #region HandCompletion
+
     private void CheckForTsumo()
     {
         InitializeValuesForTsumoCheck();

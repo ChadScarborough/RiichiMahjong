@@ -16,8 +16,8 @@ public sealed class CallMidChiiCommand : CallCommand
         _handMakingCall.CreateOpenMeld(_calledTile, MID_CHII);
         Tile tileAbove = GetTileAbove(_calledTile);
         Tile tileBelow = GetTileBelow(_calledTile);
-        _handMakingCall.RemoveCopyOfTile(tileAbove);
-        _handMakingCall.RemoveCopyOfTile(tileBelow);
+        _handMakingCall.RemoveExactCopyOfTile(tileAbove);
+        _handMakingCall.RemoveExactCopyOfTile(tileBelow);
     }
 
     public override int GetPriority()

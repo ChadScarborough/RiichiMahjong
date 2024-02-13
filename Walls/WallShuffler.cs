@@ -7,12 +7,12 @@ namespace RMU.Walls
     {
         public static void Shuffle(Wall wall)
         {
-            //List<Tile> input = new();
-            //List<Tile> output = new();
-            //RandomNumberGenerator random = new();
-            //Listify(wall, input);
-            //Randomize(input, output, random);
-            //wall.PopulateWall(output);
+            List<Tile> input = new();
+            List<Tile> output = new();
+            RandomNumberGenerator random = new();
+            Listify(wall, input);
+            Randomize(input, output, random);
+            wall.PopulateWall(output);
         }
 
         private static void Randomize(List<Tile> input, List<Tile> output, RandomNumberGenerator random)

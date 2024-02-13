@@ -48,14 +48,29 @@ public sealed class AvailablePotentialCalls
         return AvailableCallsContainsCallOfGivenType(LOW_CHII_POTENTIAL_CALL_TYPE);
     }
 
+    public bool CanCallLowChiiRed()
+    {
+        return AvailableCallsContainsCallOfGivenType(LOW_CHII_RED_POTENTIAL_CALL_TYPE);
+    }
+
     public bool CanCallMidChii()
     {
         return AvailableCallsContainsCallOfGivenType(MID_CHII_POTENTIAL_CALL_TYPE);
     }
 
+    public bool CanCallMidChiiRed()
+    {
+        return AvailableCallsContainsCallOfGivenType(MID_CHII_RED_POTENTIAL_CALL_TYPE);
+    }
+
     public bool CanCallHighChii()
     {
         return AvailableCallsContainsCallOfGivenType(HIGH_CHII_POTENTIAL_CALL_TYPE);
+    }
+
+    public bool CanCallHighChiiRed()
+    {
+        return AvailableCallsContainsCallOfGivenType(HIGH_CHII_RED_POTENTIAL_CALL_TYPE);
     }
 
     public bool CanCallRon()

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Godot;
+using System;
 
 namespace RMU.Tiles
 {
@@ -24,6 +25,16 @@ namespace RMU.Tiles
         public EventArgTileArray(string[] tileNames)
         {
             TileNames = tileNames;
+        }
+
+        public EventArgTileArray(List<Tile> tiles)
+        {
+            List<string> names = new();
+            foreach(Tile t in tiles)
+            {
+                names.Add(t.ToString());
+            }
+            TileNames = names.ToArray();
         }
     }
 }

@@ -29,11 +29,20 @@ public sealed class OpenMeld
             case LOW_CHII:
                 _createMeldBehaviour = new CreateLowChiiBehaviour();
                 break;
+            case LOW_CHII_RED:
+                _createMeldBehaviour = new CreateLowChiiRedBehaviour();
+                break;
             case MID_CHII:
                 _createMeldBehaviour = new CreateMidChiiBehaviour();
                 break;
+            case MID_CHII_RED:
+                _createMeldBehaviour = new CreateMidChiiRedBehaviour();
+                break;
             case HIGH_CHII:
                 _createMeldBehaviour = new CreateHighChiiBehaviour();
+                break;
+            case HIGH_CHII_RED:
+                _createMeldBehaviour = new CreateHighChiiRedBehaviour();
                 break;
             case PON:
                 _createMeldBehaviour = new CreatePonBehaviour();

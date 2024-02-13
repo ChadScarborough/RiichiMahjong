@@ -2,11 +2,14 @@
 
 public static class Enums
 {
-    public enum MeldType { LowChii, MidChii, HighChii, Pon, OpenKan1, OpenKan2, ClosedKan, Kita }
+    public enum MeldType { LowChii, LowChiiRed, MidChii, MidChiiRed, HighChii, HighChiiRed, Pon, OpenKan1, OpenKan2, ClosedKan, Kita }
 
     public const MeldType LOW_CHII = MeldType.LowChii;
+    public const MeldType LOW_CHII_RED = MeldType.LowChiiRed;
     public const MeldType MID_CHII = MeldType.MidChii;
+    public const MeldType MID_CHII_RED = MeldType.MidChiiRed;
     public const MeldType HIGH_CHII = MeldType.HighChii;
+    public const MeldType HIGH_CHII_RED = MeldType.HighChiiRed;
     public const MeldType PON = MeldType.Pon;
     public const MeldType OPEN_KAN_1 = MeldType.OpenKan1;
     public const MeldType OPEN_KAN_2 = MeldType.OpenKan2;
@@ -77,12 +80,15 @@ public static class Enums
     public const CompleteHandType SEVEN_PAIRS = CompleteHandType.SevenPairs;
     public const CompleteHandType THIRTEEN_ORPHANS = CompleteHandType.ThirteenOrphans;
 
-    public enum PotentialCallType { Pon, LowChii, MidChii, HighChii, ClosedKan, OpenKan1, Ron }
+    public enum PotentialCallType { Pon, LowChii, LowChiiRed, MidChii, MidChiiRed, HighChii, HighChiiRed, ClosedKan, OpenKan1, Ron }
 
     public const PotentialCallType PON_POTENTIAL_CALL_TYPE = PotentialCallType.Pon;
     public const PotentialCallType LOW_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.LowChii;
+    public const PotentialCallType LOW_CHII_RED_POTENTIAL_CALL_TYPE = PotentialCallType.LowChiiRed;
     public const PotentialCallType MID_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.MidChii;
+    public const PotentialCallType MID_CHII_RED_POTENTIAL_CALL_TYPE = PotentialCallType.MidChiiRed;
     public const PotentialCallType HIGH_CHII_POTENTIAL_CALL_TYPE = PotentialCallType.HighChii;
+    public const PotentialCallType HIGH_CHII_RED_POTENTIAL_CALL_TYPE = PotentialCallType.HighChiiRed;
     public const PotentialCallType OPEN_KAN_1_POTENTIAL_CALL_TYPE = PotentialCallType.OpenKan1;
     public const PotentialCallType RON_POTENTIAL_CALL_TYPE = PotentialCallType.Ron;
 

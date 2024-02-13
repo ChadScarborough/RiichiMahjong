@@ -25,6 +25,9 @@ public abstract class Hand
     private readonly List<ITenpaiHand> _tenpaiHands;
     private readonly List<Tile> _waits;
     private int _shanten;
+    private bool _inRiichi;
+
+    public event EventHandler OnCanRiichi;
 
     #region Constructor
     protected Hand(WallObject wallObject)
@@ -36,6 +39,7 @@ public abstract class Hand
         _openMelds = new List<OpenMeld>();
         _tenpaiHands = new List<ITenpaiHand>();
         _waits = new List<Tile>();
+        _inRiichi = false;
     }
 
     internal void SetDeadWall(IDeadWall deadWall)
@@ -291,11 +295,9 @@ public abstract class Hand
         _waits.Add(tile);
     }
 
-    public void CheckRiichi()
+    public List<Tile> GetRiichiDiscardTiles()
     {
-        List<Tile> canDiscard = RiichiChecker.CheckRiichi(this);
-        foreach (Tile t in canDiscard)
-            Console.WriteLine(t);
+        return RiichiChecker.CheckRiichi(this);
     }
     #endregion
     #endregion
@@ -326,9 +328,28 @@ public abstract class Hand
         }
     }
 
+    public void RemoveExactCopyOfTile(Tile calledTile)
+    {
+        for (int i = _closedTiles.Count - 1; i >= 0; i--)
+        {
+            if (IsExactDuplicateTile(_closedTiles[i], calledTile, i))
+                return;
+        }
+    }
+
     private bool IsDuplicateTile(Tile closedTile, Tile calledTile, int index)
     {
         if (AreTilesEquivalent(closedTile, calledTile))
+        {
+            _closedTiles.RemoveAt(index);
+            return true;
+        }
+        return false;
+    }
+
+    private bool IsExactDuplicateTile(Tile closedTile, Tile calledTile, int index)
+    {
+        if (AreTilesExactlyEquivalent(closedTile, calledTile))
         {
             _closedTiles.RemoveAt(index);
             return true;

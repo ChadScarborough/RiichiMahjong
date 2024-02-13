@@ -9,12 +9,15 @@ namespace RMU.Calls.PotentialCalls
         {
             return callType switch
             {
-                PotentialCallType.Pon => new PotentialPon(playerMakingCall),
-                PotentialCallType.LowChii => new PotentialLowChii(playerMakingCall),
-                PotentialCallType.MidChii => new PotentialMidChii(playerMakingCall),
-                PotentialCallType.HighChii => new PotentialHighChii(playerMakingCall),
-                PotentialCallType.OpenKan1 => new PotentialOpenKan1(playerMakingCall),
-                PotentialCallType.Ron => new PotentialRon(playerMakingCall),
+                PON_POTENTIAL_CALL_TYPE => new PotentialPon(playerMakingCall),
+                LOW_CHII_POTENTIAL_CALL_TYPE => new PotentialLowChii(playerMakingCall),
+                LOW_CHII_RED_POTENTIAL_CALL_TYPE => new PotentialLowChiiRed(playerMakingCall),
+                MID_CHII_POTENTIAL_CALL_TYPE => new PotentialMidChii(playerMakingCall),
+                MID_CHII_RED_POTENTIAL_CALL_TYPE => new PotentialMidChiiRed(playerMakingCall),
+                HIGH_CHII_POTENTIAL_CALL_TYPE => new PotentialHighChii(playerMakingCall),
+                HIGH_CHII_RED_POTENTIAL_CALL_TYPE => new PotentialHighChiiRed(playerMakingCall),
+                OPEN_KAN_1_POTENTIAL_CALL_TYPE => new PotentialOpenKan1(playerMakingCall),
+                RON_POTENTIAL_CALL_TYPE => new PotentialRon(playerMakingCall),
                 _ => throw new ArgumentException("Invalid call type"),
             };
         }

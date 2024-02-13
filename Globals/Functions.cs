@@ -64,6 +64,12 @@ namespace RMU.Globals
                 return false;
             }
         }
+
+        public static bool AreTilesExactlyEquivalent(Tile tile1, Tile tile2)
+        {
+            return AreTilesEquivalent(tile1, tile2) && tile1.IsRedFive() == tile2.IsRedFive();
+        }
+
          // Compares three tiles for equivalence
         public static bool AreTilesEquivalent(Tile tile1, Tile tile2, Tile tile3)
         {

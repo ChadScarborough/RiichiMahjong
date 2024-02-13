@@ -27,6 +27,7 @@ public static class TestHandList
     public static readonly TestHand DRAGON_TEST_HAND = new DragonTestHand();
     public static readonly TestHand EDGE_WAIT_TEST_HAND = new EdgeWaitTestHand();
     public static readonly TestHand FOUR_BIG_WINDS_TEST_HAND = new FourBigWindsTestHand();
+    public static readonly TestHand FOUR_CONCEALED_TRIPLETS_TEST_HAND = new FourConcealedTripletsTestHand();
     public static readonly TestHand HALF_FLUSH_TEST_HAND = new HalfFlushTestHand();
     public static readonly TestHand NINE_GATES_TEST_HAND = new NineGatesTestHand();
     public static readonly TestHand OPEN_KAN_1_TEST_HAND = new OpenKan1TestHand();
