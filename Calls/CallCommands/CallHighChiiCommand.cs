@@ -15,10 +15,10 @@ public sealed class CallHighChiiCommand : CallCommand
     {
         _handMakingCall.OpenHand();
         _handMakingCall.CreateOpenMeld(_calledTile, HIGH_CHII);
-        Tile oneAbove = Functions.GetTileAbove(_calledTile);
-        Tile twoAbove = Functions.GetTileTwoAbove(_calledTile);
-        _handMakingCall.RemoveCopyOfTile(oneAbove);
-        _handMakingCall.RemoveCopyOfTile(twoAbove);
+        Tile oneAbove = GetTileAbove(_calledTile);
+        Tile twoAbove = GetTileTwoAbove(_calledTile);
+        _handMakingCall.RemoveExactCopyOfTile(oneAbove);
+        _handMakingCall.RemoveExactCopyOfTile(twoAbove);
     }
 
     public override int GetPriority()

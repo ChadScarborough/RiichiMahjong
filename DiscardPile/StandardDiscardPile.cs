@@ -1,5 +1,5 @@
 ﻿using RMU.Tiles;
-using System.Collections.Generic;
+using System;
 
 namespace RMU.DiscardPile;
 
@@ -7,6 +7,9 @@ public sealed class StandardDiscardPile : IDiscardPile
 {
     private readonly Globals.DataStructures.Stack<Tile> _displayedDiscardedTiles;
     private readonly List<Tile> _allDiscardedTiles;
+
+    public event EventHandler OnTileDiscarded;
+    public event EventHandler OnDiscardTileCalled;
 
     public StandardDiscardPile()
     {
@@ -18,11 +21,14 @@ public sealed class StandardDiscardPile : IDiscardPile
     {
         _displayedDiscardedTiles.Push(tile);
         _allDiscardedTiles.Add(tile);
+        OnTileDiscarded?.Invoke(this, new EventArgTile(tile));
     }
 
     public Tile CallTile()
     {
-        return _displayedDiscardedTiles.Pop();
+        Tile t = _displayedDiscardedTiles.Pop();
+        OnDiscardTileCalled?.Invoke(this, EventArgs.Empty);
+        return t;
     }
 
     public int GetDisplayedTileCount()

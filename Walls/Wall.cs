@@ -1,21 +1,38 @@
 ﻿using RMU.Globals.DataStructures;
 using RMU.Tiles;
+using System;
 using System.Linq;
 
 namespace RMU.Walls;
 
 public abstract class Wall
 {
+    public event EventHandler OnTileDrawn;
+
     protected Wall()
     {
         _wall = new DoublyLinkedList<Tile>();
+        Shuffle();
+    }
+
+    public Wall(DoublyLinkedList<Tile> wall)
+    {
+        _wall = wall;
+        Shuffle();
     }
 
     private readonly DoublyLinkedList<Tile> _wall;
 
+    protected void Shuffle()
+    {
+        WallShuffler.Shuffle(this);
+    }
+
     public virtual Tile DrawTileFromWall()
     {
-        return DrawTile(_wall);
+        Tile t = DrawTile(_wall);
+        OnTileDrawn?.Invoke(this, EventArgs.Empty);
+        return t;
     }
 
     private Tile DrawTile(DoublyLinkedList<Tile> wall)
@@ -25,7 +42,9 @@ public abstract class Wall
 
     public virtual Tile DrawTileFromEndOfWall()
     {
-        return DrawTileFromEnd(_wall);
+        Tile t = DrawTileFromEnd(_wall);
+        OnTileDrawn?.Invoke(this, EventArgs.Empty);
+        return t;
     }
 
     private Tile DrawTileFromEnd(DoublyLinkedList<Tile> wall)

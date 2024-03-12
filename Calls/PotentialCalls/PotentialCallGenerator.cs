@@ -1,11 +1,11 @@
 using RMU.Hands;
 using RMU.Hands.CompleteHands;
+using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Players;
 using RMU.Tiles;
+using RMU.Tiles.TileDecorators;
 using RMU.Yaku;
-using RMU.Yaku.StandardYaku;
-using System.Collections.Generic;
 using static RMU.Calls.PotentialCalls.PotentialCallFactory;
 
 namespace RMU.Calls.PotentialCalls;
@@ -41,9 +41,19 @@ public static class PotentialCallGenerator
         List<Tile> hand = player.GetHand().GetClosedTiles();
         Tile oneBelow = GetTileBelow(lastTile);
         Tile twoBelow = GetTileTwoBelow(lastTile);
-        if (ContainsTile(hand, oneBelow) && ContainsTile(hand, twoBelow))
+        if (ContainsExactTile(hand, oneBelow) && ContainsExactTile(hand, twoBelow))
         {
             queue.AddCall(CreatePotentialCall(player, LOW_CHII_POTENTIAL_CALL_TYPE));
+        }
+        if (oneBelow.GetValue() == 5)
+        {
+            if (ContainsExactTile(hand, new RedFiveDecorator(oneBelow)))
+                queue.AddCall(CreatePotentialCall(player, LOW_CHII_RED_POTENTIAL_CALL_TYPE));
+        }
+        else if (twoBelow.GetValue() == 5)
+        {
+            if (ContainsExactTile(hand, new RedFiveDecorator(twoBelow)))
+                queue.AddCall(CreatePotentialCall(player, LOW_CHII_RED_POTENTIAL_CALL_TYPE));
         }
     }
 
@@ -53,9 +63,19 @@ public static class PotentialCallGenerator
         List<Tile> hand = player.GetHand().GetClosedTiles();
         Tile oneBelow = GetTileBelow(lastTile);
         Tile oneAbove = GetTileAbove(lastTile);
-        if (ContainsTile(hand, oneAbove) && ContainsTile(hand, oneBelow))
+        if (ContainsExactTile(hand, oneBelow) && ContainsExactTile(hand, oneAbove))
         {
             queue.AddCall(CreatePotentialCall(player, MID_CHII_POTENTIAL_CALL_TYPE));
+        }
+        if (oneBelow.GetValue() == 5)
+        {
+            if (ContainsExactTile(hand, new RedFiveDecorator(oneBelow)))
+                queue.AddCall(CreatePotentialCall(player, MID_CHII_RED_POTENTIAL_CALL_TYPE));
+        }
+        else if (oneAbove.GetValue() == 5)
+        {
+            if (ContainsExactTile(hand, new RedFiveDecorator(oneAbove)))
+                queue.AddCall(CreatePotentialCall(player, MID_CHII_RED_POTENTIAL_CALL_TYPE));
         }
     }
 
@@ -65,10 +85,25 @@ public static class PotentialCallGenerator
         List<Tile> hand = player.GetHand().GetClosedTiles();
         Tile oneAbove = GetTileAbove(lastTile);
         Tile twoAbove = GetTileTwoBelow(lastTile);
-        if (ContainsTile(hand, oneAbove) && ContainsTile(hand, twoAbove))
+        if (ContainsExactTile(hand, oneAbove) && ContainsExactTile(hand, twoAbove))
         {
             queue.AddCall(CreatePotentialCall(player, HIGH_CHII_POTENTIAL_CALL_TYPE));
         }
+        if (oneAbove.GetValue() == 5)
+        {
+            if (ContainsExactTile(hand, new RedFiveDecorator(oneAbove)))
+                queue.AddCall(CreatePotentialCall(player, HIGH_CHII_RED_POTENTIAL_CALL_TYPE));
+        }
+        else if (twoAbove.GetValue() == 5)
+        {
+            if (ContainsExactTile(hand, new RedFiveDecorator(twoAbove)))
+                queue.AddCall(CreatePotentialCall(player, HIGH_CHII_RED_POTENTIAL_CALL_TYPE));
+        }
+    }
+
+    private static bool IsNonRedFive(Tile tile)
+    {
+        return tile.GetValue() == 5 && tile.IsRedFive() == false;
     }
 
     public static void GeneratePotentialRonCall(Player player, PriorityQueueForPotentialCalls queue,
@@ -87,23 +122,6 @@ public static class PotentialCallGenerator
 
         DetermineStrongestCompleteHand(completeHands, player);
         queue.AddCall(CreatePotentialCall(player, RON_POTENTIAL_CALL_TYPE));
-    }
-
-    private static bool AtLeastOneYakuSatisfied(List<ICompleteHand> completeHands)
-    {
-        bool yakuSatisfied = false;
-        foreach (ICompleteHand completeHand in completeHands)
-        {
-            completeHand.ClearYaku();
-            StandardYakuList yakuList = new(completeHand);
-            List<YakuBase> satisfiedYaku = yakuList.CheckYaku();
-            completeHand.SetYaku(satisfiedYaku);
-            if (completeHand.GetYaku().Count > 0)
-            {
-                yakuSatisfied = true;
-            }
-        }
-        return yakuSatisfied;
     }
 
     private static List<ICompleteHand> GetAllCompleteHandsForRonCheck(Player player, Tile lastTile)
@@ -156,6 +174,21 @@ public static class PotentialCallGenerator
             }
         }
 
+        return false;
+    }
+
+    private static bool ContainsExactTile(List<Tile> hand, Tile tile)
+    {
+        foreach (Tile t in hand)
+        {
+            if (t.GetValue() != tile.GetValue())
+                continue;
+            if (t.GetSuit() != tile.GetSuit())
+                continue;
+            if (t.IsRedFive() != tile.IsRedFive())
+                continue;
+            return true;
+        }
         return false;
     }
 }

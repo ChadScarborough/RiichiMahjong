@@ -1,5 +1,5 @@
-﻿using RMU.Hands.CompleteHands;
-using System.Collections.Generic;
+﻿using Godot;
+using RMU.Hands.CompleteHands;
 using System.Linq;
 
 namespace RMU.Yaku.Yakuman
@@ -39,6 +39,7 @@ namespace RMU.Yaku.Yakuman
 
         public List<YakumanBase> CheckYakuman()
         {
+            GD.Print("Checking Yakuman");
             return _yakumanList.Where(y => y.Check()).ToList();
         }
     }

@@ -1,4 +1,6 @@
+using RMU.Globals.DataStructures;
 using RMU.Walls.DeadWall;
+using RMU.Tiles;
 
 namespace RMU.Walls;
 

@@ -24,4 +24,16 @@ public abstract class PotentialCall : ICallObject
     }
 
     public abstract int GetPriority();
+
+    public override bool Equals(object obj)
+    {
+        if (!obj.GetType().IsAssignableTo(typeof(PotentialCall)))
+            return false;
+        var call = obj as PotentialCall;
+        if (call.GetCallType() != this.GetCallType())
+            return false;
+        if (call.GetPlayerMakingCall() != this.GetPlayerMakingCall())
+            return false;
+        return true;
+    }
 }

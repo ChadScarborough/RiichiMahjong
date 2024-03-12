@@ -5,5 +5,6 @@ public sealed class ThreePlayerWallTwoRedFives : Wall
     public ThreePlayerWallTwoRedFives()
     {
         PopulateWall(TileLists.ThreePlayerWallTwoRedFives());
+        base.Shuffle();
     }
 }

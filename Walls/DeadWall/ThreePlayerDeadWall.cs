@@ -14,6 +14,8 @@ namespace RMU.Walls.DeadWall
         private readonly List<Tile> _drawableTiles;
         private readonly Wall _wall;
 
+        public event EventHandler OnDoraTileRevealed;
+
         public ThreePlayerDeadWall(Wall wall)
         {
             _wall = wall;

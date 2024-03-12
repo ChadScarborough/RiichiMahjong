@@ -1,10 +1,13 @@
 ﻿using RMU.Tiles;
 using RMU.Walls.DeadWall;
+using System;
 
 namespace RMU.TestObjects.TestWalls;
 
 public sealed class NullDeadWall : IDeadWall
 {
+    public event EventHandler OnDoraTileRevealed;
+
     public void Clear()
     {
 

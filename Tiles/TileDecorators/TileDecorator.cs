@@ -48,4 +48,9 @@ public abstract class TileDecorator : Tile
     {
         return _decoratee.GetTileBelow();
     }
+
+    public override string ToString()
+    {
+        return _decoratee.ToString();
+    }
 }

@@ -9,7 +9,7 @@ public sealed class SevenPairsTestHand : TestHand
         _closedTiles = new List<Tile>
         {
             OneMan(), OneMan(),
-            TwoPin(), TwoPin(),
+            FourPin(), FourPin(),
             ThreeSou(), ThreeSou(),
             FiveMan(), FiveMan(),
             SixSou(), SixSou(),

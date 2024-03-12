@@ -1,12 +1,14 @@
-﻿using RMU.Walls;
+﻿using Godot;
+using RMU.Walls;
 
 namespace RMU.Games;
 
-public sealed class FourPlayerNoRedFivesGame : FourPlayerGame
+public class FourPlayerNoRedFivesGame : FourPlayerGame
 {
     public FourPlayerNoRedFivesGame()
     {
-        _wallObject = new FourPlayerWallObjectNoRedFives();
+        GD.Print("FourPlayerNoRedFivesGame constructor called");
+        _wallObject ??= new FourPlayerWallObjectNoRedFives();
         Init();
     }
 }

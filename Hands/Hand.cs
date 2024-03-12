@@ -1,6 +1,8 @@
-﻿using RMU.Calls.CreateMeldBehaviours;
+﻿using Godot;
+using RMU.Calls.CreateMeldBehaviours;
 using RMU.DiscardPile;
 using RMU.Globals.Algorithms;
+using RMU.Hands.RiichiCheckHands;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten;
 using RMU.Tiles;
@@ -12,8 +14,8 @@ namespace RMU.Hands;
 
 public abstract class Hand
 {
-    private readonly Wall _wall;
-    private IDeadWall _deadWall;
+    protected Wall _wall;
+    protected IDeadWall _deadWall;
     protected List<Tile> _closedTiles;
     private Tile _drawTile;
     private readonly StandardDiscardPile _discardPile;
@@ -23,8 +25,11 @@ public abstract class Hand
     private readonly List<ITenpaiHand> _tenpaiHands;
     private readonly List<Tile> _waits;
     private int _shanten;
+    private bool _inRiichi;
 
-#region Constructor
+    public event EventHandler OnCanRiichi;
+
+    #region Constructor
     protected Hand(WallObject wallObject)
     {
         _wall = wallObject.GetWall();
@@ -34,16 +39,17 @@ public abstract class Hand
         _openMelds = new List<OpenMeld>();
         _tenpaiHands = new List<ITenpaiHand>();
         _waits = new List<Tile>();
+        _inRiichi = false;
     }
 
     internal void SetDeadWall(IDeadWall deadWall)
     {
         _deadWall = deadWall;
     }
-#endregion
+    #endregion
 
-#region DrawAndDiscard
-#region Discard
+    #region DrawAndDiscard
+    #region Discard
     public virtual void DiscardTile(int index)
     {
         if (index >= _closedTiles.Count)
@@ -71,8 +77,8 @@ public abstract class Hand
     {
         _drawTile = null;
     }
-#endregion
-#region Draw
+    #endregion
+    #region Draw
     public void DrawTileFromWall()
     {
         if (_wall.GetSize() <= 0)
@@ -84,7 +90,6 @@ public abstract class Hand
         {
             return;
         }
-
         if (_drawTile != null)
         {
             AddDrawTileToHand();
@@ -99,7 +104,6 @@ public abstract class Hand
         {
             return;
         }
-
         if (_drawTile != null)
         {
             AddDrawTileToHand();
@@ -124,7 +128,7 @@ public abstract class Hand
         SortHand();
     }
 
-        public void SetDrawTile(Tile tile)
+    public void SetDrawTile(Tile tile)
     {
         _drawTile = tile;
     }
@@ -133,10 +137,10 @@ public abstract class Hand
     {
         return _drawTile;
     }
-#endregion
-#endregion
+    #endregion
+    #endregion
 
-#region Melds
+    #region Melds
     public void CreateOpenMeld(Tile calledTile, MeldType meldType)
     {
         OpenMeld openMeld = new(meldType, calledTile);
@@ -147,9 +151,9 @@ public abstract class Hand
     {
         return _openMelds;
     }
-#endregion
+    #endregion
 
-#region GetTiles
+    #region GetTiles
     public virtual List<Tile> GetAllTiles(Tile extraTile)
     {
         List<Tile> outputList = new();
@@ -183,6 +187,16 @@ public abstract class Hand
             AddExtraTileToOutputList(_drawTile, outputList);
         }
         return _handSorter.SortHand(outputList);
+    }
+
+    public bool ContainsTile(Tile tile)
+    {
+        foreach(Tile t in GetClosedTiles())
+        {
+            if (AreTilesEquivalent(tile, t))
+                return true;
+        }
+        return false;
     }
 
     private void CompileAllTiles(List<Tile> tileList)
@@ -219,9 +233,9 @@ public abstract class Hand
             outputList.Add(tile);
         }
     }
-#endregion
+    #endregion
 
-#region Shanten
+    #region Shanten
 
     public int GetShanten()
     {
@@ -251,12 +265,12 @@ public abstract class Hand
         }
     }
 
-#region Tenpai
+    #region Tenpai
     public List<ITenpaiHand> GetTenpaiHands()
     {
         return _tenpaiHands;
     }
-        public List<Tile> GetWaits()
+    public List<Tile> GetWaits()
     {
         return _waits;
     }
@@ -280,8 +294,13 @@ public abstract class Hand
     {
         _waits.Add(tile);
     }
-#endregion
-#endregion
+
+    public List<Tile> GetRiichiDiscardTiles()
+    {
+        return RiichiChecker.CheckRiichi(this);
+    }
+    #endregion
+    #endregion
 
     public StandardDiscardPile GetDiscardPile()
     {
@@ -309,6 +328,15 @@ public abstract class Hand
         }
     }
 
+    public void RemoveExactCopyOfTile(Tile calledTile)
+    {
+        for (int i = _closedTiles.Count - 1; i >= 0; i--)
+        {
+            if (IsExactDuplicateTile(_closedTiles[i], calledTile, i))
+                return;
+        }
+    }
+
     private bool IsDuplicateTile(Tile closedTile, Tile calledTile, int index)
     {
         if (AreTilesEquivalent(closedTile, calledTile))
@@ -319,7 +347,18 @@ public abstract class Hand
         return false;
     }
 
-        public virtual bool IsOpen()
+    private bool IsExactDuplicateTile(Tile closedTile, Tile calledTile, int index)
+    {
+        if (AreTilesExactlyEquivalent(closedTile, calledTile))
+        {
+            _closedTiles.RemoveAt(index);
+            return true;
+        }
+        return false;
+    }
+
+    public virtual bool IsOpen()
     {
         return _isOpen;
     }
+}

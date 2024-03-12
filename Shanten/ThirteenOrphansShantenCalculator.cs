@@ -3,7 +3,6 @@ using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Shanten.HandSplitter;
 using RMU.Tiles;
-using System.Collections.Generic;
 
 namespace RMU.Shanten;
 
@@ -45,6 +44,20 @@ public static class ThirteenOrphansShantenCalculator
                 hand.AddTenpaiHand(TenpaiHandFactory.CreateTenpaiHand(hand, _components));
             }
 
+            return shanten;
+        }
+    }
+
+    internal static int CalculateShanten(List<TileCollection> collections)
+    {
+        lock (shantenLock)
+        {
+            _collections = collections;
+            _components = null;
+            ResetCounters();
+            CountTerminalsAndHonors(collections);
+            CalculateUniqueTerminalsAndWhetherThereAreDuplicates();
+            int shanten = ShantenFormulas.CalculateThirteenOrphansShanten(_uniqueTerminals, _isDuplicateTerminal);
             return shanten;
         }
     }

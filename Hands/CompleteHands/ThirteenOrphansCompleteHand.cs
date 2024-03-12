@@ -1,9 +1,11 @@
-﻿using RMU.Globals.Algorithms;
+﻿using Godot;
+using RMU.Globals.Algorithms;
 using RMU.Hands.CompleteHands.CompleteHandComponents;
 using RMU.Hands.TenpaiHands;
 using RMU.Players;
 using RMU.Tiles;
 using RMU.Yaku;
+using RMU.Yaku.Yakuman;
 using System.Collections.Generic;
 using static RMU.Hands.CompleteHands.CompleteHandComponents.CompleteHandComponentFactory;
 
@@ -59,6 +61,7 @@ public sealed class ThirteenOrphansCompleteHand : ICompleteHand
                 }
                 _constructedHand.Add(component);
             }
+            _satisfiedYaku.Add(new ThirteenOrphansYakuman(this));
         }
         else
         {
@@ -75,6 +78,7 @@ public sealed class ThirteenOrphansCompleteHand : ICompleteHand
                 _constructedHand.Add(component);
                 _isolatedTiles.Add(component);
             }
+            _satisfiedYaku.Add(new ThirteenWaitThirteenOrphansYakuman(this));
         }
 
         foreach (ICompleteHandComponent component in _constructedHand)

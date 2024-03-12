@@ -11,8 +11,8 @@ namespace RMU.Hands.CompleteHands;
 public interface ICompleteHand
 {
     List<ICompleteHandComponent> GetComponents();
-    Enums.CompleteHandWaitType GetWaitType();
-    Enums.CompleteHandType GetCompleteHandType();
+    CompleteHandWaitType GetWaitType();
+    CompleteHandType GetCompleteHandType();
     bool IsOpen();
     ITenpaiHand GetTenpaiHand();
     List<ICompleteHandComponent> GetConstructedHandComponents();

@@ -1,4 +1,7 @@
-﻿namespace RMU.Shanten;
+﻿using Godot;
+using System;
+
+namespace RMU.Shanten;
 
 public static class ShantenFormulas
 {
@@ -21,12 +24,32 @@ public static class ShantenFormulas
 
     public static int CalculateStandardShantenWithDrawTile(int groups, int pairs, int taatsu)
     {
-        int blocks = 0;
-        if (pairs >= 1) blocks++;
-        blocks += groups * 2;
-        int partial = pairs + taatsu;
-        if (partial > 4) partial = 4;
-        return blocks + partial;
+        //int blocks = 0;
+        //if (pairs >= 1) 
+        //{ 
+        //    blocks++;
+        //    pairs--;
+        //}
+        //blocks += groups * 2;
+        //int partial = pairs + taatsu;
+        //if (partial > 4) partial = 4;
+        //return 8 - (blocks + partial);
+        int shanten = 8 - (taatsu + pairs) - 2 * groups;
+        if (taatsu + groups == 5 && pairs == 0)
+            shanten++;
+        if (groups + pairs + taatsu >= 6)
+        {
+            while (groups + taatsu + pairs >= 6)
+            {
+                if (taatsu > 0)
+                    taatsu--;
+                else if (pairs > 0)
+                    pairs--;
+            }
+            int normTaatsu = Math.Min(5 - groups, taatsu);
+            shanten = 8 - 2 * groups - (normTaatsu + pairs);
+        }
+        return shanten;
     }
 
     public static int CalculateSevenPairsShanten(int triplets, int pairs)
